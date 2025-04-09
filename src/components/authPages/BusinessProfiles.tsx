@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const BusinessProfiles: React.FC = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
-  const [isFromGoGrub, setIsFromGoGrub] = useState(false);
+  const [isFromGoGrub, setIsFromGoGrub] = useState(true);
   const [customPayload, setCustomPayload] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const transformedState = useSelector(selectTransformedRegisterState);

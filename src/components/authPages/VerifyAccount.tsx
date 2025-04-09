@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import DigitInput from "./DigitInput";
 
 const VerifyAccount = () => {
-  const [isFromGoGrub, setIsFromGoGrub] = useState(false);
+  const [isFromGoGrub, setIsFromGoGrub] = useState(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const history = useNavigate();
