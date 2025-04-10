@@ -58,7 +58,6 @@ const VerifiedPayment: React.FC = () => {
       const headers = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       };
       const response = await axios.post(
@@ -73,7 +72,7 @@ const VerifiedPayment: React.FC = () => {
 
       SubcribePlan();
     } catch (error) {
-      console.error("Error initiating payment:", error);
+      console.error("Error verifing payment:", error);
     } finally {
       //
     }
