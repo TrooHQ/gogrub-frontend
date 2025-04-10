@@ -13,7 +13,7 @@ const EmployeeDashboard = () => {
       </div>
 
       <div className=" mt-[16px] grid grid-cols-2 gap-[16px]">
-        <Link to="/demo/ticket/troo-portal">
+        <Link to="/demo/ticket/gogrub-portal">
           <div className=" px-[28px] py-[47px] bg-[#C7ECE6] rounded-[5px]">
             <div className=" flex flex-col gap-[8px] items-center justify-center">
               <img src={Confirmation} alt="" />
@@ -22,7 +22,7 @@ const EmployeeDashboard = () => {
           </div>
         </Link>
 
-        <Link to="/demo/order/troo-portal">
+        <Link to="/demo/order/gogrub-portal">
           <div className=" px-[28px] py-[47px] bg-[#F7EFD0] rounded-[5px]">
             <div className=" flex flex-col gap-[8px] items-center justify-center">
               <img src={orderIcon} alt="" />
@@ -31,7 +31,7 @@ const EmployeeDashboard = () => {
           </div>
         </Link>
 
-        <Link to="/demo/employee-settings/troo-portal">
+        <Link to="/demo/employee-settings/gogrub-portal">
           <div className=" px-[28px] py-[47px] bg-[#F8EAE3] rounded-[5px]">
             <div className=" flex flex-col gap-[8px] items-center justify-center">
               <img src={setting} alt="" />

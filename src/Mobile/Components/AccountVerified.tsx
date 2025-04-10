@@ -31,7 +31,7 @@ const AccountVerified = () => {
           <div className=" mt-[80px]">
             <button
               className="bg-grey700 w-full text-center text-white py-3 rounded"
-              onClick={() => history("/demo/login/troo-portal")}
+              onClick={() => history("/demo/login/gogrub-portal")}
             >
               Log in Your Account
             </button>

@@ -162,68 +162,77 @@ const MobileLayout = () => {
           />
 
           <Route
-            path="/demo/forgot-password/troo-portal"
+            path="/demo/forgot-password/gogrub-portal"
             element={<ForgotPassword />}
           />
-          <Route path="/demo/dashboard/troo-portal" element={<Dashboard />} />
-          <Route path={`/demo/login/troo-portal`} element={<Login />} />
+          <Route path="/demo/dashboard/gogrub-portal" element={<Dashboard />} />
+          <Route path={`/demo/login/gogrub-portal`} element={<Login />} />
           <Route
-            path="/demo/employee-dashboard/troo-portal"
+            path="/demo/employee-dashboard/gogrub-portal"
             element={<EmployeeDashboard />}
           />
           <Route
-            path="demo/admin-menu/troo-portal"
+            path="demo/admin-menu/gogrub-portal"
             element={<AdminMenuPage />}
           />
 
           <Route
-            path="/demo/:id/menu-page/:id/troo-portal"
+            path="/demo/:id/menu-page/:id/gogrub-portal"
             element={<Menu />}
           />
 
-          <Route path="/demo/ticket/troo-portal" element={<Tickets />} />
+          <Route path="/demo/ticket/gogrub-portal" element={<Tickets />} />
           <Route
-            path="/demo/order-history/troo-portal"
+            path="/demo/order-history/gogrub-portal"
             element={<OrderHistory />}
           />
 
-          <Route path="/demo/order/troo-portal" element={<Order />} />
+          <Route path="/demo/order/gogrub-portal" element={<Order />} />
 
-          <Route path="/demo/report/troo-portal" element={<Reporting />} />
+          <Route path="/demo/report/gogrub-portal" element={<Reporting />} />
           <Route
-            path="/demo/register/troo-portal?/:id"
+            path="/demo/register/gogrub-portal?/:id"
             element={<RegistrationStepForm />}
           />
-          <Route path="/demo/verify/troo-portal" element={<VerifyAccount />} />
           <Route
-            path="/demo/verified/troo-portal"
+            path="/demo/verify/gogrub-portal"
+            element={<VerifyAccount />}
+          />
+          <Route
+            path="/demo/verified/gogrub-portal"
             element={<AccountVerified />}
           />
-          <Route path="/demo/menu/troo-portal" element={<MenuSetupForm />} />
-          <Route path="/demo/settings/troo-portal" element={<SettingsPage />} />
+          <Route path="/demo/menu/gogrub-portal" element={<MenuSetupForm />} />
           <Route
-            path="/demo/employee-settings/troo-portal"
+            path="/demo/settings/gogrub-portal"
+            element={<SettingsPage />}
+          />
+          <Route
+            path="/demo/employee-settings/gogrub-portal"
             element={<EmployeeSettingsPage />}
           />
           <Route
-            path="/demo/password/troo-portal"
+            path="/demo/password/gogrub-portal"
             element={<EnterPassword />}
           />
           <Route
-            path="/demo/create-password/troo-portal"
+            path="/demo/create-password/gogrub-portal"
             element={<CreatePassword />}
           />
           <Route
-            path="/demo/manage-qr/troo-portal"
+            path="/demo/manage-qr/gogrub-portal"
             element={<ManageQrCode />}
           />
 
           <Route
-            path="/demo/choose-color/troo-portal"
+            path="/demo/choose-color/gogrub-portal"
             element={<ChooseColor />}
           />
-          <Route path="/demo/table/troo-portal" element={<TableSetupForm />} />
-          <Route path="/demo/room/troo-portal" element={<RoomSetupForm />} />
+          <Route
+            path="/demo/table/gogrub-portal"
+            element={<TableSetupForm />}
+          />
+          <Route path="/demo/room/gogrub-portal" element={<RoomSetupForm />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

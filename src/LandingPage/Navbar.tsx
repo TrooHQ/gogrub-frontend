@@ -423,7 +423,7 @@ const Navbar = () => {
             <CloseLineIcon />
           </div>
           <div className="">
-            <NavLink to="/demo/login/troo-portal">
+            <NavLink to="/demo/login/gogrub-portal">
               <li className=" list-none text-center gap-[5px] text-[14px] font-[500] py-[10px] px-[16px] bg-[#121212] rounded-[5px] text-white">
                 Log in
               </li>

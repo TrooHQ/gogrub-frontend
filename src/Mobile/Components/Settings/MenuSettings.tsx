@@ -377,7 +377,7 @@ const MenuSettings = () => {
         </div>
 
         <div className="ml-[36px] grid gap-[24px] my-[24px]">
-          <Link to="/demo/menu/troo-portal">
+          <Link to="/demo/menu/gogrub-portal">
             <p className="text-grey300 text-[16px] cursor-pointer">Add Menu</p>
           </Link>
           <p

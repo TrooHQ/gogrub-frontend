@@ -315,7 +315,7 @@ const RegistrationStepForm = () => {
       setLoading(false);
       console.log(response);
       toast.success(response.data.message);
-      history("/demo/verify/troo-portal");
+      history("/demo/verify/gogrub-portal");
     } catch (error) {
       console.error("Error occurred:", error);
       if (axios.isAxiosError(error)) {

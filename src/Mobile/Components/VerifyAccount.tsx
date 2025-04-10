@@ -85,7 +85,7 @@ const VerifyAccount = () => {
       setLoading(false);
       console.log(response.data);
       // toast.success("User verified successfully");
-      history("/demo/verified/troo-portal");
+      history("/demo/verified/gogrub-portal");
     } catch (error) {
       console.error("Error occurred:", error);
       if (axios.isAxiosError(error)) {

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Logo from "../../Mobile/assets/trooLogoDark.svg";
+import GoGrubLogo from "../../assets/business_logo.svg";
+
 import PasswordInput from "../inputFields/PasswordInput.js";
 import { Link, useNavigate } from "react-router-dom";
 import CustomInput from "../inputFields/CustomInput.js";
@@ -47,12 +48,12 @@ const Login = () => {
       toast.success(response.data.message);
 
       if (userType === "employee") {
-        navigate("/demo/employee-dashboard/troo-portal");
+        navigate("/demo/employee-dashboard/gogrub-portal");
       } else if (userType === "admin") {
         // if (response.data.has_created_menu_item === false) {
-        //   navigate("/demo/menu/troo-portal");
+        //   navigate("/demo/menu/gogrub-portal");
         // } else {
-        navigate("/demo/dashboard/troo-portal");
+        navigate("/demo/dashboard/gogrub-portal");
         // }
       }
     } catch (error) {
@@ -69,7 +70,7 @@ const Login = () => {
             const userId = error.response.data.data.user_id;
 
             navigate(
-              `/demo/register/troo-portal?business=${business}&user_id=${userId}`,
+              `/demo/register/gogrub-portal?business=${business}&user_id=${userId}`,
               {
                 state: { step: 3 },
               }
@@ -77,7 +78,7 @@ const Login = () => {
           } else if (
             error.response.data.message === "Account details not verified"
           ) {
-            navigate("/demo/verify/troo-portal");
+            navigate("/demo/verify/gogrub-portal");
             console.log("Unverified");
           }
         } else {
@@ -96,7 +97,7 @@ const Login = () => {
       {loading && <Loader />}
       <div className="flex flex-col items-center justify-center h-screen my-auto">
         <div className="">
-          <img src={Logo} alt="" />
+          <img src={GoGrubLogo} alt="" className=" max-w-[100px] w-full" />
         </div>
         <div className=" grid  p-[40px] mt-[128px] mb-[40px] w-full md:w-[530px]">
           <div className=" mb-[40px] text-center">
@@ -121,7 +122,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-end mt-[16px] mb-[32px]">
-            <Link to="/demo/forgot-password/troo-portal">
+            <Link to="/demo/forgot-password/gogrub-portal">
               <p className="text-purple500">Forgot password?</p>
             </Link>
           </div>
@@ -135,7 +136,7 @@ const Login = () => {
           </div>
         </div>
         <div className=" mt-[100px]">
-          <Link to="/demo/register/troo-portal">
+          <Link to="/demo/register/gogrub-portal">
             <p className="font-[500] text-[16px] text-purple500">
               Create a business account
             </p>

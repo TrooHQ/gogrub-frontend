@@ -35,9 +35,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
 
   const options = [
-    { value: "daily", label: "Daily", link: "/demo/report/troo-portal" },
-    { value: "weekly", label: "Weekly", link: "/demo/report/troo-portal" },
-    { value: "monthly", label: "Monthly", link: "/demo/report/troo-portal" },
+    { value: "daily", label: "Daily", link: "/demo/report/gogrub-portal" },
+    { value: "weekly", label: "Weekly", link: "/demo/report/gogrub-portal" },
+    { value: "monthly", label: "Monthly", link: "/demo/report/gogrub-portal" },
   ];
 
   const getBranch = async () => {
@@ -188,7 +188,7 @@ const Dashboard = () => {
         </div>
 
         <div className="mt-[16px] grid gap-[16px]">
-          <Link to="/demo/ticket/troo-portal">
+          <Link to="/demo/ticket/gogrub-portal">
             <div className="px-[28px] py-[47px] bg-[#EEEEF7] rounded-[5px]">
               <div className=" flex items-center justify-between">
                 <div className="flex gap-[8px] items-center justify-start">
@@ -200,7 +200,7 @@ const Dashboard = () => {
             </div>
           </Link>
 
-          <Link to="/demo/admin-menu/troo-portal">
+          <Link to="/demo/admin-menu/gogrub-portal">
             <div className="px-[28px] py-[47px] bg-[#F4DBE6] rounded-[5px]">
               <div className=" flex items-center justify-between">
                 <div className="flex gap-[8px] items-center justify-start">
@@ -212,7 +212,7 @@ const Dashboard = () => {
             </div>
           </Link>
 
-          <Link to="/demo/order/troo-portal">
+          <Link to="/demo/order/gogrub-portal">
             <div className="px-[28px] py-[47px] bg-[#FFF5D9] rounded-[5px]">
               <div className=" flex items-center justify-between">
                 <div className="flex gap-[8px] items-center justify-start">
@@ -224,7 +224,7 @@ const Dashboard = () => {
             </div>
           </Link>
 
-          <Link to="/demo/settings/troo-portal">
+          <Link to="/demo/settings/gogrub-portal">
             <div className="px-[28px] py-[47px] bg-[#F8EAE3] rounded-[5px]">
               <div className=" flex items-center justify-between">
                 <div className="flex gap-[8px] items-center justify-start">
@@ -237,7 +237,7 @@ const Dashboard = () => {
               </div>
             </div>
           </Link>
-          <Link to="/demo/order-history/troo-portal">
+          <Link to="/demo/order-history/gogrub-portal">
             <div className="px-[28px] py-[47px] bg-[#ebc1ac] rounded-[5px]">
               <div className=" flex items-center justify-between">
                 <p className="text-[20px] font-[400] text-grey500">

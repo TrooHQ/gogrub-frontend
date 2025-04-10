@@ -93,12 +93,12 @@ const SettingsPage = () => {
   const handleManageRoomQRCodeModal = () => {
     sessionStorage.setItem("type", "room");
     setManageQRCodeModal(false);
-    navigate("/demo/manage-qr/troo-portal");
+    navigate("/demo/manage-qr/gogrub-portal");
   };
 
   const handleManageTableQRCodeModal = () => {
     setManageQRCodeModal(false);
-    navigate("/demo/manage-qr/troo-portal");
+    navigate("/demo/manage-qr/gogrub-portal");
     sessionStorage.setItem("type", "table");
   };
 
@@ -566,7 +566,7 @@ const SettingsPage = () => {
                 {" "}
                 Create QR Ordering
               </p>
-              {/* <Link to="/demo/manage-qr/troo-portal"> */}
+              {/* <Link to="/demo/manage-qr/gogrub-portal"> */}
               <p
                 className=" hidden cursor-pointer text-grey300 text-[16px]"
                 onClick={handleManageQRCodeModal}
@@ -588,7 +588,7 @@ const SettingsPage = () => {
                 {copySuccess2 ? "Copied!" : "Get Online-Ordering link"}
               </p>
 
-              <Link to="/demo/choose-color/troo-portal">
+              <Link to="/demo/choose-color/gogrub-portal">
                 <p className="text-grey300 text-[16px] cursor-pointer">
                   Manage Themes
                 </p>
@@ -985,7 +985,7 @@ const SettingsPage = () => {
               className=" cursor-pointer"
               src={CheckCircle}
               alt=""
-              onClick={() => navigate("/demo/manage-qr/troo-portal")}
+              onClick={() => navigate("/demo/manage-qr/gogrub-portal")}
             />
             <p className="text-[16px] font-[400] text-grey500 text-center">
               QR Codes successfully created for {type}s

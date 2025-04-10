@@ -43,7 +43,7 @@ const RoomSetupForm = () => {
       );
       console.log("QR Code generated successfully:", response.data);
       setNumber("");
-      navigate("/demo/dashboard/troo-portal");
+      navigate("/demo/dashboard/gogrub-portal");
       toast.success(response.data.message);
     } catch (error: any) {
       console.error("Error creating QR Code:", error);
@@ -99,7 +99,7 @@ const RoomSetupForm = () => {
               <p>Save Room</p>
             </div>
 
-            <Link to="/demo/dashboard/troo-portal">
+            <Link to="/demo/dashboard/gogrub-portal">
               <button className=" text-[16px] font-[500] text-purple500  w-full text-center py-3 rounded">
                 Skip
               </button>

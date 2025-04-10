@@ -53,7 +53,7 @@ const StartOrder = () => {
 
       getBusinessDetails();
     } else {
-      navigate("/demo/login/troo-portal");
+      navigate("/demo/login/gogrub-portal");
     }
   }, [business_identifier, tableNo, group_name, navigate, branch, fullUrl]);
 
@@ -114,7 +114,7 @@ const StartOrder = () => {
       }`
     );
   } else if (!business_identifier || !tableNo || !comingFrom) {
-    navigate("/demo/login/troo-portal");
+    navigate("/demo/login/gogrub-portal");
     // return <NotFound />;
   }
 
