@@ -561,9 +561,15 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               <button className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center">
                 <span className="text-white text-base font-semibold mr-2 capitalize">
                   {userData?.onboarding_type === "gogrub" && currentPlanName
-                    ? currentPlanName.slice(7, 16)
+                    ? currentPlanName
+                        .replace(`${userData.onboarding_type} `, "")
+                        .replace("plan", "")
+                        .trim()
                     : userData?.onboarding_type === "troo" && currentPlanName
-                    ? currentPlanName.slice(7, 16)
+                    ? currentPlanName
+                        .replace(`${userData.onboarding_type} `, "")
+                        .replace("plan", "")
+                        .trim()
                     : "Subscribe"}
                 </span>
                 <ArrowCircleRightOutlined
