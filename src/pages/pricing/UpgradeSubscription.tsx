@@ -6,8 +6,7 @@ import { AppDispatch, RootState } from "@/src/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { setPlanDetails, fetchUserDetails } from "../../slices/UserSlice";
+import { fetchUserDetails } from "../../slices/UserSlice";
 
 interface Plan {
   _id: string;
@@ -18,10 +17,8 @@ interface Plan {
 }
 
 const UpgradeSubscription: React.FC = () => {
-  const dispatch = useDispatch();
   const dispatchs = useDispatch<AppDispatch>();
 
-  const navigate = useNavigate();
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
@@ -31,6 +28,7 @@ const UpgradeSubscription: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<{
     name: string;
     _id: string;
+    price: number;
   } | null>(null);
   const [plans, setPlans] = useState<Plan[]>([]);
   const [openFeatures, setOpenFeatures] = useState<string | null>(null);
@@ -103,34 +101,35 @@ const UpgradeSubscription: React.FC = () => {
   useEffect(() => {
     dispatchs(fetchUserDetails());
   }, [dispatchs]);
-  const token = userData?.token;
 
-  const SubcribePlan = async () => {
+  const IntiatePayment = async () => {
     setLoading(true);
 
     try {
       const headers = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: "",
         },
       };
       const response = await axios.post(
-        `${SERVER_DOMAIN}/plan/subcribeBusinessPlan?secretKey=trooAdminDev`,
+        `https://payment.trootab.com/api/v1/transaction/subscription_payment/`,
         {
-          planId: selectedPlan?._id,
+          plan_id: selectedPlan?._id,
+          business_email: userData?.business_email,
+          amount: selectedPlan?.price,
+          plan_description: selectedPlan?.name,
+          callback_url: "https://gogrub-client.netlify.app/verified-payment",
         },
         headers
       );
-      dispatch(setPlanDetails(response.data.data));
 
-      sessionStorage.setItem("currentPlanName", selectedPlan?.name || "");
-      toast.success(response.data.message || "Plan subscribed successfully!");
-      setIsOpen(false);
-      setLoading(false);
-      navigate("/verified-payment");
+      toast.success(response.data.message || "Payment Initiated successfully!");
+
+      window.location.href =
+        response.data.data.paystack_data.data.authorization_url;
     } catch (error) {
-      console.error("Error adding employee:", error);
+      console.error("Error initiating payment:", error);
       setLoading(false);
     } finally {
       setLoading(false);
@@ -303,7 +302,7 @@ const UpgradeSubscription: React.FC = () => {
               </div>
               <button
                 className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
-                onClick={() => SubcribePlan()}
+                onClick={() => IntiatePayment()}
                 disabled={loading}
               >
                 <p className="text-[16px]">Proceed</p>

@@ -1,18 +1,87 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { RootState } from "@/src/store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GoGrubLogo from "../../assets/business_logo.svg";
 import CheckCirle from "../../assets/check_circle.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/troo-logo.png";
+import { setPlanDetails } from "../../slices/UserSlice";
+import { SERVER_DOMAIN } from "../../Api/Api";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const VerifiedPayment: React.FC = () => {
-  const { userData } = useSelector((state: RootState) => state.user);
-  console.log(userData);
+  const location = useLocation();
 
-  const currentPlanName = sessionStorage.getItem("currentPlanName");
-  console.log(currentPlanName);
+  const queryParams = new URLSearchParams(location.search);
+
+  // const trxref = queryParams.get("trxref");
+  const reference = queryParams.get("reference");
+
+  const dispatch = useDispatch();
+
+  const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
+  const selectedPlan = JSON.parse(businessPlan.selectedPlan);
+  const { userData } = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
+  const token = userData?.token;
+
+  const SubcribePlan = async () => {
+    try {
+      const headers = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(
+        `${SERVER_DOMAIN}/plan/subcribeBusinessPlan?secretKey=trooAdminDev`,
+        {
+          planId: selectedPlan?._id,
+        },
+        headers
+      );
+      dispatch(setPlanDetails(response.data.data));
+
+      toast.success(response.data.message || "Plan subscribed successfully!");
+      navigate("/overview");
+    } catch (error) {
+      console.error("Error adding employee:", error);
+    } finally {
+      //
+    }
+  };
+
+  const VerifyPayment = async () => {
+    try {
+      const headers = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(
+        `https://payment.trootab.com/api/v1/transaction/verify_subscription_payment/`,
+        {
+          reference: reference,
+        },
+        headers
+      );
+
+      toast.success(response.data.message || "Payment Verified successfully!");
+
+      SubcribePlan();
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+    } finally {
+      //
+    }
+  };
+
+  useEffect(() => {
+    VerifyPayment();
+  }, []);
 
   return (
     <div className=" h-screen transition-all duration-500 ease-in-out bg-[#EFEFEF] py-[5%]">
@@ -40,7 +109,7 @@ const VerifiedPayment: React.FC = () => {
             </p>
             <p className="font-[400] text-[14px] lg:text-[16px] text-[#121212] transition-all duration-500 ease-in-out">
               You have successfuly subscribed to{" "}
-              <span className=" font-bold capitalize">{currentPlanName}</span>{" "}
+              <span className=" font-bold capitalize">{selectedPlan.name}</span>{" "}
             </p>
           </div>
 
