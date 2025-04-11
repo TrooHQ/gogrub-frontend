@@ -187,7 +187,7 @@ const UpgradeSubscription: React.FC = () => {
                       <p className="capitalize font-[400] text-[18px] md:text-[24px] text-[#414141] transition-all duration-500 ease-in-out">
                         Billed {plan.billingCycle}
                       </p>
-                      <p className="font-[600] text-[#929292] text-[14px] line-through transition-all duration-500 ease-in-out">
+                      <p className="font-[600] text-[#E10101] text-[14px] line-through transition-all duration-500 ease-in-out">
                         {plan.discount ||
                           (plan.name.includes("yearly") ||
                           plan.name.includes("biannually")
