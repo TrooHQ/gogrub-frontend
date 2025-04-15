@@ -11,8 +11,6 @@ import {
   fetchCustomerTransaction,
 } from "../../slices/overviewSlice";
 import ArrowDown from "../../assets/ArrowDown.svg";
-import ArrowUp from "../../assets/ArrowUp.svg";
-import ArrowNeutral from "../../assets/activeArrow.svg";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
@@ -131,9 +129,6 @@ const CustomerData = () => {
     exportToExcel();
   };
 
-  const status = "No change from yesterday";
-  const statusIcon = ArrowNeutral;
-
   const state = {
     salesActivities: [
       {
@@ -143,31 +138,6 @@ const CustomerData = () => {
         amount: totalCustomerTransaction?.totalOrders,
         statusIcon: ArrowDown,
         status: "-25% from yesterday",
-      },
-      {
-        icon: statusIcon,
-        title: "In-Room Dining Customers",
-        time: "12:45 PM",
-        amount: totalCustomerTransaction?.channelCounts?.["Online"] || "0",
-        statusIcon: statusIcon,
-        status: status,
-      },
-      {
-        icon: ArrowUp,
-        title: "Gogrub Customers",
-        time: "12:45 PM",
-        amount: totalCustomerTransaction?.channelCounts?.GoGrub || "0",
-        statusIcon: ArrowUp,
-        status: "10% from yesterday",
-      },
-      {
-        icon: ArrowDown,
-        title: "QR Ordering Customers",
-        time: "12:45 PM",
-        amount:
-          totalCustomerTransaction?.channelCounts?.["online-ordering"] || "0",
-        statusIcon: ArrowDown,
-        status: "10% from yesterday",
       },
     ],
   };
@@ -179,19 +149,21 @@ const CustomerData = () => {
         <TopMenuNav pathName="Customer Data" />
 
         <div className="rounded-[10px] border border-[#f1f0f0] bg-white px-6 py-7 mt-10">
-          <div className="flex items-center justify-between ">
-            <h3 className="text-2xl font-normal text-[#121212]">
-              Customer Transaction Counts
-            </h3>
-            <DaysTab2
-              backgroundColor="initial"
-              selectedBackgroundColor="#f38d41"
-              selectedColor="white"
-              nonSelectedColor="#606060"
-              iconClassName={clsx("text-[#ADADB9]")}
-              onDateFilterChange={handleDateFilterChange}
-              border="1px solid var(--Kanta-Neutral-200, #C7C6CF)"
-            />
+          <div className=" hidden">
+            <div className="flex items-center justify-between ">
+              <h3 className="text-2xl font-normal text-[#121212]">
+                Customer Transaction Counts
+              </h3>
+              <DaysTab2
+                backgroundColor="initial"
+                selectedBackgroundColor="#f38d41"
+                selectedColor="white"
+                nonSelectedColor="#606060"
+                iconClassName={clsx("text-[#ADADB9]")}
+                onDateFilterChange={handleDateFilterChange}
+                border="1px solid var(--Kanta-Neutral-200, #C7C6CF)"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-4 gap-6 mt-5">

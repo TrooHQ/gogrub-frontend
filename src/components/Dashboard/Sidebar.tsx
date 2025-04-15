@@ -11,7 +11,7 @@ import AccountCircleIcon from "../../assets/account_circle.svg";
 import Upgrade from "../../assets/upgrade.svg";
 import HomeIcon from "../../assets/troo-logo-white.png";
 import ManageUsersIcon from "../../assets/manageUsers.svg";
-import HubIcon from "../../assets/hub.svg";
+// import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import ArrowToggle from "../../assets/arrowToggle.svg";
 import { TextField, Button, Popper, Paper } from "@mui/material";
@@ -168,18 +168,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         },
       ],
     },
-    // {
-    //   title: "Payment",
-    //   gap: false,
-    //   icon: PaymentIcon,
-    //   link: "/payment",
-    // },
-    // {
-    //   title: "Accounting",
-    //   gap: false,
-    //   icon: AccountingIcon,
-    //   link: "/account",
-    // },
+
     {
       subTitle: "SETTINGS",
       Subgap: true,
@@ -202,12 +191,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     {
       title: "Manage Assets",
       icon: ManageTablesIcon,
-      link: "/qr-ordering",
+      link: "/online-ordering",
       subMenu: [
-        {
-          title: "QR Ordering",
-          link: "/qr-ordering",
-        },
         {
           title: "Online Ordering",
           link: "/online-ordering",
@@ -220,18 +205,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
       icon: ManageUsersIcon,
       link: "/manage-users",
     },
-    {
-      title: "Tenant Settings",
-      gap: false,
-      icon: HubIcon,
-      link: "/tenant-settings",
-    },
-    // {
-    //   title: "Point of Sales",
-    //   gap: false,
-    //   icon: PointOfSalesIcon,
-    //   link: "/pos",
-    // },
+
     {
       title: "Profile",
       gap: false,
@@ -248,12 +222,6 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           },
         ]
       : []),
-    // {
-    //   title: "Logout",
-    //   gap: true,
-    //   icon: LogoutIcon,
-    //   link: "/logout",
-    // },
   ];
 
   const adminMenu: MenuItem[] = [

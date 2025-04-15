@@ -132,7 +132,7 @@ const OrderHistory = () => {
   // Function to export selected data as Excel
   const exportToExcel = () => {
     // Create an array with only the desired fields
-    const selectedData = data.map((item) => ({
+    const selectedData = data?.map((item) => ({
       order_number: item.order_number,
       date: item.createdAt.slice(0, 10),
       time: item.createdAt.slice(11, 16),
@@ -155,7 +155,7 @@ const OrderHistory = () => {
   // Function to export selected data as CSV
   const exportToCSV = () => {
     // Create an array with only the desired fields
-    const selectedData = data.map((item) => ({
+    const selectedData = data?.map((item) => ({
       order_number: item.order_number,
       date: item.createdAt.slice(0, 10),
       time: item.createdAt.slice(11, 16),
@@ -391,7 +391,8 @@ const OrderHistory = () => {
                   ) : data.length === 0 ? (
                     <div className="px-8">No data during this period</div>
                   ) : (
-                    data.map((item, index) => (
+                    Array.isArray(data) &&
+                    data?.map((item, index) => (
                       <div
                         className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-6 items-center  font-base text-[14px] text-[#414141] ${
                           index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
