@@ -221,10 +221,10 @@ const Tickets = () => {
                   <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-10 border-b">
                     <p className=" text-[14px] text-[#121212]">Date</p>
                     <p className=" text-[14px] text-[#121212]">Time</p>
-                    <p className=" text-[14px] text-[#121212]">Table No</p>
+                    {/* <p className=" text-[14px] text-[#121212]">Table No</p> */}
                     <p className=" text-[14px] text-[#121212]">Order No</p>
                     <p className=" text-[14px] text-[#121212]">Customer </p>
-                    <p className=" text-[14px] text-[#121212]">Waiter </p>
+                    {/* <p className=" text-[14px] text-[#121212]">Waiter </p> */}
                     <p className=" text-[14px] text-[#121212]">Channel </p>
                     <p className=" text-[14px] text-[#121212]">Status </p>
                     <p className=" text-[14px] text-[#121212]">Bill </p>
@@ -248,9 +248,9 @@ const Tickets = () => {
                         <p className=" " onClick={handleTicketMenu}>
                           {item.createdAt.slice(11, 16)}
                         </p>
-                        <p onClick={handleTicketMenu}>
+                        {/* <p onClick={handleTicketMenu}>
                           {item.table_number || "-"}
-                        </p>
+                        </p> */}
                         <p onClick={handleTicketMenu}>
                           {item.order_number || "-"}
                         </p>
@@ -266,7 +266,7 @@ const Tickets = () => {
                               )
                             : ""}
                         </p>
-                        <p>{item.waiter || "-"}</p>
+                        {/* <p>{item.waiter || "-"}</p> */}
                         <p>{item.channel || ""}</p>
                         <div className="flex items-center justify-center gap-[10px]">
                           {item.status?.toLowerCase() === "cancelled" && (
@@ -356,10 +356,10 @@ const Tickets = () => {
                 <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-10 border-b">
                   <p className=" text-[14px] text-[#121212]">Date</p>
                   <p className=" text-[14px] text-[#121212]">Time</p>
-                  <p className=" text-[14px] text-[#121212]">Table No</p>
+                  {/* <p className=" text-[14px] text-[#121212]">Table No</p> */}
                   <p className=" text-[14px] text-[#121212]">Order No</p>
                   <p className=" text-[14px] text-[#121212]">Customer </p>
-                  <p className=" text-[14px] text-[#121212]">Waiter </p>
+                  {/* <p className=" text-[14px] text-[#121212]">Waiter </p> */}
                   <p className=" text-[14px] text-[#121212]">Channel </p>
                   <p className=" text-[14px] text-[#121212]">Status </p>
                   <p className=" text-[14px] text-[#121212]">Bill</p>
@@ -383,9 +383,9 @@ const Tickets = () => {
                       <p className=" " onClick={handleTicketMenu}>
                         {item.createdAt.slice(11, 16)}
                       </p>
-                      <p onClick={handleTicketMenu}>
+                      {/* <p onClick={handleTicketMenu}>
                         {item.table_number || "-"}
-                      </p>
+                      </p> */}
                       <p onClick={handleTicketMenu}>
                         {item.order_number || "-"}
                       </p>
@@ -401,7 +401,7 @@ const Tickets = () => {
                             )
                           : ""}
                       </p>
-                      <p>{item.waiter || "-"}</p>
+                      {/* <p>{item.waiter || "-"}</p> */}
                       <p>{item.channel || ""}</p>
                       <div className="flex items-center justify-center gap-[10px]">
                         <img src={green} alt="" className="w-[12px] h-[12px]" />
