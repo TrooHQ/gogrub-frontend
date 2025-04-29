@@ -5,6 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { fetchUserDetails } from "../../slices/UserSlice";
 import { useEffect } from "react";
+import {
+  selectToggleState,
+  toggle,
+  setDoMoreToggle,
+  // doMoreToggle,
+  selectIsDoMoreToggleState,
+} from "../../slices/setupSlice";
+import { FaChevronRight } from "react-icons/fa6";
+import SetupModal from "./components/SetupModal";
+import DoMoreModal from "./components/DoMoreModal";
 interface TopMenuNavProps {
   pathName: string;
 }
@@ -13,9 +23,27 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { userData, userDetails } = useSelector((state: any) => state.user);
 
+  const isToggled = useSelector(selectToggleState);
+  const isDoMoreToggled = useSelector(selectIsDoMoreToggleState);
+
+  console.log(isDoMoreToggled);
+
+  const handleToggle = () => {
+    dispatch(toggle());
+    console.log(isToggled);
+  };
+
+  useEffect(() => {
+    dispatch(setDoMoreToggle(true));
+    // if (!isDoMoreToggled) {
+    //   dispatch(doMoreToggle());
+    // }
+    console.log(isDoMoreToggled);
+  }, []);
+
   useEffect(() => {
     dispatch(fetchUserDetails());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="">
@@ -27,19 +55,13 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
             </p>
           </div>
           <div className="flex gap-5 items-center">
-            {/* <div className="relative">
-              <input
-                type="text"
-                className="bg-[#F8F8F8] rounded p-2 pl-14"
-                placeholder="Search"
-              />
-              <img
-                src={SearchIcon}
-                alt=""
-                className="absolute left-6 top-3 pointer-events-none"
-              />
-            </div> */}
-
+            <div
+              className=" cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
+              onClick={() => handleToggle()}
+            >
+              <p className=" ">Begin Setup</p>
+              <FaChevronRight />
+            </div>
             <div className=" ml-3 mr-5">
               <img src={NotificationIcon} alt="" />
             </div>
@@ -67,6 +89,15 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
           </div>
         </div>
       </div>
+
+      <SetupModal
+        isModalOpen={isToggled}
+        setIsModalOpen={() => dispatch(toggle())}
+      />
+      <DoMoreModal
+        isModalOpen={isDoMoreToggled}
+        setIsModalOpen={() => dispatch(setDoMoreToggle(false))}
+      />
     </div>
   );
 };

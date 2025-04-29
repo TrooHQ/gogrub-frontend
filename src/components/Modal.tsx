@@ -7,7 +7,12 @@ interface ModalProps {
   bg?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, children, bg = "bg-white" }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  bg = "bg-white",
+}) => {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no-scroll");
@@ -31,8 +36,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, children, bg = "bg-white" }) => {
           overflow: hidden;
         }
       `}</style>
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50"></div>
-      <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div
+        className=" fixed inset-0 bg-black bg-opacity-50 z-50"
+        onClick={onClose}
+      ></div>
+      <div className=" fixed inset-0 flex items-center justify-center z-50">
         <div
           className={`${bg} rounded-[20px] md:min-w-[30vw] max-w-full max-h-[90%] overflow-y-auto p-4`}
         >

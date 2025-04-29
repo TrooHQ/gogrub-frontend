@@ -3,6 +3,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import authReducer from "../slices/authSlice";
+import setupReducer from "../slices/setupSlice";
 import inviteUserReducer from "../slices/InviteUserSlice";
 import faqSettingReducer from "../slices/FaqSettingSlice";
 import userReducer from "../slices/UserSlice";
@@ -20,6 +21,7 @@ import overviewReducer from "../slices/overviewSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  setup: setupReducer,
   inviteUser: inviteUserReducer,
   faqSetting: faqSettingReducer,
   user: userReducer,
@@ -41,6 +43,7 @@ const persistConfig = {
   storage,
   whitelist: [
     "auth",
+    "setup",
     "inviteUser",
     "faqSetting",
     "user",
