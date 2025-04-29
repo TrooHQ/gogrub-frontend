@@ -76,6 +76,7 @@ const DoMoreModal: React.FC<SetupModalProps> = ({
           </div>
 
           <div className=" flex items-center justify-end">
+            {" "}
             <div
               className=" cursor-pointer inline-flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px] "
               onClick={() => setIsModalOpen(false)}

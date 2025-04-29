@@ -11,6 +11,7 @@ import {
   setDoMoreToggle,
   // doMoreToggle,
   selectIsDoMoreToggleState,
+  setToggle,
 } from "../../slices/setupSlice";
 import { FaChevronRight } from "react-icons/fa6";
 import SetupModal from "./components/SetupModal";
@@ -92,7 +93,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
 
       <SetupModal
         isModalOpen={isToggled}
-        setIsModalOpen={() => dispatch(toggle())}
+        setIsModalOpen={() => dispatch(setToggle(false))}
       />
       <DoMoreModal
         isModalOpen={isDoMoreToggled}
