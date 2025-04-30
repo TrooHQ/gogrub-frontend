@@ -3,6 +3,7 @@ import Logo from "../../../assets/Union.svg";
 import ActivateIcon from "../../../assets/activateIcon.svg";
 import MenuSetupIcon from "../../../assets/menuSetupIcon.svg";
 import PickupIcon from "../../../assets/pickupIcon.svg";
+import CancelIcon from "../../../assets/Cancel.svg";
 
 interface SetupModalProps {
   isModalOpen: boolean;
@@ -20,6 +21,12 @@ const SetupModal: React.FC<SetupModalProps> = ({
           <div
             className="absolute top-0 right-0  cursor-pointer"
             onClick={() => setIsModalOpen(false)}
+          >
+            <img src={CancelIcon} alt="" />
+          </div>
+          <div
+            className="absolute top-0 right-10  "
+            // onClick={() => setIsModalOpen(false)}
           >
             <img src={Logo} alt="Logo" />
           </div>

@@ -10,7 +10,7 @@ import ManageTablesIcon from "../../assets/manageTableIcon.svg";
 import AccountCircleIcon from "../../assets/account_circle.svg";
 import Upgrade from "../../assets/upgrade.svg";
 import HomeIcon from "../../assets/troo-logo-white.png";
-import ManageUsersIcon from "../../assets/manageUsers.svg";
+// import ManageUsersIcon from "../../assets/manageUsers.svg";
 // import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import ArrowToggle from "../../assets/arrowToggle.svg";
@@ -199,12 +199,12 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         },
       ],
     },
-    {
-      title: "Manage Users",
-      gap: false,
-      icon: ManageUsersIcon,
-      link: "/manage-users",
-    },
+    // {
+    //   title: "Manage Users",
+    //   gap: false,
+    //   icon: ManageUsersIcon,
+    //   link: "/manage-users",
+    // },
 
     {
       title: "Profile",
