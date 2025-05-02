@@ -113,56 +113,58 @@ const OverviewAdmin: React.FC = () => {
               {storeData.name}
             </span>
           </h3>
-          <Button
-            variant="contained"
-            onClick={handleButtonClick}
-            sx={{
-              backgroundColor: "#ffffff",
-              border: "1px solid #121212",
-              color: "#121212",
-              ml: 2,
-              "&:hover": {
-                backgroundColor: "#4842a3",
-                color: "white",
-              },
-            }}
-          >
-            {selectedOutlet.label} <ArrowDropDown />
-          </Button>
-          <Popper
-            open={open}
-            anchorEl={anchorEl}
-            placement="bottom-start"
-            sx={{ zIndex: 10, boxShadow: 3 }} // Added boxShadow
-          >
-            <Paper sx={{ boxShadow: 3 }}>
-              <CustomAutocomplete
-                disablePortal
-                options={transformedBranches}
-                value={selectedOutlet}
-                onChange={handleSelect}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    placeholder="Search outlet"
-                    variant="outlined"
-                    style={{ width: "220px", marginLeft: "0px" }} // Adjust width as needed
-                    InputProps={{
-                      ...params.InputProps,
-                      startAdornment: (
-                        <>
-                          <Search
-                            style={{ color: "gray", marginRight: "4px" }}
-                          />
-                          {params.InputProps.startAdornment}
-                        </>
-                      ),
-                    }}
-                  />
-                )}
-              />
-            </Paper>
-          </Popper>
+          <div className=" hidden">
+            <Button
+              variant="contained"
+              onClick={handleButtonClick}
+              sx={{
+                backgroundColor: "#ffffff",
+                border: "1px solid #121212",
+                color: "#121212",
+                ml: 2,
+                "&:hover": {
+                  backgroundColor: "#4842a3",
+                  color: "white",
+                },
+              }}
+            >
+              {selectedOutlet.label} <ArrowDropDown />
+            </Button>
+            <Popper
+              open={open}
+              anchorEl={anchorEl}
+              placement="bottom-start"
+              sx={{ zIndex: 10, boxShadow: 3 }} // Added boxShadow
+            >
+              <Paper sx={{ boxShadow: 3 }}>
+                <CustomAutocomplete
+                  disablePortal
+                  options={transformedBranches}
+                  value={selectedOutlet}
+                  onChange={handleSelect}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Search outlet"
+                      variant="outlined"
+                      style={{ width: "220px", marginLeft: "0px" }} // Adjust width as needed
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <>
+                            <Search
+                              style={{ color: "gray", marginRight: "4px" }}
+                            />
+                            {params.InputProps.startAdornment}
+                          </>
+                        ),
+                      }}
+                    />
+                  )}
+                />
+              </Paper>
+            </Popper>
+          </div>
         </div>
 
         {/* Second div */}

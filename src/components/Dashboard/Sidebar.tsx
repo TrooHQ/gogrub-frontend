@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, NavLink, useNavigate, Link } from "react-router-dom";
+import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/troo-logo.png";
 import LogoMini from "../../assets/logo-mini-icon.svg";
 import OverviewIcon from "../../assets/OverviewIcon.svg";
@@ -215,7 +215,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     ...(currentPlanName
       ? [
           {
-            title: "Upgrade Plan",
+            title: "Change Plan",
             gap: false,
             icon: Upgrade,
             link: "/upgrade-subscription",
@@ -519,32 +519,33 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
         <div className="flex items-start justify-start gap-0">
           <div>
-            <Link
+            {/* <Link
               to={`${
                 userData?.onboarding_type === "gogrub" && !currentPlanName
                   ? "/upgrade-subscription"
                   : "/upgrade-subscription"
               }`}
+            > */}
+            <button
+              className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center"
+              type="button"
             >
-              <button className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center">
-                <span className="text-white text-base font-semibold mr-2 capitalize">
-                  {userData?.onboarding_type === "gogrub" && currentPlanName
-                    ? currentPlanName
-                        .replace(`${userData.onboarding_type} `, "")
-                        .replace("plan", "")
-                        .trim()
-                    : userData?.onboarding_type === "troo" && currentPlanName
-                    ? currentPlanName
-                        .replace(`${userData.onboarding_type} `, "")
-                        .replace("plan", "")
-                        .trim()
-                    : "Subscribe"}
-                </span>
-                <ArrowCircleRightOutlined
-                  sx={{ color: "var(--white, #FFF)" }}
-                />{" "}
-              </button>
-            </Link>
+              <span className="text-white text-base font-semibold mr-2 capitalize">
+                {userData?.onboarding_type === "gogrub" && currentPlanName
+                  ? currentPlanName
+                      .replace(`${userData.onboarding_type} `, "")
+                      .replace("plan", "")
+                      .trim()
+                  : userData?.onboarding_type === "troo" && currentPlanName
+                  ? currentPlanName
+                      .replace(`${userData.onboarding_type} `, "")
+                      .replace("plan", "")
+                      .trim()
+                  : "Subscribe"}
+              </span>
+              <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
+            </button>
+            {/* </Link> */}
           </div>
           {!currentPlanName && (
             <div className="-ml-[8px] mt-0">

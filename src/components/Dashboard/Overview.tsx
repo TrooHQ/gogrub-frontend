@@ -113,57 +113,59 @@ const Overview: React.FC = () => {
               {userData?.business_name} {""}
             </span>
           </h3>
-          <Button
-            variant="contained"
-            onClick={handleButtonClick}
-            sx={{
-              backgroundColor: "#ffffff",
-              border: "1px solid #ffffff",
-              color: "#000000",
-              ml: 2,
-              "&:hover": {
+          <div className=" hidden">
+            <Button
+              variant="contained"
+              onClick={handleButtonClick}
+              sx={{
                 backgroundColor: "#ffffff",
-                color: "white",
-              },
-            }}
-          >
-            {selectedBranch?.label || selectedOutlet?.label || "All outlets"}{" "}
-            <ArrowDropDown />
-          </Button>
-          <Popper
-            open={open}
-            anchorEl={anchorEl}
-            placement="bottom-start"
-            sx={{ zIndex: 10, boxShadow: 3 }} // Added boxShadow
-          >
-            <Paper sx={{ boxShadow: 3 }}>
-              <CustomAutocomplete
-                disablePortal
-                options={transformedBranches}
-                value={selectedBranch ? selectedBranch?.label : "All outlets"}
-                onChange={handleSelect}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    placeholder="Search outlet"
-                    variant="outlined"
-                    style={{ width: "220px", marginLeft: "0px" }} // Adjust width as needed
-                    InputProps={{
-                      ...params.InputProps,
-                      startAdornment: (
-                        <>
-                          <Search
-                            style={{ color: "gray", marginRight: "4px" }}
-                          />
-                          {params.InputProps.startAdornment}
-                        </>
-                      ),
-                    }}
-                  />
-                )}
-              />
-            </Paper>
-          </Popper>
+                border: "1px solid #ffffff",
+                color: "#000000",
+                ml: 2,
+                "&:hover": {
+                  backgroundColor: "#ffffff",
+                  color: "white",
+                },
+              }}
+            >
+              {selectedBranch?.label || selectedOutlet?.label || "All outlets"}{" "}
+              <ArrowDropDown />
+            </Button>
+            <Popper
+              open={open}
+              anchorEl={anchorEl}
+              placement="bottom-start"
+              sx={{ zIndex: 10, boxShadow: 3 }} // Added boxShadow
+            >
+              <Paper sx={{ boxShadow: 3 }}>
+                <CustomAutocomplete
+                  disablePortal
+                  options={transformedBranches}
+                  value={selectedBranch ? selectedBranch?.label : "All outlets"}
+                  onChange={handleSelect}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Search outlet"
+                      variant="outlined"
+                      style={{ width: "220px", marginLeft: "0px" }} // Adjust width as needed
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <>
+                            <Search
+                              style={{ color: "gray", marginRight: "4px" }}
+                            />
+                            {params.InputProps.startAdornment}
+                          </>
+                        ),
+                      }}
+                    />
+                  )}
+                />
+              </Paper>
+            </Popper>
+          </div>
         </div>
         {/* Second div */}
         <BalanceComp />
