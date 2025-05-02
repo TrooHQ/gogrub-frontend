@@ -6,7 +6,14 @@ import ActivateIcon from "../../../assets/activateIcon.svg";
 import MenuSetupIcon from "../../../assets/menuSetupIcon.svg";
 import PickupIcon from "../../../assets/pickupIcon.svg";
 import CancelIcon from "../../../assets/Cancel.svg";
-
+import { useNavigate } from "react-router-dom";
+import UpgradeSubscriptionModal from "../../../pages/pricing/UpgradeSubscriptionModal";
+import {
+  setSubscription,
+  selectSubscriptionToggleState,
+} from "../../../slices/setupSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../../store/store";
 interface SetupModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
@@ -16,7 +23,11 @@ const SetupModal: React.FC<SetupModalProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const paid = true;
+  const router = useNavigate();
+  const isSubscription = useSelector(selectSubscriptionToggleState);
 
   return (
     <div>
@@ -64,7 +75,13 @@ const SetupModal: React.FC<SetupModalProps> = ({
                     />
                   )}
                   <p className=" text-[44px] font-[400] text-[#000000]">1.</p>
-                  <div className=" bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[248px] w-full text-start">
+                  <div
+                    className=" bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[248px] w-full text-start cursor-pointer"
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      router("/menu-builder");
+                    }}
+                  >
                     <div className=" flex items-center gap-[4px]">
                       <img
                         src={MenuSetupIcon}
@@ -87,7 +104,13 @@ const SetupModal: React.FC<SetupModalProps> = ({
                     />
                   )}
                   <p className=" text-[44px] font-[400] text-[#000000]">2.</p>
-                  <div className=" bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[248px] w-full text-start">
+                  <div
+                    className="cursor-pointer bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[248px] w-full text-start"
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      router("/online-ordering");
+                    }}
+                  >
                     <div className=" flex items-center gap-[4px]">
                       <img
                         src={PickupIcon}
@@ -111,7 +134,13 @@ const SetupModal: React.FC<SetupModalProps> = ({
                   />
                 )}
                 <p className=" text-[44px] font-[400] text-[#000000]">3.</p>
-                <div className=" bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[441px] mx-auto w-full text-start">
+                <div
+                  className="cursor-pointer bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[441px] mx-auto w-full text-start"
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    dispatch(setSubscription(true));
+                  }}
+                >
                   <div className=" flex items-center gap-[4px]">
                     <img
                       src={ActivateIcon}
@@ -128,6 +157,11 @@ const SetupModal: React.FC<SetupModalProps> = ({
           </div>
         </div>
       </Modal>
+
+      <UpgradeSubscriptionModal
+        isModalOpen={isSubscription}
+        setIsModalOpen={() => dispatch(setSubscription(false))}
+      />
     </div>
   );
 };

@@ -9,13 +9,13 @@ import {
   selectToggleState,
   toggle,
   setDoMoreToggle,
-  // doMoreToggle,
   selectIsDoMoreToggleState,
   setToggle,
 } from "../../slices/setupSlice";
 import { FaChevronRight } from "react-icons/fa6";
 import SetupModal from "./components/SetupModal";
 import DoMoreModal from "./components/DoMoreModal";
+
 interface TopMenuNavProps {
   pathName: string;
 }
@@ -26,7 +26,6 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
 
   const isToggled = useSelector(selectToggleState);
   const isDoMoreToggled = useSelector(selectIsDoMoreToggleState);
-
   console.log(isDoMoreToggled);
 
   const handleToggle = () => {
@@ -36,9 +35,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
 
   useEffect(() => {
     dispatch(setDoMoreToggle(true));
-    // if (!isDoMoreToggled) {
-    //   dispatch(doMoreToggle());
-    // }
+
     console.log(isDoMoreToggled);
   }, []);
 
@@ -57,7 +54,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
           </div>
           <div className="flex gap-5 items-center">
             <div
-              className=" cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
+              className=" hidden cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
               onClick={() => handleToggle()}
             >
               <p className=" ">Begin Setup</p>
