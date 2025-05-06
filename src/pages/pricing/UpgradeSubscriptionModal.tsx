@@ -33,6 +33,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
+
+  const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   // const [currentPlan, setCurrentPlan] = useState<string>("");
@@ -248,7 +250,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                 className={`max-w-[500px] mx-auto w-full flex items-center justify-center  px-[10px] py-[13px] rounded-[5px]  text-[16px] font-[500] transition-all duration-500 ease-in-out ${
                   selectedPlan && agreed
                     ? "bg-[#FF4F00] border border-[#FF4F00] text-white"
-                    : " bg-slate-200 text-[#000]"
+                    : " bg-[#FF4F001F] text-[#FFFFFF]"
                 }`}
                 disabled={!selectedPlan || !agreed}
                 onClick={() => {
@@ -264,15 +266,12 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
             </div>
 
             <button
-              className="mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center bg-[#FF4F00] border border-[#FF4F00] px-[10px] py-[13px] rounded-[5px] text-white text-[16px] font-[500] transition-all duration-500 ease-in-out"
+              className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${
+                !currentPlanName
+                  ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
+                  : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
+              }`}
               disabled={!selectedPlan}
-              // onClick={() => {
-              //   if (!selectedPlan) {
-              //     alert("Please select a plan before proceeding.");
-              //   } else {
-              //     setIsOpen(true);
-              //   }
-              // }}
             >
               Get Your URL
             </button>
