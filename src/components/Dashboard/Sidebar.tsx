@@ -33,6 +33,7 @@ import {
 import { clearUserData, fetchUserDetails } from "../../slices/UserSlice";
 import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
 import BlinkerSubscribe from "../BlinkerSubscribe";
+import { setSubscription } from "../../slices/setupSlice";
 
 interface MenuItem {
   subTitle?: string;
@@ -529,6 +530,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
             <button
               className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center"
               type="button"
+              onClick={() => dispatch(setSubscription(true))}
             >
               <span className="text-white text-base font-semibold mr-2 capitalize">
                 {userData?.onboarding_type === "gogrub" && currentPlanName

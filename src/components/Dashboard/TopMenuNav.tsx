@@ -53,15 +53,15 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
             </p>
           </div>
           <div className="flex gap-5 items-center">
-            <div className="hidden">
-              <div
-                className="  cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
-                onClick={() => handleToggle()}
-              >
-                <p className=" ">Begin Setup</p>
-                <FaChevronRight />
-              </div>
+            {/* <div className="hidden"> */}
+            <div
+              className="  cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
+              onClick={() => handleToggle()}
+            >
+              <p className=" ">Begin Setup</p>
+              <FaChevronRight />
             </div>
+            {/* </div> */}
             <div className=" ml-3 mr-5">
               <img src={NotificationIcon} alt="" />
             </div>
