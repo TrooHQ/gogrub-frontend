@@ -17,6 +17,9 @@ interface Plan {
   price: number;
   billingCycle: string;
   discount?: string;
+  prevPrice: number;
+  billingFrequencyAmount: number;
+  billingCycleInMonths: number;
 }
 
 interface SetupModalProps {
@@ -173,7 +176,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
             </div>
 
             <div
-              className=" space-y-[14px]"
+              className=" space-y-[14px] py-[30px]"
               style={{
                 backgroundImage: `url(${Pattern})`,
                 backgroundSize: "cover",
@@ -181,7 +184,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                 width: "full",
               }}
             >
-              <div className="space-y-[30px] max-w-[500px] mx-auto py-[30px]">
+              <div className="space-y-[30px] max-w-[500px] mx-auto ">
                 {plans.map((plan, index) => (
                   <div
                     key={index}
@@ -213,15 +216,15 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                         </div>
                         <div className="grid md:flex items-center md:justify-between">
                           <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
-                            Billed {plan.billingCycle}
+                            Pay <span className="font-[400]">₦ </span>
+                            {plan.billingFrequencyAmount.toLocaleString()} every{" "}
+                            {plan.billingCycleInMonths} months
                           </p>
-                          <p className="font-[600] text-[#303030] text-[14px] line-through transition-all duration-500 ease-in-out">
-                            {plan.discount ||
-                              (plan.name.includes("yearly") ||
-                              plan.name.includes("biannually")
-                                ? "30,000"
-                                : "10,000")}
-                          </p>
+                          {plan.name !== "quarterly plan" && (
+                            <p className="font-[600] text-[#303030] text-[14px] line-through transition-all duration-500 ease-in-out">
+                              {plan.prevPrice.toLocaleString()}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
