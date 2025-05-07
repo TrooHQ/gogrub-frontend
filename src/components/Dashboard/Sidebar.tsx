@@ -200,12 +200,6 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         },
       ],
     },
-    // {
-    //   title: "Manage Users",
-    //   gap: false,
-    //   icon: ManageUsersIcon,
-    //   link: "/manage-users",
-    // },
 
     {
       title: "Profile",
@@ -213,16 +207,16 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
       icon: AccountCircleIcon,
       link: "/profile-page",
     },
-    ...(currentPlanName
-      ? [
-          {
-            title: "Change Plan",
-            gap: false,
-            icon: Upgrade,
-            link: "/upgrade-subscription",
-          },
-        ]
-      : []),
+    // ...(currentPlanName
+    //   ? [
+    //       {
+    //         title: "Change Plan",
+    //         gap: false,
+    //         icon: Upgrade,
+    //         link: "/upgrade-subscription",
+    //       },
+    //     ]
+    //   : []),
   ];
 
   const adminMenu: MenuItem[] = [
@@ -495,38 +489,22 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           </div>
         ))}
       </ul>
-
+      {currentPlanName && (
+        <button
+          className=" flex items-center gap-[16px] px-[4px] py-[6px]  font-[400] text-[16px] text-[#606060] mt-[10px]"
+          type="button"
+          onClick={() => dispatch(setSubscription(true))}
+        >
+          <img src={Upgrade} alt="arrow-up" className="w-[24px]" />
+          Change Plan
+        </button>
+      )}
       <div className="mb-10">
         <hr className="h-[2px] bg-[#929292] mt-5 mb-3" />
         <p className="text-[10px] font-medium ml-3.5"></p>
-        {/* <button className="ml-4 px-2.5 py-[6px] bg-[#DB7F3B] rounded-[100px] mt-1 text-center">
-          <Link
-            to={`${
-              userData?.onboarding_type === "gogrub" && !currentPlanName
-                ? "/upgrade-subscription"
-                : "/subscription-plan"
-            }`}
-          >
-            <span className="text-white text-base font-semibold mr-2 capitalize">
-              {userData?.onboarding_type === "gogrub" && currentPlanName
-                ? currentPlanName.slice(0, 16)
-                : userData?.onboarding_type === "troo" && currentPlanName
-                ? currentPlanName.slice(0, 16)
-                : "Subscribe"}
-            </span>
-          </Link>
-          <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
-        </button> */}
 
         <div className="flex items-start justify-start gap-0">
           <div>
-            {/* <Link
-              to={`${
-                userData?.onboarding_type === "gogrub" && !currentPlanName
-                  ? "/upgrade-subscription"
-                  : "/upgrade-subscription"
-              }`}
-            > */}
             <button
               className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center"
               type="button"
@@ -547,7 +525,6 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               </span>
               <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
             </button>
-            {/* </Link> */}
           </div>
           {!currentPlanName && (
             <div className="-ml-[8px] mt-0">
