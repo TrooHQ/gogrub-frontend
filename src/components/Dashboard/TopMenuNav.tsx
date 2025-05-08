@@ -27,7 +27,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const { userData, userDetails } = useSelector((state: any) => state.user);
   const location = useLocation();
 
-  const BusinessPlan = userDetails?.businessPlan.plan.name;
+  const BusinessPlan = userDetails?.businessPlan?.plan?.name;
   console.log(BusinessPlan);
 
   const queryParams = new URLSearchParams(location.search);

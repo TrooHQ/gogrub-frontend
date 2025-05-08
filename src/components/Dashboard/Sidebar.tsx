@@ -32,7 +32,7 @@ import {
 } from "../../slices/branchSlice";
 import { clearUserData, fetchUserDetails } from "../../slices/UserSlice";
 import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
-import BlinkerSubscribe from "../BlinkerSubscribe";
+// import BlinkerSubscribe from "../BlinkerSubscribe";
 import { setSubscription } from "../../slices/setupSlice";
 
 interface MenuItem {
@@ -526,11 +526,11 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
             </button>
           </div>
-          {!currentPlanName && (
+          {/* {!currentPlanName && (
             <div className="-ml-[8px] mt-0">
               <BlinkerSubscribe />
             </div>
-          )}
+          )} */}
         </div>
         <hr className="h-[2px] bg-[#929292] mt-5 mb-3" />
       </div>

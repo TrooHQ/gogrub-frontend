@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { userDetails } = useSelector((state: any) => state.user);
 
-  const BusinessPlan = userDetails?.businessPlan.plan.name;
+  const BusinessPlan = userDetails?.businessPlan?.plan?.name;
   console.log(BusinessPlan);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
