@@ -14,7 +14,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   const { userDetails } = useSelector((state: any) => state.user);
 
   const BusinessPlan = userDetails?.businessPlan?.plan?.name;
-  console.log(BusinessPlan);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault();
@@ -39,7 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const tabs = [
     { label: "PICKUP LOCATION", value: "pickup location" },
     { label: "DELIVERY", value: "delivery service" },
-    ...(!BusinessPlan ? [{ label: "GET YOUR LINK", value: "your link" }] : []),
+    ...(BusinessPlan ? [{ label: "GET YOUR LINK", value: "your link" }] : []),
     { label: "THEMES", value: "themes" },
   ];
 

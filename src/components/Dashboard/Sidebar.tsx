@@ -92,6 +92,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
       dispatch(userSelectedBranch(userData?.branch_id));
     }
   }, [dispatch, transformedBranches, selectedBranch]);
+
   const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setIsAutoOpen((prev) => !prev);
@@ -222,7 +223,6 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const adminMenu: MenuItem[] = [
     { title: "AdminHome", gap: false, icon: HomeIcon },
   ];
-  console.log(userData, "userData here:");
   const userPermissions = userData?.permissions || [];
   const permittedMenu =
     userData?.user_role === "admin"
@@ -508,7 +508,11 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
             <button
               className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center"
               type="button"
-              onClick={() => dispatch(setSubscription(true))}
+              onClick={
+                !currentPlanName
+                  ? () => dispatch(setSubscription(true))
+                  : undefined
+              }
             >
               <span className="text-white text-base font-semibold mr-2 capitalize">
                 {userData?.onboarding_type === "gogrub" && currentPlanName

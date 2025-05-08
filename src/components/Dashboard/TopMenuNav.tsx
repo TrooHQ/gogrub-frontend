@@ -28,30 +28,26 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const location = useLocation();
 
   const BusinessPlan = userDetails?.businessPlan?.plan?.name;
-  console.log(BusinessPlan);
 
   const queryParams = new URLSearchParams(location.search);
   const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
   const isDoMoreToggled = useSelector(selectIsDoMoreToggleState);
-  console.log(isDoMoreToggled);
 
   const handleToggle = () => {
     dispatch(toggle());
-    console.log(isToggled);
   };
 
   useEffect(() => {
     if (reference) {
       dispatch(setSubscription(true));
     }
-  }, [reference]);
+  }, []);
 
   useEffect(() => {
     if (!reference && !BusinessPlan) {
       dispatch(setDoMoreToggle(true));
     }
-    console.log(isDoMoreToggled);
   }, [reference, BusinessPlan]);
 
   useEffect(() => {

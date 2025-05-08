@@ -12,7 +12,7 @@ import Logo from "../../assets/Union.svg";
 import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
 import { Link, useLocation } from "react-router-dom";
-// import { setSubscription } from "../../slices/setupSlice";
+import { setSubscription } from "../../slices/setupSlice";
 
 interface Plan {
   _id: string;
@@ -35,7 +35,6 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   setIsModalOpen,
 }) => {
   const dispatchs = useDispatch<AppDispatch>();
-
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
@@ -147,7 +146,6 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
   const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
   const selectedPlans = JSON.parse(businessPlan.selectedPlan);
-  // const navigate = useNavigate();
   const token = userData?.token;
 
   const SubcribePlan = async () => {
@@ -346,7 +344,10 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               )}
             </div>
 
-            <Link to="/online-ordering">
+            <Link
+              to="/online-ordering"
+              onClick={() => dispatch(setSubscription(false))}
+            >
               <button
                 className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${
                   reference
