@@ -12,7 +12,7 @@ import Logo from "../../assets/Union.svg";
 import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
 import { useLocation } from "react-router-dom";
-import { setSubscription } from "../../slices/setupSlice";
+// import { setSubscription } from "../../slices/setupSlice";
 
 interface Plan {
   _id: string;
