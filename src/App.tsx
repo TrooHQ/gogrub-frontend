@@ -97,7 +97,8 @@ export default function App() {
           />
           <Route path="/verified-payment" element={<VerifiedPayment />} />
           <Route path="/payout-details" element={<PayoutDetails />} />
-          <Route path="/overview" element={<Overview />} />
+          {/* <Route path="/overview" element={<Overview />} /> */}
+          <Route path="/overview/:param?" element={<Overview />} />
           <Route path="/overview-admin" element={<OverviewAdmin />} />
           <Route path="/roles" element={<Roles />} />
           <Route path="/new-roles" element={<NewRoles />} />
