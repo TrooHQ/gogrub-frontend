@@ -11,7 +11,7 @@ import CancelIcon from "../../assets/Cancel.svg";
 import Logo from "../../assets/Union.svg";
 import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import { setSubscription } from "../../slices/setupSlice";
 
 interface Plan {
@@ -346,16 +346,18 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               )}
             </div>
 
-            <button
-              className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${
-                reference
-                  ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
-                  : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
-              }`}
-              disabled={!reference}
-            >
-              Get Your URL
-            </button>
+            <Link to="/online-ordering">
+              <button
+                className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${
+                  reference
+                    ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
+                    : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
+                }`}
+                disabled={!reference}
+              >
+                Get Your URL
+              </button>
+            </Link>
           </div>
         </div>
       </Modal>
