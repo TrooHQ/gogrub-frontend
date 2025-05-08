@@ -166,7 +166,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         headers
       );
       dispatch(setPlanDetails(response.data.data));
-      dispatch(setSubscription(false));
+      // dispatch(setSubscription(false));
       toast.success(response.data.message || "Plan subscribed successfully!");
       // navigate("/overview");
     } catch (error) {
