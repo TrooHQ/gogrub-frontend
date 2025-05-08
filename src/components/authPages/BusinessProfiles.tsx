@@ -64,7 +64,7 @@ const BusinessProfiles: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get("coming-from") === "gogrub") {
-      const monthlyAverageSales = params.get("monthlySales") || "0";
+      const monthlyAverageSales = params.get("monthlySales") || 0;
       const planName = params.get("selectedPlan") || "Quarterly";
 
       setCustomPayload({
