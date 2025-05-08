@@ -201,7 +201,10 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   };
 
   useEffect(() => {
-    VerifyPayment();
+    if (reference) {
+      VerifyPayment();
+      console.log(reference);
+    }
   }, [reference]);
 
   return plans.length === 0 ? (
