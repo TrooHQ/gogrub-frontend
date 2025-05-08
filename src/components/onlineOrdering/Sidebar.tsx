@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs, Tab } from "@mui/material";
+import { useSelector } from "react-redux";
 
 interface SidebarProps {
   activeComponent: string;
@@ -10,6 +11,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   activeComponent,
   setActiveComponent,
 }) => {
+  const { userDetails } = useSelector((state: any) => state.user);
+
+  const BusinessPlan = userDetails?.businessPlan.plan.name;
+  console.log(BusinessPlan);
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault();
     setActiveComponent(newValue);
@@ -33,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const tabs = [
     { label: "PICKUP LOCATION", value: "pickup location" },
     { label: "DELIVERY", value: "delivery service" },
-    { label: "GET YOUR LINK", value: "your link" },
+    ...(!BusinessPlan ? [{ label: "GET YOUR LINK", value: "your link" }] : []),
     { label: "THEMES", value: "themes" },
   ];
 
