@@ -37,10 +37,13 @@ const Modifiers = ({
   handleAddModifier,
 }: any) => {
   const dispatch = useDispatch<AppDispatch>();
-
+  console.log(selectedMenuItem);
   const [modifiers, setModifiers] = useState<Modifier[]>([
     { id: 1, name: "", price: "" },
   ]);
+
+  console.log(modifiers);
+
   const [confirmSaveModal, setConfirmSaveModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modifierRules, setModifierRules] = useState<ModifierRules>({
@@ -284,7 +287,7 @@ const Modifiers = ({
       modifier_group_name: groupName,
       branch_id: selectedBranch.id,
       attach_to: "item",
-      menu_item_name: selectedMenuItem,
+      menu_item_name: selectedMenuItem.menu_item_name,
     };
     try {
       setModGroupLoading(true);
@@ -316,7 +319,7 @@ const Modifiers = ({
       branch_id: selectedBranch.id, // Replace with the correct branch ID
       modifier_group_name: modifier.modifier_group_name,
       new_group_name: newGroupName,
-      menu_item_name: selectedMenuItem,
+      menu_item_name: selectedMenuItem.menu_item_name,
       rule: "single", // Adjust as necessary
     };
 

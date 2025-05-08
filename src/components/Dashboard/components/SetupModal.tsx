@@ -14,9 +14,19 @@ import {
 } from "../../../slices/setupSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../store/store";
+import { SERVER_DOMAIN } from "../../../Api/Api";
+import axios from "axios";
+import { useEffect, useState } from "react";
 interface SetupModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+}
+
+interface UserCheckState {
+  hasMenu: boolean;
+  businessPlan: boolean;
+  hasPickUpLocation: boolean;
+  hasDeliveryDetails: boolean;
 }
 
 const SetupModal: React.FC<SetupModalProps> = ({
@@ -24,10 +34,43 @@ const SetupModal: React.FC<SetupModalProps> = ({
   setIsModalOpen,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
+  // const { userDetails } = useSelector((state: any) => state.user);
 
-  const paid = true;
+  const [userCheck, setUserChecks] = useState<UserCheckState>({
+    hasMenu: false,
+    businessPlan: false,
+    hasPickUpLocation: false,
+    hasDeliveryDetails: false,
+  });
+  const token = localStorage.getItem("token");
+
+  // const paid = true;
   const router = useNavigate();
   const isSubscription = useSelector(selectSubscriptionToggleState);
+
+  const getUserOnboardChecks = async () => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/userOnboardChecks`,
+        headers
+      );
+      setUserChecks(response.data);
+    } catch (error) {
+      console.error("Error getting Business Details:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserOnboardChecks();
+  }, []);
+
+  console.log(userCheck);
 
   return (
     <div>
@@ -67,7 +110,7 @@ const SetupModal: React.FC<SetupModalProps> = ({
             <div className=" max-w-[700px] mx-auto py-[100px] space-y-[44px]">
               <div className=" flex items-center justify-between ">
                 <div className=" flex items-center gap-[16px]">
-                  {paid && (
+                  {userCheck.hasMenu && (
                     <img
                       src={CheckIcon}
                       alt="check icon"
@@ -96,13 +139,14 @@ const SetupModal: React.FC<SetupModalProps> = ({
                 </div>
 
                 <div className=" flex items-center gap-[16px]">
-                  {paid && (
-                    <img
-                      src={CheckIcon}
-                      alt="check icon"
-                      className=" w-[40px] h-[40px] object-contain]"
-                    />
-                  )}
+                  {userCheck.hasPickUpLocation &&
+                    userCheck.hasDeliveryDetails && (
+                      <img
+                        src={CheckIcon}
+                        alt="check icon"
+                        className=" w-[40px] h-[40px] object-contain]"
+                      />
+                    )}
                   <p className=" text-[44px] font-[400] text-[#000000]">2.</p>
                   <div
                     className="cursor-pointer bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[248px] w-full text-start"
@@ -126,7 +170,7 @@ const SetupModal: React.FC<SetupModalProps> = ({
               </div>
 
               <div className=" flex items-center gap-[16px]">
-                {paid && (
+                {userCheck.businessPlan && (
                   <img
                     src={CheckIcon}
                     alt="check icon"
