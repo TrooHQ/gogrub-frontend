@@ -11,10 +11,12 @@ import {
   setDoMoreToggle,
   selectIsDoMoreToggleState,
   setToggle,
+  setSubscription,
 } from "../../slices/setupSlice";
 import { FaChevronRight } from "react-icons/fa6";
 import SetupModal from "./components/SetupModal";
 import DoMoreModal from "./components/DoMoreModal";
+import { useLocation } from "react-router-dom";
 
 interface TopMenuNavProps {
   pathName: string;
@@ -23,7 +25,10 @@ interface TopMenuNavProps {
 const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { userData, userDetails } = useSelector((state: any) => state.user);
+  const location = useLocation();
 
+  const queryParams = new URLSearchParams(location.search);
+  const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
   const isDoMoreToggled = useSelector(selectIsDoMoreToggleState);
   console.log(isDoMoreToggled);
@@ -32,6 +37,10 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     dispatch(toggle());
     console.log(isToggled);
   };
+
+  useEffect(() => {
+    dispatch(setSubscription(true));
+  }, [reference]);
 
   useEffect(() => {
     dispatch(setDoMoreToggle(true));

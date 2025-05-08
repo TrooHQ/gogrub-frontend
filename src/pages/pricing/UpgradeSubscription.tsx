@@ -119,7 +119,7 @@ const UpgradeSubscription: React.FC = () => {
           business_email: userData?.business_email,
           amount: selectedPlan?.price,
           plan_description: selectedPlan?.name,
-          callback_url: "https://gogrub-client.netlify.app/verified-payment",
+          callback_url: "https://gogrub-client.netlify.app/overview",
         },
         headers
       );

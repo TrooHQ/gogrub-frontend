@@ -10,6 +10,7 @@ import { setPlanDetails } from "../../slices/UserSlice";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
+// import Modal from "../../components/Modal";
 
 const VerifiedPayment: React.FC = () => {
   const location = useLocation();
@@ -83,6 +84,7 @@ const VerifiedPayment: React.FC = () => {
   }, []);
 
   return (
+    // <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
     <div className=" h-full transition-all duration-500 ease-in-out bg-[#EFEFEF] py-[5%]">
       <div className="max-w-[536px] min-h-[541px] mx-auto w-full py-[50px] ">
         <div className="flex items-center justify-center">
@@ -118,6 +120,7 @@ const VerifiedPayment: React.FC = () => {
         </div>
       </div>
     </div>
+    // </Modal>
   );
 };
 

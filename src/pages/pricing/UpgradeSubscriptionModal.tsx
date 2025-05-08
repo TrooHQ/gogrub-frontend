@@ -6,10 +6,12 @@ import { AppDispatch, RootState } from "@/src/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal";
 import { toast } from "react-toastify";
-import { fetchUserDetails } from "../../slices/UserSlice";
+import { fetchUserDetails, setPlanDetails } from "../../slices/UserSlice";
 import CancelIcon from "../../assets/Cancel.svg";
 import Logo from "../../assets/Union.svg";
+import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Plan {
   _id: string;
@@ -37,7 +39,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     (state: RootState) => state.user
   );
 
-  const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
+  // const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   // const [currentPlan, setCurrentPlan] = useState<string>("");
@@ -50,26 +52,6 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   const [agreed, setAgreed] = useState(false);
 
   const currentPlanId = userDetails?.businessPlan?.plan._id ?? null;
-
-  // const features: Record<string, string[]> = {
-  //   quarterly: [
-  //     "Branded Online Store",
-  //     "Custom Menu & Pricing",
-  //     "Pickup & Delivery Scheduling",
-  //     "Unique GoGrub URL",
-  //   ],
-  //   yearly: [
-  //     "Branded Online Store",
-  //     "Custom Menu & Pricing",
-  //     "Pickup & Delivery Scheduling",
-  //     "Unique GoGrub URL",
-  //     "Real-Time Order Management",
-  //     "Sales Report & Analysis",
-  //     "Customer Insights & Data",
-  //     "Automated Order Notifications",
-  //     "Online Payment Processing (Low Transaction Fees)",
-  //   ],
-  // };
 
   const updateLocalStorage = (key: string, value: string): void => {
     const storedData = JSON.parse(
@@ -135,7 +117,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           business_email: userData?.business_email,
           amount: selectedPlan?.price,
           plan_description: selectedPlan?.name,
-          callback_url: "https://gogrub-client.netlify.app/verified-payment",
+          callback_url: "https://gogrub-client.netlify.app/overview",
         },
         headers
       );
@@ -151,6 +133,76 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       setLoading(false);
     }
   };
+
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+
+  // const trxref = queryParams.get("trxref");
+  const reference = queryParams.get("reference");
+  // const reference = "PLANSUB202504248DE350CA2699";
+
+  const dispatch = useDispatch();
+
+  // const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
+  // const selectedPlans = JSON.parse(businessPlan.selectedPlan);
+  const navigate = useNavigate();
+  const token = userData?.token;
+
+  const SubcribePlan = async () => {
+    try {
+      const headers = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(
+        `${SERVER_DOMAIN}/plan/subcribeBusinessPlan?secretKey=trooAdminDev`,
+        {
+          planId: selectedPlan?._id,
+        },
+        headers
+      );
+      dispatch(setPlanDetails(response.data.data));
+
+      toast.success(response.data.message || "Plan subscribed successfully!");
+      navigate("/overview");
+    } catch (error) {
+      console.error("Error adding employee:", error);
+    } finally {
+      //
+    }
+  };
+
+  const VerifyPayment = async () => {
+    try {
+      const headers = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await axios.post(
+        `https://payment.trootab.com/api/v1/transaction/verify_subscription_payment/`,
+        {
+          reference: reference,
+        },
+        headers
+      );
+
+      toast.success(response.data.message || "Payment Verified successfully!");
+
+      SubcribePlan();
+    } catch (error) {
+      console.error("Error verifing payment:", error);
+    } finally {
+      //
+    }
+  };
+
+  useEffect(() => {
+    VerifyPayment();
+  }, [reference]);
 
   return plans.length === 0 ? (
     <div className="flex justify-center items-center h-screen">
@@ -176,7 +228,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
             </div>
 
             <div
-              className=" space-y-[14px] py-[30px]"
+              className="  py-[30px]"
               style={{
                 backgroundImage: `url(${Pattern})`,
                 backgroundSize: "cover",
@@ -184,97 +236,119 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                 width: "full",
               }}
             >
-              <div className="space-y-[30px] max-w-[500px] mx-auto ">
-                {plans.map((plan, index) => (
-                  <div
-                    key={index}
-                    className={`px-[30px] py-[22px] rounded-[10px] border ${
-                      selectedPlan?.name === plan.name
-                        ? "border-[#FF4F00]"
-                        : " border-none"
-                    } text-[16px] font-[400] text-[#414141] w-full shadow-sm bg-white cursor-pointer transition-all duration-500 ease-in-out`}
-                    onClick={() => handlePlanSelect(plan)}
-                  >
-                    <div className="flex items-start gap-[24px] ">
-                      <img
-                        src={
+              {!reference ? (
+                <div className="space-y-[14px]">
+                  <div className="space-y-[30px] max-w-[500px] mx-auto ">
+                    {plans.map((plan, index) => (
+                      <div
+                        key={index}
+                        className={`px-[30px] py-[22px] rounded-[10px] border ${
                           selectedPlan?.name === plan.name
-                            ? "/stateOn.svg"
-                            : "/stateOff.svg"
-                        }
-                        className="w-[23px] h-[23px] mt-[15px] transition-all duration-500 ease-in-out"
-                      />
-                      <div className="w-full space-y-[13px]">
-                        <div className="w-full grid md:flex items-center md:justify-between">
-                          <p className="capitalize font-[600] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
-                            {plan.name}
-                          </p>
-                          <p className="font-[700] text-[18px] lg:text-[24px] text-[#FF4F00] transition-all duration-500 ease-in-out">
-                            <span className="font-[400]">₦ </span>
-                            {plan.price.toLocaleString()}
-                          </p>
-                        </div>
-                        <div className="grid md:flex items-center md:justify-between">
-                          <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
-                            Pay <span className="font-[400]">₦ </span>
-                            {plan.billingFrequencyAmount.toLocaleString()} every{" "}
-                            {plan.billingCycleInMonths} months
-                          </p>
-                          {plan.name !== "quarterly plan" && (
-                            <p className="font-[600] text-[#303030] text-[14px] line-through transition-all duration-500 ease-in-out">
-                              {plan.prevPrice.toLocaleString()}
-                            </p>
-                          )}
+                            ? "border-[#FF4F00]"
+                            : " border-none"
+                        } text-[16px] font-[400] text-[#414141] w-full shadow-sm bg-white cursor-pointer transition-all duration-500 ease-in-out`}
+                        onClick={() => handlePlanSelect(plan)}
+                      >
+                        <div className="flex items-start gap-[24px] ">
+                          <img
+                            src={
+                              selectedPlan?.name === plan.name
+                                ? "/stateOn.svg"
+                                : "/stateOff.svg"
+                            }
+                            className="w-[23px] h-[23px] mt-[15px] transition-all duration-500 ease-in-out"
+                          />
+                          <div className="w-full space-y-[13px]">
+                            <div className="w-full grid md:flex items-center md:justify-between">
+                              <p className="capitalize font-[600] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
+                                {plan.name}
+                              </p>
+                              <p className="font-[700] text-[18px] lg:text-[24px] text-[#FF4F00] transition-all duration-500 ease-in-out">
+                                <span className="font-[400]">₦ </span>
+                                {plan.price.toLocaleString()}
+                              </p>
+                            </div>
+                            <div className="grid md:flex items-center md:justify-between">
+                              <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
+                                Pay <span className="font-[400]">₦ </span>
+                                {plan.billingFrequencyAmount.toLocaleString()}{" "}
+                                every {plan.billingCycleInMonths} months
+                              </p>
+                              {plan.name !== "quarterly plan" && (
+                                <p className="font-[600] text-[#303030] text-[14px] line-through transition-all duration-500 ease-in-out">
+                                  {plan.prevPrice.toLocaleString()}
+                                </p>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
+                    ))}
+                  </div>
+                  <div className="  max-w-[500px] mx-auto w-full flex items-center gap-[10px] transition-all duration-500 ease-in-out">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      className="w-[20px] h-[20px] border border-[#929292] rounded transition-all duration-500 ease-in-out"
+                    />
+                    <label
+                      htmlFor="terms"
+                      className="text-[18px] font-[400] text-[#414141] transition-all duration-500 ease-in-out"
+                    >
+                      I have read and agree to the{" "}
+                      <span className="text-[#FF4F00] transition-all duration-500 ease-in-out">
+                        terms of service
+                      </span>
+                    </label>
+                  </div>
+                  <button
+                    className={`max-w-[500px] mx-auto w-full flex items-center justify-center  px-[10px] py-[13px] rounded-[5px]  text-[16px] font-[500] transition-all duration-500 ease-in-out ${
+                      selectedPlan && agreed
+                        ? "bg-[#FF4F00] border border-[#FF4F00] text-white"
+                        : " bg-[#FF4F001F] text-[#FFFFFF]"
+                    }`}
+                    disabled={!selectedPlan || !agreed}
+                    onClick={() => {
+                      if (!selectedPlan) {
+                        alert("Please select a plan before proceeding.");
+                      } else {
+                        setIsOpen(true);
+                      }
+                    }}
+                  >
+                    Proceed to Payment
+                  </button>
+                </div>
+              ) : (
+                <div className=" flex flex-col items-center justify-center max-w-[421px] mx-auto w-full h-[404px] bg-[#FF4F00] rounded-[8px]">
+                  <div className="font-GeneralSans space-y-[40px]  flex flex-col items-center justify-center">
+                    <img
+                      src={CheckCirle}
+                      alt="Check"
+                      className=" w-[100px] h-[100px] "
+                    />
+                    <div className="space-y-[28px] text-center w-[316px]">
+                      <p className="font-[700] text-[#FFFFFF] text-[20px] lg:text-[32px] transition-all duration-500 ease-in-out">
+                        Payment Successful
+                      </p>
+                      <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
+                        You can get your link now.
+                      </p>
                     </div>
                   </div>
-                ))}
-              </div>
-              <div className="  max-w-[500px] mx-auto w-full flex items-center gap-[10px] transition-all duration-500 ease-in-out">
-                <input
-                  type="checkbox"
-                  id="terms"
-                  checked={agreed}
-                  onChange={(e) => setAgreed(e.target.checked)}
-                  className="w-[20px] h-[20px] border border-[#929292] rounded transition-all duration-500 ease-in-out"
-                />
-                <label
-                  htmlFor="terms"
-                  className="text-[18px] font-[400] text-[#414141] transition-all duration-500 ease-in-out"
-                >
-                  I have read and agree to the{" "}
-                  <span className="text-[#FF4F00] transition-all duration-500 ease-in-out">
-                    terms of service
-                  </span>
-                </label>
-              </div>
-              <button
-                className={`max-w-[500px] mx-auto w-full flex items-center justify-center  px-[10px] py-[13px] rounded-[5px]  text-[16px] font-[500] transition-all duration-500 ease-in-out ${
-                  selectedPlan && agreed
-                    ? "bg-[#FF4F00] border border-[#FF4F00] text-white"
-                    : " bg-[#FF4F001F] text-[#FFFFFF]"
-                }`}
-                disabled={!selectedPlan || !agreed}
-                onClick={() => {
-                  if (!selectedPlan) {
-                    alert("Please select a plan before proceeding.");
-                  } else {
-                    setIsOpen(true);
-                  }
-                }}
-              >
-                Proceed to Payment
-              </button>
+                </div>
+              )}
             </div>
 
             <button
               className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${
-                !currentPlanName
+                reference
                   ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
                   : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
               }`}
-              disabled={!selectedPlan}
+              disabled={!reference}
             >
               Get Your URL
             </button>
