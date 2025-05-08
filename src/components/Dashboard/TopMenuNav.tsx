@@ -70,12 +70,26 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
           </div>
           <div className="flex gap-5 items-center">
             <div
-              className="  cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
+              className="cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px] animate-pulse"
               onClick={() => handleToggle()}
+              style={{
+                animation: "vibrate 0.3s infinite",
+              }}
             >
               <p className=" ">Begin Setup</p>
               <FaChevronRight />
             </div>
+            <style>
+              {`
+              @keyframes vibrate {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-2px); }
+                50% { transform: translateX(2px); }
+                75% { transform: translateX(-2px); }
+                100% { transform: translateX(0); }
+              }
+              `}
+            </style>
             <div className=" ml-3 mr-5">
               <img src={NotificationIcon} alt="" />
             </div>
