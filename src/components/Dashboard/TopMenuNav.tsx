@@ -44,7 +44,6 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   useEffect(() => {
     if (reference) {
       dispatch(setSubscription(true));
-      console.log(reference);
     }
   }, [reference]);
 
