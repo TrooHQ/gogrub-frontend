@@ -144,8 +144,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
   const dispatch = useDispatch();
 
-  // const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
-  // const selectedPlans = JSON.parse(businessPlan.selectedPlan);
+  const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
+  const selectedPlans = JSON.parse(businessPlan.selectedPlan);
   const navigate = useNavigate();
   const token = userData?.token;
 
@@ -160,7 +160,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       const response = await axios.post(
         `${SERVER_DOMAIN}/plan/subcribeBusinessPlan?secretKey=trooAdminDev`,
         {
-          planId: selectedPlan?._id,
+          planId: selectedPlans?._id,
         },
         headers
       );
