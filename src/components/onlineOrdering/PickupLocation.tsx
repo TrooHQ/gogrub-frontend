@@ -83,6 +83,21 @@ const PickupLocation = () => {
   };
 
   const handleSubmit = () => {
+    if (!selectedState.trim()) {
+      toast.error("State is required");
+      return;
+    }
+
+    if (addresses.some((address) => !address.trim())) {
+      toast.error("All pickup addresses are required");
+      return;
+    }
+
+    if (!supportLink.trim()) {
+      toast.error("Support link is required");
+      return;
+    }
+
     dispatch(
       addPickupLocation({
         state: selectedState,
