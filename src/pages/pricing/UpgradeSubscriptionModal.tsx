@@ -11,7 +11,7 @@ import CancelIcon from "../../assets/Cancel.svg";
 import Logo from "../../assets/Union.svg";
 import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { setSubscription } from "../../slices/setupSlice";
 
 interface Plan {
@@ -147,7 +147,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
   const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
   const selectedPlans = JSON.parse(businessPlan.selectedPlan);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const token = userData?.token;
 
   const SubcribePlan = async () => {
@@ -168,7 +168,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       dispatch(setPlanDetails(response.data.data));
       dispatch(setSubscription(false));
       toast.success(response.data.message || "Plan subscribed successfully!");
-      navigate("/overview");
+      // navigate("/overview");
     } catch (error) {
       console.error("Error adding employee:", error);
     } finally {
