@@ -12,6 +12,7 @@ import Logo from "../../assets/Union.svg";
 import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setSubscription } from "../../slices/setupSlice";
 
 interface Plan {
   _id: string;
@@ -165,7 +166,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         headers
       );
       dispatch(setPlanDetails(response.data.data));
-
+      dispatch(setSubscription(false));
       toast.success(response.data.message || "Plan subscribed successfully!");
       navigate("/overview");
     } catch (error) {

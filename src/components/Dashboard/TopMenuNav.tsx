@@ -46,10 +46,11 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   }, [reference]);
 
   useEffect(() => {
-    dispatch(setDoMoreToggle(true));
-
+    if (!reference) {
+      dispatch(setDoMoreToggle(true));
+    }
     console.log(isDoMoreToggled);
-  }, []);
+  }, [reference]);
 
   useEffect(() => {
     dispatch(fetchUserDetails());
