@@ -27,6 +27,9 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const { userData, userDetails } = useSelector((state: any) => state.user);
   const location = useLocation();
 
+  const BusinessPlan = userDetails?.businessPlan.plan.name;
+  console.log(BusinessPlan);
+
   const queryParams = new URLSearchParams(location.search);
   const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
@@ -46,11 +49,11 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   }, [reference]);
 
   useEffect(() => {
-    if (!reference) {
+    if (!reference && !BusinessPlan) {
       dispatch(setDoMoreToggle(true));
     }
     console.log(isDoMoreToggled);
-  }, [reference]);
+  }, [reference, BusinessPlan]);
 
   useEffect(() => {
     dispatch(fetchUserDetails());
@@ -66,14 +69,12 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
             </p>
           </div>
           <div className="flex gap-5 items-center">
-            <div className="hidden">
-              <div
-                className="  cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
-                onClick={() => handleToggle()}
-              >
-                <p className=" ">Begin Setup</p>
-                <FaChevronRight />
-              </div>
+            <div
+              className="  cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px]"
+              onClick={() => handleToggle()}
+            >
+              <p className=" ">Begin Setup</p>
+              <FaChevronRight />
             </div>
             <div className=" ml-3 mr-5">
               <img src={NotificationIcon} alt="" />
