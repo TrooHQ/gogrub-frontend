@@ -22,6 +22,8 @@ const BusinessProfiles: React.FC = () => {
     currentStep === 0 && setCurrentStep((prevStep) => prevStep + 1);
     if (currentStep === 1) {
       setLoading(true);
+      console.log(customPayload);
+
       // Send request to sample endpoint
       try {
         const endpoint = isFromGoGrub
@@ -63,18 +65,18 @@ const BusinessProfiles: React.FC = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    if (params.get("coming-from") === "gogrub") {
-      const monthlyAverageSales = params.get("monthlySales") || 20000;
-      const planName = params.get("selectedPlan") || "Quarterly";
+    // if (params.get("coming-from") === "gogrub") {
+    const monthlyAverageSales = params.get("monthlySales") || 20000;
+    const planName = params.get("selectedPlan") || "Quarterly";
 
-      setCustomPayload({
-        ...transformedState,
-        onboarding_type: "gogrub",
-        monthlyAverageSales,
-        planName,
-      });
-      setIsFromGoGrub(true);
-    }
+    setCustomPayload({
+      ...transformedState,
+      onboarding_type: "gogrub",
+      monthlyAverageSales,
+      planName,
+    });
+    setIsFromGoGrub(true);
+    // }
   }, [transformedState]);
 
   const stepTitles = ["Business Information", "Personal Information"];

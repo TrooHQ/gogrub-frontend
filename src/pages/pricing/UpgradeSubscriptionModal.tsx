@@ -145,7 +145,9 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   const dispatch = useDispatch();
 
   const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
-  const selectedPlans = JSON.parse(businessPlan.selectedPlan);
+  const selectedPlans = businessPlan.selectedPlan
+    ? JSON.parse(businessPlan.selectedPlan)
+    : null;
   const token = userData?.token;
 
   const SubcribePlan = async () => {

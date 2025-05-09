@@ -254,6 +254,9 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     dispatch(clearUserData());
     dispatch(clearSelectedBranch());
 
+    localStorage.clear();
+    sessionStorage.clear();
+
     navigate("/");
   };
 
