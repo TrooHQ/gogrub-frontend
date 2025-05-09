@@ -4,7 +4,7 @@ import NotificationIcon from "../../assets/notificationIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { fetchUserDetails } from "../../slices/UserSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   selectToggleState,
   toggle,
@@ -17,16 +17,30 @@ import { FaChevronRight } from "react-icons/fa6";
 import SetupModal from "./components/SetupModal";
 import DoMoreModal from "./components/DoMoreModal";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { SERVER_DOMAIN } from "../../Api/Api";
 
 interface TopMenuNavProps {
   pathName: string;
+}
+
+interface UserCheckState {
+  hasMenu: boolean;
+  businessPlan: boolean;
+  hasPickUpLocation: boolean;
+  hasDeliveryDetails: boolean;
 }
 
 const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { userData, userDetails } = useSelector((state: any) => state.user);
   const location = useLocation();
-
+  const [userCheck, setUserChecks] = useState<UserCheckState>({
+    hasMenu: false,
+    businessPlan: false,
+    hasPickUpLocation: false,
+    hasDeliveryDetails: false,
+  });
   const BusinessPlan = userDetails?.businessPlan?.plan?.name;
 
   const queryParams = new URLSearchParams(location.search);
@@ -54,6 +68,32 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     dispatch(fetchUserDetails());
   }, [dispatch]);
 
+  const token = localStorage.getItem("token");
+
+  const getUserOnboardChecks = async () => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/userOnboardChecks`,
+        headers
+      );
+      setUserChecks(response.data);
+    } catch (error) {
+      console.error("Error getting Business Details:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserOnboardChecks();
+  }, []);
+
+  console.log(userCheck);
+
   return (
     <div className="">
       <div className="w-full">
@@ -64,16 +104,24 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
             </p>
           </div>
           <div className="flex gap-5 items-center">
-            <div
-              className="cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px] animate-pulse"
-              onClick={() => handleToggle()}
-              style={{
-                animation: "vibrate 0.3s infinite",
-              }}
-            >
-              <p className=" ">Begin Setup</p>
-              <FaChevronRight />
-            </div>
+            {!(
+              userCheck.hasMenu ||
+              userCheck.businessPlan ||
+              userCheck.hasDeliveryDetails ||
+              userCheck.hasPickUpLocation
+            ) && (
+              <div
+                className="cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px] animate-pulse"
+                onClick={() => handleToggle()}
+                style={{
+                  animation: "vibrate 0.3s infinite",
+                }}
+              >
+                <p className=" ">Begin Setup</p>
+                <FaChevronRight />
+              </div>
+            )}
+
             <style>
               {`
               @keyframes vibrate {
@@ -117,10 +165,17 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
         isModalOpen={isToggled}
         setIsModalOpen={() => dispatch(setToggle(false))}
       />
-      <DoMoreModal
-        isModalOpen={isDoMoreToggled}
-        setIsModalOpen={() => dispatch(setDoMoreToggle(false))}
-      />
+      {!(
+        userCheck.hasMenu ||
+        userCheck.businessPlan ||
+        userCheck.hasDeliveryDetails ||
+        userCheck.hasPickUpLocation
+      ) && (
+        <DoMoreModal
+          isModalOpen={isDoMoreToggled}
+          setIsModalOpen={() => dispatch(setDoMoreToggle(false))}
+        />
+      )}
     </div>
   );
 };
