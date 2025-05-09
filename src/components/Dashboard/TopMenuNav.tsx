@@ -32,6 +32,12 @@ interface UserCheckState {
 }
 
 const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
+  useEffect(() => {
+    if (sessionStorage.getItem("doMore") === null) {
+      sessionStorage.setItem("doMore", JSON.stringify(false));
+    }
+  }, []);
+
   const dispatch = useDispatch<AppDispatch>();
   const { userData, userDetails } = useSelector((state: any) => state.user);
   const location = useLocation();
@@ -41,15 +47,22 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     hasPickUpLocation: false,
     hasDeliveryDetails: false,
   });
-  const BusinessPlan = userDetails?.businessPlan?.plan?.name;
 
   const queryParams = new URLSearchParams(location.search);
   const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
   const isDoMoreToggled = useSelector(selectIsDoMoreToggleState);
 
+  const hasShownDoMore = JSON.parse(
+    sessionStorage.getItem("doMore") || "false"
+  );
   const handleToggle = () => {
-    dispatch(toggle());
+    if (!hasShownDoMore) {
+      dispatch(setDoMoreToggle(true));
+      sessionStorage.setItem("doMore", JSON.stringify(true));
+    } else {
+      dispatch(toggle());
+    }
   };
 
   useEffect(() => {
@@ -57,12 +70,6 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
       dispatch(setSubscription(true));
     }
   }, []);
-
-  useEffect(() => {
-    if (!reference && !BusinessPlan) {
-      dispatch(setDoMoreToggle(true));
-    }
-  }, [reference, BusinessPlan]);
 
   useEffect(() => {
     dispatch(fetchUserDetails());
@@ -164,17 +171,11 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
         isModalOpen={isToggled}
         setIsModalOpen={() => dispatch(setToggle(false))}
       />
-      {!(
-        userCheck.hasMenu ||
-        userCheck.businessPlan ||
-        userCheck.hasDeliveryDetails ||
-        userCheck.hasPickUpLocation
-      ) && (
-        <DoMoreModal
-          isModalOpen={isDoMoreToggled}
-          setIsModalOpen={() => dispatch(setDoMoreToggle(false))}
-        />
-      )}
+
+      <DoMoreModal
+        isModalOpen={isDoMoreToggled}
+        setIsModalOpen={() => dispatch(setDoMoreToggle(false))}
+      />
     </div>
   );
 };

@@ -13,6 +13,9 @@ import { useState } from "react";
 import Pattern from "../../../assets/Pattern.png";
 
 import { FaChevronRight } from "react-icons/fa6";
+import { AppDispatch } from "../../../store/store";
+import { useDispatch } from "react-redux";
+import { toggle } from "../../../slices/setupSlice";
 
 interface SetupModalProps {
   isModalOpen: boolean;
@@ -24,6 +27,8 @@ const DoMoreModal: React.FC<SetupModalProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState(0);
   const tabImages = [Description, Description1, Description2, Description3];
+  const dispatch = useDispatch<AppDispatch>();
+
   return (
     <div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -91,7 +96,11 @@ const DoMoreModal: React.FC<SetupModalProps> = ({
             {" "}
             <div
               className=" cursor-pointer inline-flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px] "
-              onClick={() => setIsModalOpen(false)}
+              onClick={() => {
+                setIsModalOpen(false);
+                dispatch(toggle());
+                sessionStorage.setItem("doMore", JSON.stringify(true));
+              }}
             >
               <p className=" ">Next</p>
               <FaChevronRight />
