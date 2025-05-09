@@ -136,11 +136,11 @@ const UpgradeSubscription: React.FC = () => {
     }
   };
 
-  return plans.length === 0 ? (
-    <div className="flex justify-center items-center h-screen">
-      <p className="text-[24px] font-[500] text-[#414141]">Loading plans...</p>
-    </div>
-  ) : (
+  return (
+    // <div className="flex justify-center items-center h-screen">
+    //   <p className="text-[24px] font-[500] text-[#414141]">Loading plans...</p>
+    // </div>
+    // ) : (
     <div className=" h-full transition-all duration-500 ease-in-out bg-[#EFEFEF] py-[5%]">
       <div className="max-w-[900px] min-h-[800px] mx-auto w-full bg-white border border-[#E7E7E7] py-[50px]">
         <div className="font-GeneralSans w-full transition-all duration-500 ease-in-out max-w-[700px] mx-auto">

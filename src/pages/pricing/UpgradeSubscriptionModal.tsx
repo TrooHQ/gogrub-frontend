@@ -208,11 +208,11 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     }
   }, [reference]);
 
-  return plans.length === 0 ? (
-    <div className="flex justify-center items-center h-screen">
-      <p className="text-[24px] font-[500] text-[#414141]">Loading plans...</p>
-    </div>
-  ) : (
+  return (
+    //   <div className="flex justify-center items-center h-screen">
+    //     <p className="text-[24px] font-[500] text-[#414141]">Loading plans...</p>
+    //   </div>
+    // ) : (
     <div className=" ">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className="w-[900px] max-h-[900px] h-auto mx-auto bg-white  relative overflow-auto">

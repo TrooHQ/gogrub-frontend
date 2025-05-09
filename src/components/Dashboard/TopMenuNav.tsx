@@ -111,7 +111,8 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
             </p>
           </div>
           <div className="flex gap-5 items-center">
-            {userCheck &&
+            {location.pathname === "/overview" &&
+              userCheck &&
               (!userCheck.hasMenu ||
                 !userCheck.businessPlan ||
                 !userCheck.hasDeliveryDetails ||
