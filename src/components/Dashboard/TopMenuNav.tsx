@@ -32,6 +32,16 @@ interface UserCheckState {
 }
 
 const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
+  const [showSetupPrompt, setShowSetupPrompt] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSetupPrompt(true);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   useEffect(() => {
     if (sessionStorage.getItem("doMore") === null) {
       sessionStorage.setItem("doMore", JSON.stringify(false));
@@ -113,6 +123,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
           <div className="flex gap-5 items-center">
             {location.pathname === "/overview" &&
               userCheck &&
+              showSetupPrompt &&
               (!userCheck.hasMenu ||
                 !userCheck.businessPlan ||
                 !userCheck.hasDeliveryDetails ||
@@ -124,7 +135,31 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
                     animation: "vibrate 0.3s infinite",
                   }}
                 >
-                  <p className=" ">Begin Setup</p>
+                  <p className="flex items-center">
+                    {[
+                      userCheck.hasMenu,
+                      userCheck.businessPlan,
+                      userCheck.hasDeliveryDetails &&
+                        userCheck.hasPickUpLocation,
+                    ].every((check) => !check) ? (
+                      "Begin Setup"
+                    ) : (
+                      <>
+                        Continue Setup{" "}
+                        <span className=" rounded-[4px] ml-2 px-[4px] border-[0.4px] border-[#FFF5F0] text-white">
+                          {
+                            [
+                              userCheck.hasMenu,
+                              userCheck.businessPlan,
+                              userCheck.hasDeliveryDetails &&
+                                userCheck.hasPickUpLocation,
+                            ].filter(Boolean).length
+                          }
+                          /3
+                        </span>
+                      </>
+                    )}
+                  </p>
                   <FaChevronRight />
                 </div>
               )}

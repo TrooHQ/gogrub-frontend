@@ -13,6 +13,7 @@ import Add from "../../../assets/addWhite.svg";
 import { truncateText } from "../../../utils/truncateText";
 import ModifierModal from "./ModifierModal";
 import DisplayModifiers from "./DisplayModifiers";
+import { useNavigate } from "react-router-dom";
 
 type ModifierRules = {
   requireSelection: boolean;
@@ -56,7 +57,7 @@ const Modifiers = ({
   const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
   const [isGroupFetching, setIsGroupFetching] = useState(false);
   const [selectedModifier, setSelectedModifier] = useState({} as any);
-
+  const navigate = useNavigate();
   const { branches } = useSelector((state: any) => state.branches);
 
   useEffect(() => {
@@ -117,13 +118,17 @@ const Modifiers = ({
 
   const handleConfirmSave = async () => {
     setLoading(true);
+    console.log(selectedModifier);
+
     // Create the payload with branch_id, modifier_group_name, and modifiers array
     const payload = {
       branch_id: selectedBranch.id,
       attach_to: "modifier_group",
-      modifier_name: modifiers[0].name,
+      modifier_name: selectedModifier.modifier_group_name,
       // modifier_group_name: selectedModifier.modifier_group_name,
-      price: parseFloat(modifiers[0].price),
+      price: selectedModifier.modifiers[0].modifier_price,
+      // price: selectedModifier.modifier_price,
+
       modifier_group_id: selectedModifier._id,
     };
 
@@ -141,6 +146,7 @@ const Modifiers = ({
         headers
       );
       toast.success(response.data.message || "Modifiers added successfully.");
+      navigate("/menu-list");
       setAddModifierModal(false);
       fetchModifierGroups();
       setModifiers([{ id: 1, name: "", price: "" }]); // Reset modifiers state
