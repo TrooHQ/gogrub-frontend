@@ -229,7 +229,7 @@ const PickupLocation = () => {
 
                 <CustomInput
                   type="text"
-                  label="Add your support link to your profile (Optional) WhatsApp, Instagram)"
+                  label="Add your support link to your profile, WhatsApp, Instagram)"
                   value={supportLink}
                   onChange={(newValue) => setSupportLink(newValue)}
                   className="border-gray-500"

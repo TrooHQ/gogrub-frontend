@@ -246,7 +246,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
           <div className="mt-6 flex-grow">
             <CustomInput
               type="text"
-              label="Support link (Optional)"
+              label="Support link"
               value={formData.support_link}
               readOnly={true}
               onChange={(value) =>

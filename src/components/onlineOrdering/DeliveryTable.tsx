@@ -147,7 +147,7 @@ const DeliveryTable = ({ deliveryDetails }: any) => {
           <div className="mt-6 flex-grow">
             <CustomInput
               type="text"
-              label="Support link (Optional)"
+              label="Support link "
               value={formData.support_link}
               onChange={(value) =>
                 setFormData({ ...formData, support_link: value })

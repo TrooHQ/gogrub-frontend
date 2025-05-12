@@ -37,7 +37,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowSetupPrompt(true);
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, []);
