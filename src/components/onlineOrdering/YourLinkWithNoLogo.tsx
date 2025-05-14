@@ -8,7 +8,7 @@ import brandLogo from "../../assets/yourlink.png";
 import FileUploadComponent from "./FileUploadComponent";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
 const YourLinkWithNoLogo = ({
@@ -23,8 +23,17 @@ const YourLinkWithNoLogo = ({
   loading: any;
 }) => {
   const { userData } = useSelector((state: RootState) => state.user);
+  const { selectedBranch } = useSelector((state: RootState) => state.branches);
+  const dispatch = useDispatch();
 
-  console.log(onlineOrderingLink, businessLogo, "qqqqq", userData);
+  console.log(selectedBranch);
+  useEffect(() => {
+    if (selectedBranch?.id) {
+      generateOnlineOrderingLink();
+    }
+  }, [selectedBranch?.id, dispatch]);
+
+  // console.log(onlineOrderingLink, businessLogo, "qqqqq", userData);
 
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

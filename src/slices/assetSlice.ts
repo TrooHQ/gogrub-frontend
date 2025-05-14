@@ -190,13 +190,13 @@ export const updateDeliveryDetails = createAsyncThunk<
 
 export const fetchOnlineOrderingLink = createAsyncThunk<
   OnlineOrderingLink,
-  void,
+  string,
   { rejectValue: string }
->("asset/fetchOnlineOrderingLink", async (_, { rejectWithValue }) => {
+>("asset/fetchOnlineOrderingLink", async (branch, { rejectWithValue }) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get<OnlineOrderingLinkResponse>(
-      `${SERVER_DOMAIN}/asset/generateOnlineOrderingLink/`,
+      `${SERVER_DOMAIN}/asset/generateOnlineOrderingLink/?branch_id=${branch}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data.data;

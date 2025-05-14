@@ -9,43 +9,34 @@ const YourLink = () => {
   const dispatch = useDispatch();
 
   const [businessLogo, setBusinessLogo] = useState("");
+  const { selectedBranch } = useSelector((state: RootState) => state.branches);
+  const { userDetails } = useSelector((state: RootState) => state.user);
 
-  const businessDetails = useSelector(
-    (state: RootState) => state.business.businessDetails
-  );
+  // const businessDetails = useSelector((state: RootState) => state.business);
   const { onlineOrderingLink, loading } = useSelector(
     (state: RootState) => state.asset
   );
-  console.log(businessDetails, onlineOrderingLink, "pppppp");
 
   useEffect(() => {
     dispatch(fetchAccountDetails() as any);
-    generateOnlineOrderingLink();
+    console.log(selectedBranch?.id);
   }, [dispatch]);
 
+  useEffect(() => {
+    if (selectedBranch?.id) {
+      generateOnlineOrderingLink();
+    }
+  }, [selectedBranch?.id, dispatch]);
+
   const generateOnlineOrderingLink = () => {
-    dispatch(fetchOnlineOrderingLink() as any);
+    dispatch(fetchOnlineOrderingLink(selectedBranch?.id || "") as any);
   };
 
   useEffect(() => {
-    if (businessDetails) {
-      setBusinessLogo(businessDetails.business_logo);
+    if (userDetails) {
+      setBusinessLogo(userDetails?.business_logo);
     }
-  }, [businessDetails]);
-
-  // const handleCustomizeClick = () => {
-  //   setIsCustomizing(true);
-  // };
-
-  // const handleCancelClick = () => {
-  //   setIsCustomizing(false);
-  //   setCustomLink("");
-  // };
-
-  // const handleGenerateClick = () => {
-  //   console.log("Generated Link:", customLink);
-  //   setIsCustomizing(false);
-  // };
+  }, [userDetails]);
 
   return (
     <div>
