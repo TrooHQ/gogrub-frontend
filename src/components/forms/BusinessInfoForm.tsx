@@ -15,7 +15,11 @@ import { useLocation } from "react-router-dom";
 //   { value: "GoGrub", label: "GoGrub" },
 // ];
 
-const BusinessInfoForm: React.FC = () => {
+interface BusinessInfoFormProps {
+  onValidityChange: (isValid: boolean) => void;
+}
+
+const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const {
@@ -60,6 +64,36 @@ const BusinessInfoForm: React.FC = () => {
       console.error("Error converting file to base64:", error);
     }
   };
+
+  const isFormValid = () => {
+    return (
+      businessName?.trim() !== "" &&
+      businessEmail?.trim() !== "" &&
+      business_contract_person.trim() !== "" &&
+      businessAddress.trim() !== "" &&
+      businessPhoneNumber.trim() !== "" &&
+      businessType.trim() !== "" &&
+      cacNumber?.trim() !== "" &&
+      password.trim() !== "" &&
+      confirmPassword.trim() !== "" &&
+      password === confirmPassword // Add matching logic
+    );
+  };
+
+  useEffect(() => {
+    onValidityChange(isFormValid());
+  }, [
+    businessName,
+    businessEmail,
+    business_contract_person,
+    businessAddress,
+    businessPhoneNumber,
+    businessType,
+    cacNumber,
+    password,
+    confirmPassword,
+  ]);
+
 
   return (
     <div className="grid gap-5">
