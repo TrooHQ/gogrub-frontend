@@ -35,9 +35,9 @@ const initialState: RegisterState = {
   email: "",
   password: "",
   confirmPassword: "",
-  pin: "",
+  pin: "0000",
   businessPhoneNumber: "",
-  businessType: "",
+  businessType: "GoGrub",
   businessAddress: "",
   firstName: "",
   lastName: "",
@@ -57,7 +57,10 @@ const registerSlice = createSlice({
   name: "register",
   initialState,
   reducers: {
-    setField: (state, action: PayloadAction<{ field: keyof RegisterState; value: string }>) => {
+    setField: (
+      state,
+      action: PayloadAction<{ field: keyof RegisterState; value: string }>
+    ) => {
       state[action.payload.field] = action.payload.value;
     },
     setFormData: (state, action: PayloadAction<Partial<RegisterState>>) => {

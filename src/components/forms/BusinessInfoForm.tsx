@@ -6,14 +6,14 @@ import CustomInput from "../inputFields/CustomInput";
 import imageIcon from "../../assets/image.svg";
 import { convertToBase64 } from "../../utils/imageToBase64";
 import { useLocation } from "react-router-dom";
-import CustomSelect5 from "../inputFields/CustomSelect5";
+// import CustomSelect5 from "../inputFields/CustomSelect5";
 
-const businessTypeOptions = [
-  { value: "Bar and lounge", label: "Bar and lounge" },
-  { value: "Hotel and lodging", label: "Hotel and lodging" },
-  { value: "Restaurant", label: "Restaurant" },
-  { value: "GoGrub", label: "GoGrub" },
-];
+// const businessTypeOptions = [
+//   { value: "Bar and lounge", label: "Bar and lounge" },
+//   { value: "Hotel and lodging", label: "Hotel and lodging" },
+//   { value: "Restaurant", label: "Restaurant" },
+//   { value: "GoGrub", label: "GoGrub" },
+// ];
 
 const BusinessInfoForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const BusinessInfoForm: React.FC = () => {
     businessLogo,
     password,
     confirmPassword,
-    pin,
+    // pin,
   } = useSelector((state: RootState) => state.register);
 
   const [image, setImage] = useState<string>(businessLogo);
@@ -67,18 +67,21 @@ const BusinessInfoForm: React.FC = () => {
         type="text"
         label="Business name"
         value={businessName as any}
+        required="true"
         onChange={(newValue) => handleInputChange("businessName", newValue)}
       />
       <CustomInput
         type="email"
         label="Business email"
         value={businessEmail as any}
+        required="true"
         onChange={(newValue) => handleInputChange("businessEmail", newValue)}
       />
       <CustomInput
         type="text"
         label="Business contact (Owner's name)"
         value={business_contract_person as any}
+        required="true"
         onChange={(newValue) =>
           handleInputChange("business_contract_person", newValue)
         }
@@ -87,31 +90,42 @@ const BusinessInfoForm: React.FC = () => {
         type="text"
         label="Business address"
         value={businessAddress}
+        required="true"
         onChange={(newValue) => handleInputChange("businessAddress", newValue)}
       />
       <CustomInput
         type="text"
         label="Business phone number"
         value={businessPhoneNumber}
+        required="true"
         onChange={(newValue) =>
           handleInputChange("businessPhoneNumber", newValue)
         }
       />
-      <CustomSelect5
+      {/* <CustomSelect5
         label="Business type"
         options={businessTypeOptions}
         value={businessType}
+        onChange={(value) => handleInputChange("businessType", value)}
+        /> */}
+      <CustomInput
+        type="text"
+        label="Category"
+        value={businessType}
+        required="true"
+        readOnly={true}
         onChange={(value) => handleInputChange("businessType", value)}
       />
       <CustomInput
         type="text"
         label="CAC Number"
         value={cacNumber as any}
+        required="true"
         onChange={(newValue) => handleInputChange("cacNumber", newValue)}
       />
       <CustomInput
         type="password"
-        label="Password"
+        label="Create Password"
         value={password}
         onChange={(newValue) => handleInputChange("password", newValue)}
       />
@@ -121,12 +135,12 @@ const BusinessInfoForm: React.FC = () => {
         value={confirmPassword}
         onChange={(newValue) => handleInputChange("confirmPassword", newValue)}
       />
-      <CustomInput
+      {/* <CustomInput
         type="password"
         label="Create PIN"
         value={pin}
         onChange={(newValue) => handleInputChange("pin", newValue)}
-      />
+      /> */}
       <p className="text-[16px] text-grey500 font-semibold">
         Add business logo
       </p>
@@ -163,7 +177,7 @@ const BusinessInfoForm: React.FC = () => {
           <img
             src={image}
             alt="Uploaded Preview"
-            className="mt-2 w-1/4 h-auto"
+            className="w-1/4 h-auto mt-2"
           />
         </div>
       )}
