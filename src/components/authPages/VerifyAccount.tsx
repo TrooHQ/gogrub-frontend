@@ -116,7 +116,7 @@ const VerifyAccount = () => {
           <img src={GoGrubLogo} alt="Logo" className="mb-0" />
         )}
         <div className="bg-white grid  p-[40px] mt-[32px] mb-[40px] w-full md:w-[530px] rounded shadow-md">
-          <p className=" text-red-500">{error}</p>
+          <p className="text-red-500 ">{error}</p>
           <div className=" flex flex-col text-center justify-center items-center gap-[24px] mt-[28px] mb-[40px]">
             <p className=" font-[500] text-[20px] text-[#121212]">
               Verify Account
@@ -154,7 +154,7 @@ const VerifyAccount = () => {
           {allInputsFilled() ? (
             <div className=" mt-[16px]" onClick={verify}>
               <button
-                className="bg-purple500 w-full text-center text-white py-3 rounded"
+                className="w-full py-3 text-center text-white rounded bg-purple500"
                 disabled={loading}
               >
                 {loading ? "Loading..." : "Activate Account"}

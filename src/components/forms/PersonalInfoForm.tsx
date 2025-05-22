@@ -21,36 +21,43 @@ const PersonalInfoForm: React.FC = () => {
         label="First name"
         value={firstName}
         onChange={(newValue) => handleInputChange("firstName", newValue)}
+        required="true"
       />
       <CustomInput
         type="text"
         label="Last name"
         value={lastName}
         onChange={(newValue) => handleInputChange("lastName", newValue)}
+        required="true"
       />
       <CustomInput
         type="text"
         label="Registered home address"
         value={personalAddress}
         onChange={(newValue) => handleInputChange("personalAddress", newValue)}
+        required="true"
       />
       <CustomInput
         type="text"
         label="City"
         value={city}
         onChange={(newValue) => handleInputChange("city", newValue)}
+        required="true"
       />
       <CustomInput
         type="text"
         label="State"
         value={state}
         onChange={(newValue) => handleInputChange("state", newValue)}
+        required="true"
       />
       <CustomInput
         type="text"
         label="Country"
         value={country}
         onChange={(newValue) => handleInputChange("country", newValue)}
+        required="true"
+        readOnly={true}
       />
     </div>
   );

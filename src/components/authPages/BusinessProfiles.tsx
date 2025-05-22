@@ -86,14 +86,16 @@ const BusinessProfiles: React.FC = () => {
     "Please enter your bank account information. You’ll receive a four-digit verification code via text message. Once you enter the code Troo will direct all payouts to the account.",
   ];
 
+  const [isStepValid, setIsStepValid] = useState(false);
   const renderStepContent = () => {
+
     switch (currentStep) {
       case 0:
-        return <BusinessInfoForm />;
+        return <BusinessInfoForm onValidityChange={setIsStepValid} />;
       case 1:
         return <PersonalInfoForm />;
       default:
-        return <BusinessInfoForm />;
+        return <BusinessInfoForm onValidityChange={setIsStepValid} />;
     }
   };
 
@@ -103,19 +105,17 @@ const BusinessProfiles: React.FC = () => {
         {stepTitles.map((_, index) => (
           <div key={index} className="flex items-center">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStep >= index
-                  ? "bg-purple500 text-white"
-                  : "bg-gray-300 text-gray-600"
-              }`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= index
+                ? "bg-purple500 text-white"
+                : "bg-gray-300 text-gray-600"
+                }`}
             >
               {index + 1}
             </div>
             {index < stepTitles.length - 1 && (
               <div
-                className={`flex-1 h-1 ${
-                  currentStep > index ? "bg-purple500" : "bg-gray-300"
-                }`}
+                className={`flex-1 h-1 ${currentStep > index ? "bg-purple500" : "bg-gray-300"
+                  }`}
               ></div>
             )}
           </div>
@@ -133,17 +133,17 @@ const BusinessProfiles: React.FC = () => {
       )}
       <div className="bg-white py-10 px-8 w-full md:w-3/5 rounded shadow-md h-[85vh] overflow-y-auto border-[1.5px] border-[#121212]">
         {renderStepProgress()}
-        <p className="text-2xl font-medium text-purple500 mb-2">
+        <p className="mb-2 text-2xl font-medium text-purple500">
           {stepTitles[currentStep]}
         </p>
-        <p className="text-gray-600 mb-8">{stepDescriptions[currentStep]}</p>
+        <p className="mb-8 text-gray-600">{stepDescriptions[currentStep]}</p>
         {renderStepContent()}
       </div>
-      <div className="mt-4 flex justify-end w-full md:w-3/5">
+      <div className="flex justify-end w-full mt-4 md:w-3/5">
         {currentStep > 0 ? (
           <button
             onClick={handleBack}
-            className="border-2 border-purple500 rounded px-6 py-3 font-semibold text-purple500"
+            className="px-6 py-3 font-semibold border-2 rounded border-purple500 text-purple500"
             disabled={loading}
           >
             Back
@@ -151,7 +151,7 @@ const BusinessProfiles: React.FC = () => {
         ) : (
           <Link to="/">
             <button
-              className="border-2 border-purple500 rounded px-6 py-3 font-semibold text-purple500"
+              className="px-6 py-3 font-semibold border-2 rounded border-purple500 text-purple500"
               disabled={loading}
             >
               Back
@@ -161,19 +161,19 @@ const BusinessProfiles: React.FC = () => {
         {currentStep < stepTitles.length - 1 ? (
           <button
             onClick={handleNext}
-            className="ml-auto border-2 border-purple500 bg-purple500 rounded px-6 py-3 font-semibold text-white"
-            disabled={loading}
+            className="px-6 py-3 ml-auto font-semibold text-white border-2 rounded border-purple500 bg-purple500"
+            disabled={!isStepValid || loading}
           >
             {loading
               ? "Loading..."
               : currentStep === 0
-              ? "Next"
-              : "Save and continue"}
+                ? "Next"
+                : "Save and continue"}
           </button>
         ) : (
           <button
             onClick={handleNext}
-            className="ml-auto border-2 border-purple500 bg-purple500 rounded px-6 py-3 font-semibold text-white"
+            className="px-6 py-3 ml-auto font-semibold text-white border-2 rounded border-purple500 bg-purple500"
             disabled={loading}
           >
             {loading ? "Loading..." : "Save and continue"}
