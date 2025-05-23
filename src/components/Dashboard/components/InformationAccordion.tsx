@@ -112,7 +112,10 @@ export default function InformationAccordion() {
   });
 
   const userDetails = useSelector((state: any) => state.user);
+  // const userInfo = useSelector((state: any) => state);
   const token = userDetails?.userData?.token;
+
+  console.log("Token", token)
 
   const fetchAccountDetails = async () => {
     const headers = {
@@ -156,8 +159,9 @@ export default function InformationAccordion() {
           sortCode: data.account_details.sort_code,
         },
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching account details:", error);
+      toast.error(error?.response?.data?.message || "Error fetching information");
     }
   };
 
@@ -309,24 +313,24 @@ export default function InformationAccordion() {
       section: "personalInfo" | "businessInfo" | "payoutBankDetails",
       subField: keyof PersonalInfo | keyof BusinessInfo | keyof BankInfo
     ) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [section]: {
-          ...prevFormData[section],
-          [subField]: event.target.value,
-        },
-      }));
-    };
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [section]: {
+            ...prevFormData[section],
+            [subField]: event.target.value,
+          },
+        }));
+      };
 
   const renderFields = (
     section: "personalInfo" | "businessInfo" | "payoutBankDetails",
     fields: {
       label: string;
       field:
-        | keyof FormData["businessInfo"]
-        | keyof FormData["personalInfo"]
-        | keyof FormData["payoutBankDetails"];
+      | keyof FormData["businessInfo"]
+      | keyof FormData["personalInfo"]
+      | keyof FormData["payoutBankDetails"];
     }[]
   ) =>
     fields.map((item) => (
