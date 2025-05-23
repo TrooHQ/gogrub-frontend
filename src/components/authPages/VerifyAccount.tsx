@@ -7,15 +7,19 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import DigitInput from "./DigitInput";
+// import DigitInput from "./DigitInput";
+import { MuiOtpInput } from 'mui-one-time-password-input'
 
 const VerifyAccount = () => {
+
+  const OTPInput = MuiOtpInput as React.ElementType;
+
   const [isFromGoGrub, setIsFromGoGrub] = useState(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const history = useNavigate();
 
-  const [digits, setDigits] = useState(["", "", "", "", "", ""]);
+  // const [digits, setDigits] = useState(["", "", "", "", "", ""]);
   const userDetails = useSelector((state: RootState) => state.user);
   console.log(userDetails, "userDetails:");
 
@@ -28,27 +32,27 @@ const VerifyAccount = () => {
     }
   }, []);
 
-  const handleChange = (index: number, newValue: string) => {
-    const newDigits = [...digits];
-    newDigits[index] = newValue.toString();
-    setDigits(newDigits);
-  };
+  // const handleChange = (index: number, newValue: string) => {
+  //   const newDigits = [...digits];
+  //   newDigits[index] = newValue.toString();
+  //   setDigits(newDigits);
+  // };
 
-  const handleFocus = (index: number) => {
-    if (digits[index] === "") {
-      const newDigits = [...digits];
-      newDigits[index] = "";
-      setDigits(newDigits);
-    }
-  };
+  // const handleFocus = (index: number) => {
+  //   if (digits[index] === "") {
+  //     const newDigits = [...digits];
+  //     newDigits[index] = "";
+  //     setDigits(newDigits);
+  //   }
+  // };
 
-  const handleBlur = (index: number) => {
-    if (digits[index] === "") {
-      const newDigits = [...digits];
-      newDigits[index] = "";
-      setDigits(newDigits);
-    }
-  };
+  // const handleBlur = (index: number) => {
+  //   if (digits[index] === "") {
+  //     const newDigits = [...digits];
+  //     newDigits[index] = "";
+  //     setDigits(newDigits);
+  //   }
+  // };
 
   const resendOTP = async () => {
     try {
@@ -73,11 +77,16 @@ const VerifyAccount = () => {
       setLoading(false);
     }
   };
+  const [otp, setOtp] = useState('');
 
+  const handleChange = (newValue: string) => {
+    setOtp(newValue);
+  };
   const verify = async () => {
+    console.log("OTP:", otp);
     try {
       setLoading(true);
-      const token = parseInt(digits.join(""));
+      const token = otp;
       const response = await axios.post(`${SERVER_DOMAIN}/emailVerification`, {
         token,
       });
@@ -101,12 +110,15 @@ const VerifyAccount = () => {
   };
 
   const allInputsFilled = () => {
-    return digits.every((digit) => digit !== "");
+    return otp.length === 6;
   };
 
   useEffect(() => {
     setError(allInputsFilled() ? "" : "Please fill all input fields");
-  }, [digits]);
+  }, [otp]);
+
+
+
   return (
     <div className="bg-[#EFEFEF] h-screen">
       <div className="flex flex-col items-center justify-center h-screen my-auto">
@@ -128,7 +140,9 @@ const VerifyAccount = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-6 gap-0">
+
+          <OTPInput value={otp} onChange={handleChange} length={6} />
+          {/* <div className="grid grid-cols-6 gap-0">
             {digits.map((value, index) => (
               <DigitInput
                 key={index}
@@ -138,7 +152,7 @@ const VerifyAccount = () => {
                 onBlur={() => handleBlur(index)}
               />
             ))}
-          </div>
+          </div> */}
 
           <div
             className=" mt-[24px] flex items-center justify-start cursor-pointer"
@@ -163,6 +177,7 @@ const VerifyAccount = () => {
           ) : (
             <div className=" mt-[16px]">
               <button
+                // onClick={verify}
                 className="bg-[#E7E7E7] text-[#B6B6B6] w-full text-center  py-3 rounded"
                 disabled
               >
