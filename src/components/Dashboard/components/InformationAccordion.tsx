@@ -315,7 +315,8 @@ export default function InformationAccordion() {
   };
 
   // This Handles bank selection
-  const handleBankChange = (event: any, newValue: any) => {
+  // const handleBankChange = (event: any, newValue: any) => {
+  const handleBankChange = (newValue: any) => {
     if (newValue) {
       setSelectedBank({ name: newValue.name, code: newValue.code });
       setFormData((prevFormData) => ({
@@ -486,24 +487,24 @@ export default function InformationAccordion() {
       section: "personalInfo" | "businessInfo" | "payoutBankDetails",
       subField: keyof PersonalInfo | keyof BusinessInfo | keyof BankInfo
     ) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
 
-      if (section === "payoutBankDetails" && subField === "bvn") {
-        if (value.length > 0 && value.length < 11) {
-          toast.error("BVN must be 11 digits");
+        if (section === "payoutBankDetails" && subField === "bvn") {
+          if (value.length > 0 && value.length < 11) {
+            toast.error("BVN must be 11 digits");
+          }
+          if (value.length > 11) return;
         }
-        if (value.length > 11) return;
-      }
 
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [section]: {
-          ...prevFormData[section],
-          [subField]: value,
-        },
-      }));
-    };
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [section]: {
+            ...prevFormData[section],
+            [subField]: value,
+          },
+        }));
+      };
 
   const renderFields = (
     section: "personalInfo" | "businessInfo",
