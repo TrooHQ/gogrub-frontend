@@ -54,6 +54,10 @@ const BusinessProfiles: React.FC = () => {
         }
       } catch (error: any) {
         console.error("Error submitting sample data:", error);
+        if (error.response.data.message === "Business with email already exists") {
+          toast.error(error.response.data.message);
+          navigate("/verify-account");
+        }
         toast.error(
           error.response.data.message || "Error submitting business information"
         );

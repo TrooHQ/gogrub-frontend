@@ -4,7 +4,7 @@ import EditSecurityModal from "../../components/Dashboard/Profile/EditSecurityMo
 
 const Security = () => {
   const [isEditPasswordModalOpen, setIsEditPasswordModalOpen] = useState(false);
-  const [isEditPinModalOpen, setIsEditPinModalOpen] = useState(false);
+  // const [isEditPinModalOpen, setIsEditPinModalOpen] = useState(false);d
 
   const handleEditPasswordClick = () => {
     setIsEditPasswordModalOpen(true);
@@ -14,13 +14,13 @@ const Security = () => {
     setIsEditPasswordModalOpen(false);
   };
 
-  const handleEditPinClick = () => {
-    setIsEditPinModalOpen(true);
-  };
+  // const handleEditPinClick = () => {
+  //   setIsEditPinModalOpen(true);
+  // };
 
-  const handleClosePinModal = () => {
-    setIsEditPinModalOpen(false);
-  };
+  // const handleClosePinModal = () => {
+  //   setIsEditPinModalOpen(false);
+  // };
 
   return (
     <div className="space-y-8">
@@ -34,7 +34,7 @@ const Security = () => {
         />
       </div>
 
-      <div>
+      {/* <div>
         <SectionHeader title="Pin" onEditClick={handleEditPinClick} />
         <p className="text-gray-900">****</p>
         <EditSecurityModal
@@ -42,7 +42,7 @@ const Security = () => {
           isOpen={isEditPinModalOpen}
           onClose={handleClosePinModal}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
