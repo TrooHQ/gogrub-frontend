@@ -16,7 +16,7 @@ import imageIcon from "../../../assets/image60.png";
 import { convertToBase64 } from "../../../utils/imageToBase64";
 import { toast } from "react-toastify";
 import { setUserData } from "../../../slices/UserSlice";
-import { AppDispatch } from "../../../store/store";
+import { AppDispatch, RootState } from "../../../store/store";
 
 type PersonalInfo = {
   firstName: string;
@@ -55,7 +55,9 @@ type FormData = {
 export default function InformationAccordion() {
   const dispatch = useDispatch<AppDispatch>();
 
+
   const userData = useSelector((state: any) => state.user.userData);
+
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedFileBase64, setSelectedFileBase64] = useState<string | null>(
@@ -83,23 +85,29 @@ export default function InformationAccordion() {
     sortCode: false,
   });
 
+  const { userData: DataInfo, userDetails: userInfo } = useSelector(
+    (state: RootState) => state.user
+  );
+  console.log("DataInfo", DataInfo);
+  console.log("userInfo", userInfo);
+
   const [formData, setFormData] = useState<FormData>({
     businessInfo: {
-      businessName: "",
-      businessAddress: "",
-      businessEmail: "",
-      phoneNumber: "",
-      businessType: "",
-      cacNumber: "",
-      businessLogo: imageIcon,
+      businessName: (userInfo && userInfo?.business_name) ? userInfo.business_name : "",
+      businessAddress: (userInfo && userInfo?.business_address) ? userInfo.business_address : "",
+      businessEmail: (userInfo && userInfo?.business_email) ? userInfo.business_email : "",
+      phoneNumber: (userInfo && userInfo?.phone_number) ? userInfo.phone_number : "",
+      businessType: (userInfo && userInfo?.business_type) ? userInfo.business_type : "",
+      cacNumber: (userInfo && userInfo?.cac_number) ? userInfo?.cac_number : "",
+      businessLogo: (userInfo && userInfo?.business_logo) ? userInfo?.business_logo : imageIcon,
     },
     personalInfo: {
-      firstName: "",
-      lastName: "",
-      address: "",
-      city: "",
-      state: "",
-      country: "Nigeria",
+      firstName: (userInfo && userInfo?.first_name) ? userInfo?.first_name : "",
+      lastName: (userInfo && userInfo?.last_name) ? userInfo?.last_name : "",
+      address: (userInfo && userInfo?.personal_address) ? userInfo?.personal_address : "",
+      city: (userInfo && userInfo?.city) ? userInfo?.city : "",
+      state: (userInfo && userInfo?.state) ? userInfo?.state : "",
+      country: (userInfo && userInfo?.country) ? userInfo?.country : "Nigeria",
     },
     payoutBankDetails: {
       accountNumber: "",
@@ -115,7 +123,6 @@ export default function InformationAccordion() {
   // const userInfo = useSelector((state: any) => state);
   const token = userDetails?.userData?.token;
 
-  console.log("Token", token)
 
   const fetchAccountDetails = async () => {
     const headers = {
@@ -431,7 +438,7 @@ export default function InformationAccordion() {
 
           {/* Conditionally render the Save and Clear buttons */}
           {selectedFileBase64 && (
-            <div className="px-4 py-2 flex gap-2">
+            <div className="flex gap-2 px-4 py-2">
               <button
                 className="bg-white text-[#5855B3] border border-[#5855B3] font-semibold py-2 px-4 rounded"
                 onClick={(e: any) => handleSaveLogo(e)}
@@ -439,7 +446,7 @@ export default function InformationAccordion() {
                 {isSavingLogo ? "Saving..." : "Save Logo"}
               </button>
               <button
-                className="text-red-500 bg-white border border-red-500 font-semibold py-2 px-4 rounded"
+                className="px-4 py-2 font-semibold text-red-500 bg-white border border-red-500 rounded"
                 onClick={handleClearLogo}
               >
                 Clear

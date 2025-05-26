@@ -18,12 +18,15 @@ const VerifyAccount = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const history = useNavigate();
+  const navigate = useNavigate();
 
   // const [digits, setDigits] = useState(["", "", "", "", "", ""]);
-  const userDetails = useSelector((state: RootState) => state.user);
+  const { userDetails } = useSelector((state: RootState) => state.user);
   console.log(userDetails, "userDetails:");
 
   const userEmail = localStorage.getItem("registeredUserEmail");
+
+
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -61,7 +64,7 @@ const VerifyAccount = () => {
         email: userEmail,
       });
       setLoading(false);
-      toast.success(response.data.message || "Token has been resent");
+      toast.success(response.data.message || "Check your email for the OTP");
     } catch (error) {
       console.error("Error occurred:", error);
       if (axios.isAxiosError(error)) {
@@ -78,6 +81,16 @@ const VerifyAccount = () => {
     }
   };
   const [otp, setOtp] = useState('');
+
+  useEffect(() => {
+    // if (userDetails) {
+    //   if (userDetails?.email_verified === true) {
+    //     navigate("/overview");
+    //   } else if (userDetails?.email_verified === false) {
+    //     resendOTP()
+    //   }
+    // }
+  }, [userDetails, navigate]);
 
   const handleChange = (newValue: string) => {
     setOtp(newValue);
