@@ -649,7 +649,6 @@ export default function InformationAccordion() {
             { label: "CAC Number", field: "cacNumber" },
           ])}
 
-          {/* Business Logo Section */}
           <label
             htmlFor="logo"
             className="text-base font-medium text-[#121212] p-4"
@@ -697,7 +696,6 @@ export default function InformationAccordion() {
             </div>
           </div>
 
-          {/* Conditionally render the Save and Clear buttons */}
           {selectedFileBase64 && (
             <div className="flex gap-2 px-4 py-2">
               <button
@@ -764,7 +762,6 @@ export default function InformationAccordion() {
             { label: "Bank Country", field: "bankCountry" },
           ])}
 
-          {/* Submit Button for Bank Details */}
           <div className="flex justify-end mt-4">
             <Button
               variant="contained"
