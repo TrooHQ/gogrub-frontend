@@ -315,7 +315,6 @@ export default function InformationAccordion() {
   };
 
   // This Handles bank selection
-  // const handleBankChange = (event: any, newValue: any) => {
   const handleBankChange = (newValue: any) => {
     if (newValue) {
       setSelectedBank({ name: newValue.name, code: newValue.code });
