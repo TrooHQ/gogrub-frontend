@@ -8,10 +8,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 // import DigitInput from "./DigitInput";
-import { MuiOtpInput } from 'mui-one-time-password-input'
+import { MuiOtpInput } from "mui-one-time-password-input";
 
 const VerifyAccount = () => {
-
   const OTPInput = MuiOtpInput as React.ElementType;
 
   const [isFromGoGrub, setIsFromGoGrub] = useState(true);
@@ -25,8 +24,6 @@ const VerifyAccount = () => {
   console.log(userDetails, "userDetails:");
 
   const userEmail = localStorage.getItem("registeredUserEmail");
-
-
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -80,7 +77,7 @@ const VerifyAccount = () => {
       setLoading(false);
     }
   };
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
 
   useEffect(() => {
     // if (userDetails) {
@@ -130,8 +127,6 @@ const VerifyAccount = () => {
     setError(allInputsFilled() ? "" : "Please fill all input fields");
   }, [otp]);
 
-
-
   return (
     <div className="bg-[#EFEFEF] h-screen">
       <div className="flex flex-col items-center justify-center h-screen my-auto">
@@ -152,7 +147,6 @@ const VerifyAccount = () => {
               six-digit OTP that was sent to your email
             </p>
           </div>
-
 
           <OTPInput value={otp} onChange={handleChange} length={6} />
           {/* <div className="grid grid-cols-6 gap-0">
