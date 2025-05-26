@@ -65,7 +65,7 @@ const Login = () => {
         if (error.response) {
           setError(error.response.data.message);
           if (error.response.data.message === "Your Email is not verified") {
-            history("/verify");
+            history("/verify-account");
           }
         } else {
           setError("An error occurred. Please try again later.");
@@ -87,7 +87,7 @@ const Login = () => {
         <div className="bg-white grid  p-[40px] mt-[32px] mb-[40px] w-full md:w-[530px] rounded shadow-md">
           <div className=" mb-[40px]">
             <p className="text-2xl text-grey500 ">Login Details</p>
-            {error && <p className="text-red-500 pt-4">{error}</p>}
+            {error && <p className="pt-4 text-red-500">{error}</p>}
           </div>
           <div className=" grid gap-[24px]">
             <CustomInput
@@ -112,7 +112,7 @@ const Login = () => {
             </Link>
           </div>
           <div className="" onClick={handleLogin}>
-            <button className="bg-purple500 w-full text-center text-white py-3 rounded">
+            <button className="w-full py-3 text-center text-white rounded bg-purple500">
               {loading ? "Please wait..." : "Login"}
             </button>
           </div>
