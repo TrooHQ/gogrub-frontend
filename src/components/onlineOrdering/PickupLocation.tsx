@@ -22,7 +22,7 @@ const PickupLocation = () => {
     (state: RootState) => state.asset
   );
 
-  const [isPickupEnabled, setIsPickupEnabled] = useState(false);
+  const [isPickupEnabled, setIsPickupEnabled] = useState(true);
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);
   const [selectedState, setSelectedState] = useState("");
   const [addresses, setAddresses] = useState([""]);

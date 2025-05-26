@@ -61,9 +61,9 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
   if (!isOpen) return null; // Do not render if modal is closed
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-8 rounded-md shadow-md w-[80%] md:w-[50%] max-h-[80vh] overflow-y-scroll">
-        <h2 className="text-lg font-semibold mb-4">
+        <h2 className="mb-4 text-lg font-semibold">
           {credentialType === "email" ? "Edit Password" : "Edit PIN"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -76,7 +76,7 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
               name="old_password"
               value={formData.old_password}
               onChange={handleChange}
-              className="w-full border rounded-md p-2"
+              className="w-full p-2 border rounded-md"
               required
             />
           </div>
@@ -87,7 +87,7 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border rounded-md p-2"
+              className="w-full p-2 border rounded-md"
               required
             />
           </div>
@@ -100,19 +100,19 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
               name="confirm_password"
               value={formData.confirm_password}
               onChange={handleChange}
-              className="w-full border rounded-md p-2"
+              className="w-full p-2 border rounded-md"
               required
             />
           </div>
-          <div className="flex justify-end space-x-4 mt-6">
+          <div className="flex justify-end mt-6 space-x-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border rounded-md bg-gray-200"
+              className="px-4 py-2 bg-gray-200 border rounded-md"
             >
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 bg-purple500 text-white rounded-md">
+            <button type="submit" className="px-4 py-2 text-white rounded-md bg-purple500">
               Save
             </button>
           </div>
