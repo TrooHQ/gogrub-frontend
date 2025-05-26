@@ -5,6 +5,8 @@ import {
   AccordionDetails,
   TextField,
   IconButton,
+  Button,
+  Autocomplete,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -43,7 +45,6 @@ type BankInfo = {
   bankName: string;
   bvn: string;
   bankCountry: string;
-  sortCode: string;
 };
 
 type FormData = {
@@ -55,9 +56,7 @@ type FormData = {
 export default function InformationAccordion() {
   const dispatch = useDispatch<AppDispatch>();
 
-
   const userData = useSelector((state: any) => state.user.userData);
-
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedFileBase64, setSelectedFileBase64] = useState<string | null>(
@@ -77,13 +76,14 @@ export default function InformationAccordion() {
     city: false,
     state: false,
     country: false,
-    accountNumber: false,
-    accountName: false,
-    bankName: false,
-    bvn: false,
-    bankCountry: false,
-    sortCode: false,
   });
+
+  const [isSubmittingBankDetails, setIsSubmittingBankDetails] = useState(false);
+  const [selectedBank, setSelectedBank] = useState<{
+    name: string;
+    code: string;
+  } | null>(null);
+  const [banks, setBanks] = useState<any[]>([]);
 
   const { userData: DataInfo, userDetails: userInfo } = useSelector(
     (state: RootState) => state.user
@@ -93,21 +93,32 @@ export default function InformationAccordion() {
 
   const [formData, setFormData] = useState<FormData>({
     businessInfo: {
-      businessName: (userInfo && userInfo?.business_name) ? userInfo.business_name : "",
-      businessAddress: (userInfo && userInfo?.business_address) ? userInfo.business_address : "",
-      businessEmail: (userInfo && userInfo?.business_email) ? userInfo.business_email : "",
-      phoneNumber: (userInfo && userInfo?.phone_number) ? userInfo.phone_number : "",
-      businessType: (userInfo && userInfo?.business_type) ? userInfo.business_type : "",
-      cacNumber: (userInfo && userInfo?.cac_number) ? userInfo?.cac_number : "",
-      businessLogo: (userInfo && userInfo?.business_logo) ? userInfo?.business_logo : imageIcon,
+      businessName:
+        userInfo && userInfo?.business_name ? userInfo.business_name : "",
+      businessAddress:
+        userInfo && userInfo?.business_address ? userInfo.business_address : "",
+      businessEmail:
+        userInfo && userInfo?.business_email ? userInfo.business_email : "",
+      phoneNumber:
+        userInfo && userInfo?.phone_number ? userInfo.phone_number : "",
+      businessType:
+        userInfo && userInfo?.business_type ? userInfo.business_type : "",
+      cacNumber: userInfo && userInfo?.cac_number ? userInfo?.cac_number : "",
+      businessLogo:
+        userInfo && userInfo?.business_logo
+          ? userInfo?.business_logo
+          : imageIcon,
     },
     personalInfo: {
-      firstName: (userInfo && userInfo?.first_name) ? userInfo?.first_name : "",
-      lastName: (userInfo && userInfo?.last_name) ? userInfo?.last_name : "",
-      address: (userInfo && userInfo?.personal_address) ? userInfo?.personal_address : "",
-      city: (userInfo && userInfo?.city) ? userInfo?.city : "",
-      state: (userInfo && userInfo?.state) ? userInfo?.state : "",
-      country: (userInfo && userInfo?.country) ? userInfo?.country : "Nigeria",
+      firstName: userInfo && userInfo?.first_name ? userInfo?.first_name : "",
+      lastName: userInfo && userInfo?.last_name ? userInfo?.last_name : "",
+      address:
+        userInfo && userInfo?.personal_address
+          ? userInfo?.personal_address
+          : "",
+      city: userInfo && userInfo?.city ? userInfo?.city : "",
+      state: userInfo && userInfo?.state ? userInfo?.state : "",
+      country: userInfo && userInfo?.country ? userInfo?.country : "Nigeria",
     },
     payoutBankDetails: {
       accountNumber: "",
@@ -115,14 +126,31 @@ export default function InformationAccordion() {
       bankName: "",
       bvn: "",
       bankCountry: "Nigeria",
-      sortCode: "",
     },
   });
 
   const userDetails = useSelector((state: any) => state.user);
-  // const userInfo = useSelector((state: any) => state);
   const token = userDetails?.userData?.token;
 
+  const getBanks = async () => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(`${SERVER_DOMAIN}/getBanks`, headers);
+      const { data } = response.data;
+
+      setBanks(data);
+      console.log(data);
+    } catch (error: any) {
+      console.error("Error fetching Banks:", error);
+      toast.error(error?.response?.data?.message || "Error fetching Banks");
+    }
+  };
 
   const fetchAccountDetails = async () => {
     const headers = {
@@ -158,23 +186,60 @@ export default function InformationAccordion() {
           businessLogo: data.business_information.business_logo,
         },
         payoutBankDetails: {
-          accountNumber: data.account_details.account_number,
-          accountName: data.account_details.account_name,
-          bankName: data.account_details.bank_name,
-          bvn: data.account_details.bank_verification_number,
-          bankCountry: data.account_details.country,
-          sortCode: data.account_details.sort_code,
+          accountNumber: data.account_details.account_number || "",
+          accountName: data.account_details.account_name || "",
+          bankName: data.account_details.bank_name || "",
+          bvn: data.account_details.bank_verification_number || "",
+          bankCountry: data.account_details.country || "Nigeria",
         },
       });
+
+      if (data.account_details.bank_name) {
+        const foundBank = banks.find(
+          (bank) => bank.name === data.account_details.bank_name
+        );
+        if (foundBank) {
+          setSelectedBank({ name: foundBank.name, code: foundBank.code });
+        }
+      }
     } catch (error: any) {
       console.error("Error fetching account details:", error);
-      toast.error(error?.response?.data?.message || "Error fetching information");
+      toast.error(
+        error?.response?.data?.message || "Error fetching information"
+      );
     }
   };
 
   useEffect(() => {
+    getBanks();
     fetchAccountDetails();
   }, [token]);
+
+  useEffect(() => {
+    if (banks.length > 0 && formData.payoutBankDetails.bankName) {
+      const foundBank = banks.find(
+        (bank) => bank.name === formData.payoutBankDetails.bankName
+      );
+      if (foundBank) {
+        setSelectedBank({ name: foundBank.name, code: foundBank.code });
+      }
+    }
+  }, [banks, formData.payoutBankDetails.bankName]);
+
+  useEffect(() => {
+    const shouldVerify =
+      formData.payoutBankDetails.accountNumber &&
+      formData.payoutBankDetails.accountNumber.length >= 10 &&
+      selectedBank?.code;
+
+    if (shouldVerify) {
+      const timeoutId = setTimeout(() => {
+        VerifyAccountNumber();
+      }, 1000); // I used Debounce for 1 second to avoid too many API calls
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [formData.payoutBankDetails.accountNumber, selectedBank?.code]);
 
   const handleChange = (panel: string) => (_: any, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
@@ -183,36 +248,31 @@ export default function InformationAccordion() {
   const toSnakeCase = (str: string) =>
     str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
-  // Update Logo
-
   // Update handleFileChange to handle logo upload
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file); // Store the selected file temporarily
+      setSelectedFile(file); // this  Stores the selected file temporarily
 
-      // Convert the file to base64 and store it for preview
+      //This Converts the file to base64 and store it for preview
       const base64 = await convertToBase64(file);
-      setSelectedFileBase64(base64 as string); // Cast to string because base64 is a string
+      setSelectedFileBase64(base64 as string);
     }
   };
 
   const handleClearLogo = () => {
-    setSelectedFile(null); // Clear the selected file
-    setSelectedFileBase64(null); // Clear the base64 preview
+    setSelectedFile(null); //this Clears the selected file
+    setSelectedFileBase64(null); //this also Clears the base64 preview
   };
 
   const handleEditClick = async (
-    field:
-      | keyof FormData["businessInfo"]
-      | keyof FormData["personalInfo"]
-      | keyof FormData["payoutBankDetails"],
-    section: "businessInfo" | "personalInfo" | "payoutBankDetails"
+    field: keyof FormData["businessInfo"] | keyof FormData["personalInfo"],
+    section: "businessInfo" | "personalInfo"
   ) => {
     const isCurrentlyInEditMode = editMode[field];
-    // Check if the field is in edit mode, and if yes, send the update request
+    // This Checks if the field is in edit mode, and if yes, send the update request
     if (isCurrentlyInEditMode) {
       const payload = {
         [toSnakeCase(field)]: (formData[section] as any)[field],
@@ -224,19 +284,18 @@ export default function InformationAccordion() {
           Authorization: `Bearer ${token}`,
         };
 
-        // Determine the endpoint based on the section
+        // this Determines the endpoint based on the section
         let endpoint = "";
-        if (section === "businessInfo" || section === "payoutBankDetails") {
-          endpoint = `${SERVER_DOMAIN}/updateBusinessDetails`; // Use this for business info
+        if (section === "businessInfo") {
+          endpoint = `${SERVER_DOMAIN}/updateBusinessDetails`; //this is  Used for business info
         } else if (section === "personalInfo") {
-          endpoint = `${SERVER_DOMAIN}/updatePersonalInformation`; // Use this for personal info
+          endpoint = `${SERVER_DOMAIN}/updatePersonalInformation`; // While this is Used for personal info
         }
 
         const response = await axios.put(endpoint, payload, { headers });
         fetchAccountDetails();
         console.log(`${section} field updated successfully:`, response.data);
 
-        // Dispatch setUserData with sorted user data
         dispatch(
           setUserData({
             ...userData,
@@ -248,11 +307,121 @@ export default function InformationAccordion() {
       }
     }
 
-    // Toggle the edit mode
+    //This Toggles the edit mode
     setEditMode((prevEditMode) => ({
       ...prevEditMode,
       [field]: !prevEditMode[field],
     }));
+  };
+
+  // This Handles bank selection
+  const handleBankChange = (event: any, newValue: any) => {
+    if (newValue) {
+      setSelectedBank({ name: newValue.name, code: newValue.code });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        payoutBankDetails: {
+          ...prevFormData.payoutBankDetails,
+          bankName: newValue.name,
+        },
+      }));
+    } else {
+      setSelectedBank(null);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        payoutBankDetails: {
+          ...prevFormData.payoutBankDetails,
+          bankName: "",
+        },
+      }));
+    }
+  };
+
+  //This is the Function to verify account number
+  const VerifyAccountNumber = async () => {
+    try {
+      const payload = {
+        account_number: formData.payoutBankDetails.accountNumber,
+        account_code: selectedBank?.code || "",
+      };
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      const response = await axios.post(
+        `${SERVER_DOMAIN}/verifyUserAccountNumber/`,
+        payload,
+        { headers }
+      );
+
+      console.log("Account verification response:", response.data);
+
+      //this Updates account name if verification is successful and returns account name
+      if (response.data?.data?.account_name) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          payoutBankDetails: {
+            ...prevFormData.payoutBankDetails,
+            accountName: response.data.data.account_name,
+          },
+        }));
+        toast.success("Account verified successfully!");
+      }
+    } catch (error: any) {
+      console.error("Error verifying account:", error);
+      toast.error(error?.response?.data?.message || "Error verifying account");
+    }
+  };
+
+  // this is a new function to handle bank details submission
+  const handleBankDetailsSubmit = async () => {
+    try {
+      setIsSubmittingBankDetails(true);
+
+      const payload = {
+        user_id: DataInfo?.id,
+        business_id: DataInfo?.business_identifier,
+        account_number: formData.payoutBankDetails.accountNumber,
+        account_name: formData.payoutBankDetails.accountName,
+        bank_name: formData.payoutBankDetails.bankName,
+        bank_verification_number: formData.payoutBankDetails.bvn,
+        country: formData.payoutBankDetails.bankCountry,
+        bank_code: selectedBank?.code || "", // this Includes bank code from selectedBank
+      };
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      const response = await axios.post(
+        `${SERVER_DOMAIN}/createAccountDetails`,
+        payload,
+        { headers }
+      );
+
+      console.log("Bank details added successfully:", response.data);
+      toast.success("Bank details saved successfully!");
+
+      //this  Optionally refresh the account details
+      fetchAccountDetails();
+
+      dispatch(
+        setUserData({
+          ...userData,
+          ...response.data.data,
+        })
+      );
+    } catch (error: any) {
+      console.error("Error saving bank details:", error);
+      toast.error(
+        error?.response?.data?.message || "Error saving bank details"
+      );
+    } finally {
+      setIsSubmittingBankDetails(false);
+    }
   };
 
   const [isSavingLogo, setIsSavingLogo] = useState(false);
@@ -266,10 +435,10 @@ export default function InformationAccordion() {
 
     try {
       setIsSavingLogo(true);
-      const base64Image = await convertToBase64(selectedFile); // Convert the file to base64
+      const base64Image = await convertToBase64(selectedFile);
 
       const payload = {
-        business_logo: base64Image, // Send the image as base64 in the payload
+        business_logo: base64Image,
       };
 
       const headers = {
@@ -277,7 +446,6 @@ export default function InformationAccordion() {
         Authorization: `Bearer ${token}`,
       };
 
-      // Send the request to update the logo
       const response = await axios.put(
         `${SERVER_DOMAIN}/updateBusinessDetails`,
         payload,
@@ -288,23 +456,21 @@ export default function InformationAccordion() {
 
       console.log("Logo updated successfully:", response.data);
 
-      // Optionally update the form data or state with the new logo URL or base64 string
       setFormData((prevFormData) => ({
         ...prevFormData,
         businessInfo: {
           ...prevFormData.businessInfo,
-          business_logo: base64Image, // Optionally store the base64 image
+          business_logo: base64Image,
         },
       }));
       setSelectedFileBase64(null);
       toast.success("Logo updated successfully");
       fetchAccountDetails();
 
-      // Dispatch setUserData with sorted user data
       dispatch(
         setUserData({
-          ...userData, // Spread existing user data
-          business_logo: response.data.data.business_logo, // Update only the changed field
+          ...userData,
+          business_logo: response.data.data.business_logo, // this Updates only the changed field
         })
       );
     } catch (error) {
@@ -320,24 +486,30 @@ export default function InformationAccordion() {
       section: "personalInfo" | "businessInfo" | "payoutBankDetails",
       subField: keyof PersonalInfo | keyof BusinessInfo | keyof BankInfo
     ) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [section]: {
-            ...prevFormData[section],
-            [subField]: event.target.value,
-          },
-        }));
-      };
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+
+      if (section === "payoutBankDetails" && subField === "bvn") {
+        if (value.length > 0 && value.length < 11) {
+          toast.error("BVN must be 11 digits");
+        }
+        if (value.length > 11) return;
+      }
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [section]: {
+          ...prevFormData[section],
+          [subField]: value,
+        },
+      }));
+    };
 
   const renderFields = (
-    section: "personalInfo" | "businessInfo" | "payoutBankDetails",
+    section: "personalInfo" | "businessInfo",
     fields: {
       label: string;
-      field:
-      | keyof FormData["businessInfo"]
-      | keyof FormData["personalInfo"]
-      | keyof FormData["payoutBankDetails"];
+      field: keyof FormData["businessInfo"] | keyof FormData["personalInfo"];
     }[]
   ) =>
     fields.map((item) => (
@@ -362,6 +534,95 @@ export default function InformationAccordion() {
         </IconButton>
       </div>
     ));
+
+  const { payoutBankDetails } = formData;
+  const isBankFormComplete =
+    !!payoutBankDetails.accountNumber?.trim() &&
+    !!payoutBankDetails.bankName?.trim() &&
+    payoutBankDetails.bvn.trim().length >= 11 &&
+    !!payoutBankDetails.bankCountry?.trim();
+
+  console.log(isBankFormComplete);
+
+  const renderBankFields = (
+    fields: {
+      label: string;
+      field: keyof FormData["payoutBankDetails"];
+    }[]
+  ) =>
+    fields.map((item) => {
+      if (item.field === "bankName") {
+        return (
+          <div key={item.field} className="flex items-center gap-2">
+            <Autocomplete
+              fullWidth
+              options={banks}
+              getOptionLabel={(option) => option.name}
+              value={selectedBank}
+              onChange={handleBankChange}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={item.label}
+                  variant="outlined"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": { borderColor: "black" },
+                      "&:hover fieldset": { borderColor: "black" },
+                      "&.Mui-focused fieldset": { borderColor: "black" },
+                    },
+                  }}
+                />
+              )}
+              isOptionEqualToValue={(option, value) =>
+                option.code === value.code
+              }
+            />
+          </div>
+        );
+      }
+
+      if (item.field === "accountName") {
+        return (
+          <div key={item.field} className="flex items-center gap-2">
+            <TextField
+              fullWidth
+              value={formData.payoutBankDetails[item.field]}
+              onChange={handleInputChange("payoutBankDetails", item.field)}
+              variant="outlined"
+              label={item.label}
+              disabled={true}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "black" },
+                  "&:hover fieldset": { borderColor: "black" },
+                  "&.Mui-focused fieldset": { borderColor: "black" },
+                },
+              }}
+            />
+          </div>
+        );
+      }
+
+      return (
+        <div key={item.field} className="flex items-center gap-2">
+          <TextField
+            fullWidth
+            value={formData.payoutBankDetails[item.field]}
+            onChange={handleInputChange("payoutBankDetails", item.field)}
+            variant="outlined"
+            label={item.label}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "black" },
+                "&:hover fieldset": { borderColor: "black" },
+                "&.Mui-focused fieldset": { borderColor: "black" },
+              },
+            }}
+          />
+        </div>
+      );
+    });
 
   return (
     <>
@@ -388,7 +649,6 @@ export default function InformationAccordion() {
             { label: "CAC Number", field: "cacNumber" },
           ])}
 
-          {/* Business Logo Section */}
           <label
             htmlFor="logo"
             className="text-base font-medium text-[#121212] p-4"
@@ -436,7 +696,6 @@ export default function InformationAccordion() {
             </div>
           </div>
 
-          {/* Conditionally render the Save and Clear buttons */}
           {selectedFileBase64 && (
             <div className="flex gap-2 px-4 py-2">
               <button
@@ -495,14 +754,32 @@ export default function InformationAccordion() {
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
-          {renderFields("payoutBankDetails", [
+          {renderBankFields([
             { label: "Account Number", field: "accountNumber" },
             { label: "Account Name", field: "accountName" },
             { label: "Bank Name", field: "bankName" },
             { label: "BVN", field: "bvn" },
             { label: "Bank Country", field: "bankCountry" },
-            { label: "Sort Code", field: "sortCode" },
           ])}
+
+          <div className="flex justify-end mt-4">
+            <Button
+              variant="contained"
+              onClick={handleBankDetailsSubmit}
+              disabled={isSubmittingBankDetails || !isBankFormComplete}
+              sx={{
+                backgroundColor: "#5855B3",
+                "&:hover": {
+                  backgroundColor: "#4A47A3",
+                },
+                textTransform: "none",
+                fontWeight: "600",
+                padding: "12px 24px",
+              }}
+            >
+              {isSubmittingBankDetails ? "Saving..." : "Save Bank Details"}
+            </Button>
+          </div>
         </AccordionDetails>
       </Accordion>
     </>
