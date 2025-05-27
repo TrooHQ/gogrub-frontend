@@ -10,6 +10,7 @@ import ManageTablesIcon from "../../assets/manageTableIcon.svg";
 import AccountCircleIcon from "../../assets/account_circle.svg";
 import Upgrade from "../../assets/upgrade.svg";
 import HomeIcon from "../../assets/troo-logo-white.png";
+import alarmIcon from "../../assets/fire-alarm.png";
 // import ManageUsersIcon from "../../assets/manageUsers.svg";
 // import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
@@ -34,6 +35,7 @@ import { clearUserData, fetchUserDetails } from "../../slices/UserSlice";
 import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
 // import BlinkerSubscribe from "../BlinkerSubscribe";
 import { setSubscription } from "../../slices/setupSlice";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 interface MenuItem {
   subTitle?: string;
@@ -183,7 +185,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     },
     {
       title: "Restaurant Details",
-      icon: RestaurantDetailsIcon,
+      icon: userData?.has_account ? RestaurantDetailsIcon : alarmIcon,
       link: "/business-information",
       subMenu: [
         {
@@ -425,6 +427,29 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                 onClick={() => menu.subMenu && handleSubmenuToggle(index)}
               >
                 {menu.title && (
+                  (menu.link === "/business-information" && !userData?.has_account) ?
+                    <div className="text-white bg-red-500 rounded-full animate-ping size-4">
+                      <RiErrorWarningLine className="w-full h-full" />
+                    </div>
+                    : (
+                      <img
+                        src={menu.icon}
+                        alt={menu.title}
+                        style={{
+                          width: "24px",
+                          marginRight: "8px",
+                          fontWeight: isMenuItemActive(menu.link || "", menu.subMenu)
+                            ? "bold"
+                            : "normal",
+                          color: isMenuItemActive(menu.link || "", menu.subMenu)
+                            ? ""
+                            : "initial",
+                        }}
+                      />
+                    )
+                )}
+                {/* {menu.title && (
+                  
                   <img
                     src={menu.icon}
                     alt={menu.title}
@@ -442,7 +467,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                         : "initial",
                     }}
                   />
-                )}
+                )} */}
                 <NavLink to={menu.link || "#"} className="flex-grow">
                   <span
                     className={`${!open && "hidden"

@@ -19,6 +19,7 @@ import { convertToBase64 } from "../../../utils/imageToBase64";
 import { toast } from "react-toastify";
 import { setUserData } from "../../../slices/UserSlice";
 import { AppDispatch, RootState } from "../../../store/store";
+import { RiErrorWarningLine } from "react-icons/ri";
 type PersonalInfo = {
   firstName: string;
   lastName: string;
@@ -504,24 +505,24 @@ export default function InformationAccordion() {
       section: "personalInfo" | "businessInfo" | "payoutBankDetails",
       subField: keyof PersonalInfo | keyof BusinessInfo | keyof BankInfo
     ) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
 
-      if (section === "payoutBankDetails" && subField === "bvn") {
-        if (value.length > 0 && value.length < 11) {
-          toast.error("BVN must be 11 digits");
+        if (section === "payoutBankDetails" && subField === "bvn") {
+          if (value.length > 0 && value.length < 11) {
+            toast.error("BVN must be 11 digits");
+          }
+          if (value.length > 11) return;
         }
-        if (value.length > 11) return;
-      }
 
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [section]: {
-          ...prevFormData[section],
-          [subField]: value,
-        },
-      }));
-    };
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [section]: {
+            ...prevFormData[section],
+            [subField]: value,
+          },
+        }));
+      };
 
   const renderFields = (
     section: "personalInfo" | "businessInfo",
@@ -820,8 +821,12 @@ export default function InformationAccordion() {
           aria-controls="panel3-content"
           id="panel3-header"
         >
-          <div className="flex gap-3 font-base text-normal text-blackish">
+          <div className="relative flex gap-3 font-base text-normal text-blackish">
             Bank Information
+
+            <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
+              <RiErrorWarningLine className="w-full h-full" />
+            </div>
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
