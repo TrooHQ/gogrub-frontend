@@ -20,7 +20,6 @@ import { toast } from "react-toastify";
 import { setUserData } from "../../../slices/UserSlice";
 import { AppDispatch, RootState } from "../../../store/store";
 import { RiErrorWarningLine } from "react-icons/ri";
-
 type PersonalInfo = {
   firstName: string;
   lastName: string;
@@ -85,6 +84,8 @@ export default function InformationAccordion() {
     code: string;
   } | null>(null);
   const [banks, setBanks] = useState<any[]>([]);
+
+  console.log(selectedBank);
 
   const { userData: DataInfo, userDetails: userInfo } = useSelector(
     (state: RootState) => state.user
@@ -360,6 +361,7 @@ export default function InformationAccordion() {
       console.log("Account verification response:", response.data);
 
       //this Updates account name if verification is successful and returns account name
+
       if (response.data?.data?.account_name) {
         setFormData((prevFormData) => ({
           ...prevFormData,
@@ -369,10 +371,26 @@ export default function InformationAccordion() {
           },
         }));
         toast.success("Account verified successfully!");
+      } else {
+        // Clear account name if verification fails
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          payoutBankDetails: {
+            ...prevFormData.payoutBankDetails,
+            accountName: "",
+          },
+        }));
       }
     } catch (error: any) {
       console.error("Error verifying account:", error);
       toast.error(error?.response?.data?.message || "Error verifying account");
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        payoutBankDetails: {
+          ...prevFormData.payoutBankDetails,
+          accountName: "",
+        },
+      }));
     }
   };
 
@@ -545,6 +563,16 @@ export default function InformationAccordion() {
 
   console.log(isBankFormComplete);
 
+  // Synchronous filterOptions function for Autocomplete
+  // const bankFilterOptions = (
+  //   options: any[],
+  //   { inputValue }: { inputValue: string }
+  // ) => {
+  //   return options.filter((option) =>
+  //     option.name.toLowerCase().includes(inputValue.toLowerCase())
+  //   );
+  // };
+
   const renderBankFields = (
     fields: {
       label: string;
@@ -558,9 +586,47 @@ export default function InformationAccordion() {
             <Autocomplete
               fullWidth
               options={banks}
-              getOptionLabel={(option) => option.name}
-              value={selectedBank}
-              onChange={handleBankChange}
+              getOptionLabel={(option) => option?.name || ""}
+              value={
+                banks.find(
+                  (bank) => bank.name === formData.payoutBankDetails.bankName
+                ) || null
+              }
+              inputValue={formData.payoutBankDetails.bankName}
+              onChange={(_, newValue) => {
+                handleBankChange(newValue);
+              }}
+              onInputChange={(_, newInputValue, reason) => {
+                // Only update inputValue if the user is typing, not when selecting
+                if (reason === "input") {
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    payoutBankDetails: {
+                      ...prevFormData.payoutBankDetails,
+                      bankName: newInputValue,
+                    },
+                  }));
+                  setSelectedBank(null);
+                }
+              }}
+              filterOptions={(options, { inputValue }) => {
+                // Normalize input and option names: remove spaces and lowercase
+                const normalize = (str: string) =>
+                  str.replace(/\s+/g, "").toLowerCase();
+                const normalizedInput = normalize(inputValue);
+
+                // Match if input is contained in option name (with or without spaces)
+                const filtered = options.filter((option) => {
+                  const normalizedOption = normalize(option.name);
+                  return (
+                    normalizedOption.includes(normalizedInput) ||
+                    option.name
+                      .toLowerCase()
+                      .includes(inputValue.trim().toLowerCase())
+                  );
+                });
+                return filtered.slice(0, 20); // limit to 20 results for performance
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -576,8 +642,13 @@ export default function InformationAccordion() {
                 />
               )}
               isOptionEqualToValue={(option, value) =>
-                option.code === value.code
+                option?.code === value?.code
               }
+              autoHighlight
+              autoSelect
+              openOnFocus
+              blurOnSelect
+              disableClearable
             />
           </div>
         );
@@ -761,8 +832,8 @@ export default function InformationAccordion() {
         <AccordionDetails className="flex flex-col gap-4">
           {renderBankFields([
             { label: "Account Number", field: "accountNumber" },
-            { label: "Account Name", field: "accountName" },
             { label: "Bank Name", field: "bankName" },
+            { label: "Account Name", field: "accountName" },
             { label: "BVN", field: "bvn" },
             { label: "Bank Country", field: "bankCountry" },
           ])}
