@@ -827,8 +827,8 @@ export default function InformationAccordion() {
         <AccordionDetails className="flex flex-col gap-4">
           {renderBankFields([
             { label: "Account Number", field: "accountNumber" },
-            { label: "Account Name", field: "accountName" },
             { label: "Bank Name", field: "bankName" },
+            { label: "Account Name", field: "accountName" },
             { label: "BVN", field: "bvn" },
             { label: "Bank Country", field: "bankCountry" },
           ])}
