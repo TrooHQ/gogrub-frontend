@@ -209,14 +209,14 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   }, [reference]);
 
   return (
-    //   <div className="flex justify-center items-center h-screen">
+    //   <div className="flex items-center justify-center h-screen">
     //     <p className="text-[24px] font-[500] text-[#414141]">Loading plans...</p>
     //   </div>
     // ) : (
-    <div className=" ">
+    <div className="">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className="w-[900px] max-h-[900px] h-auto mx-auto bg-white  relative overflow-auto">
-          <div className="font-GeneralSans w-full transition-all duration-500 ease-in-out ">
+          <div className="w-full transition-all duration-500 ease-in-out font-GeneralSans ">
             <div className=" flex items-center gap-[9px] justify-center py-[20px]">
               <p className="font-[500] text-[28px] text-[#000000]">
                 Choose Your Plan With
@@ -225,7 +225,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
             </div>
 
             <div
-              className="absolute top-0 right-0  cursor-pointer"
+              className="absolute top-0 right-0 cursor-pointer"
               onClick={() => setIsModalOpen(false)}
             >
               <img src={CancelIcon} alt="" />
@@ -246,11 +246,10 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                     {plans.map((plan, index) => (
                       <div
                         key={index}
-                        className={`px-[30px] py-[22px] rounded-[10px] border ${
-                          selectedPlan?.name === plan.name
+                        className={`px-[30px] py-[22px] rounded-[10px] border ${selectedPlan?.name === plan.name
                             ? "border-[#FF4F00]"
                             : " border-none"
-                        } text-[16px] font-[400] text-[#414141] w-full shadow-sm bg-white cursor-pointer transition-all duration-500 ease-in-out`}
+                          } text-[16px] font-[400] text-[#414141] w-full shadow-sm bg-white cursor-pointer transition-all duration-500 ease-in-out`}
                         onClick={() => handlePlanSelect(plan)}
                       >
                         <div className="flex items-start gap-[24px] ">
@@ -263,7 +262,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                             className="w-[23px] h-[23px] mt-[15px] transition-all duration-500 ease-in-out"
                           />
                           <div className="w-full space-y-[13px]">
-                            <div className="w-full grid md:flex items-center md:justify-between">
+                            <div className="grid items-center w-full md:flex md:justify-between">
                               <p className="capitalize font-[600] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
                                 {plan.name}
                               </p>
@@ -272,7 +271,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                                 {plan.price.toLocaleString()}
                               </p>
                             </div>
-                            <div className="grid md:flex items-center md:justify-between">
+                            <div className="grid items-center md:flex md:justify-between">
                               <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
                                 Pay <span className="font-[400]">₦ </span>
                                 {plan.billingFrequencyAmount.toLocaleString()}{" "}
@@ -308,11 +307,10 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                     </label>
                   </div>
                   <button
-                    className={`max-w-[500px] mx-auto w-full flex items-center justify-center  px-[10px] py-[13px] rounded-[5px]  text-[16px] font-[500] transition-all duration-500 ease-in-out ${
-                      selectedPlan && agreed
+                    className={`max-w-[500px] mx-auto w-full flex items-center justify-center  px-[10px] py-[13px] rounded-[5px]  text-[16px] font-[500] transition-all duration-500 ease-in-out ${selectedPlan && agreed
                         ? "bg-[#FF4F00] border border-[#FF4F00] text-white"
                         : " bg-[#FF4F001F] text-[#FFFFFF]"
-                    }`}
+                      }`}
                     disabled={!selectedPlan || !agreed}
                     onClick={() => {
                       if (!selectedPlan) {
@@ -346,28 +344,27 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               )}
             </div>
 
-            <Link
+            {!currentPlanId && <Link
               to="/online-ordering"
               onClick={() => dispatch(setSubscription(false))}
             >
               <button
-                className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${
-                  reference
+                className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${reference
                     ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
                     : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
-                }`}
+                  }`}
                 disabled={!reference}
               >
                 Get Your URL
               </button>
-            </Link>
+            </Link>}
           </div>
         </div>
       </Modal>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[372px]">
-          <div className=" text-center">
+          <div className="text-center ">
             <p className="text-[24px] font-[500] text-purple500">Payment</p>
             <p className="text-[16px] font-[400] text-grey500">
               Make payment to selected plan
