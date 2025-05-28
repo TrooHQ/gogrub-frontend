@@ -22,6 +22,7 @@ interface BusinessState {
   URL: string;
   colour_scheme: string;
   businessDetails: BusinessDetails | null;
+  accountDetails?: any;
   loading: boolean;
   error: string | null;
 }
@@ -51,7 +52,8 @@ export const fetchAccountDetails = createAsyncThunk(
         },
       });
 
-      return response.data.data.business_information;
+      // return response.data.data.business_information;
+      return response.data.data;
     } catch (error: any) {
       return rejectWithValue(
         error.response?.data?.message || "An error occurred"
@@ -96,10 +98,19 @@ const businessSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+      // .addCase(fetchAccountDetails.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.businessDetails = action.payload;
+      //   state.colour_scheme = action.payload.colour_scheme;
+      // })
       .addCase(fetchAccountDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.businessDetails = action.payload;
-        state.colour_scheme = action.payload.colour_scheme;
+
+        const { business_information, account_details } = action.payload;
+
+        state.businessDetails = business_information;
+        state.accountDetails = account_details;
+        state.colour_scheme = business_information.colour_scheme;
       })
       .addCase(fetchAccountDetails.rejected, (state, action) => {
         state.loading = false;
