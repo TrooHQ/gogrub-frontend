@@ -436,7 +436,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                 onClick={() => menu.subMenu && handleSubmenuToggle(index)}
               >
                 {menu.title && (
-                  (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails.account_number)) ?
+                  (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
                     <div className="text-white bg-red-500 rounded-full animate-ping size-4">
                       <RiErrorWarningLine className="w-full h-full" />
                     </div>
