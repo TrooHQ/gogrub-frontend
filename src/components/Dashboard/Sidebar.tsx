@@ -10,7 +10,6 @@ import ManageTablesIcon from "../../assets/manageTableIcon.svg";
 import AccountCircleIcon from "../../assets/account_circle.svg";
 import Upgrade from "../../assets/upgrade.svg";
 import HomeIcon from "../../assets/troo-logo-white.png";
-import alarmIcon from "../../assets/fire-alarm.png";
 // import ManageUsersIcon from "../../assets/manageUsers.svg";
 // import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
@@ -36,6 +35,8 @@ import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
 // import BlinkerSubscribe from "../BlinkerSubscribe";
 import { setSubscription } from "../../slices/setupSlice";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { fetchAccountDetails } from "../../slices/businessSlice";
+// import { fetchAccountDetails } from "@/src/slices/businessSlice";
 
 interface MenuItem {
   subTitle?: string;
@@ -62,7 +63,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
-
+  console.log("userData", userData)
+  console.log("userDetails", userDetails)
   useEffect(() => {
     if (userDetails?.email_verified === false) {
       navigate("/verify-account");
@@ -85,7 +87,14 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   useEffect(() => {
     dispatch(fetchBranches());
     dispatch(fetchUserDetails());
+    dispatch(fetchAccountDetails());
   }, [dispatch]);
+
+  const {
+    accountDetails
+  } = useSelector((state: RootState) => state.business);
+
+
 
   const transformedBranches = branches.map((branch: any) => ({
     label: branch.branch_name,
@@ -185,7 +194,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     },
     {
       title: "Restaurant Details",
-      icon: userData?.has_account ? RestaurantDetailsIcon : alarmIcon,
+      icon: RestaurantDetailsIcon,
       link: "/business-information",
       subMenu: [
         {
@@ -427,7 +436,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                 onClick={() => menu.subMenu && handleSubmenuToggle(index)}
               >
                 {menu.title && (
-                  (menu.link === "/business-information" && !userData?.has_account) ?
+                  (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails.account_number)) ?
                     <div className="text-white bg-red-500 rounded-full animate-ping size-4">
                       <RiErrorWarningLine className="w-full h-full" />
                     </div>

@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import { setUserData } from "../../../slices/UserSlice";
 import { AppDispatch, RootState } from "../../../store/store";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { fetchAccountDetails as fetchAccountDetailState } from "../../../slices/businessSlice";
 type PersonalInfo = {
   firstName: string;
   lastName: string;
@@ -212,10 +213,16 @@ export default function InformationAccordion() {
     }
   };
 
+
   useEffect(() => {
     getBanks();
     fetchAccountDetails();
+    dispatch(fetchAccountDetailState());
   }, [token]);
+
+  const {
+    accountDetails
+  } = useSelector((state: RootState) => state.business);
 
   useEffect(() => {
     if (banks.length > 0 && formData.payoutBankDetails.bankName) {
@@ -824,9 +831,9 @@ export default function InformationAccordion() {
           <div className="relative flex gap-3 font-base text-normal text-blackish">
             Bank Information
 
-            <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
+            {(!accountDetails?.account_number && !accountDetails?.account_name) && <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
               <RiErrorWarningLine className="w-full h-full" />
-            </div>
+            </div>}
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
