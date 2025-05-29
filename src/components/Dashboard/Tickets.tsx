@@ -352,14 +352,14 @@ const Tickets = () => {
                     : "Tickets"}
                 </p>
 
-                <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-10 border-b">
+                <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-7 border-b">
                   <p className=" text-[14px] text-[#121212]">Date</p>
                   <p className=" text-[14px] text-[#121212]">Time</p>
                   {/* <p className=" text-[14px] text-[#121212]">Table No</p> */}
                   <p className=" text-[14px] text-[#121212]">Order No</p>
                   <p className=" text-[14px] text-[#121212]">Customer </p>
                   {/* <p className=" text-[14px] text-[#121212]">Waiter </p> */}
-                  <p className=" text-[14px] text-[#121212]">Channel </p>
+                  {/* <p className=" text-[14px] text-[#121212]">Channel </p> */}
                   <p className=" text-[14px] text-[#121212]">Status </p>
                   <p className=" text-[14px] text-[#121212]">Bill</p>
                   <p className=" text-[14px] text-[#121212]">Actions </p>
@@ -371,7 +371,7 @@ const Tickets = () => {
                 ) : (
                   closedData.map((item, index) => (
                     <div
-                      className={`text-center py-[14px] px-[32px] grid grid-cols-10 items-center font-base text-normal text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                      className={`text-center py-[14px] px-[32px] grid grid-cols-7 items-center font-base text-normal text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
                         }`}
                       key={index}
                     >
