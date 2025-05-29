@@ -261,8 +261,8 @@ const OrderHistory = () => {
                   <div className="flex items-center gap-[8px]">
                     <button
                       className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter2 === "today"
-                          ? "bg-purple500 text-white"
-                          : "border-gray-400 text-black"
+                        ? "bg-purple500 text-white"
+                        : "border-gray-400 text-black"
                         }`}
                       onClick={() => handleFilterChange("today")}
                     >
@@ -270,8 +270,8 @@ const OrderHistory = () => {
                     </button>
                     <button
                       className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 7
-                          ? "bg-purple500 text-white"
-                          : "border-gray-400 text-black"
+                        ? "bg-purple500 text-white"
+                        : "border-gray-400 text-black"
                         }`}
                       onClick={() => handleFilterChange("days", 7)}
                     >
@@ -279,8 +279,8 @@ const OrderHistory = () => {
                     </button>
                     <button
                       className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 30
-                          ? "bg-purple500 text-white"
-                          : "border-gray-400 text-black"
+                        ? "bg-purple500 text-white"
+                        : "border-gray-400 text-black"
                         }`}
                       onClick={() => handleFilterChange("days", 30)}
                     >
@@ -288,8 +288,8 @@ const OrderHistory = () => {
                     </button>
                     <button
                       className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 90
-                          ? "bg-purple500 text-white"
-                          : "border-gray-400 text-black"
+                        ? "bg-purple500 text-white"
+                        : "border-gray-400 text-black"
                         }`}
                       onClick={() => handleFilterChange("days", 90)}
                     >
@@ -298,8 +298,8 @@ const OrderHistory = () => {
 
                     <button
                       className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 180
-                          ? "bg-purple500 text-white"
-                          : "border-gray-400 text-black"
+                        ? "bg-purple500 text-white"
+                        : "border-gray-400 text-black"
                         }`}
                       onClick={() => handleFilterChange("days", 180)}
                     >
@@ -308,8 +308,8 @@ const OrderHistory = () => {
 
                     <button
                       className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 365
-                          ? "bg-purple500 text-white"
-                          : "border-gray-400 text-black"
+                        ? "bg-purple500 text-white"
+                        : "border-gray-400 text-black"
                         }`}
                       onClick={() => handleFilterChange("days", 365)}
                     >
