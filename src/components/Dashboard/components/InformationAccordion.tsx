@@ -213,16 +213,13 @@ export default function InformationAccordion() {
     }
   };
 
-
   useEffect(() => {
     getBanks();
     fetchAccountDetails();
     dispatch(fetchAccountDetailState());
   }, [token]);
 
-  const {
-    accountDetails
-  } = useSelector((state: RootState) => state.business);
+  const { accountDetails } = useSelector((state: RootState) => state.business);
 
   useEffect(() => {
     if (banks.length > 0 && formData.payoutBankDetails.bankName) {
@@ -512,24 +509,24 @@ export default function InformationAccordion() {
       section: "personalInfo" | "businessInfo" | "payoutBankDetails",
       subField: keyof PersonalInfo | keyof BusinessInfo | keyof BankInfo
     ) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
 
-        if (section === "payoutBankDetails" && subField === "bvn") {
-          if (value.length > 0 && value.length < 11) {
-            toast.error("BVN must be 11 digits");
-          }
-          if (value.length > 11) return;
+      if (section === "payoutBankDetails" && subField === "bvn") {
+        if (value.length > 0 && value.length < 11) {
+          toast.error("BVN must be 11 digits");
         }
+        if (value.length > 11) return;
+      }
 
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [section]: {
-            ...prevFormData[section],
-            [subField]: value,
-          },
-        }));
-      };
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [section]: {
+          ...prevFormData[section],
+          [subField]: value,
+        },
+      }));
+    };
 
   const renderFields = (
     section: "personalInfo" | "businessInfo",
@@ -830,10 +827,12 @@ export default function InformationAccordion() {
         >
           <div className="relative flex gap-3 font-base text-normal text-blackish">
             Bank Information
-
-            {(!accountDetails?.account_number && !accountDetails?.account_name) && <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
-              <RiErrorWarningLine className="w-full h-full" />
-            </div>}
+            {!accountDetails?.account_number &&
+              !accountDetails?.account_name && (
+                <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
+                  <RiErrorWarningLine className="w-full h-full" />
+                </div>
+              )}
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
