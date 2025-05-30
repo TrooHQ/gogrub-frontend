@@ -39,7 +39,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     (state: RootState) => state.user
   );
 
-  console.log("User Data:", userData);
+  // console.log("User Data:", userData);
 
   // const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
   const [isOpen, setIsOpen] = useState(false);
@@ -206,7 +206,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   useEffect(() => {
     if (reference) {
       VerifyPayment();
-      console.log(reference);
+      // console.log(reference);
     }
   }, [reference]);
 

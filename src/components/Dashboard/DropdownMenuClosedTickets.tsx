@@ -26,7 +26,7 @@ export const DropdownMenuClosedTickets = ({
         onClick={() => handleItemClick("")}
         className="font-[400] cursor-pointer text-left"
       >
-        Order Complete
+        Complete Order
       </li>
       <li
         onClick={() => handleItemClick("")}

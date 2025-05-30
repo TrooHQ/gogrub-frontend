@@ -58,7 +58,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     hasDeliveryDetails: false,
   });
 
-  console.log(userDetails);
+  // console.log(userDetails);
   const queryParams = new URLSearchParams(location.search);
   const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
@@ -110,7 +110,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     getUserOnboardChecks();
   }, []);
 
-  console.log(userCheck);
+  // console.log(userCheck);
 
   return (
     <div className="">
@@ -141,7 +141,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
                       userCheck.hasMenu,
                       userCheck.businessPlan,
                       userCheck.hasDeliveryDetails &&
-                        userCheck.hasPickUpLocation,
+                      userCheck.hasPickUpLocation,
                     ].every((check) => !check) ? (
                       "Begin Setup"
                     ) : (
@@ -153,7 +153,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
                               userCheck.hasMenu,
                               userCheck.businessPlan,
                               userCheck.hasDeliveryDetails &&
-                                userCheck.hasPickUpLocation,
+                              userCheck.hasPickUpLocation,
                             ].filter(Boolean).length
                           }
                           /3

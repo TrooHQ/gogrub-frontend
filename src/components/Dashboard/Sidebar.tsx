@@ -63,8 +63,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
-  console.log("userData", userData)
-  console.log("userDetails", userDetails)
+  // console.log("userData", userData)
+  // console.log("userDetails", userDetails)
   useEffect(() => {
     if (userDetails?.email_verified === false) {
       navigate("/verify-account");
