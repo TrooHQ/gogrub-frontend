@@ -34,6 +34,9 @@ import { clearUserData, fetchUserDetails } from "../../slices/UserSlice";
 import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
 // import BlinkerSubscribe from "../BlinkerSubscribe";
 import { setSubscription } from "../../slices/setupSlice";
+import { RiErrorWarningLine } from "react-icons/ri";
+import { fetchAccountDetails } from "../../slices/businessSlice";
+// import { fetchAccountDetails } from "@/src/slices/businessSlice";
 
 interface MenuItem {
   subTitle?: string;
@@ -60,7 +63,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
-
+  console.log("userData", userData)
+  console.log("userDetails", userDetails)
   useEffect(() => {
     if (userDetails?.email_verified === false) {
       navigate("/verify-account");
@@ -83,7 +87,19 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   useEffect(() => {
     dispatch(fetchBranches());
     dispatch(fetchUserDetails());
+    dispatch(fetchAccountDetails());
   }, [dispatch]);
+
+
+
+  const {
+    accountDetails
+  } = useSelector((state: RootState) => state.business);
+
+  const [hasAccount, setHasAccount] = useState(true);
+  useEffect(() => {
+    setHasAccount(!accountDetails?.account_name && !accountDetails?.account_number)
+  }, [accountDetails?.account_name, accountDetails?.account_number]);
 
   const transformedBranches = branches.map((branch: any) => ({
     label: branch.branch_name,
@@ -423,8 +439,32 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                       : ""
                   }`}
                 onClick={() => menu.subMenu && handleSubmenuToggle(index)}
+              // (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
               >
                 {menu.title && (
+                  (menu.link === "/business-information" && hasAccount) ?
+                    <div className="text-white bg-red-500 rounded-full animate-ping size-4">
+                      <RiErrorWarningLine className="w-full h-full" />
+                    </div>
+                    : (
+                      <img
+                        src={menu.icon}
+                        alt={menu.title}
+                        style={{
+                          width: "24px",
+                          marginRight: "8px",
+                          fontWeight: isMenuItemActive(menu.link || "", menu.subMenu)
+                            ? "bold"
+                            : "normal",
+                          color: isMenuItemActive(menu.link || "", menu.subMenu)
+                            ? ""
+                            : "initial",
+                        }}
+                      />
+                    )
+                )}
+                {/* {menu.title && (
+                  
                   <img
                     src={menu.icon}
                     alt={menu.title}
@@ -442,7 +482,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                         : "initial",
                     }}
                   />
-                )}
+                )} */}
                 <NavLink to={menu.link || "#"} className="flex-grow">
                   <span
                     className={`${!open && "hidden"
@@ -504,9 +544,9 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
         <div className="flex items-start justify-start gap-0">
           <div>
-            <button
+            <div
               className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center"
-              type="button"
+              // type="button"
               onClick={
                 !currentPlanName
                   ? () => dispatch(setSubscription(true))
@@ -527,7 +567,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                     : "Subscribe"}
               </span>
               <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
-            </button>
+            </div>
           </div>
           {/* {!currentPlanName && (
             <div className="-ml-[8px] mt-0">

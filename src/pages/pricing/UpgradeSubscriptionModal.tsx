@@ -39,6 +39,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     (state: RootState) => state.user
   );
 
+  console.log("User Data:", userData);
+
   // const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -247,8 +249,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                       <div
                         key={index}
                         className={`px-[30px] py-[22px] rounded-[10px] border ${selectedPlan?.name === plan.name
-                            ? "border-[#FF4F00]"
-                            : " border-none"
+                          ? "border-[#FF4F00]"
+                          : " border-none"
                           } text-[16px] font-[400] text-[#414141] w-full shadow-sm bg-white cursor-pointer transition-all duration-500 ease-in-out`}
                         onClick={() => handlePlanSelect(plan)}
                       >
@@ -308,8 +310,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                   </div>
                   <button
                     className={`max-w-[500px] mx-auto w-full flex items-center justify-center  px-[10px] py-[13px] rounded-[5px]  text-[16px] font-[500] transition-all duration-500 ease-in-out ${selectedPlan && agreed
-                        ? "bg-[#FF4F00] border border-[#FF4F00] text-white"
-                        : " bg-[#FF4F001F] text-[#FFFFFF]"
+                      ? "bg-[#FF4F00] border border-[#FF4F00] text-white"
+                      : " bg-[#FF4F001F] text-[#FFFFFF]"
                       }`}
                     disabled={!selectedPlan || !agreed}
                     onClick={() => {
@@ -335,9 +337,9 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                       <p className="font-[700] text-[#FFFFFF] text-[20px] lg:text-[32px] transition-all duration-500 ease-in-out">
                         Payment Successful
                       </p>
-                      <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
+                      {!userData?.businessPlan && <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
                         You can get your link now.
-                      </p>
+                      </p>}
                     </div>
                   </div>
                 </div>
@@ -350,8 +352,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
             >
               <button
                 className={`mt-[50px] w-full max-w-[148px] ml-auto flex items-center justify-center  px-[10px] py-[13px] rounded-[5px] text-[16px] font-[500] transition-all duration-500 ease-in-out ${reference
-                    ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
-                    : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
+                  ? "text-white  bg-[#FF4F00] border border-[#FF4F00]"
+                  : " bg-[#FF4F001F] text-[#FFFFFF] cursor-none"
                   }`}
                 disabled={!reference}
               >

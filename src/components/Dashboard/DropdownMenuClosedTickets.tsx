@@ -15,21 +15,24 @@ export const DropdownMenuClosedTickets = ({
     } else if (action === "Request Refund") {
       handleRefundMenu();
     }
+    else {
+      console.log("click")
+    }
   };
 
   return (
     <ul className="w-[200px] shadow grid gap-[18px] dropdown-menu absolute bg-white p-[12px] text-black right-[25px] top-[40px] z-10">
       <li
-        onClick={() => handleItemClick("Request Refund")}
+        onClick={() => handleItemClick("")}
         className="font-[400] cursor-pointer text-left"
       >
-        Request Refund
+        Order Complete
       </li>
       <li
-        onClick={() => handleItemClick("Vacate Table")}
+        onClick={() => handleItemClick("")}
         className="font-[400] cursor-pointer text-left"
       >
-        Vacate Table
+        Cancel Order
       </li>
     </ul>
   );
