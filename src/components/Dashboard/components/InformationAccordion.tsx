@@ -839,9 +839,9 @@ export default function InformationAccordion() {
               onClick={handleBankDetailsSubmit}
               disabled={isSubmittingBankDetails || !isBankFormComplete}
               sx={{
-                backgroundColor: "#5855B3",
+                backgroundColor: "#000000",
                 "&:hover": {
-                  backgroundColor: "#4A47A3",
+                  backgroundColor: "#1e1e1e",
                 },
                 textTransform: "none",
                 fontWeight: "600",
