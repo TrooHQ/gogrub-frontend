@@ -78,10 +78,11 @@ const Tickets = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOpenTickets/?branch_id=${selectedBranch.id}`,
+        // `${SERVER_DOMAIN}/order/getOpenTickets/?branch_id=${selectedBranch.id}`,
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=ticket`,
         headers
       );
-      console.log(response.data);
+      // console.log(response.data);
       setData(response.data.data);
       // toast.success(response.data.message || "Successful");
     } catch (error) {
@@ -90,6 +91,28 @@ const Tickets = () => {
       setIsLoading(false);
     }
   };
+  // const getTickets = async () => {
+  //   const headers = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   };
+  //   try {
+  //     setIsLoading(true);
+  //     const response = await axios.get(
+  //       `${SERVER_DOMAIN}/order/getOpenTickets/?branch_id=${selectedBranch.id}`,
+  //       headers
+  //     );
+  //     console.log(response.data);
+  //     setData(response.data.data);
+  //     // toast.success(response.data.message || "Successful");
+  //   } catch (error) {
+  //     toast.error("Error retrieving tickets");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const getClosedTickets = async () => {
     const headers = {
@@ -179,7 +202,7 @@ const Tickets = () => {
       );
       console.log(response.data);
       getTickets();
-      getClosedTickets();
+      // getClosedTickets();
       setVoidOrderMenu(false);
       toast.success(response.data.message || "Successful");
     } catch (error) {
@@ -189,7 +212,7 @@ const Tickets = () => {
 
   const handleRefresh = () => {
     getTickets();
-    getClosedTickets();
+    // getClosedTickets();
   };
 
   return (
@@ -266,7 +289,7 @@ const Tickets = () => {
                             : ""}
                         </p>
                         {/* <p>{item.waiter || "-"}</p> */}
-                        <p>{item.channel || ""}</p>
+                        {/* <p>{item.channel || ""}</p> */}
                         <div className="flex items-center justify-center gap-[10px]">
                           {item.status?.toLowerCase() === "cancelled" && (
                             <img
@@ -400,7 +423,7 @@ const Tickets = () => {
                           : ""}
                       </p>
                       {/* <p>{item.waiter || "-"}</p> */}
-                      <p>{item.channel || ""}</p>
+                      {/* <p>{item.channel || ""}</p> */}
                       <div className="flex items-center justify-center gap-[10px]">
                         <img src={green} alt="" className="w-[12px] h-[12px]" />
                         <p>Served</p>

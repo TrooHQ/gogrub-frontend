@@ -102,15 +102,18 @@ const OrderHistory = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOrderByBranch/`,
+
+        // https://troox-backend-new.vercel.app/api/order/getOrderbyType/branch_id=681e0c0fe373e648d293d4b9&queryType=history
+        // https://troox-backend-new.vercel.app/api/order/getOrderbyType/?branch_id=669e67afbe2d93ee11921119&queryType=ticket 
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history`,
         {
           ...headers,
-          params: { branch_id: selectedBranch.id, ...params },
-          paramsSerializer: (params) => new URLSearchParams(params).toString(),
+          // params: { branch_id: selectedBranch.id, ...params },
+          // paramsSerializer: (params) => new URLSearchParams(params).toString(),
         }
       );
-      console.log(response.data, "mmmm");
-      setData(response.data);
+      console.log("res data", response.data);
+      setData(response.data?.data);
       // toast.success(response.data.message || "Successful");
     } catch (error) {
       toast.error("Error retrieving tickets");
@@ -118,6 +121,52 @@ const OrderHistory = () => {
       setIsLoading(false);
     }
   };
+  // const getTickets = async ({
+  //   date_filter,
+  //   startDate,
+  //   endDate,
+  //   number_of_days,
+  // }: {
+  //   date_filter: string;
+  //   startDate?: string;
+  //   endDate?: string;
+  //   number_of_days?: number;
+  // }) => {
+  //   const headers = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   };
+
+  //   const params: any = { date_filter };
+
+  //   if (date_filter === "date_range") {
+  //     params.startDate = startDate;
+  //     params.endDate = endDate;
+  //   } else if (date_filter !== "today") {
+  //     params.number_of_days = number_of_days;
+  //   }
+
+  //   try {
+  //     setIsLoading(true);
+  //     const response = await axios.get(
+  //       `${SERVER_DOMAIN}/order/getOrderByBranch/`,
+  //       {
+  //         ...headers,
+  //         params: { branch_id: selectedBranch.id, ...params },
+  //         paramsSerializer: (params) => new URLSearchParams(params).toString(),
+  //       }
+  //     );
+  //     console.log(response.data, "mmmm");
+  //     setData(response.data);
+  //     // toast.success(response.data.message || "Successful");
+  //   } catch (error) {
+  //     toast.error("Error retrieving tickets");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     getTickets({ date_filter: "today" });
@@ -411,7 +460,8 @@ const OrderHistory = () => {
                             : ""}
                         </p>
 
-                        <p>{item.channel}</p>
+                        {/* <p>{item.channel}</p> */}
+                        <p>{item.status}</p>
 
                         <p>&#x20A6;{item.total_price.toLocaleString()}</p>
                       </div>
