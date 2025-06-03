@@ -83,13 +83,14 @@ const Tickets = () => {
         `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=ticket`,
         headers
       );
-      // console.log(response.data);
+      console.log("respn", response.data);
       setData(response.data.data);
       // toast.success(response.data.message || "Successful");
+      setIsLoading(false);
     } catch (error) {
       toast.error("Error retrieving tickets");
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
   // const getTickets = async () => {
@@ -141,7 +142,7 @@ const Tickets = () => {
   useEffect(() => {
     getTickets();
     getClosedTickets();
-  }, [selectedBranch]);
+  }, []);
 
   const handleVoidOrder = async () => {
     if (activeMenuIndex === null) {
@@ -427,7 +428,7 @@ const Tickets = () => {
                       </p>
                       {/* <p>{item.waiter || "-"}</p> */}
                       {/* <p>{item.channel || ""}</p> */}
-                      <div className="flex items-center justify-center gap-[10px]">
+                      <div className="flex items-center gap-[10px]">
                         {item.status?.toLowerCase() === "cancelled" ?
                           <div className="w-[12px] h-[12px] rounded-full bg-red-600" />
                           : item.status?.toLowerCase() === "completed" ?
@@ -442,7 +443,8 @@ const Tickets = () => {
                       <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
                         <div
                           className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
-                          onClick={() => { item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? {} : toggleMenu2(index) }}
+                          onClick={() => toggleMenu2(index)}
+                        // onClick={() => { item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? {} : toggleMenu2(index) }}
                         >
                           <>
                             {item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? null :

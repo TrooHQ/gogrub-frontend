@@ -374,7 +374,7 @@ export default function InformationAccordion() {
             accountName: response.data.data.account_name,
           },
         }));
-        toast.success("Account verified successfully!");
+        // toast.success("Account verified successfully!");
       } else {
         // Clear account name if verification fails
         setFormData((prevFormData) => ({
@@ -509,24 +509,24 @@ export default function InformationAccordion() {
       section: "personalInfo" | "businessInfo" | "payoutBankDetails",
       subField: keyof PersonalInfo | keyof BusinessInfo | keyof BankInfo
     ) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
 
-      if (section === "payoutBankDetails" && subField === "bvn") {
-        if (value.length > 0 && value.length < 11) {
-          toast.error("BVN must be 11 digits");
+        if (section === "payoutBankDetails" && subField === "bvn") {
+          if (value.length > 0 && value.length < 11) {
+            toast.error("BVN must be 11 digits");
+          }
+          if (value.length > 11) return;
         }
-        if (value.length > 11) return;
-      }
 
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [section]: {
-          ...prevFormData[section],
-          [subField]: value,
-        },
-      }));
-    };
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [section]: {
+            ...prevFormData[section],
+            [subField]: value,
+          },
+        }));
+      };
 
   const renderFields = (
     section: "personalInfo" | "businessInfo",
@@ -859,7 +859,7 @@ export default function InformationAccordion() {
                 padding: "12px 24px",
               }}
             >
-              {isSubmittingBankDetails ? "Saving..." : "Save Bank Details"}
+              {isSubmittingBankDetails ? "Saving..." : formData?.payoutBankDetails?.accountNumber ? "Update Bank Details" : "Save Bank Details"}
             </Button>
           </div>
         </AccordionDetails>

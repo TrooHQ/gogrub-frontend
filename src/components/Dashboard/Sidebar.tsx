@@ -206,10 +206,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           title: "Business Information",
           link: "/business-information",
         },
-        {
-          title: "Manage Branches",
-          link: "/manage-branches",
-        },
+        // {
+        //   title: "Manage Branches",
+        //   link: "/manage-branches",
+        // },
       ],
     },
     {

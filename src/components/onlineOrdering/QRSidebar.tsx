@@ -36,7 +36,7 @@ const QRSidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <div className="w-full bg-white py-2 px-0">
+    <div className="w-full px-0 py-2 bg-white">
       <Tabs
         value={activeComponent}
         onChange={handleTabChange}
