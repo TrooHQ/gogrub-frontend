@@ -267,10 +267,10 @@ const Tickets = () => {
                           }`}
                         key={index}
                       >
-                        <p className=" " onClick={handleTicketMenu}>
+                        <p className="" onClick={handleTicketMenu}>
                           {item.createdAt.slice(0, 10)}
                         </p>
-                        <p className=" " onClick={handleTicketMenu}>
+                        <p className="" onClick={handleTicketMenu}>
                           {item.createdAt.slice(11, 16)}
                         </p>
                         {/* <p onClick={handleTicketMenu}>
@@ -401,10 +401,10 @@ const Tickets = () => {
                         }`}
                       key={index}
                     >
-                      <p className=" " onClick={handleTicketMenu}>
+                      <p className="" onClick={handleTicketMenu}>
                         {item.createdAt.slice(0, 10)}
                       </p>
-                      <p className=" " onClick={handleTicketMenu}>
+                      <p className="" onClick={handleTicketMenu}>
                         {item.createdAt.slice(11, 16)}
                       </p>
                       {/* <p onClick={handleTicketMenu}>
@@ -439,12 +439,16 @@ const Tickets = () => {
                         <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
                       </div>
                       <p>&#x20A6;{item.total_price.toLocaleString()}</p>
-                      <p className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
+                      <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
                         <div
                           className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
-                          onClick={() => toggleMenu2(index)}
+                          onClick={() => { item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? {} : toggleMenu2(index) }}
                         >
-                          <img src={More} alt="" className="w-[5px]" />
+                          <>
+                            {item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? null :
+                              <img src={More} alt="" className="w-[5px]" />
+                            }
+                          </>
                         </div>
                         {activeMenuIndex2 === index && (
                           <DropdownMenuTicketStatusUpdate
@@ -452,13 +456,9 @@ const Tickets = () => {
                             branchId={selectedBranch.id}
                             orderId={item._id}
                           />
-                          // <DropdownMenuClosedTickets
-                          //   handleVoidOrderMenu={() => handleVoidOrderMenu()}
-                          //   handleVacateTableMenu={() => handleVacateTableMenu()}
-                          //   handleRefundMenu={() => handleRefundMenu()}
-                          // />
+
                         )}
-                      </p>
+                      </div>
                     </div>
                   ))
                 )}
