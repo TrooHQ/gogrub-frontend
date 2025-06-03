@@ -15,10 +15,11 @@ import RefundMenu from "./ticketComponents/RefundMenu";
 import VoidOrderMenu from "./ticketComponents/VoidOrderMenu";
 import { useSelector } from "react-redux";
 import { DropdownMenu } from "./DropdownMenuOpenTickets";
-import { DropdownMenuClosedTickets } from "./DropdownMenuClosedTickets";
+// import { DropdownMenuClosedTickets } from "./DropdownMenuClosedTickets";
 import ChangeBranchForTicket from "./ChangeBranchForTicket";
 import { truncateText } from "../../utils/truncateText";
 import { RootState } from "@/src/store/store";
+import { DropdownMenuTicketStatusUpdate } from "./DropDownTicketStatusUpdate";
 
 const Tickets = () => {
   const { selectedBranch } = useSelector((state: any) => state.branches);
@@ -215,6 +216,8 @@ const Tickets = () => {
     // getClosedTickets();
   };
 
+
+
   return (
     <div>
       <DashboardLayout>
@@ -264,10 +267,10 @@ const Tickets = () => {
                           }`}
                         key={index}
                       >
-                        <p className=" " onClick={handleTicketMenu}>
+                        <p className="" onClick={handleTicketMenu}>
                           {item.createdAt.slice(0, 10)}
                         </p>
-                        <p className=" " onClick={handleTicketMenu}>
+                        <p className="" onClick={handleTicketMenu}>
                           {item.createdAt.slice(11, 16)}
                         </p>
                         {/* <p onClick={handleTicketMenu}>
@@ -398,10 +401,10 @@ const Tickets = () => {
                         }`}
                       key={index}
                     >
-                      <p className=" " onClick={handleTicketMenu}>
+                      <p className="" onClick={handleTicketMenu}>
                         {item.createdAt.slice(0, 10)}
                       </p>
-                      <p className=" " onClick={handleTicketMenu}>
+                      <p className="" onClick={handleTicketMenu}>
                         {item.createdAt.slice(11, 16)}
                       </p>
                       {/* <p onClick={handleTicketMenu}>
@@ -425,27 +428,37 @@ const Tickets = () => {
                       {/* <p>{item.waiter || "-"}</p> */}
                       {/* <p>{item.channel || ""}</p> */}
                       <div className="flex items-center justify-center gap-[10px]">
-                        <img src={green} alt="" className="w-[12px] h-[12px]" />
-                        <p>Served</p>
+                        {item.status?.toLowerCase() === "cancelled" ?
+                          <div className="w-[12px] h-[12px] rounded-full bg-red-600" />
+                          : item.status?.toLowerCase() === "completed" ?
+                            <div className="w-[12px] h-[12px] rounded-full bg-green-600" />
+                            :
+                            <div className="w-[12px] h-[12px] rounded-full bg-orange-600" />
+                        }
+                        {/* <div className="w-[12px] h-[12px] rounded-full bg-orange-500" /> */}
+                        <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
                       </div>
                       <p>&#x20A6;{item.total_price.toLocaleString()}</p>
-                      <p className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
+                      <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
                         <div
                           className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
-                          onClick={() => toggleMenu2(index)}
+                          onClick={() => { item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? {} : toggleMenu2(index) }}
                         >
-                          <img src={More} alt="" className="w-[5px]" />
+                          <>
+                            {item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? null :
+                              <img src={More} alt="" className="w-[5px]" />
+                            }
+                          </>
                         </div>
                         {activeMenuIndex2 === index && (
-                          <DropdownMenuClosedTickets
-                            handleVoidOrderMenu={() => handleVoidOrderMenu()}
-                            handleVacateTableMenu={() =>
-                              handleVacateTableMenu()
-                            }
-                            handleRefundMenu={() => handleRefundMenu()}
+                          <DropdownMenuTicketStatusUpdate
+                            getTickets={getTickets}
+                            branchId={selectedBranch.id}
+                            orderId={item._id}
                           />
+
                         )}
-                      </p>
+                      </div>
                     </div>
                   ))
                 )}
