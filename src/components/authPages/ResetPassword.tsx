@@ -7,7 +7,9 @@ import { SERVER_DOMAIN } from "../../Api/Api";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const idParam = new URLSearchParams(window.location.search).get("id");
 
+  console.log("ID Parameter:", idParam);
   // const [token, setToken] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -36,8 +38,10 @@ const ResetPassword = () => {
     setError("");
 
     try {
-      const response = await axios.post(`${SERVER_DOMAIN}/emailVerification`, {
+      // const response = await axios.post(`${SERVER_DOMAIN}/emailVerification`, {
+      const response = await axios.post(`${SERVER_DOMAIN}/goGrub/resetGogrubForgotPassword`, {
         // token,
+        id: idParam,
         password,
         confirm_password: confirmPassword,
       });
@@ -84,16 +88,16 @@ const ResetPassword = () => {
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
           />
-          {error && <p className="text-red-500 text-center">{error}</p>}
+          {error && <p className="text-center text-red-500">{error}</p>}
           <p className="text-[14px]">Both passwords must match</p>
           <button
-            className="bg-purple500 w-full text-center text-white py-3 rounded"
+            className="w-full py-3 text-center text-white rounded bg-purple500"
             onClick={handleSubmit}
             disabled={loading}
           >
             {loading ? "Resetting..." : "Reset password"}
           </button>
-          <div className="text-center py-3">
+          <div className="py-3 text-center">
             <div onClick={() => navigate(-1)}>
               <p className="font-[500] text-[16px] text-purple500 cursor-pointer">Go Back</p>
             </div>

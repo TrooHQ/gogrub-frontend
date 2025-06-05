@@ -40,7 +40,8 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post(`${SERVER_DOMAIN}/login`, {
+      // const response = await axios.post(`${SERVER_DOMAIN}/login`, {
+      const response = await axios.post(`${SERVER_DOMAIN}/goGrubLogin`, {
         email: Email,
         password: Password,
       });
