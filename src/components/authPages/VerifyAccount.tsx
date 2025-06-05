@@ -97,7 +97,9 @@ const VerifyAccount = () => {
     try {
       setLoading(true);
       const token = otp;
-      const response = await axios.post(`${SERVER_DOMAIN}/emailVerification`, {
+      // const response = await axios.post(`${SERVER_DOMAIN}/emailVerification`, {
+      // https://troox-backend-new.vercel.app/api/gogrub/goGrubEmailVerification
+      const response = await axios.post(`${SERVER_DOMAIN}/gogrub/goGrubEmailVerification`, {
         token,
       });
       setLoading(false);

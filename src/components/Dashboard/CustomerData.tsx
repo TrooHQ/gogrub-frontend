@@ -17,6 +17,9 @@ import Papa from "papaparse";
 import { toast } from "react-toastify";
 
 import chip from "../../assets/chip.svg";
+import { SERVER_DOMAIN } from "../../Api/Api";
+import axios from "axios";
+import { FiArrowDownRight, FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 
 const CustomerData = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,6 +31,9 @@ const CustomerData = () => {
 
   const { customerData, customerDataLoading, totalCustomerTransaction } =
     useSelector((state: RootState) => state.overview);
+
+  console.log("totalCustomerTransaction", totalCustomerTransaction);
+  console.log("customerData", customerData);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -45,6 +51,35 @@ const CustomerData = () => {
       );
     dispatch(fetchCustomerTransaction({ date_filter: "today" }));
   }, [businessIdentifier, dispatch]);
+
+  const [orderCount, setOrderCount] = useState<any>({});
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const getTransactionCountData = async () => {
+
+      try {
+        const res = await axios.get(`${SERVER_DOMAIN}/getCustomerTransaction`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        console.log("res", res);
+        setOrderCount(res?.data);
+
+      } catch (e) {
+        console.error("Error fetching transaction count data:", e);
+      }
+    }
+    if (token) {
+      getTransactionCountData();
+    }
+  }, [token]);
+
+  console.log("orderCount", orderCount);
+
+  // Function to handle date filter changes
   const handleDateFilterChange = (
     date_filter: string,
     startDate?: string,
@@ -134,10 +169,13 @@ const CustomerData = () => {
       {
         icon: ArrowDown,
         title: "Total Transaction Counts",
-        time: "12:45 PM",
-        amount: totalCustomerTransaction?.totalOrders,
+        // time: "12:45 PM",
+        amount: orderCount?.today?.totalOrders,
+        // amount: totalCustomerTransaction?.totalOrders,
         statusIcon: ArrowDown,
-        status: "-25% from yesterday",
+        status: `${orderCount?.percentageChange}% from yesterday`,
+        // status: "-25% from yesterday",
+        percent: orderCount?.percentageChange,
       },
     ],
   };
@@ -149,7 +187,7 @@ const CustomerData = () => {
         <TopMenuNav pathName="Customer Data" />
 
         <div className="rounded-[10px] border border-[#f1f0f0] bg-white px-6 py-7 mt-10">
-          <div className=" hidden">
+          <div className="hidden ">
             <div className="flex items-center justify-between ">
               <h3 className="text-2xl font-normal text-[#121212]">
                 Customer Transaction Counts
@@ -178,8 +216,9 @@ const CustomerData = () => {
                 <h5 className="text-base font-medium">{activity.title}</h5>
                 <span>{activity.amount}</span>
                 <div className="flex items-center justify-start gap-2">
-                  <img src={activity.icon} alt="icon" />
-                  <p>{activity.status}</p>
+                  {/* <img src={activity.icon} alt="icon" /> */}
+                  {activity.percent < 0 ? <div className="flex items-center justify-center p-0.5 bg-red-600 rounded-md w-fit h-fit"><FiArrowDownRight className="w-5 h-5 text-white" /></div> : activity.percent > 0 ? <div className="flex items-center justify-center p-0.5 bg-green-600 rounded-md w-fit h-fit"><FiArrowUpRight className="w-5 h-5 text-white" /></div> : <div className="flex items-center justify-center p-0.5 bg-blue-600 rounded-md w-fit h-fit"><FiArrowRight className="w-5 h-5 text-white" /></div>}
+                  <p className={`${activity.percent < 0 ? "text-red-600" : activity.percent > 0 ? "text-green-600" : "text-blue-600"} font-semibold text-sm`}>{activity.status}</p>
                 </div>
               </div>
             ))}
@@ -238,14 +277,13 @@ const CustomerData = () => {
                 ) : customerData ? (
                   customerData.map((data: any, index: any) => (
                     <div
-                      className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-4 items-center  font-base text-[14px] text-[#414141] ${
-                        index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                      }`}
+                      className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-4 items-center  font-base text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                        }`}
                       key={index}
                     >
                       <p className="text-start ">{data.customerName}</p>
-                      <p className=" ">{data.email}</p>
-                      <p className=" ">{data.phoneNumber}</p>
+                      <p className="">{data.email}</p>
+                      <p className="">{data.phoneNumber}</p>
                       <p className="">{data.address}</p>
                     </div>
                   ))

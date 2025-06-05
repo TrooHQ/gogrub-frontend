@@ -17,7 +17,8 @@ const ForgotPassword = () => {
     setError("");
 
     try {
-      const response = await axios.post(`${SERVER_DOMAIN}/requestForgotPassword`, {
+      // const response = await axios.post(`${SERVER_DOMAIN}/requestForgotPassword`, {
+      const response = await axios.post(`${SERVER_DOMAIN}/goGrub/requestGogrubForgotPassword`, {
         email: value,
       });
 
