@@ -6,10 +6,10 @@ const OpenTicketModal = ({
   openTicket,
   handleTicketMenu,
   setOpenTicket,
-  data,
+  // data,
   openTicketData,
 }: any) => {
-  console.log(openTicketData, "openTicketData", data);
+  // console.log(openTicketData, "openTicketData", data);
   return (
     <div>
       <Modal isOpen={openTicket} onClose={handleTicketMenu}>
@@ -18,27 +18,26 @@ const OpenTicketModal = ({
             className="flex items-center justify-start gap-2 cursor-pointer"
             onClick={() => setOpenTicket(false)}
           >
-            <img src={ArrowLeft} alt="" className=" " />
+            <img src={ArrowLeft} alt="" className="" />
             <span className="text-base font-normal text-[#606060]">
               Back to ticket
             </span>
           </div>
           <div className="flex flex-col gap-8 mt-12">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-[#121212] text-[32px] font-medium">
                   {`Order No: ${openTicketData?.order_number}`}
                 </h2>
                 <p className="text-[#606060] text-[16px] font-normal">
-                  {`Tracking Number ${
-                    openTicketData?.tracking_number
-                  }, ${openTicketData?.createdAt.slice(
-                    0,
-                    10
-                  )}, ${openTicketData?.createdAt.slice(11, 16)}`}
+                  {`Tracking Number ${openTicketData?.tracking_number
+                    }, ${openTicketData?.createdAt.slice(
+                      0,
+                      10
+                    )}, ${openTicketData?.createdAt.slice(11, 16)}`}
                 </p>
               </div>
-              <div className="flex justify-end items-center gap-10">
+              <div className="flex items-center justify-end gap-10">
                 <div>
                   <h2 className="text-[#dc3232] text-[32px] font-medium">#0</h2>
                   <p className="text-[#dc3232] text-[16px] font-normal">
@@ -98,9 +97,8 @@ const OpenTicketModal = ({
                 {openTicketData &&
                   openTicketData?.menu_items?.map((item: any, index: any) => (
                     <div
-                      className={`text-center py-[14px] px-[32px] grid grid-cols-3 items-center font-[500] text-[14px] text-[#414141] ${
-                        index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                      }`}
+                      className={`text-center py-[14px] px-[32px] grid grid-cols-3 items-center font-[500] text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                        }`}
                       key={index}
                     >
                       <p className="text-start">{item.name}</p>

@@ -19,13 +19,13 @@ import {
 const BalanceComp = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [showBalance, setShowBalance] = useState(true);
-  const { openAndClosedTickets, loading, totalSales } = useSelector(
+  const { loading, totalSales } = useSelector(
     (state: RootState) => state.overview
   );
   const { selectedBranch } = useSelector((state: any) => state.branches);
 
   useEffect(() => {
-    dispatch(fetchOpenAndClosedTickets({ date_filter: "today" }));
+    // dispatch(fetchOpenAndClosedTickets({ date_filter: "today" }));
     dispatch(fetchTotalSales({ date_filter: "today" }));
     dispatch(fetchAverageOrderValue({ date_filter: "today" }));
     dispatch(fetchSalesRevenueGraph({ date_filter: "today" }));
@@ -91,8 +91,16 @@ const BalanceComp = () => {
     );
   };
 
-  const closedTickets = openAndClosedTickets?.data?.closed_tickets || 0;
-  const processedOrders = openAndClosedTickets?.data?.open_tickets || 0;
+
+
+
+  const { openOrderData, closedOrderData } = useSelector((state: RootState) => state.tickets);
+
+  const closedTickets = closedOrderData?.length || 0;
+  const processedOrders = openOrderData?.length || 0;
+
+  console.log("Open Order Data:", openOrderData);
+  console.log("Closed Order Data:", closedOrderData);
 
   return (
     <div>
@@ -113,10 +121,10 @@ const BalanceComp = () => {
             {loading
               ? "..."
               : showBalance && totalSales?.data !== undefined
-              ? `₦ ${totalSales?.data?.toLocaleString("en-US")}`
-              : showBalance && totalSales?.data === undefined
-              ? "Loading..."
-              : "****"}
+                ? `₦ ${totalSales?.data?.toLocaleString("en-US")}`
+                : showBalance && totalSales?.data === undefined
+                  ? "Loading..."
+                  : "****"}
           </h2>
           {!showBalance ? (
             <Visibility
