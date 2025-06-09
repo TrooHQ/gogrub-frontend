@@ -70,21 +70,21 @@ const SetupModal: React.FC<SetupModalProps> = ({
     getUserOnboardChecks();
   }, []);
 
-  console.log(userCheck);
+  // console.log(userCheck);
 
   return (
     <div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className=" bg-white relative rounded-[20px] w-[890px] h-[620px]">
           <div
-            className="absolute top-0 right-0  cursor-pointer"
+            className="absolute top-0 right-0 cursor-pointer"
             onClick={() => setIsModalOpen(false)}
           >
             <img src={CancelIcon} alt="" />
           </div>
           <div
-            className="absolute top-0 right-10  "
-            // onClick={() => setIsModalOpen(false)}
+            className="absolute top-0 right-10 "
+          // onClick={() => setIsModalOpen(false)}
           >
             <img src={Logo} alt="Logo" />
           </div>
@@ -108,7 +108,7 @@ const SetupModal: React.FC<SetupModalProps> = ({
             }}
           >
             <div className=" max-w-[700px] mx-auto py-[100px] space-y-[44px]">
-              <div className=" flex items-center justify-between ">
+              <div className="flex items-center justify-between ">
                 <div className=" flex items-center gap-[16px]">
                   {userCheck.hasMenu && (
                     <img

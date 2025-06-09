@@ -1,5 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import authReducer from "../slices/authSlice";
@@ -18,6 +26,7 @@ import assetReducer from "../slices/assetSlice";
 import tableReducer from "../slices/TableSlice";
 import outletReducer from "../slices/OutletSlice";
 import overviewReducer from "../slices/overviewSlice";
+import TicketReducer from "../slices/ticketsSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -36,6 +45,7 @@ const rootReducer = combineReducers({
   tables: tableReducer,
   outlet: outletReducer,
   overview: overviewReducer,
+  tickets: TicketReducer,
 });
 
 const persistConfig = {
@@ -60,8 +70,17 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// export const store = configureStore({
+//   reducer: persistedReducer,
+// });
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
