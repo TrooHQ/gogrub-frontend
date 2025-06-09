@@ -6,7 +6,7 @@ const OpenTicketModal = ({
   openTicket,
   handleTicketMenu,
   setOpenTicket,
-  data,
+  // data,
   openTicketData,
 }: any) => {
   // console.log(openTicketData, "openTicketData", data);
@@ -18,13 +18,13 @@ const OpenTicketModal = ({
             className="flex items-center justify-start gap-2 cursor-pointer"
             onClick={() => setOpenTicket(false)}
           >
-            <img src={ArrowLeft} alt="" className=" " />
+            <img src={ArrowLeft} alt="" className="" />
             <span className="text-base font-normal text-[#606060]">
               Back to ticket
             </span>
           </div>
           <div className="flex flex-col gap-8 mt-12">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-[#121212] text-[32px] font-medium">
                   {`Order No: ${openTicketData?.order_number}`}
@@ -37,7 +37,7 @@ const OpenTicketModal = ({
                     )}, ${openTicketData?.createdAt.slice(11, 16)}`}
                 </p>
               </div>
-              <div className="flex justify-end items-center gap-10">
+              <div className="flex items-center justify-end gap-10">
                 <div>
                   <h2 className="text-[#dc3232] text-[32px] font-medium">#0</h2>
                   <p className="text-[#dc3232] text-[16px] font-normal">
