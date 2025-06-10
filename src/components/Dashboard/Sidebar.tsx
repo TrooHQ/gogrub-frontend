@@ -14,15 +14,15 @@ import HomeIcon from "../../assets/troo-logo-white.png";
 // import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import ArrowToggle from "../../assets/arrowToggle.svg";
-import { TextField, Button, Popper, Paper } from "@mui/material";
+// import { TextField, Button, Popper, Paper } from "@mui/material";
 import {
   ArrowCircleRightOutlined,
-  ArrowDropDown,
-  Search,
+  // ArrowDropDown,
+  // Search,
 } from "@mui/icons-material";
 import GoGrubLogo from "../../assets/business_logo.svg";
 
-import { CustomAutocomplete } from "./Overview";
+// import { CustomAutocomplete } from "./Overview";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
@@ -72,17 +72,17 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   }, [userDetails?.email_verified, navigate]);
 
   const [open, setOpen] = useState(true);
-  const [isAutoOpen, setIsAutoOpen] = useState(false);
+  // const [isAutoOpen, setIsAutoOpen] = useState(false);
   const [openSubmenuIndex, setOpenSubmenuIndex] = useState<number | null>(null);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedOutlet, setSelectedOutlet] = useState(
-    selectedBranch
-      ? selectedBranch
-      : {
-        label: "All outlets",
-        id: "",
-      }
-  );
+  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const [selectedOutlet, setSelectedOutlet] = useState(
+  //   selectedBranch
+  //     ? selectedBranch
+  //     : {
+  //       label: "All outlets",
+  //       id: "",
+  //     }
+  // );
 
   useEffect(() => {
     dispatch(fetchBranches());
@@ -115,17 +115,17 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     }
   }, [dispatch, transformedBranches, selectedBranch]);
 
-  const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-    setIsAutoOpen((prev) => !prev);
-  };
+  // const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  //   setIsAutoOpen((prev) => !prev);
+  // };
 
-  const handleSelect = (event: any, value: any) => {
-    event.preventDefault();
-    setSelectedOutlet(value ?? { label: "All outlets" });
-    dispatch(userSelectedBranch(value));
-    setIsAutoOpen(false);
-  };
+  // const handleSelect = (event: any, value: any) => {
+  //   event.preventDefault();
+  //   setSelectedOutlet(value ?? { label: "All outlets" });
+  //   dispatch(userSelectedBranch(value));
+  //   setIsAutoOpen(false);
+  // };
 
   useEffect(() => {
     // Open the submenu if the current location is within its links
@@ -289,7 +289,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
       <div className="grid items-center gap-3">
-        <div className="flex items-center justify-center mt-4 gap-x-4">
+        <div className="flex flex-col items-center justify-center mt-4 gap-x-4">
           {userData?.onboarding_type === "gogrub" ? (
             <img src={GoGrubLogo} alt="Logo" className="mb-8" />
           ) : (
@@ -310,20 +310,22 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               />
             </>
           )}
+          <h4 className="mt-4 mb-0 text-base font-medium">
+            {userData?.business_name}
+          </h4>
         </div>
 
         <div
           className={`cursor-pointer duration-500 ${!open ? "hidden" : "block"
             } `}
         >
-          <hr className="h-[2px] bg-[#929292] my-3" />
-          <div className="ml-[5px] flex flex-col items-start justify-center gap-2">
+          {/* <hr className="h-[2px] bg-[#929292] my-3" /> */}
+          {/* <div className="ml-[5px] flex flex-col items-start justify-center gap-2">
             <h4 className="mb-0 text-base font-medium">
               {userData?.business_name}
             </h4>
 
-            {/* Insert Button and Popper components here */}
-            {userData?.user_role === "admin" ? (
+                        {userData?.user_role === "admin" ? (
               <div>
                 <Button
                   onClick={handleButtonClick}
@@ -411,7 +413,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                 </Button>
               </div>
             )}
-          </div>
+          </div> */}
           <hr className="h-[2px] bg-[#929292] my-3" />
         </div>
       </div>
