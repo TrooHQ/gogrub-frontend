@@ -100,15 +100,17 @@ const Tickets = () => {
                           )
                           : ""}
                       </p>
-                      <div className="flex items-center gap-[10px]">
-                        {item.status?.toLowerCase() === "cancelled" ?
-                          <div className="w-[12px] h-[12px] rounded-full bg-red-600" />
-                          : item.status?.toLowerCase() === "completed" ?
-                            <div className="w-[12px] h-[12px] rounded-full bg-green-600" />
-                            :
-                            <div className="w-[12px] h-[12px] rounded-full bg-orange-600" />
-                        }
-                        <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
+                      <div className="mx-auto w-fit">
+                        <div className="flex items-center gap-[10px]">
+                          {item.status?.toLowerCase() === "cancelled" ?
+                            <div className="w-[12px] h-[12px] rounded-full bg-red-600" />
+                            : item.status?.toLowerCase() === "completed" ?
+                              <div className="w-[12px] h-[12px] rounded-full bg-green-600" />
+                              :
+                              <div className="w-[12px] h-[12px] rounded-full bg-orange-600" />
+                          }
+                          <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
+                        </div>
                       </div>
                       <p>&#x20A6;{item.total_price.toLocaleString()}</p>
                       <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">

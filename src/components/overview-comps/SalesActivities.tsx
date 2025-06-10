@@ -34,6 +34,12 @@ const SalesActivities = () => {
     totalCustomerTransaction,
   } = useSelector((state: RootState) => state.overview);
 
+  console.log("salesGrowthRate", salesGrowthRate)
+  console.log("totalSales", totalSales)
+  console.log("averageOrderValue", averageOrderValue)
+  console.log("totalCustomerTransaction", totalCustomerTransaction)
+
+
   useEffect(() => {
     dispatch(fetchSalesGrowthRate());
   }, [dispatch]);
@@ -79,9 +85,8 @@ const SalesActivities = () => {
         icon: statusIcon,
         title: "Sales Growth Rate",
         time: "12:45 PM",
-        amount: `${
-          salesGrowthRate?.data?.salesGrowthRate?.toLocaleString("en-US") || 0
-        }%`,
+        amount: `${salesGrowthRate?.data?.salesGrowthRate?.toLocaleString("en-US") || 0
+          }%`,
         statusIcon: statusIcon,
         status: status,
       },
