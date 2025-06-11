@@ -62,7 +62,7 @@ const BusinessProfiles: React.FC = () => {
               <div onClick={() => navigate(-1)} className=" ">
                 <button
                   className=" font-[500] text-[16px] text-grey700 cursor-pointer"
-                  // disabled={loading}
+                // disabled={loading}
                 >
                   Cancel
                 </button>

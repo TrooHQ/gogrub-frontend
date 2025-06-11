@@ -39,7 +39,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     (state: RootState) => state.user
   );
 
-  // console.log("User Data:", userData);
+  console.log("User Data:", userData);
 
   // const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +91,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           }
         }
       } catch (error) {
-        // console.error("Error fetching plans data:", error);
+        console.error("Error fetching plans data:", error);
       }
     };
 
@@ -129,7 +129,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       window.location.href =
         response.data.data.paystack_data.data.authorization_url;
     } catch (error) {
-      // console.error("Error initiating payment:", error);
+      console.error("Error initiating payment:", error);
       setLoading(false);
     } finally {
       setLoading(false);
@@ -173,7 +173,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       toast.success(response.data.message || "Plan subscribed successfully!");
       // navigate("/overview");
     } catch (error) {
-      // console.error("Error adding employee:", error);
+      console.error("Error adding employee:", error);
     } finally {
       //
     }
@@ -203,7 +203,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
       SubcribePlan();
     } catch (error) {
-      // console.error("Error verifing payment:", error);
+      console.error("Error verifing payment:", error);
     } finally {
       //
     }
@@ -212,7 +212,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   useEffect(() => {
     if (reference) {
       VerifyPayment();
-      // console.log(reference);
+      console.log(reference);
     }
   }, [reference]);
 

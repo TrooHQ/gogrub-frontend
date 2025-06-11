@@ -321,9 +321,8 @@ export const OnlineOrderingBasket = () => {
                   setPickupModal(true);
                 }
               }}
-              className={` w-full text-center font-[500] text-[16px]   rounded-[5px]  text-white py-[10px] px-[24px] ${
-                selectedOption === "" ? " bg-[#B6B6B6]" : "border"
-              }`}
+              className={` w-full text-center font-[500] text-[16px]   rounded-[5px]  text-white py-[10px] px-[24px] ${selectedOption === "" ? " bg-[#B6B6B6]" : "border"
+                }`}
               style={{
                 backgroundColor:
                   selectedOption == ""

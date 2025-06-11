@@ -44,9 +44,9 @@ const EditOpen = ({ setIsEditOpen }: any) => {
                   id="yes"
                   name="options"
                   value="yes"
-                  // checked={applyPriceToAll === true}
-                  // onChange={handleOptionChange}
-                  // className={`mr-2 ${applyPriceToAll === true ? "bg-purple500" : ""}`}
+                // checked={applyPriceToAll === true}
+                // onChange={handleOptionChange}
+                // className={`mr-2 ${applyPriceToAll === true ? "bg-purple500" : ""}`}
                 />
                 <label
                   htmlFor="yes"
@@ -60,9 +60,9 @@ const EditOpen = ({ setIsEditOpen }: any) => {
                   id="no"
                   name="options"
                   value="no"
-                  // checked={applyPriceToAll === false}
-                  // onChange={handleOptionChange}
-                  // className={`mr-2 ${applyPriceToAll === false ? "bg-purple500" : ""}`}
+                // checked={applyPriceToAll === false}
+                // onChange={handleOptionChange}
+                // className={`mr-2 ${applyPriceToAll === false ? "bg-purple500" : ""}`}
                 />
                 <label
                   htmlFor="no"
@@ -130,7 +130,7 @@ const EditOpen = ({ setIsEditOpen }: any) => {
 
           <div
             className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
-            // onClick={handleSaveMenuGroup}
+          // onClick={handleSaveMenuGroup}
           >
             <button className=" text-[16px]">{"Save Menu"}</button>
           </div>

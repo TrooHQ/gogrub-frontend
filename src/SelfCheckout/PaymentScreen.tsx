@@ -43,13 +43,13 @@ const PaymentScreen = () => {
     totalPrice: item.totalPrice,
     menuItem: item.menuItem
       ? {
-          _id: item.menuItem._id,
-          menu_category_name: item.menuItem.menu_category_name,
-          menu_group_name: item.menuItem.menu_group_name,
-          menu_item_name: item.menuItem.menu_item_name,
-          menu_item_price: item.menuItem.menu_item_price,
-          menu_item_image: item.menuItem.menu_item_image,
-        }
+        _id: item.menuItem._id,
+        menu_category_name: item.menuItem.menu_category_name,
+        menu_group_name: item.menuItem.menu_group_name,
+        menu_item_name: item.menuItem.menu_item_name,
+        menu_item_price: item.menuItem.menu_item_price,
+        menu_item_image: item.menuItem.menu_item_image,
+      }
       : undefined,
     name: item.name,
     selectedOptions: item.selectedOptions.map((option) => ({
@@ -135,7 +135,7 @@ const PaymentScreen = () => {
           </span>
         </p>
         <p className=" text-[#000000] text-[32px] font-[500]">
-          Tip: ₦ {}{" "}
+          Tip: ₦ { }{" "}
           <span className=" text-[#000000]">{tip.toLocaleString() || 0} </span>
         </p>
 
@@ -150,11 +150,10 @@ const PaymentScreen = () => {
 
       <div className="bg-[#F8F8F8] border border-[#E7E7E7] px-[24px] py-[32px] rounded-[10px] grid grid-cols-3 gap-[8px] items-center mx-[18px] mt-[80px]">
         <p
-          className={`text-[25px] font-[500] cursor-pointer text-center py-[35px] px-[8px] bg-white rounded-[10px] ${
-            selectedOption === "Bank Transfer QR"
-              ? "border-4 text-white"
-              : "border-4 text-[#414141]"
-          }`}
+          className={`text-[25px] font-[500] cursor-pointer text-center py-[35px] px-[8px] bg-white rounded-[10px] ${selectedOption === "Bank Transfer QR"
+            ? "border-4 text-white"
+            : "border-4 text-[#414141]"
+            }`}
           onClick={() => setSelectedOption("Bank Transfer QR")}
           style={{
             borderColor:
@@ -171,11 +170,10 @@ const PaymentScreen = () => {
         </p>
 
         <p
-          className={`text-[25px] font-[500] cursor-pointer  py-[35px] px-[8px] text-center border  bg-white rounded-[10px] ${
-            selectedOption === "WebPay"
-              ? "border-4 text-white"
-              : "border-4 text-[#414141]"
-          }`}
+          className={`text-[25px] font-[500] cursor-pointer  py-[35px] px-[8px] text-center border  bg-white rounded-[10px] ${selectedOption === "WebPay"
+            ? "border-4 text-white"
+            : "border-4 text-[#414141]"
+            }`}
           onClick={() => setSelectedOption("WebPay")}
           style={{
             borderColor:
@@ -186,11 +184,10 @@ const PaymentScreen = () => {
           WebPay
         </p>
         <p
-          className={`text-[25px] font-[500] cursor-pointer text-[#414141] py-[35px] px-[8px] text-center  bg-white rounded-[10px] ${
-            selectedOption === "Terminals"
-              ? "border-4 text-white"
-              : "border-4 text-[#414141]"
-          }`}
+          className={`text-[25px] font-[500] cursor-pointer text-[#414141] py-[35px] px-[8px] text-center  bg-white rounded-[10px] ${selectedOption === "Terminals"
+            ? "border-4 text-white"
+            : "border-4 text-[#414141]"
+            }`}
           onClick={() => setSelectedOption("Terminals")}
           style={{
             borderColor:

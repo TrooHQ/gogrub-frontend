@@ -276,16 +276,17 @@ const CustomerData = () => {
                   <div className="px-8">No data during this period</div>
                 ) : customerData ? (
                   customerData.map((data: any, index: any) => (
-                    <div
-                      className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-4 items-center  font-base text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                        }`}
-                      key={index}
-                    >
-                      <p className="text-start ">{data.customerName}</p>
-                      <p className="">{data.email}</p>
-                      <p className="">{data.phoneNumber}</p>
-                      <p className="">{data.address}</p>
-                    </div>
+                    <>
+                      {data?.customerName && <div
+                        className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-4 items-center  font-base text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                          }`}
+                        key={index}
+                      >
+                        <p className="text-start ">{data.customerName}</p>
+                        <p className="">{data.email}</p>
+                        <p className="">{data.phoneNumber}</p>
+                        <p className="">{data.address}</p>
+                      </div>}</>
                   ))
                 ) : (
                   <div className="px-8">No data during this period</div>

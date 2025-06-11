@@ -238,7 +238,6 @@ const SettingsPage = () => {
   const businessId = userDetails?.userData?.business_identifier;
   // const attachedUrl = attachBusinessIdToHost(businessId, selectedOutletID);
 
-  // console.log(attachedUrl);
   const token = userDetails?.userData?.token;
 
   // const handleSelect = () => {
@@ -497,7 +496,7 @@ const SettingsPage = () => {
         if (error.response?.status === 400) {
           toast.error(
             error.response?.data.message ||
-              "An error occurred. Please try again."
+            "An error occurred. Please try again."
           );
         } else {
           toast.error("An unexpected error occurred.");
@@ -606,7 +605,7 @@ const SettingsPage = () => {
           <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
             <div>
               <div
-                className=" cursor-pointer flex items-center justify-end"
+                className="flex items-center justify-end cursor-pointer "
                 onClick={() => setResetPasswordModal(false)}
               >
                 <img src={Back} alt="" />
@@ -615,7 +614,7 @@ const SettingsPage = () => {
                 Reset password
               </p>
               <div className=" mt-[24px] grid gap-[16px]">
-                <p className="text-red-500 text-sm mt-1">{error}</p>
+                <p className="mt-1 text-sm text-red-500">{error}</p>
                 <input
                   type="password"
                   id="new_password"
@@ -650,7 +649,7 @@ const SettingsPage = () => {
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div>
             <div
-              className=" cursor-pointer flex items-center justify-end"
+              className="flex items-center justify-end cursor-pointer "
               onClick={() => setQRCodeModal(false)}
             >
               <img src={Back} alt="" />
@@ -667,7 +666,7 @@ const SettingsPage = () => {
             >
               Ok
             </button>
-            <div className=" hidden">
+            <div className="hidden ">
               <p className="text-[20px] font-[400] text-grey500">
                 Create QR Ordering
               </p>
@@ -696,7 +695,7 @@ const SettingsPage = () => {
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div>
             <div
-              className=" cursor-pointer flex items-center justify-end"
+              className="flex items-center justify-end cursor-pointer "
               onClick={() => setOrderingLink(false)}
             >
               <img src={Back} alt="" />
@@ -725,7 +724,7 @@ const SettingsPage = () => {
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div>
             <div
-              className=" cursor-pointer flex items-center justify-end"
+              className="flex items-center justify-end cursor-pointer "
               onClick={() => setManageQRCodeModal(false)}
             >
               <img src={Back} alt="" />
@@ -756,13 +755,13 @@ const SettingsPage = () => {
       >
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div
-            className=" cursor-pointer flex items-center justify-end"
+            className="flex items-center justify-end cursor-pointer "
             onClick={() => setRoomQRCodeModal(false)}
           >
             <img src={Back} alt="" />
           </div>
 
-          <div className=" ">
+          <div className="">
             <p className="text-[16px] font-[400] text-grey500 text-center">
               How many rooms do you have?
             </p>
@@ -795,7 +794,7 @@ const SettingsPage = () => {
       >
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div
-            className=" cursor-pointer flex items-center justify-end"
+            className="flex items-center justify-end cursor-pointer "
             onClick={() => setTableQRCodeModal(false)}
           >
             <img src={Back} alt="" />
@@ -834,7 +833,7 @@ const SettingsPage = () => {
         <form onSubmit={generateQr}>
           <div className="w-full py-[32px] px-[32px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
             <div
-              className=" cursor-pointer flex items-center justify-end"
+              className="flex items-center justify-end cursor-pointer "
               onClick={() => setSaveTableGroupModal(false)}
             >
               <img src={Back} alt="" />
@@ -844,7 +843,7 @@ const SettingsPage = () => {
                 Save Group As{" "}
               </p>
               <div className=" mt-[16px] ">
-                <p className="text-red-500 text-sm mt-1"></p>
+                <p className="mt-1 text-sm text-red-500"></p>
                 <input
                   type="text"
                   id="group_name"
@@ -883,9 +882,9 @@ const SettingsPage = () => {
         onClose={() => setRoomQRCodeContentModal(false)}
       >
         <div className="w-full py-[40px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
-          <div className=" ">
+          <div className="">
             <div
-              className=" cursor-pointer flex items-center justify-center"
+              className="flex items-center justify-center cursor-pointer "
               onClick={handleDownloadQRCodeModal}
             >
               <img src={QrCode} alt="" />
@@ -894,7 +893,7 @@ const SettingsPage = () => {
               QR Code for rooms at Deluxe Hotel has been created successfully
             </p>
             <div className=" mt-[24px] grid gap-[16px]">
-              <p className="text-red-500 text-sm mt-1"></p>
+              <p className="mt-1 text-sm text-red-500"></p>
 
               <div className=" flex items-center gap-[8px]">
                 <button className=" flex items-center justify-center  gap-[4px] border-2 border-[#1E1E1E] w-full font-[500] text-center text-[#0D0D0D] py-[10px] rounded">
@@ -927,33 +926,33 @@ const SettingsPage = () => {
             </p>
 
             <div className=" mt-[32px] grid gap-[16px]">
-              <div className=" flex items-center justify-between">
-                <p className="  text-grey500">Table 1</p>
+              <div className="flex items-center justify-between ">
+                <p className=" text-grey500">Table 1</p>
                 <img src={QrCode} alt="" className=" h-[18px]" />
               </div>
-              <div className=" flex items-center justify-between">
-                <p className="  text-grey500">Table 2</p>
+              <div className="flex items-center justify-between ">
+                <p className=" text-grey500">Table 2</p>
                 <img src={QrCode} alt="" className=" h-[18px]" />
               </div>
-              <div className=" flex items-center justify-between">
-                <p className="  text-grey500">Table 3</p>
+              <div className="flex items-center justify-between ">
+                <p className=" text-grey500">Table 3</p>
                 <img src={QrCode} alt="" className=" h-[18px]" />
               </div>
-              <div className=" flex items-center justify-between">
-                <p className="  text-grey500">Table 4</p>
+              <div className="flex items-center justify-between ">
+                <p className=" text-grey500">Table 4</p>
                 <img src={QrCode} alt="" className=" h-[18px]" />
               </div>
-              <div className=" flex items-center justify-between">
-                <p className="  text-grey500">Table 5</p>
+              <div className="flex items-center justify-between ">
+                <p className=" text-grey500">Table 5</p>
                 <img src={QrCode} alt="" className=" h-[18px]" />
               </div>
-              <div className=" flex items-center justify-between">
-                <p className="  text-grey500">Table 6</p>
+              <div className="flex items-center justify-between ">
+                <p className=" text-grey500">Table 6</p>
                 <img src={QrCode} alt="" className=" h-[18px]" />
               </div>
             </div>
             <div className=" mt-[16px] ">
-              <p className="text-red-500 text-sm mt-1"></p>
+              <p className="mt-1 text-sm text-red-500"></p>
 
               <div className=" mt-[32px] flex items-center gap-[16px]">
                 <button
@@ -979,10 +978,10 @@ const SettingsPage = () => {
         isOpen={tableGroupSuccessModal}
         onClose={() => setTableGroupSuccessModal(false)}
       >
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[292px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={CheckCircle}
               alt=""
               onClick={() => navigate("/demo/manage-qr/gogrub-portal")}
@@ -999,7 +998,7 @@ const SettingsPage = () => {
           <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
             {loading && <Loader />}
             <div
-              className=" cursor-pointer flex items-center justify-end"
+              className="flex items-center justify-end cursor-pointer "
               onClick={() => setEmployeeModal(false)}
             >
               <img src={Back} alt="" />
@@ -1072,7 +1071,7 @@ const SettingsPage = () => {
       >
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px] h-[300px] overflow-y-auto">
           <div
-            className=" cursor-pointer flex items-center justify-end"
+            className="flex items-center justify-end cursor-pointer "
             onClick={() => setRemoveEmployeeModal(false)}
           >
             <img src={Back} alt="" />
@@ -1109,10 +1108,10 @@ const SettingsPage = () => {
       </MenuModal>
 
       <MenuModal isOpen={successModal} onClose={() => setSuccessModal(false)}>
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[292px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={CheckCircle}
               alt=""
               onClick={() => setSuccessModal(false)}
@@ -1125,7 +1124,7 @@ const SettingsPage = () => {
       </MenuModal>
 
       <MenuModal isOpen={warningModal} onClose={() => setWarningModal(false)}>
-        <div className=" absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 w-full bg-white ">
           <div
             className=" cursor-pointer flex items-center justify-end p-[15px]"
             onClick={() => setWarningModal(false)}
@@ -1135,7 +1134,7 @@ const SettingsPage = () => {
           <div className="flex items-center justify-center">
             <div className=" px-[32px] py-[32px] h-[292px] flex flex-col items-center justify-center">
               <img
-                className=" cursor-pointer"
+                className="cursor-pointer "
                 src={WarningIcon}
                 alt=""
                 onClick={() => setSuccessModal(false)}
@@ -1160,10 +1159,10 @@ const SettingsPage = () => {
         isOpen={deleteSuccessfullModal}
         onClose={() => setDeleteSuccessfullModal(false)}
       >
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[292px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={DeleteSuccess}
               alt=""
               onClick={() => setDeleteSuccessfullModal(false)}
@@ -1179,10 +1178,10 @@ const SettingsPage = () => {
         isOpen={resetSuccessModal}
         onClose={() => setResetSuccessModal(false)}
       >
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[380px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={CheckCircle}
               alt=""
               onClick={() => setResetSuccessModal(false)}
@@ -1195,10 +1194,10 @@ const SettingsPage = () => {
       </MenuModal>
 
       <MenuModal isOpen={successModal} onClose={() => setSuccessModal(false)}>
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[380px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={CheckCircle}
               alt=""
               onClick={() => setSuccessModal(false)}

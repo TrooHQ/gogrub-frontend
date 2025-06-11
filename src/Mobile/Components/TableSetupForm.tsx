@@ -91,9 +91,8 @@ const TableSetupForm = () => {
 
           <div className=" grid mt-[32px] gap-[8px]">
             <div
-              className={`${
-                loading ? "bg-[#B6B6B6] " : "bg-purple500"
-              } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded cursor-pointer`}
+              className={`${loading ? "bg-[#B6B6B6] " : "bg-purple500"
+                } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded cursor-pointer`}
               onClick={generateQr}
             >
               <p>Save Table</p>

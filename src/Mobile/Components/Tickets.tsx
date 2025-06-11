@@ -106,8 +106,8 @@ const Tickets = () => {
                     index === 0
                       ? name
                       : index === 1
-                      ? ` ${name.charAt(0).toUpperCase()}.`
-                      : ""
+                        ? ` ${name.charAt(0).toUpperCase()}.`
+                        : ""
                   )}
               </p>
 
@@ -152,8 +152,8 @@ const Tickets = () => {
                         index === 0
                           ? name
                           : index === 1
-                          ? ` ${name.charAt(0).toUpperCase()}.`
-                          : ""
+                            ? ` ${name.charAt(0).toUpperCase()}.`
+                            : ""
                       )}
                 </p>
               </div>

@@ -62,8 +62,8 @@ export const InRoomReceipt = () => {
           <p className="text-[#121212] text-[14px] font-[400] text-center">
             {orderDetails?.createdAt
               ? dayjs(orderDetails.createdAt).format(
-                  "HH:mm:ss dddd, DD MMM YYYY"
-                )
+                "HH:mm:ss dddd, DD MMM YYYY"
+              )
               : "08:02:27 Wednesday, 30 Apr 2020"}
           </p>
         </div>

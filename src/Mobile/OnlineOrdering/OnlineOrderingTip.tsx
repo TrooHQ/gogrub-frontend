@@ -83,9 +83,8 @@ export const OnlineOrderingTip = () => {
             {tipPercentages.map((tip, index) => (
               <div
                 key={index}
-                className={`flex flex-col items-center px-[36px] py-[8px] border border-[#B6B6B6] rounded-[3px] cursor-pointer ${
-                  selectedTip === tip ? "bg-[#E0E0E0]" : ""
-                }`}
+                className={`flex flex-col items-center px-[36px] py-[8px] border border-[#B6B6B6] rounded-[3px] cursor-pointer ${selectedTip === tip ? "bg-[#E0E0E0]" : ""
+                  }`}
                 onClick={() => handleTipClick(tip)}
               >
                 <p className=" text-[#121212] text-[16px] font-[500]">

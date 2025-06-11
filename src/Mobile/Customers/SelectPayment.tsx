@@ -111,7 +111,7 @@ export const SelectPayment = () => {
           </span>
         </p>
         <p className=" text-[#000000] text-[18px] font-[500]">
-          Tip: ₦ {}{" "}
+          Tip: ₦ { }{" "}
           <span className=" text-[#000000]">{tip.toLocaleString() || 0} </span>
         </p>
 

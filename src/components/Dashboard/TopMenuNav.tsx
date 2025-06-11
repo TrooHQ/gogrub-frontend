@@ -58,7 +58,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     hasDeliveryDetails: false,
   });
 
-  // console.log(userDetails);
+  console.log(userDetails);
   const queryParams = new URLSearchParams(location.search);
   const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
@@ -110,7 +110,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     getUserOnboardChecks();
   }, []);
 
-  // console.log(userCheck);
+  console.log(userCheck);
 
   return (
     <div className="">
@@ -121,7 +121,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
               {pathName}
             </p>
           </div>
-          <div className="flex gap-5 items-center">
+          <div className="flex items-center gap-5">
             {location.pathname === "/overview" &&
               userCheck &&
               showSetupPrompt &&
@@ -176,7 +176,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
               }
               `}
             </style>
-            <div className=" ml-3 mr-5">
+            <div className="ml-3 mr-5 ">
               <img src={NotificationIcon} alt="" />
             </div>
             <div>
@@ -193,7 +193,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
                   <img
                     src={userDetails?.photo || userDetails?.business_logo || ""}
                     alt={`${userDetails?.first_name} ${userDetails?.last_name}`}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="object-cover w-10 h-10 rounded-full"
                   />
                 ) : (
                   <PersonIcon />

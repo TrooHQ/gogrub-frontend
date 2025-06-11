@@ -92,7 +92,7 @@ const Overview: React.FC = () => {
     dispatch(fetchClosedTickets({ selectedBranch }));
   }, [dispatch, selectedBranch]);
 
-  // console.log("Selected Branch:", selectedBranch);
+  console.log("Selected Branch:", selectedBranch);
 
   const transformedBranches = branches.map((branch: any) => ({
     label: branch.branch_name,

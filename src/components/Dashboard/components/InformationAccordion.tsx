@@ -170,6 +170,7 @@ export default function InformationAccordion() {
       );
       const { data } = response.data;
 
+      console.log("data", data);
       setFormData({
         personalInfo: {
           firstName: data.personal_information.first_name,
@@ -219,8 +220,9 @@ export default function InformationAccordion() {
     dispatch(fetchAccountDetailState());
   }, [token]);
 
-  // const { accountDetails } = useSelector((state: RootState) => state.business);
+  const { accountDetails } = useSelector((state: RootState) => state.business);
 
+  console.log("accountDetails", accountDetails);
   useEffect(() => {
     if (banks.length > 0 && formData.payoutBankDetails.bankName) {
       const foundBank = banks.find(

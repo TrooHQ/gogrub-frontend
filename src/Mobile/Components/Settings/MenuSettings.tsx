@@ -400,7 +400,7 @@ const MenuSettings = () => {
         onClose={() => setAddModifierModal(false)}
       >
         <div className="  w-full py-[32px] px-[16px] absolute bottom-0  bg-white">
-          <div className=" ">
+          <div className="">
             <div className=" flex relative items-center justify-between mb-[16px]">
               <p className=" text-[20px]  font-[400] text-grey500">
                 New menu category
@@ -409,7 +409,7 @@ const MenuSettings = () => {
                 src={info}
                 alt=""
                 onClick={handleInfoModal}
-                className=" cursor-pointer"
+                className="cursor-pointer "
               />
               {infoModal && (
                 <div className="grid gap-[10px] absolute top-[30px] right-0 shadow-2xl z-[50] w-[300px] py-[32px] px-[16px] bg-white">
@@ -445,7 +445,7 @@ const MenuSettings = () => {
               <p className=" text-[#606060] text-[14px] font-[400]">
                 Would you like to add a Menu group?
               </p>
-              <div className=" flex">
+              <div className="flex ">
                 <RadioInput options={options} onChange={handleOptionChange} />
               </div>
             </div>
@@ -471,7 +471,7 @@ const MenuSettings = () => {
       >
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div
-            className=" cursor-pointer flex items-center justify-end"
+            className="flex items-center justify-end cursor-pointer "
             onClick={() => setRemoveMenuModal(false)}
           >
             <img src={Back} alt="" />
@@ -530,7 +530,7 @@ const MenuSettings = () => {
                           </div>
 
                           {expandedGroups[group.name] && (
-                            <div className=" ">
+                            <div className="">
                               <h5 className="text-grey500 text-[14px] font-[600] ">
                                 Menu Item(s)
                               </h5>
@@ -614,7 +614,7 @@ const MenuSettings = () => {
       <MenuModal isOpen={editModal} onClose={() => setEditModal(false)}>
         <div className="w-full py-[32px] px-[16px] absolute bottom-0 bg-white rounded-tr-[20px] rounded-tl-[20px]">
           <div
-            className=" cursor-pointer flex items-center justify-end"
+            className="flex items-center justify-end cursor-pointer "
             onClick={() => setEditModal(false)}
           >
             <img src={Back} alt="" />
@@ -662,7 +662,7 @@ const MenuSettings = () => {
               <p className=" text-[#606060] text-[14px] font-[400]">
                 Would you like to edit this menu group?
               </p>
-              <div className=" flex">
+              <div className="flex ">
                 <RadioInput options={options} onChange={handleOptionChange} />
               </div>
 
@@ -702,10 +702,10 @@ const MenuSettings = () => {
       </MenuModal>
 
       <MenuModal isOpen={successModal} onClose={() => setSuccessModal(false)}>
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[380px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={CheckCircle}
               alt=""
               onClick={() => setSuccessModal(false)}
@@ -718,10 +718,10 @@ const MenuSettings = () => {
       </MenuModal>
 
       <MenuModal isOpen={successModal2} onClose={() => setSuccessModal2(false)}>
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[380px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={CheckCircle}
               alt=""
               onClick={() => setSuccessModal2(false)}
@@ -738,7 +738,7 @@ const MenuSettings = () => {
         onClose={() => setAddCategoryModal(false)}
       >
         <div className="  w-full py-[32px] px-[16px] absolute bottom-0  bg-white">
-          <div className=" ">
+          <div className="">
             <p className=" text-[20px]  font-[400] text-grey500 mb-[16px]">
               New menu Item
             </p>
@@ -794,10 +794,10 @@ const MenuSettings = () => {
       </MenuModal>
 
       <MenuModal isOpen={warningModal2} onClose={() => setWarningModal2(false)}>
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[292px] flex flex-col items-center justify-center">
             <img
-              className="  cursor-pointer"
+              className="cursor-pointer "
               src={WarningIcon}
               alt=""
               onClick={() => setWarningModal2(false)}
@@ -826,10 +826,10 @@ const MenuSettings = () => {
         isOpen={deleteSuccessfullModal2}
         onClose={() => setDeleteSuccessfullModal2(false)}
       >
-        <div className="flex items-center justify-center absolute bg-white w-full bottom-0">
+        <div className="absolute bottom-0 flex items-center justify-center w-full bg-white">
           <div className=" px-[32px] py-[32px] h-[292px] flex flex-col items-center justify-center">
             <img
-              className=" cursor-pointer"
+              className="cursor-pointer "
               src={DeleteSuccess}
               alt=""
               onClick={() => setDeleteSuccessfullModal2(false)}

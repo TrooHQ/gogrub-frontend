@@ -97,9 +97,8 @@ const ChooseColor = () => {
         {colors.map((color) => (
           <div
             key={color.name}
-            className={`py-[16px] border-b border-b-[#E7E7E7] flex gap-[8px] cursor-pointer ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`py-[16px] border-b border-b-[#E7E7E7] flex gap-[8px] cursor-pointer ${loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             onClick={() => handleColorSelect(color)}
           >
             <div

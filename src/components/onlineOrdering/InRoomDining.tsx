@@ -131,8 +131,7 @@ const InRoomDining = () => {
       }
 
       await axios.delete(
-        `${SERVER_DOMAIN}/asset/removeBusinessAsset/?group_name=${
-          selectedQRCode?.group_name ?? ""
+        `${SERVER_DOMAIN}/asset/removeBusinessAsset/?group_name=${selectedQRCode?.group_name ?? ""
         }&branch_id=${selectedQRCode?.branch ?? ""}`,
         {
           headers: {
@@ -146,8 +145,7 @@ const InRoomDining = () => {
     } catch (error) {
       console.error("Error saving QR code:", error);
       toast.error(
-        `Error saving QR code: ${
-          error instanceof Error ? error.message : String(error)
+        `Error saving QR code: ${error instanceof Error ? error.message : String(error)
         }`
       );
     } finally {

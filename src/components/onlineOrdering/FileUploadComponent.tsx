@@ -229,9 +229,8 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
           Cancel
         </button>
         <button
-          className={`px-4 py-2 text-white rounded-lg ${
-            uploadProgress === 100 ? "bgpurple-500" : "bg-purple-300"
-          }`}
+          className={`px-4 py-2 text-white rounded-lg ${uploadProgress === 100 ? "bgpurple-500" : "bg-purple-300"
+            }`}
           disabled={uploadProgress < 100}
         >
           Upload
