@@ -70,7 +70,7 @@ const SetupModal: React.FC<SetupModalProps> = ({
     getUserOnboardChecks();
   }, []);
 
-  // console.log(userCheck);
+  console.log(userCheck);
 
   return (
     <div>

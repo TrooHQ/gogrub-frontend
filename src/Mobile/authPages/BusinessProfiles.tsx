@@ -37,7 +37,7 @@ const BusinessProfiles: React.FC = () => {
   ) => {
     const newFAQData = [...faqData];
     newFAQData[index].inputValue = event.target.value;
-    // console.log(newFAQData);
+    console.log(newFAQData);
   };
   return (
     <div className="bg-[#EFEFEF] ">

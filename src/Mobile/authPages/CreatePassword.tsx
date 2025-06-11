@@ -51,7 +51,7 @@ const CreatePassword = () => {
         }
       );
       setLoading(false);
-      // console.log(response.data);
+      console.log(response.data);
       toast.success("Password reset successfully");
       history("/demo/login/gogrub-portal");
     } catch (error) {

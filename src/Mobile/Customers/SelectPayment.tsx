@@ -75,7 +75,7 @@ export const SelectPayment = () => {
         payload
       );
       setLoading(false);
-      // console.log(response.data);
+      console.log(response.data);
       sessionStorage.setItem(
         "OrderDetails",
         JSON.stringify(response.data.data)

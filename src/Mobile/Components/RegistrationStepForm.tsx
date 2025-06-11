@@ -76,7 +76,7 @@ const RegistrationStepForm = () => {
     (state: RootState) => state.user?.userData?.business_id
   );
 
-  // console.log(businessId, userId);
+  console.log(businessId, userId);
 
   const location = useLocation();
 
@@ -85,7 +85,7 @@ const RegistrationStepForm = () => {
   useEffect(() => {
     if (location.state?.step) {
       setCurrentStep(location.state.step);
-      // console.log(location.state?.step);
+      console.log(location.state?.step);
     }
   }, [location.state]);
 
@@ -229,7 +229,7 @@ const RegistrationStepForm = () => {
       setLoading(false);
       toast.success("User created successfully");
       dispatch(setUserData(response.data));
-      // console.log(response.data);
+      console.log(response.data);
       sessionStorage.setItem("id", response.data.id);
       sessionStorage.setItem("user_role", response.data.user_role);
       sessionStorage.setItem("email_verified", response.data.email_verified);
@@ -259,7 +259,7 @@ const RegistrationStepForm = () => {
   //     reader.onload = function (event) {
   //       const base64 = event.target?.result as string;
   //       setBase64String(base64);
-  //       // console.log("Base64 representation:", base64);
+  //       console.log("Base64 representation:", base64);
   //     };
   //     reader.readAsDataURL(file);
   //   }
@@ -280,7 +280,7 @@ const RegistrationStepForm = () => {
       reader.onload = function (event) {
         const base64 = event.target?.result as string;
         setBase64String(base64);
-        // console.log("Base64 representation:", base64);
+        console.log("Base64 representation:", base64);
       };
       reader.readAsDataURL(file);
     }
@@ -313,7 +313,7 @@ const RegistrationStepForm = () => {
         }
       );
       setLoading(false);
-      // console.log(response);
+      console.log(response);
       toast.success(response.data.message);
       history("/demo/verify/gogrub-portal");
     } catch (error) {
@@ -340,10 +340,10 @@ const RegistrationStepForm = () => {
   //       `${SERVER_DOMAIN}/verifyUserAccountNumber`,
   //       payload
   //     );
-  //     // console.log(payload);
+  //     console.log(payload);
 
   //     setLoading(false);
-  //     // console.log(response);
+  //     console.log(response);
   //     toast.success(response.data.message);
   //     // history.push("/verify"); // Corrected navigation
   //   } catch (error) {
@@ -396,7 +396,7 @@ const RegistrationStepForm = () => {
       const response = await axios.get(`${SERVER_DOMAIN}/getBanks`);
       setLoading(false);
       setBanks(response.data.data);
-      // console.log(banks);
+      console.log(banks);
     } catch (error) {
       console.error("Error occurred:", error);
       if (axios.isAxiosError(error)) {

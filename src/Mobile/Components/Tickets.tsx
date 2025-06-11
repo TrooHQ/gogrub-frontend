@@ -58,7 +58,7 @@ const Tickets = () => {
         `${SERVER_DOMAIN}/order/getOrder`,
         headers
       );
-      // console.log("Tickets Retrieved successfully:", response.data);
+      console.log("Tickets Retrieved successfully:", response.data);
       setTickets(response.data);
     } catch (error) {
       console.error("Error Retrieving Tickets:", error);

@@ -32,9 +32,9 @@ const BusinessTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (index: number) => {
-    // console.log("Changing tab to:", index);
+    console.log("Changing tab to:", index);
     setActiveTab(index);
-    // console.log("Active tab now:", activeTab);
+    console.log("Active tab now:", activeTab);
   };
 
   return (
@@ -120,8 +120,8 @@ const BusinessTabs = () => {
             <p
               key={index}
               className={` text-[14px] md:text-[16px] font-[500]  cursor-pointer ${index === activeTab
-                  ? "text-white px-[28px] py-[12px] bg-[#5855B3] rounded-[25px] cursor-pointer"
-                  : "text-[#606060] cursor-pointer"
+                ? "text-white px-[28px] py-[12px] bg-[#5855B3] rounded-[25px] cursor-pointer"
+                : "text-[#606060] cursor-pointer"
                 }`}
               onClick={() => handleTabChange(index)}
             >

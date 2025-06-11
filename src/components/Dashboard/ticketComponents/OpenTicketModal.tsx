@@ -9,7 +9,6 @@ const OpenTicketModal = ({
   // data,
   openTicketData,
 }: any) => {
-  // console.log(openTicketData, "openTicketData", data);
   return (
     <div>
       <Modal isOpen={openTicket} onClose={handleTicketMenu}>

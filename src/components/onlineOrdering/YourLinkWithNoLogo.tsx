@@ -33,7 +33,7 @@ const YourLinkWithNoLogo = ({
     }
   }, [selectedBranch?.id, dispatch]);
 
-  // console.log(onlineOrderingLink, businessLogo, "qqqqq", userData);
+  console.log(onlineOrderingLink, businessLogo, "qqqqq", userData);
 
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

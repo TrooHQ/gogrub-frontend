@@ -42,7 +42,7 @@ const ChooseColor = () => {
         { colour_scheme: color.colorCode },
         headers
       );
-      // console.log("Colour Scheme Added successfully:", response.data);
+      console.log("Colour Scheme Added successfully:", response.data);
       toast.success(response.data.message);
     } catch (error) {
       console.error("Error Adding Colour Scheme:", error);

@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       dispatch(setSelectedOutlet(selectedOption.label));
       dispatch(setSelectedOutletID(selectedOption.value));
     } else {
-      // console.log("No matching option found for:", Outlet);
+      console.log("No matching option found for:", Outlet);
     }
   };
 

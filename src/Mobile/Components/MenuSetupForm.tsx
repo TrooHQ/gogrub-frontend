@@ -94,7 +94,7 @@ const MenuSetupForm: React.FC<Props> = () => {
   const [modifierError, setModifierError] = useState("");
   const [error, setError] = useState("");
 
-  // console.log(error);
+  console.log(error);
   const [menuItemDescription, setMenuItemDescription] = useState("");
 
   const [base64String, setBase64String] = useState<string | null>(null);
@@ -513,7 +513,7 @@ const MenuSetupForm: React.FC<Props> = () => {
       );
 
       setModifierGroup(response.data.data);
-      // console.log(response.data.data);
+      console.log(response.data.data);
     } catch (error: any) {
       console.error("Error retrieving Modifiers:", error);
 
@@ -552,7 +552,7 @@ const MenuSetupForm: React.FC<Props> = () => {
         },
         headers
       );
-      // console.log("Modifier added successfully:", response.data);
+      console.log("Modifier added successfully:", response.data);
       toast.success(response.data.message);
       setModifierModal(false);
       window.location.reload();
@@ -823,8 +823,8 @@ const MenuSetupForm: React.FC<Props> = () => {
                 {menuData?.length > 0 ? (
                   <Link
                     to={`${businessType === "Hotel & Lodgings"
-                        ? "/demo/room/gogrub-portal"
-                        : "/demo/table/gogrub-portal"
+                      ? "/demo/room/gogrub-portal"
+                      : "/demo/table/gogrub-portal"
                       }`}
                   >
                     <p>Save and continue</p>

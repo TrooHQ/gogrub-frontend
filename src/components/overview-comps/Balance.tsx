@@ -99,8 +99,8 @@ const BalanceComp = () => {
   const closedTickets = closedOrderData?.length || 0;
   const processedOrders = openOrderData?.length || 0;
 
-  // console.log("Open Order Data:", openOrderData);
-  // console.log("Closed Order Data:", closedOrderData);
+  console.log("Open Order Data:", openOrderData);
+  console.log("Closed Order Data:", closedOrderData);
 
   return (
     <div>

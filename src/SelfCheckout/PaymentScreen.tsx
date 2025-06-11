@@ -17,15 +17,15 @@ const PaymentScreen = () => {
   const branchId = useSelector((state: RootState) => state.business?.branchID);
 
   const business = useSelector((state: RootState) => state.business);
-  // console.log(business?.businessDetails?._id);
+  console.log(business?.businessDetails?._id);
 
   const totalPrice = basketDetails?.totalPrice ?? 0;
   const tip = basketDetails?.tip ?? 0;
-  // console.log(tip);
+  console.log(tip);
 
   const finalTotal = totalPrice + tip;
-  // console.log(finalTotal);
-  // console.log(basketDetails);
+  console.log(finalTotal);
+  console.log(basketDetails);
 
   const color = useSelector(
     (state: RootState) => state.business?.businessDetails?.colour_scheme
@@ -83,7 +83,7 @@ const PaymentScreen = () => {
         payload
       );
       setLoading(false);
-      // console.log(response.data?.data?.order_number);
+      console.log(response.data?.data?.order_number);
       sessionStorage.setItem("orderId", response.data?.data?.order_number);
       sessionStorage.setItem(
         "OrderDetails",
@@ -151,8 +151,8 @@ const PaymentScreen = () => {
       <div className="bg-[#F8F8F8] border border-[#E7E7E7] px-[24px] py-[32px] rounded-[10px] grid grid-cols-3 gap-[8px] items-center mx-[18px] mt-[80px]">
         <p
           className={`text-[25px] font-[500] cursor-pointer text-center py-[35px] px-[8px] bg-white rounded-[10px] ${selectedOption === "Bank Transfer QR"
-              ? "border-4 text-white"
-              : "border-4 text-[#414141]"
+            ? "border-4 text-white"
+            : "border-4 text-[#414141]"
             }`}
           onClick={() => setSelectedOption("Bank Transfer QR")}
           style={{
@@ -171,8 +171,8 @@ const PaymentScreen = () => {
 
         <p
           className={`text-[25px] font-[500] cursor-pointer  py-[35px] px-[8px] text-center border  bg-white rounded-[10px] ${selectedOption === "WebPay"
-              ? "border-4 text-white"
-              : "border-4 text-[#414141]"
+            ? "border-4 text-white"
+            : "border-4 text-[#414141]"
             }`}
           onClick={() => setSelectedOption("WebPay")}
           style={{
@@ -185,8 +185,8 @@ const PaymentScreen = () => {
         </p>
         <p
           className={`text-[25px] font-[500] cursor-pointer text-[#414141] py-[35px] px-[8px] text-center  bg-white rounded-[10px] ${selectedOption === "Terminals"
-              ? "border-4 text-white"
-              : "border-4 text-[#414141]"
+            ? "border-4 text-white"
+            : "border-4 text-[#414141]"
             }`}
           onClick={() => setSelectedOption("Terminals")}
           style={{

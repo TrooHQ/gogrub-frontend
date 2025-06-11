@@ -76,7 +76,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             },
           }
         );
-        // console.log("Deleted branch:", branchId);
+        console.log("Deleted branch:", branchId);
         handleCloseDeleteModal();
         toast.success("Successfully deleted");
         dispatch(fetchPickupLocations());
@@ -114,7 +114,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             },
           }
         );
-        // console.log("Updated branch:", response);
+        console.log("Updated branch:", response);
         dispatch(fetchPickupLocations());
         toast.success("Successfully edited");
         setIsEditModalOpen(false);
@@ -129,18 +129,18 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
 
   return (
     <div>
-      <div className="overflow-x-auto mt-6">
+      <div className="mt-6 overflow-x-auto">
         <table className="min-w-full border-collapse">
           <thead>
             <tr className="bg-[#606060] text-white  text-base font-normal">
               <th className="py-2 px-4 text-base font-normal min-w-[100px] text-start">
                 State
               </th>
-              <th className="py-2 px-4 text-base font-normal text-start">
+              <th className="px-4 py-2 text-base font-normal text-start">
                 Address
               </th>
-              <th className="py-2 px-4 text-base font-normal">Support link</th>
-              <th className="py-2 px-4 text-base font-normal">Actions</th>
+              <th className="px-4 py-2 text-base font-normal">Support link</th>
+              <th className="px-4 py-2 text-base font-normal">Actions</th>
             </tr>
           </thead>
 
@@ -153,13 +153,13 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
                 className={`${index % 2 === 1 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
                   }`}
               >
-                <td className="text-base font-normal py-2 px-4">
+                <td className="px-4 py-2 text-base font-normal">
                   {branch.state}
                 </td>
-                <td className="text-base py-2 px-4 break-words font-normal">
+                <td className="px-4 py-2 text-base font-normal break-words">
                   {convertFirstLetterToUppercase(branch.address)}
                 </td>
-                <td className="text-base py-2 px-4 break-words font-normal text-center">
+                <td className="px-4 py-2 text-base font-normal text-center break-words">
                   {branch.support_link}
                 </td>
                 <td className="text-center">
@@ -194,7 +194,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
           >
             <img src={Close} alt="Close" />
           </div>
-          <div className="flex flex-col justify-center items-center gap-6">
+          <div className="flex flex-col items-center justify-center gap-6">
             <img src={DeleteAlert} alt="Close" className="w-[64px] h-[64px]" />
             <p className="text-[16px] font-[400] text-grey500">
               Are you sure you want to delete this?
@@ -233,7 +233,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             /> */}
           </div>
 
-          <div className="mt-6 flex-grow">
+          <div className="flex-grow mt-6">
             <CustomInput
               type="text"
               label="What is your pickup address?"
@@ -242,7 +242,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             />
           </div>
 
-          <div className="mt-6 flex-grow">
+          <div className="flex-grow mt-6">
             <CustomInput
               type="text"
               label="Support link"
@@ -254,7 +254,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             />
           </div>
 
-          <div className="flex justify-end items-center gap-2 mt-7">
+          <div className="flex items-center justify-end gap-2 mt-7">
             <div
               className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
               onClick={() => setIsEditModalOpen(false)}

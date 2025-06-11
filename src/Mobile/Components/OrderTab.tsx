@@ -112,7 +112,7 @@ const OrderTab: React.FC = () => {
         requestData,
         headers
       );
-      // console.log("Ticket status updated successfully:", response.data);
+      console.log("Ticket status updated successfully:", response.data);
 
       if (response.status === 200) {
         if (status === "accept") {

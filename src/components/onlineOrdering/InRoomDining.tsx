@@ -118,7 +118,7 @@ const InRoomDining = () => {
     setState((prevState) => ({ ...prevState, addNewQR: false }));
   };
 
-  // console.log(rooms, "branches");
+  console.log(rooms, "branches");
 
   const handleConfirmDelete = async () => {
     setIsLoading(true);

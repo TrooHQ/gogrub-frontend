@@ -72,7 +72,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
             },
           }
         );
-        // console.log(response, "uuuu");
+        console.log(response, "uuuu");
         dispatch(fetchAccountDetails() as any);
         dispatch(
           setUserData({
@@ -94,7 +94,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
       }
     };
   };
-  // console.log(userData, "ssss");
+  console.log(userData, "ssss");
 
   const handleUploadClick = () => {
     handleFileUpload();

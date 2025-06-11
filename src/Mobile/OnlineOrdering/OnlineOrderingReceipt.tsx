@@ -33,7 +33,7 @@ export const OnlineOrderingReceipt = () => {
     ? JSON.parse(storedOrderDetails)
     : null;
 
-  // console.log(orderDetails);
+  console.log(orderDetails);
 
   const handleDownloadImage = async () => {
     const element = receiptRef.current;

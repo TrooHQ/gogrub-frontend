@@ -21,7 +21,7 @@ const VerifyAccount = () => {
 
   // const [digits, setDigits] = useState(["", "", "", "", "", ""]);
   const { userDetails } = useSelector((state: RootState) => state.user);
-  // console.log(userDetails, "userDetails:");
+  console.log(userDetails, "userDetails:");
 
   const userEmail = localStorage.getItem("registeredUserEmail");
 
@@ -93,7 +93,7 @@ const VerifyAccount = () => {
     setOtp(newValue);
   };
   const verify = async () => {
-    // console.log("OTP:", otp);
+    console.log("OTP:", otp);
     try {
       setLoading(true);
       const token = otp;

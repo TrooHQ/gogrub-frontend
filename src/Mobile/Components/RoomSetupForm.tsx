@@ -41,7 +41,7 @@ const RoomSetupForm = () => {
         },
         headers
       );
-      // console.log("QR Code generated successfully:", response.data);
+      console.log("QR Code generated successfully:", response.data);
       setNumber("");
       navigate("/demo/dashboard/gogrub-portal");
       toast.success(response.data.message);

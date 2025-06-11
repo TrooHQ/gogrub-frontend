@@ -67,7 +67,7 @@ export const OnlineOrderingTip = () => {
   };
 
   useEffect(() => {
-    // console.log("Basket Details:");
+    console.log("Basket Details:");
   }, [basketDetails]);
 
   return (

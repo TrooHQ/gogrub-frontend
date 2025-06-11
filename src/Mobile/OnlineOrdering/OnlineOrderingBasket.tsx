@@ -86,7 +86,7 @@ export const OnlineOrderingBasket = () => {
     dispatch(updateCustomerAddress(addressLocation));
   };
 
-  // console.log(addressvalue);
+  console.log(addressvalue);
 
   const handleAddressSubmit = (event: React.FormEvent) => {
     event.preventDefault();

@@ -121,7 +121,7 @@ const QRCodesAtTable = () => {
   };
 
   const handleConfirmDelete = async () => {
-    // console.log(selectedQRCode);
+    console.log(selectedQRCode);
     setLoading(true);
     const authToken = localStorage.getItem("token");
 

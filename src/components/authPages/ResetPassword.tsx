@@ -9,7 +9,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const idParam = new URLSearchParams(window.location.search).get("id");
 
-  // console.log("ID Parameter:", idParam);
+  console.log("ID Parameter:", idParam);
   // const [token, setToken] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");

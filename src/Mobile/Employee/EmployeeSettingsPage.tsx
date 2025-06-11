@@ -56,7 +56,7 @@ const EmployeeSettingsPage = () => {
         },
         headers
       );
-      // console.log("Employee Password Reset successfully:", response.data);
+      console.log("Employee Password Reset successfully:", response.data);
       setLoading(false);
       setError("");
       setNewPassword("");
