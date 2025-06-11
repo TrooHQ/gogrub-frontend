@@ -20,9 +20,9 @@ interface RootState {
 
 const VerifyAccount2 = () => {
   const user = useSelector((state: RootState) => state.user);
-  console.log("user id", user.id);
-  console.log(user.user_role);
-  console.log(user.email_verified);
+  // console.log("user id", user.id);
+  // console.log(user.user_role);
+  // console.log(user.email_verified);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -60,7 +60,7 @@ const VerifyAccount2 = () => {
         email,
       });
       setLoading(false);
-      console.log(response.data);
+      // console.log(response.data);
       toast.success("Token has been resent");
     } catch (error) {
       console.error("Error occurred:", error);
@@ -86,7 +86,7 @@ const VerifyAccount2 = () => {
         token,
       });
       setLoading(false);
-      console.log(response.data);
+      // console.log(response.data);
       toast.success("User verified successfully");
       history("/demo/menu/gogrub-portal");
     } catch (error) {

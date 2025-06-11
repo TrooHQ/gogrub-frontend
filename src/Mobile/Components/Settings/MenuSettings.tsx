@@ -97,7 +97,7 @@ const MenuSettings = () => {
   const userDetails = useSelector((state: RootState) => state.user);
   const token = userDetails?.userData?.token;
 
-  console.log(error);
+  // console.log(error);
 
   const toggleCategory = (categoryId: string | number) => {
     setExpandedCategories((prevState) => {
@@ -153,7 +153,7 @@ const MenuSettings = () => {
   const handleWarningModal2 = (menuType: string, menuName: string) => {
     setMenuName(menuName);
     setMenuType(menuType);
-    console.log(menuName, menuType);
+    // console.log(menuName, menuType);
 
     setRemoveMenuModal(false);
     setWarningModal2(true);
@@ -172,7 +172,7 @@ const MenuSettings = () => {
         `${SERVER_DOMAIN}/menu/removeMenu/?menu_type=${menuType}&name=${menuName}&branch_id=${selectedOutletID}`,
         headers
       );
-      console.log("Employee removed successfully:", response.data);
+      // console.log("Employee removed successfully:", response.data);
       setLoading(false);
       setWarningModal2(false);
       setDeleteSuccessfullModal2(true);
@@ -196,7 +196,7 @@ const MenuSettings = () => {
         `${SERVER_DOMAIN}/menu/deleteMenuModifier/?branch_id=${selectedOutletID}&modifier_id=${menuName}`,
         headers
       );
-      console.log("Employee removed successfully:", response.data);
+      // console.log("Employee removed successfully:", response.data);
       setLoading(false);
       setWarningModal2(false);
       setDeleteSuccessfullModal2(true);
@@ -236,7 +236,7 @@ const MenuSettings = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log("Selected file:", file);
+    // console.log("Selected file:", file);
   };
 
   const getMenuCategory = async () => {

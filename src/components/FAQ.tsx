@@ -62,12 +62,11 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
       {faqData.map((faq, index) => (
         <div
           key={index}
-          className={`text-purple500 border p-4 focus:outline-[#121212] w-full rounded border-[#484590] ${
-            openIndex === index ? "overflow-y-scroll max-h-96" : ""
-          }`}
+          className={`text-purple500 border p-4 focus:outline-[#121212] w-full rounded border-[#484590] ${openIndex === index ? "overflow-y-scroll max-h-96" : ""
+            }`}
         >
           <div
-            className="flex items-center justify-between cursor-pointer font-bold "
+            className="flex items-center justify-between font-bold cursor-pointer "
             onClick={() => toggleAnswer(index)}
           >
             <div className="flex items-center">
@@ -81,18 +80,17 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
               <img
                 src={Arrow}
                 alt=""
-                className={`transform transition-transform duration-300 ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
+                className={`transform transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                  }`}
               />
             </div>
           </div>
 
-          <div className=" pl-3">
+          <div className="pl-3 ">
             {openIndex === index && (
               <div className="text-[#757575] text-[12px] lg:text-[18px] font-[300] ">
                 {openIndex === 0 && (
-                  <div className=" ">
+                  <div className="">
                     <p className=" text-[16px] font-[400] leading-[24px] py-5 text-grey500">
                       This information is required in order to verify your
                       business. It will show up on your payout report, invoices
@@ -102,15 +100,14 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                       <p className=" text-[16px] font-[500] leading-[24px] text-grey500">
                         What is the legal type of your business?
                       </p>
-                      <div className="grid md:grid-cols-2 gap-4 my-5">
+                      <div className="grid gap-4 my-5 md:grid-cols-2">
                         <label
                           htmlFor="soleTrader"
-                          className={`flex flex-col items-center px-4 py-3 rounded cursor-pointer ${
-                            checkedLegalType ===
+                          className={`flex flex-col items-center px-4 py-3 rounded cursor-pointer ${checkedLegalType ===
                             "Sole trader/Private Individual"
-                              ? "bg-purple500 text-white"
-                              : "bg-[#E7E7E7] text-grey500"
-                          }`}
+                            ? "bg-purple500 text-white"
+                            : "bg-[#E7E7E7] text-grey500"
+                            }`}
                         >
                           <input
                             type="radio"
@@ -133,11 +130,10 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                         </label>
                         <label
                           htmlFor="otherLegalType"
-                          className={`flex flex-col items-center px-4 py-3 rounded cursor-pointer ${
-                            checkedLegalType === "Other legal type"
-                              ? "bg-purple500 text-white"
-                              : "bg-[#E7E7E7] text-grey500"
-                          }`}
+                          className={`flex flex-col items-center px-4 py-3 rounded cursor-pointer ${checkedLegalType === "Other legal type"
+                            ? "bg-purple500 text-white"
+                            : "bg-[#E7E7E7] text-grey500"
+                            }`}
                         >
                           <input
                             type="radio"
@@ -191,13 +187,13 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                       </div>
                     </div>
 
-                    <div className=" my-8">
+                    <div className="my-8 ">
                       <p className=" text-[14px] font-[500] font-sans leading-[24px] text-grey500">
                         Web page: Website, Social media page, Business listing,
                         Google map location, etc
                       </p>
 
-                      <div className=" grid gap-5">
+                      <div className="grid gap-5 ">
                         <CustomInput
                           type="text"
                           label="http://www.example.com"
@@ -205,14 +201,14 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                           onChange={(newValue) => setSelectedValue(newValue)}
                         />
 
-                        <div className=" mb-5 flex items-center justify-between">
+                        <div className="flex items-center justify-between mb-5 ">
                           <div className="flex items-center">
                             <input
                               type="checkbox"
                               id="rememberMe"
-                              className="h-6 w-6 mr-2"
-                              // checked={auth.rememberMe}
-                              // onChange={handleRememberMeToggle}
+                              className="w-6 h-6 mr-2"
+                            // checked={auth.rememberMe}
+                            // onChange={handleRememberMeToggle}
                             />
                             <label
                               htmlFor="rememberMe"
@@ -282,11 +278,11 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                       </div>
                     </div>
 
-                    <div className=" my-8">
+                    <div className="my-8 ">
                       <p className=" text-[16px] font-[500] font-sans leading-[24px] text-grey500 my-4">
                         Business fiscal year
                       </p>
-                      <div className=" grid md:grid-cols-2 items-center gap-5">
+                      <div className="grid items-center gap-5 md:grid-cols-2">
                         <div className="grid gap-2">
                           <label
                             htmlFor=""
@@ -301,7 +297,7 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                             onChange={(newValue) => setSelectedValue(newValue)}
                           />
                         </div>
-                        <div className=" grid gap-2">
+                        <div className="grid gap-2 ">
                           <label
                             htmlFor=""
                             className=" text-[16px] font-[500] text-grey500"
@@ -328,8 +324,8 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                       message if you need to change it.
                     </p>
 
-                    <div className=" grid gap-5">
-                      <div className=" grid grid-cols-2 gap-5 items-center">
+                    <div className="grid gap-5 ">
+                      <div className="grid items-center grid-cols-2 gap-5 ">
                         <CustomInput
                           type="text"
                           label="First name"
@@ -392,7 +388,7 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                       account.
                     </p>
 
-                    <div className=" grid gap-5">
+                    <div className="grid gap-5 ">
                       <CustomInput
                         type="text"
                         label="Account holder or business name"

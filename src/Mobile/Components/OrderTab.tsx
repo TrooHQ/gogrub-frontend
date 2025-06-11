@@ -112,7 +112,7 @@ const OrderTab: React.FC = () => {
         requestData,
         headers
       );
-      console.log("Ticket status updated successfully:", response.data);
+      // console.log("Ticket status updated successfully:", response.data);
 
       if (response.status === 200) {
         if (status === "accept") {
@@ -162,15 +162,15 @@ const OrderTab: React.FC = () => {
                         <p className="capitalize">
                           {ticket?.customer_name
                             ? ticket?.customer_name
-                                .split(" ")
-                                .map((name, index) =>
-                                  index === 0
-                                    ? name.slice(0, 6)
-                                    : index === 1
+                              .split(" ")
+                              .map((name, index) =>
+                                index === 0
+                                  ? name.slice(0, 6)
+                                  : index === 1
                                     ? ` ${name.charAt(0).toUpperCase()}.`
                                     : ""
-                                )
-                                .join("")
+                              )
+                              .join("")
                             : ""}
                         </p>
                         <p className="capitalize">
@@ -198,7 +198,7 @@ const OrderTab: React.FC = () => {
                               {item?.selectedOptions?.map((item, index) => (
                                 <div
                                   key={index}
-                                  className=" flex items-center justify-between"
+                                  className="flex items-center justify-between "
                                 >
                                   <p>{item?.name}</p>
                                 </div>
@@ -208,7 +208,7 @@ const OrderTab: React.FC = () => {
                         ))}
                       </div>
                       <div
-                        className=" cursor-pointer"
+                        className="cursor-pointer "
                         onClick={() => handleTicketModal(ticket)}
                       >
                         <img src={chatMessage} alt="" />
@@ -267,15 +267,15 @@ const OrderTab: React.FC = () => {
                           <p className="capitalize">
                             {ticket?.customer_name
                               ? ticket?.customer_name
-                                  .split(" ")
-                                  .map((name, index) =>
-                                    index === 0
-                                      ? name
-                                      : index === 1
+                                .split(" ")
+                                .map((name, index) =>
+                                  index === 0
+                                    ? name
+                                    : index === 1
                                       ? ` ${name.charAt(0).toUpperCase()}.`
                                       : ""
-                                  )
-                                  .join("")
+                                )
+                                .join("")
                               : ""}
                           </p>
                           <p className="capitalize">
@@ -329,7 +329,7 @@ const OrderTab: React.FC = () => {
   }
   return (
     <div>
-      <div className="grid grid-cols-2  mb-4 border-b">
+      <div className="grid grid-cols-2 mb-4 border-b">
         {tabItems.map((tab) => (
           <div
             key={tab.id}
@@ -337,11 +337,10 @@ const OrderTab: React.FC = () => {
             onClick={() => handleTabChange(tab.id)}
           >
             <p
-              className={` inline text-[16px] leading-[24px] py-4 px-4 ${
-                activeTab === tab.id
-                  ? "font-[600] text-grey500 border-b-4 border-[#E16B07] "
-                  : "text-[#929292] font-[400]"
-              }`}
+              className={` inline text-[16px] leading-[24px] py-4 px-4 ${activeTab === tab.id
+                ? "font-[600] text-grey500 border-b-4 border-[#E16B07] "
+                : "text-[#929292] font-[400]"
+                }`}
             >
               {tab.label}
             </p>
@@ -372,8 +371,8 @@ const OrderTab: React.FC = () => {
                       index === 0
                         ? name
                         : index === 1
-                        ? ` ${name.charAt(0).toUpperCase()}.`
-                        : ""
+                          ? ` ${name.charAt(0).toUpperCase()}.`
+                          : ""
                     )}
                   | #{selectedTicket?.order_number || "23"}
                   {" | "}
@@ -385,7 +384,7 @@ const OrderTab: React.FC = () => {
               src={Close}
               alt=""
               onClick={() => setTicketModal(false)}
-              className=" cursor-pointer"
+              className="cursor-pointer "
             />
           </div>
 

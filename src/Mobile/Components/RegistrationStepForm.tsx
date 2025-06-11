@@ -76,7 +76,7 @@ const RegistrationStepForm = () => {
     (state: RootState) => state.user?.userData?.business_id
   );
 
-  console.log(businessId, userId);
+  // console.log(businessId, userId);
 
   const location = useLocation();
 
@@ -85,7 +85,7 @@ const RegistrationStepForm = () => {
   useEffect(() => {
     if (location.state?.step) {
       setCurrentStep(location.state.step);
-      console.log(location.state?.step);
+      // console.log(location.state?.step);
     }
   }, [location.state]);
 
@@ -229,7 +229,7 @@ const RegistrationStepForm = () => {
       setLoading(false);
       toast.success("User created successfully");
       dispatch(setUserData(response.data));
-      console.log(response.data);
+      // console.log(response.data);
       sessionStorage.setItem("id", response.data.id);
       sessionStorage.setItem("user_role", response.data.user_role);
       sessionStorage.setItem("email_verified", response.data.email_verified);
@@ -259,7 +259,7 @@ const RegistrationStepForm = () => {
   //     reader.onload = function (event) {
   //       const base64 = event.target?.result as string;
   //       setBase64String(base64);
-  //       console.log("Base64 representation:", base64);
+  //       // console.log("Base64 representation:", base64);
   //     };
   //     reader.readAsDataURL(file);
   //   }
@@ -280,7 +280,7 @@ const RegistrationStepForm = () => {
       reader.onload = function (event) {
         const base64 = event.target?.result as string;
         setBase64String(base64);
-        console.log("Base64 representation:", base64);
+        // console.log("Base64 representation:", base64);
       };
       reader.readAsDataURL(file);
     }
@@ -313,7 +313,7 @@ const RegistrationStepForm = () => {
         }
       );
       setLoading(false);
-      console.log(response);
+      // console.log(response);
       toast.success(response.data.message);
       history("/demo/verify/gogrub-portal");
     } catch (error) {
@@ -340,10 +340,10 @@ const RegistrationStepForm = () => {
   //       `${SERVER_DOMAIN}/verifyUserAccountNumber`,
   //       payload
   //     );
-  //     console.log(payload);
+  //     // console.log(payload);
 
   //     setLoading(false);
-  //     console.log(response);
+  //     // console.log(response);
   //     toast.success(response.data.message);
   //     // history.push("/verify"); // Corrected navigation
   //   } catch (error) {
@@ -396,7 +396,7 @@ const RegistrationStepForm = () => {
       const response = await axios.get(`${SERVER_DOMAIN}/getBanks`);
       setLoading(false);
       setBanks(response.data.data);
-      console.log(banks);
+      // console.log(banks);
     } catch (error) {
       console.error("Error occurred:", error);
       if (axios.isAxiosError(error)) {
@@ -441,9 +441,8 @@ const RegistrationStepForm = () => {
             <p className=" text-red-500">{errorDuplicate}</p>
             <div className=" grid gap-3  my-5 w-full md:w-[530px] ">
               <div
-                className={`${
-                  fieldsError && " border border-red-500 rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500 rounded-[5px]"
+                  }`}
               >
                 <CustomInput
                   type="text"
@@ -453,10 +452,9 @@ const RegistrationStepForm = () => {
                 />
               </div>
               <div
-                className={`${
-                  emailError ||
+                className={`${emailError ||
                   (fieldsError && " border border-red-500  rounded-[5px]")
-                }`}
+                  }`}
               >
                 <CustomInput
                   type="email"
@@ -478,9 +476,8 @@ const RegistrationStepForm = () => {
               )}
 
               <div
-                className={`${
-                  fieldsError && " border border-red-500  rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500  rounded-[5px]"
+                  }`}
               >
                 <CustomInput
                   type="text"
@@ -491,9 +488,8 @@ const RegistrationStepForm = () => {
               </div>
 
               <div
-                className={`${
-                  fieldsError && " border border-red-500  rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500  rounded-[5px]"
+                  }`}
               >
                 <CustomInput
                   type="text"
@@ -504,9 +500,8 @@ const RegistrationStepForm = () => {
               </div>
 
               <div
-                className={`${
-                  fieldsError && " border border-red-500  rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500  rounded-[5px]"
+                  }`}
               >
                 <CustomInput
                   type="text"
@@ -517,9 +512,8 @@ const RegistrationStepForm = () => {
               </div>
 
               <div
-                className={`${
-                  fieldsError && " border border-red-500  rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500  rounded-[5px]"
+                  }`}
               >
                 <CustomInput
                   type="text"
@@ -530,9 +524,8 @@ const RegistrationStepForm = () => {
               </div>
 
               <div
-                className={`${
-                  fieldsError && " border border-red-500  rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500  rounded-[5px]"
+                  }`}
               >
                 <CustomInput
                   type="number"
@@ -547,10 +540,9 @@ const RegistrationStepForm = () => {
               </div>
 
               <div
-                className={`${
-                  passwordError ||
+                className={`${passwordError ||
                   (fieldsError && "border border-red-500 rounded-[5px]")
-                }`}
+                  }`}
               >
                 <PasswordInput
                   label="Password"
@@ -563,9 +555,8 @@ const RegistrationStepForm = () => {
               )}
               {password && !passwordError && (
                 <div
-                  className={`${
-                    fieldsError && "border border-red-500 rounded-[5px]"
-                  }`}
+                  className={`${fieldsError && "border border-red-500 rounded-[5px]"
+                    }`}
                 >
                   <PasswordInput
                     label="Confirm Password"
@@ -580,9 +571,8 @@ const RegistrationStepForm = () => {
                 </p>
               )}
               <div
-                className={`${
-                  fieldsError && " border border-red-500  rounded-[5px]"
-                }`}
+                className={`${fieldsError && " border border-red-500  rounded-[5px]"
+                  }`}
               >
                 <CustomSelect4
                   options={["Restaurant", "Hotel & Lodgings", "Bar & Lounge"]}
@@ -708,9 +698,8 @@ const RegistrationStepForm = () => {
                 {!loading && (
                   <div className="" onClick={createBusinessAccount}>
                     <button
-                      className={`${
-                        loading ? `bg-gray-400` : `bg-grey700`
-                      } w-full text-center text-white py-3 rounded`}
+                      className={`${loading ? `bg-gray-400` : `bg-grey700`
+                        } w-full text-center text-white py-3 rounded`}
                       disabled={loading}
                     >
                       Next
@@ -796,9 +785,8 @@ const RegistrationStepForm = () => {
                 {!bvnError && (
                   <div className="" onClick={createAccountDetails}>
                     <button
-                      className={`${
-                        loading ? `bg-gray-400` : `bg-grey700`
-                      } w-full text-center text-white py-3 rounded`}
+                      className={`${loading ? `bg-gray-400` : `bg-grey700`
+                        } w-full text-center text-white py-3 rounded`}
                       disabled={loading}
                     >
                       {loading ? "Saving..." : "Save and continue"}

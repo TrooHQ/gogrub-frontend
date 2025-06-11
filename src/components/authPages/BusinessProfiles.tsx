@@ -22,7 +22,7 @@ const BusinessProfiles: React.FC = () => {
     currentStep === 0 && setCurrentStep((prevStep) => prevStep + 1);
     if (currentStep === 1) {
       setLoading(true);
-      console.log(customPayload);
+      // console.log(customPayload);
 
       // Send request to sample endpoint
       try {

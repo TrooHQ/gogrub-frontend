@@ -63,8 +63,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
-  console.log("userData", userData)
-  console.log("userDetails", userDetails)
+  // console.log("userData", userData)
+  // console.log("userDetails", userDetails)
   useEffect(() => {
     if (userDetails?.email_verified === false) {
       navigate("/verify-account");
@@ -90,7 +90,19 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     dispatch(fetchAccountDetails());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log('from side bar')
+    const fetchAcc = async () => {
+      try {
+        const res = await "https://troox-backend-new.vercel.app/api/getAccountDetails"
 
+        console.log("res from sidebar", res)
+      } catch (error) {
+        console.error("Error fetching account details:", error);
+      }
+    }
+    fetchAcc();
+  }, [])
 
   const {
     accountDetails
@@ -98,10 +110,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
   const [hasAccount, setHasAccount] = useState(true);
   useEffect(() => {
-    setHasAccount(!accountDetails?.account_name && !accountDetails?.account_number)
+    setHasAccount(accountDetails?.account_name && accountDetails?.account_number)
   }, [accountDetails?.account_name, accountDetails?.account_number]);
 
-  console.log("hasAccount", hasAccount)
+  console.log("accountDetails", accountDetails);
 
   const transformedBranches = branches.map((branch: any) => ({
     label: branch.branch_name,
@@ -145,7 +157,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
   const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
 
-  console.log("currentPlanName", currentPlanName)
+  // console.log("currentPlanName", currentPlanName)
   const commonMenu: MenuItem[] = [
     {
       subTitle: "RESTAURANT",
@@ -444,10 +456,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                       : ""
                   }`}
                 onClick={() => menu.subMenu && handleSubmenuToggle(index)}
-              // (menu.link === "/business-information" && !hasAccount) ?
+              // (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
               >
                 {menu.title && (
-                  (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
+                  (menu.link === "/business-information" && !hasAccount) ?
                     <div className="text-white bg-red-500 rounded-full animate-ping size-4">
                       <RiErrorWarningLine className="w-full h-full" />
                     </div>

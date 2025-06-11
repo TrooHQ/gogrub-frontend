@@ -94,7 +94,7 @@ const MenuSetupForm: React.FC<Props> = () => {
   const [modifierError, setModifierError] = useState("");
   const [error, setError] = useState("");
 
-  console.log(error);
+  // console.log(error);
   const [menuItemDescription, setMenuItemDescription] = useState("");
 
   const [base64String, setBase64String] = useState<string | null>(null);
@@ -513,7 +513,7 @@ const MenuSetupForm: React.FC<Props> = () => {
       );
 
       setModifierGroup(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     } catch (error: any) {
       console.error("Error retrieving Modifiers:", error);
 
@@ -552,7 +552,7 @@ const MenuSetupForm: React.FC<Props> = () => {
         },
         headers
       );
-      console.log("Modifier added successfully:", response.data);
+      // console.log("Modifier added successfully:", response.data);
       toast.success(response.data.message);
       setModifierModal(false);
       window.location.reload();
@@ -658,31 +658,31 @@ const MenuSetupForm: React.FC<Props> = () => {
                                       <div className="" key={index}>
                                         {group.name ===
                                           item.menu_group_name && (
-                                          <div
-                                            className="flex items-center justify-between"
-                                            onClick={() =>
-                                              toggleItem(item.menu_item_name)
-                                            }
-                                            style={{ cursor: "pointer" }}
-                                          >
-                                            <p className=" font-[500] py-[8px]">
-                                              {item.menu_item_name}
-                                            </p>
-                                            <img
-                                              src={Arrow}
-                                              alt=""
-                                              style={{
-                                                transform: expandedItem[
-                                                  item.menu_item_name
-                                                ]
-                                                  ? "rotate(180deg)"
-                                                  : "rotate(0deg)",
-                                                transition:
-                                                  "transform 0.3s ease",
-                                              }}
-                                            />
-                                          </div>
-                                        )}
+                                            <div
+                                              className="flex items-center justify-between"
+                                              onClick={() =>
+                                                toggleItem(item.menu_item_name)
+                                              }
+                                              style={{ cursor: "pointer" }}
+                                            >
+                                              <p className=" font-[500] py-[8px]">
+                                                {item.menu_item_name}
+                                              </p>
+                                              <img
+                                                src={Arrow}
+                                                alt=""
+                                                style={{
+                                                  transform: expandedItem[
+                                                    item.menu_item_name
+                                                  ]
+                                                    ? "rotate(180deg)"
+                                                    : "rotate(0deg)",
+                                                  transition:
+                                                    "transform 0.3s ease",
+                                                }}
+                                              />
+                                            </div>
+                                          )}
 
                                         {expandedItem[item.menu_item_name] && (
                                           <div className=" grid gap-[10px]">
@@ -731,51 +731,51 @@ const MenuSetupForm: React.FC<Props> = () => {
                                                   {expandedModifierGroup[
                                                     modifier.modifier_group_name
                                                   ] && (
-                                                    <div className="grid gap-[10px]">
-                                                      {modifiers
-                                                        .filter(
-                                                          (MainModifier) =>
-                                                            MainModifier.modifier_group_name ===
-                                                            modifier.modifier_group_name
-                                                        )
-                                                        .map(
-                                                          (
-                                                            MainModifier,
-                                                            index
-                                                          ) => (
-                                                            <div
-                                                              key={index}
-                                                              className="flex items-center justify-between bg-slate-50 p-[8px]"
-                                                            >
-                                                              <p>
-                                                                {
-                                                                  MainModifier.modifier_name
-                                                                }
-                                                              </p>
-                                                              <p>
-                                                                &#x20A6;
-                                                                {
-                                                                  MainModifier.modifier_price
-                                                                }
-                                                              </p>
-                                                            </div>
+                                                      <div className="grid gap-[10px]">
+                                                        {modifiers
+                                                          .filter(
+                                                            (MainModifier) =>
+                                                              MainModifier.modifier_group_name ===
+                                                              modifier.modifier_group_name
                                                           )
-                                                        )}
+                                                          .map(
+                                                            (
+                                                              MainModifier,
+                                                              index
+                                                            ) => (
+                                                              <div
+                                                                key={index}
+                                                                className="flex items-center justify-between bg-slate-50 p-[8px]"
+                                                              >
+                                                                <p>
+                                                                  {
+                                                                    MainModifier.modifier_name
+                                                                  }
+                                                                </p>
+                                                                <p>
+                                                                  &#x20A6;
+                                                                  {
+                                                                    MainModifier.modifier_price
+                                                                  }
+                                                                </p>
+                                                              </div>
+                                                            )
+                                                          )}
 
-                                                      <p
-                                                        className="text-[#5855B3] py-[11px] px-[4px] text-[14px] font-[400] flex items-center cursor-pointer"
-                                                        onClick={() =>
-                                                          setModifierModal(true)
-                                                        }
-                                                      >
-                                                        <img
-                                                          src={AddWhite}
-                                                          alt=""
-                                                        />
-                                                        Add Modifier
-                                                      </p>
-                                                    </div>
-                                                  )}
+                                                        <p
+                                                          className="text-[#5855B3] py-[11px] px-[4px] text-[14px] font-[400] flex items-center cursor-pointer"
+                                                          onClick={() =>
+                                                            setModifierModal(true)
+                                                          }
+                                                        >
+                                                          <img
+                                                            src={AddWhite}
+                                                            alt=""
+                                                          />
+                                                          Add Modifier
+                                                        </p>
+                                                      </div>
+                                                    )}
                                                 </>
                                               ))}
 
@@ -817,17 +817,15 @@ const MenuSetupForm: React.FC<Props> = () => {
           <div className=" grid py-[32px] gap-[8px]">
             {hasMenu === false && (
               <div
-                className={`${
-                  menuData?.length > 0 ? " bg-purple500" : "bg-[#B6B6B6]"
-                } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded`}
+                className={`${menuData?.length > 0 ? " bg-purple500" : "bg-[#B6B6B6]"
+                  } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded`}
               >
                 {menuData?.length > 0 ? (
                   <Link
-                    to={`${
-                      businessType === "Hotel & Lodgings"
+                    to={`${businessType === "Hotel & Lodgings"
                         ? "/demo/room/gogrub-portal"
                         : "/demo/table/gogrub-portal"
-                    }`}
+                      }`}
                   >
                     <p>Save and continue</p>
                   </Link>
@@ -838,9 +836,8 @@ const MenuSetupForm: React.FC<Props> = () => {
             )}
 
             <Link
-              to={`${
-                hasMenu === false ? "/" : "/demo/dashboard/gogrub-portal"
-              }`}
+              to={`${hasMenu === false ? "/" : "/demo/dashboard/gogrub-portal"
+                }`}
             >
               <button className=" text-[16px] font-[500] text-[#929292] border border-[#B6B6B6] w-full text-center py-3 rounded">
                 {hasMenu === false ? "Cancel" : "Back"}

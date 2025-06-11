@@ -42,7 +42,7 @@ const DemoPage = () => {
   }, []);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
+    // console.log(data);
     setLoading(true);
     try {
       const payload = {
@@ -60,7 +60,7 @@ const DemoPage = () => {
         payload
       );
 
-      console.log("Form submitted successfully:", response.data);
+      // console.log("Form submitted successfully:", response.data);
       toast.success("Form Submitted Succesfully");
 
       reset();

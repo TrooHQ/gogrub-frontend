@@ -61,7 +61,7 @@ const Login = () => {
       if (axios.isAxiosError(error)) {
         if (error.response) {
           setError(error.response.data.message);
-          console.log(error.response?.data?.data?.business);
+          // console.log(error.response?.data?.data?.business);
           if (
             error.response?.data?.data?.has_account === false &&
             error.response.data.message === "Account details not verified"
@@ -79,7 +79,7 @@ const Login = () => {
             error.response.data.message === "Account details not verified"
           ) {
             navigate("/demo/verify/gogrub-portal");
-            console.log("Unverified");
+            // console.log("Unverified");
           }
         } else {
           setError("An error occurred. Please try again later.");

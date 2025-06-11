@@ -436,11 +436,10 @@ const PricingPage = () => {
               <p
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`text-[16px] font-[500] max-w-[148px] w-full text-center py-[13px] px-[16px] text-[#0D0D0D] cursor-pointer transition-all min-w-[200px] ${
-                  activeTab === tab
-                    ? "border rounded-[5px] border-[#CBCAE7] bg-[#121212] text-white"
-                    : "border-none"
-                }`}
+                className={`text-[16px] font-[500] max-w-[148px] w-full text-center py-[13px] px-[16px] text-[#0D0D0D] cursor-pointer transition-all min-w-[200px] ${activeTab === tab
+                  ? "border rounded-[5px] border-[#CBCAE7] bg-[#121212] text-white"
+                  : "border-none"
+                  }`}
               >
                 {tab}
               </p>
@@ -592,9 +591,8 @@ const PricingPage = () => {
                                 {row.map((cell, cellIndex) => (
                                   <td
                                     key={cellIndex}
-                                    className={`py-3 px-4 text-gray-600 border border-gray-300 text-[13px] font-[500] ${
-                                      cellIndex > 0 ? "text-center" : ""
-                                    }`}
+                                    className={`py-3 px-4 text-gray-600 border border-gray-300 text-[13px] font-[500] ${cellIndex > 0 ? "text-center" : ""
+                                      }`}
                                   >
                                     {cell}
                                   </td>

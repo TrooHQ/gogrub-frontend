@@ -497,7 +497,7 @@ const SettingsPage = () => {
         if (error.response?.status === 400) {
           toast.error(
             error.response?.data.message ||
-              "An error occurred. Please try again."
+            "An error occurred. Please try again."
           );
         } else {
           toast.error("An unexpected error occurred.");

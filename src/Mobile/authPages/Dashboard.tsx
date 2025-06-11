@@ -91,7 +91,7 @@ const Dashboard = () => {
       dispatch(setSelectedOutlet(selectedOption.label));
       dispatch(setSelectedOutletID(selectedOption.value));
     } else {
-      console.log("No matching option found for:", selectedOutlet);
+      // console.log("No matching option found for:", selectedOutlet);
     }
   };
 

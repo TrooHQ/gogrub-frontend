@@ -25,7 +25,7 @@ const ForgotPassword = () => {
         }
       );
       setLoading(false);
-      console.log(response.data);
+      // console.log(response.data);
       toast.success("Password reset token sent successfully");
       history("/demo/create-password/gogrub-portal");
     } catch (error) {

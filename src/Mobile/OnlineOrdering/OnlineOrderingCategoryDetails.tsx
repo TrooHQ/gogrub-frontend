@@ -154,7 +154,7 @@ export const OnlineOrderingCategoryDetails = () => {
         headers
       );
       setMenuItems(response.data.data);
-      console.log(response?.data?.data);
+      // console.log(response?.data?.data);
     } catch (error) {
       console.error("Error getting Business Details:", error);
     } finally {
@@ -273,11 +273,10 @@ export const OnlineOrderingCategoryDetails = () => {
               >
                 <p
                   ref={(el) => (groupRefs.current[0] = el)}
-                  className={`cursor-pointer px-[12px] py-[8px] rounded-[4px] ${
-                    selectedGroup === "All"
+                  className={`cursor-pointer px-[12px] py-[8px] rounded-[4px] ${selectedGroup === "All"
                       ? `font-[600] text-[#FFFFFF] border border-[#929292]`
                       : "text-[#606060] font-[400] border border-[#B6B6B6]"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor:
                       selectedGroup === "All"

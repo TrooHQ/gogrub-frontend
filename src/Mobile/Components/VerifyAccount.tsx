@@ -57,7 +57,7 @@ const VerifyAccount = () => {
         email,
       });
       setLoading(false);
-      console.log(response);
+      // console.log(response);
       toast.success("Token has been resent");
     } catch (error) {
       console.error("Error occurred:", error);
@@ -83,7 +83,7 @@ const VerifyAccount = () => {
         token,
       });
       setLoading(false);
-      console.log(response.data);
+      // console.log(response.data);
       // toast.success("User verified successfully");
       history("/demo/verified/gogrub-portal");
     } catch (error) {

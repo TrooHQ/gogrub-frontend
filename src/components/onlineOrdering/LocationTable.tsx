@@ -76,7 +76,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             },
           }
         );
-        console.log("Deleted branch:", branchId);
+        // console.log("Deleted branch:", branchId);
         handleCloseDeleteModal();
         toast.success("Successfully deleted");
         dispatch(fetchPickupLocations());
@@ -114,7 +114,7 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             },
           }
         );
-        console.log("Updated branch:", response);
+        // console.log("Updated branch:", response);
         dispatch(fetchPickupLocations());
         toast.success("Successfully edited");
         setIsEditModalOpen(false);
@@ -150,9 +150,8 @@ const LocationTable: React.FC<LocationTableProps> = ({ branches }) => {
             {branches.map((branch, index) => (
               <tr
                 key={index}
-                className={`${
-                  index % 2 === 1 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                }`}
+                className={`${index % 2 === 1 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                  }`}
               >
                 <td className="text-base font-normal py-2 px-4">
                   {branch.state}

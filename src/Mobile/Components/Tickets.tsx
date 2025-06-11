@@ -58,7 +58,7 @@ const Tickets = () => {
         `${SERVER_DOMAIN}/order/getOrder`,
         headers
       );
-      console.log("Tickets Retrieved successfully:", response.data);
+      // console.log("Tickets Retrieved successfully:", response.data);
       setTickets(response.data);
     } catch (error) {
       console.error("Error Retrieving Tickets:", error);
@@ -106,8 +106,8 @@ const Tickets = () => {
                     index === 0
                       ? name
                       : index === 1
-                      ? ` ${name.charAt(0).toUpperCase()}.`
-                      : ""
+                        ? ` ${name.charAt(0).toUpperCase()}.`
+                        : ""
                   )}
               </p>
 
@@ -152,8 +152,8 @@ const Tickets = () => {
                         index === 0
                           ? name
                           : index === 1
-                          ? ` ${name.charAt(0).toUpperCase()}.`
-                          : ""
+                            ? ` ${name.charAt(0).toUpperCase()}.`
+                            : ""
                       )}
                 </p>
               </div>

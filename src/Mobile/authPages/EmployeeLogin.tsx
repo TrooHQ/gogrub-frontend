@@ -41,8 +41,8 @@ const EmployeeLogin = () => {
         password: Password,
       });
       setLoading(false);
-      console.log(response.data.account_details);
-      console.log(response.data.message);
+      // console.log(response.data.account_details);
+      // console.log(response.data.message);
       toast.success(response.data.message);
       history("/demo/login/gogrub-portal");
     } catch (error: any) {

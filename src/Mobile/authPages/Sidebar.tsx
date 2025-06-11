@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       dispatch(setSelectedOutlet(selectedOption.label));
       dispatch(setSelectedOutletID(selectedOption.value));
     } else {
-      console.log("No matching option found for:", Outlet);
+      // console.log("No matching option found for:", Outlet);
     }
   };
 
@@ -93,16 +93,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-[#606060] transition-opacity duration-300 ${
-          isOpen ? " pointer-events-auto" : "opacity-0 pointer-events-none"
-        } z-50`}
+        className={`fixed inset-0 bg-[#606060] transition-opacity duration-300 ${isOpen ? " pointer-events-auto" : "opacity-0 pointer-events-none"
+          } z-50`}
         onClick={toggleSidebar}
       ></div>
 
       <div
-        className={`fixed inset-y-0 left-0 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out bg-white text-black w-64 z-50 px-[16px] py-[21px]`}
+        className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out bg-white text-black w-64 z-50 px-[16px] py-[21px]`}
       >
         <div className="flex items-center justify-between pb-[33px] border-b border-[#E7E7E7]">
           <img src={Logo} alt="Logo" className="max-w-[147px]" />

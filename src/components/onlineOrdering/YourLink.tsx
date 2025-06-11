@@ -19,7 +19,7 @@ const YourLink = () => {
 
   useEffect(() => {
     dispatch(fetchAccountDetails() as any);
-    console.log(selectedBranch?.id);
+    // console.log(selectedBranch?.id);
   }, [dispatch]);
 
   useEffect(() => {

@@ -106,9 +106,8 @@ const TablesList = ({
             (groupItems as any[]).map((item: any, index: number) => (
               <li
                 key={item._id}
-                className={`grid grid-cols-10 items-center px-5 py-[16px] text-grey300 text-[16px] font-[400] ${
-                  index % 2 === 0 ? "bg-[#F8F8F8]" : ""
-                }`}
+                className={`grid grid-cols-10 items-center px-5 py-[16px] text-grey300 text-[16px] font-[400] ${index % 2 === 0 ? "bg-[#F8F8F8]" : ""
+                  }`}
               >
                 <p className="text-[#121212] col-span-2 px-3 py-2">
                   {item.group_name}
