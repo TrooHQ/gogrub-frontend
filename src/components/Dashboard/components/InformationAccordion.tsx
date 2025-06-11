@@ -512,8 +512,10 @@ export default function InformationAccordion() {
       (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
+        // if (value.length > 0 && value.length < 11) {
+
         if (section === "payoutBankDetails" && subField === "bvn") {
-          if (value.length > 0 && value.length < 11) {
+          if (value.length > 11) {
             toast.error("BVN must be 11 digits");
           }
           if (value.length > 11) return;

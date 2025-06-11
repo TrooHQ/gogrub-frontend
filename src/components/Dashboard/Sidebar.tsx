@@ -444,10 +444,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                       : ""
                   }`}
                 onClick={() => menu.subMenu && handleSubmenuToggle(index)}
-              // (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
+              // (menu.link === "/business-information" && !hasAccount) ?
               >
                 {menu.title && (
-                  (menu.link === "/business-information" && !hasAccount) ?
+                  (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
                     <div className="text-white bg-red-500 rounded-full animate-ping size-4">
                       <RiErrorWarningLine className="w-full h-full" />
                     </div>
@@ -553,9 +553,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center cursor-pointer"
               // type="button"
               onClick={
-                !currentPlanName
-                  ? () => dispatch(setSubscription(true))
-                  : undefined
+                () => dispatch(setSubscription(true))
+                // currentPlanName
+                // ? () => dispatch(setSubscription(true))
+                // : undefined
               }
             >
               <span className="mr-2 text-base font-semibold text-white capitalize">

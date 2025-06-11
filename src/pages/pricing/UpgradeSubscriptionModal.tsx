@@ -144,6 +144,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   const reference = queryParams.get("reference");
   // const reference = "PLANSUB202504248DE350CA2699";
 
+  console.log("reference:", reference);
   const dispatch = useDispatch();
 
   const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
@@ -194,6 +195,11 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       );
 
       toast.success(response.data.message || "Payment Verified successfully!");
+      // wait 3 seconds then route to online ordering
+      setTimeout(() => {
+        dispatch(setSubscription(false));
+        // window.location.href = "/online-ordering";
+      }, 3000);
 
       SubcribePlan();
     } catch (error) {
@@ -337,16 +343,16 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                       <p className="font-[700] text-[#FFFFFF] text-[20px] lg:text-[32px] transition-all duration-500 ease-in-out">
                         Payment Successful
                       </p>
-                      {/* {!userData?.businessPlan && <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
-                        You can get your link now.
-                      </p>} */}
+                      {!userData?.businessPlan && <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
+                        You can get your link <Link to={'/online-ordering'}>now</Link>.
+                      </p>}
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            {!currentPlanId && <Link
+            {/* <Link
               to="/online-ordering"
               onClick={() => dispatch(setSubscription(false))}
             >
@@ -359,7 +365,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               >
                 Get Your URL
               </button>
-            </Link>}
+            </Link> */}
           </div>
         </div>
       </Modal>
