@@ -402,17 +402,17 @@ const MenuList = () => {
       <div className="">
         {viewingBranch === null ? (
           <div className="my-[40px]">
-            <div className="overflow-x-auto mt-6">
+            <div className="mt-6 overflow-x-auto">
               <table className="min-w-full border-collapse">
                 <thead>
                   <tr className="bg-[#606060] text-white text-center text-base font-normal">
-                    <th className="py-2 px-4 text-base font-normal text-start">
-                      Branch Name
+                    <th className="px-4 py-2 text-base font-normal text-start">
+                      Business Name
                     </th>
-                    <th className="py-2 px-4 text-base font-normal text-start">
+                    <th className="px-4 py-2 text-base font-normal text-start">
                       Manager
                     </th>
-                    <th className="py-2 px-4 text-base font-normal text-center">
+                    <th className="px-4 py-2 text-base font-normal text-center">
                       Action
                     </th>
                   </tr>
@@ -420,13 +420,13 @@ const MenuList = () => {
                 <tbody>
                   {branches.map((branch: any) => (
                     <tr key={branch._id} className="bg-[#ffffff]">
-                      <td className="text-base font-normal py-2 px-4 text-start">
+                      <td className="px-4 py-2 text-base font-normal text-start">
                         {branch.branch_name}
                       </td>
-                      <td className="text-base font-normal py-2 px-4 text-start">
+                      <td className="px-4 py-2 text-base font-normal text-start">
                         {branch.branch_email}
                       </td>
-                      <td className="text-base font-normal py-2 px-4 text-center">
+                      <td className="px-4 py-2 text-base font-normal text-center">
                         <button
                           className="text-blue-500"
                           onClick={() => handleViewMore(branch)}
@@ -454,28 +454,28 @@ const MenuList = () => {
               <div className="flex items-center justify-between"></div>
             </div>
 
-            <div className="overflow-x-auto mt-6">
+            <div className="mt-6 overflow-x-auto">
               <table className="min-w-full border-collapse">
                 <thead>
-                  <tr className="bg-[#606060] text-white text-center text-base font-normal">
-                    <th className="py-2 px-4 text-base font-normal">
+                  <tr className="bg-[#606060] text-white text-base font-normal">
+                    <th className="px-4 py-2 text-base font-normal text-start">
                       Menu Group
                     </th>
-                    <th className="py-2 px-4 text-base font-normal text-start">
+                    <th className="px-4 py-2 text-base font-normal text-start">
                       Menu Name
                     </th>
-                    {/* <th className="py-2 px-4 text-base font-normal">Quantity</th> */}
-                    <th className="py-2 px-4 text-base font-normal">Price</th>
-                    <th className="py-2 px-4 text-base font-normal">
+                    {/* <th className="px-4 py-2 text-base font-normal">Quantity</th> */}
+                    <th className="px-4 py-2 text-base font-normal">Price</th>
+                    <th className="px-4 py-2 text-base font-normal">
                       Modifiers
                     </th>
-                    <th className="py-2 px-4 text-base font-normal">Actions</th>
+                    <th className="px-4 py-2 text-base font-normal">Actions</th>
                   </tr>
                 </thead>
 
                 <hr className="mb-2 text-[#E7E7E7]" />
                 {loading && (
-                  <div className="text-center min-w-full">Loading...</div>
+                  <div className="min-w-full text-center">Loading...</div>
                 )}
 
                 {menuItems.length !== 0 ? (
@@ -483,18 +483,17 @@ const MenuList = () => {
                     {menuItems.map((item: any, index: number) => (
                       <tr
                         key={item.id}
-                        className={`${
-                          !toggleStates[item._id]
-                            ? "opacity-50"
-                            : index % 2 === 1
+                        className={`${!toggleStates[item._id]
+                          ? "opacity-50"
+                          : index % 2 === 1
                             ? "bg-[#ffffff]"
                             : "bg-[#F8F8F8]"
-                        }`}
+                          }`}
                       >
-                        <td className="text-base font-normal py-2 px-4">
+                        <td className="px-4 py-2 text-base font-normal text-center">
                           {item.menu_group_name}
                         </td>
-                        <td className="text-base font-normal py-2 px-4">
+                        <td className="px-4 py-2 text-base font-normal">
                           <div className="flex items-center justify-start gap-1">
                             {toggleStates2[item._id] && (
                               <Tooltip title="This item is recommended." arrow>
@@ -511,11 +510,11 @@ const MenuList = () => {
                             <span>{item.menu_item_name}</span>
                           </div>
                         </td>
-                        <td className="text-base font-normal text-center py-2 px-4 break-words">
+                        <td className="px-4 py-2 text-base font-normal text-center break-words">
                           &#8358;
                           {parseFloat(item.menu_item_price).toLocaleString()}
                         </td>
-                        <td className="text-base font-normal text-center py-2 px-4 break-words">
+                        <td className="px-4 py-2 text-base font-normal text-center break-words">
                           <button
                             className="text-blue-500"
                             onClick={() => handleOpenModal(item)}
@@ -524,7 +523,7 @@ const MenuList = () => {
                           </button>
                         </td>
 
-                        <td className="flex items-center justify-center text-center w-full">
+                        <td className="flex items-center justify-center w-full text-center">
                           <Tooltip title="More options" arrow>
                             <IconButton
                               onClick={(event) => handleOpenMenu(event, item)}
@@ -675,7 +674,7 @@ const MenuList = () => {
                   </tbody>
                 ) : (
                   <div>
-                    <p className="text-center min-w-full">
+                    <p className="min-w-full text-center">
                       No menu items found
                     </p>
                   </div>
@@ -684,7 +683,7 @@ const MenuList = () => {
               {totalPages > 1 && !loading && (
                 <Stack
                   spacing={2}
-                  className="flex justify-center items-center mt-8"
+                  className="flex items-center justify-center mt-8"
                 >
                   <CustomPagination
                     count={totalPages}
@@ -699,12 +698,12 @@ const MenuList = () => {
         )}
 
         {openModal && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="fixed inset-0 bg-black opacity-50"></div>
             <div className="bg-white min-w-[30%] p-6 rounded-lg z-10 relative">
-              <h2 className="text-lg font-semibold mb-4">
+              <h2 className="mb-4 text-lg font-semibold">
                 {selectedModifiers?.menu_item_name}
-                <span className="text-sm font-normal ml-5">MODIFIERS</span>
+                <span className="ml-5 text-sm font-normal">MODIFIERS</span>
               </h2>
               <hr className="h-[1px] bg-[#929292] my-3" />
 
@@ -753,7 +752,7 @@ const MenuList = () => {
                 </>
               )}
               <Close
-                className="absolute top-3 right-3 cursor-pointer"
+                className="absolute cursor-pointer top-3 right-3"
                 onClick={handleCloseModal}
               />
             </div>
@@ -805,17 +804,15 @@ const MenuList = () => {
         open={confirmationDialog.open}
         onClose={() => setConfirmationDialog({ open: false, id: null })}
         onConfirm={handleConfirmToggleChange}
-        message={`Are you sure you want to ${
-          confirmationDialog.id !== null &&
+        message={`Are you sure you want to ${confirmationDialog.id !== null &&
           toggleStates[confirmationDialog.id as any]
-            ? "freeze"
-            : "unfreeze"
-        } this menu item? ${
-          confirmationDialog.id !== null &&
-          toggleStates[confirmationDialog.id as any]
+          ? "freeze"
+          : "unfreeze"
+          } this menu item? ${confirmationDialog.id !== null &&
+            toggleStates[confirmationDialog.id as any]
             ? "Freezing it will remove it from all your product channels."
             : ""
-        }`}
+          }`}
       />
 
       <ConfirmationDialog
@@ -823,12 +820,11 @@ const MenuList = () => {
         onClose={() => setConfirmationDialog3({ open: false, id: null })}
         onConfirm={handleConfirmToggleRecommendChange}
         isLoading={confirmationLoading}
-        message={`Are you sure you want to ${
-          confirmationDialog3.id !== null &&
+        message={`Are you sure you want to ${confirmationDialog3.id !== null &&
           toggleStates2[confirmationDialog3.id as any]
-            ? "unrecommend"
-            : "recommend"
-        } this menu item?
+          ? "unrecommend"
+          : "recommend"
+          } this menu item?
         `}
       />
     </DashboardLayout>

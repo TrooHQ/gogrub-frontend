@@ -22,7 +22,7 @@ const PickupLocation = () => {
     (state: RootState) => state.asset
   );
 
-  const [isPickupEnabled, setIsPickupEnabled] = useState(true);
+  const [isPickupEnabled, setIsPickupEnabled] = useState(false);
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);
   const [selectedState, setSelectedState] = useState("");
   const [addresses, setAddresses] = useState([""]);
@@ -125,48 +125,8 @@ const PickupLocation = () => {
   return (
     <div className="h-full">
       {state.showLocation && (
-        <div className="flex justify-end mb-4">
-          <button
-            className="border border-[#0d0d0d] bg-[#0d0d0d] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-[#ffffff]"
-            onClick={handleCreateLocation}
-          >
-            Add New Location
-          </button>
-        </div>
-      )}
+        <div className="flex items-center justify-between mb-4">
 
-      {state.showLocation && loading && locations.length === 0 ? (
-        <Loader />
-      ) : state.showLocation && locations.length === 0 ? (
-        <div className="flex flex-col gap-6 items-center justify-center h-full w-full mt-[-100px]">
-          <p>No location has been set yet</p>
-          <div className="border border-purple500 bg-white w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-purple500">
-            <button
-              className="text-[16px] flex items-center gap-[8px]"
-              onClick={handleCreateLocation}
-            >
-              <FaPlus className="w-5 h-5 text-purple500" />
-              Add new location
-            </button>
-          </div>
-        </div>
-      ) : state.showLocation && locations.length > 0 ? (
-        <LocationTable branches={locations} />
-      ) : state.createLocation ? (
-        <div className="">
-          <div
-            className="cursor-pointer"
-            onClick={() =>
-              setState((prev: any) => ({
-                ...prev,
-                createLocation: false,
-                showLocation: true,
-              }))
-            }
-          >
-            <ArrowBack />
-            Back
-          </div>
           <div className="flex items-center g-2.5">
             <span className="text-[#121212] text-base font-normal">
               Do you want to offer pickup service?
@@ -187,134 +147,203 @@ const PickupLocation = () => {
               {isPickupEnabled ? "Enabled" : "Disabled"}
             </span>
           </div>
-          {isPickupEnabled && (
-            <div className="mt-[80px] w-[60%] m-auto">
-              <form className="space-y-6">
-                <CustomSelect5
-                  label="Select a state"
-                  options={stateOptions}
-                  value={selectedState}
-                  onChange={handleStateChange}
-                />
-                {addresses.map((address, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <CustomInput
-                      type="text"
-                      label="What is your pickup address?"
-                      value={address}
-                      onChange={(newValue) =>
-                        handleAddressChange(index, newValue)
-                      }
-                      className="border-gray-500"
-                      fullWidth
-                    />
-                    {index > 0 && (
-                      <IconButton
-                        onClick={() => removeAddressField(index)}
-                        className="w-[5%] min-w-[24px] h-[24px]"
-                      >
-                        <Clear className="text-[#f03f3f]" fontSize="small" />
-                      </IconButton>
-                    )}
-                  </div>
-                ))}
+          <button
+            className="border border-[#0d0d0d] bg-[#0d0d0d] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-[#ffffff]"
+            onClick={handleCreateLocation}
+            disabled={!isPickupEnabled}
+            style={{ cursor: isPickupEnabled ? "pointer" : "not-allowed", opacity: isPickupEnabled ? 1 : 0.5 }}          >
+            Add New Location
+          </button>
+        </div>
+      )}
 
-                <button
-                  type="button"
-                  className="border border-[#0d0d0d] text-[#0d0d0d] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] bg-[#ffffff]"
-                  onClick={addAddressField}
-                >
-                  Add more addresses
-                </button>
+      {!isPickupEnabled ? (<div className="flex items-center justify-center mt-10">
+        <p className="text-xl font-semibold text-gray-500">You have not enabled pickup service</p>
+      </div>) : <>
 
-                <CustomInput
-                  type="text"
-                  label="Add your support link to your profile, WhatsApp, Instagram)"
-                  value={supportLink}
-                  onChange={(newValue) => setSupportLink(newValue)}
-                  className="border-gray-500"
-                />
 
-                <div className="flex items-center g-2.5">
-                  <span className="text-[#121212] text-base font-normal">
-                    Do you want to enable scheduling of pickup for your
-                    customers?
-                  </span>
-                  <Switch
-                    checked={isSchedulingEnabled}
-                    onChange={handleScheduleToggleChange}
-                    color="primary"
-                    style={{
-                      color: isSchedulingEnabled ? "#5855B3" : "#929292",
-                    }}
-                  />
-                  <span
-                    className={clsx({
-                      "text-[#5855B3]": isSchedulingEnabled,
-                      "text-[#929292]": !isSchedulingEnabled,
-                      "text-base font-medium": true,
-                    })}
-                  >
-                    {isSchedulingEnabled ? "Enabled" : "Disabled"}
-                  </span>
-                </div>
+        {state.showLocation && loading && locations.length === 0 ? (
+          <Loader />
+        ) : state.showLocation && locations.length === 0 ? (
+          <div className="flex flex-col gap-6 items-center justify-center h-full w-full mt-[-100px]">
+            <p>No location has been set yet</p>
+            <div className="border border-purple500 bg-white w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-purple500">
 
-                <button
-                  type="button"
-                  className="bg-[#0d0d0d] text-center text-white py-3 px-4 rounded"
-                  onClick={handleSubmit}
-                >
-                  {loading ? "Adding..." : "Add Location"}
-                </button>
-              </form>
+              <button
+                className="text-[16px] flex items-center gap-[8px]"
+                onClick={handleCreateLocation}
+              >
+                <FaPlus className="w-5 h-5 text-purple500" />
+                Add new location
+              </button>
             </div>
-          )}
-          <Modal open={open} onClose={handleClose}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: 400,
-                bgcolor: "background.paper",
-                boxShadow: 24,
-                p: 4,
-                borderRadius: 2,
-              }}
+          </div>
+        ) : state.showLocation && locations.length > 0 ? (
+          <LocationTable branches={locations} />
+        ) : state.createLocation ? (
+          <div className="">
+            <div
+              className="cursor-pointer"
+              onClick={() =>
+                setState((prev: any) => ({
+                  ...prev,
+                  createLocation: false,
+                  showLocation: true,
+                }))
+              }
             >
-              <IconButton
-                aria-label="close"
-                onClick={handleClose}
+              <ArrowBack />
+              Back
+            </div>
+            {/* <div className="flex items-center g-2.5">
+            <span className="text-[#121212] text-base font-normal">
+              Do you want to offer pickup service?
+            </span>
+            <Switch
+              checked={isPickupEnabled}
+              onChange={handleToggleChange}
+              color="primary"
+              style={{ color: isPickupEnabled ? "#5855B3" : "#929292" }}
+            />
+            <span
+              className={clsx({
+                "text-[#5855B3]": isPickupEnabled,
+                "text-[#929292]": !isPickupEnabled,
+                "text-base font-medium": true,
+              })}
+            >
+              {isPickupEnabled ? "Enabled" : "Disabled"}
+            </span>
+          </div> */}
+            {isPickupEnabled && (
+              <div className="mt-[80px] w-[60%] m-auto">
+                <form className="space-y-6">
+                  <CustomSelect5
+                    label="Select a state"
+                    options={stateOptions}
+                    value={selectedState}
+                    onChange={handleStateChange}
+                  />
+                  {addresses.map((address, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <CustomInput
+                        type="text"
+                        label="What is your pickup address?"
+                        value={address}
+                        onChange={(newValue) =>
+                          handleAddressChange(index, newValue)
+                        }
+                        className="border-gray-500"
+                        fullWidth
+                      />
+                      {index > 0 && (
+                        <IconButton
+                          onClick={() => removeAddressField(index)}
+                          className="w-[5%] min-w-[24px] h-[24px]"
+                        >
+                          <Clear className="text-[#f03f3f]" fontSize="small" />
+                        </IconButton>
+                      )}
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    className="border border-[#0d0d0d] text-[#0d0d0d] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] bg-[#ffffff]"
+                    onClick={addAddressField}
+                  >
+                    Add more addresses
+                  </button>
+
+                  <CustomInput
+                    type="text"
+                    label="Add your support link to your profile, WhatsApp, Instagram)"
+                    value={supportLink}
+                    onChange={(newValue) => setSupportLink(newValue)}
+                    className="border-gray-500"
+                  />
+
+                  <div className="flex items-center g-2.5">
+                    <span className="text-[#121212] text-base font-normal">
+                      Do you want to enable scheduling of pickup for your
+                      customers?
+                    </span>
+                    <Switch
+                      checked={isSchedulingEnabled}
+                      onChange={handleScheduleToggleChange}
+                      color="primary"
+                      style={{
+                        color: isSchedulingEnabled ? "#5855B3" : "#929292",
+                      }}
+                    />
+                    <span
+                      className={clsx({
+                        "text-[#5855B3]": isSchedulingEnabled,
+                        "text-[#929292]": !isSchedulingEnabled,
+                        "text-base font-medium": true,
+                      })}
+                    >
+                      {isSchedulingEnabled ? "Enabled" : "Disabled"}
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="bg-[#0d0d0d] text-center text-white py-3 px-4 rounded"
+                    onClick={handleSubmit}
+                  >
+                    {loading ? "Adding..." : "Add Location"}
+                  </button>
+                </form>
+              </div>
+            )}
+            <Modal open={open} onClose={handleClose}>
+              <Box
                 sx={{
                   position: "absolute",
-                  right: 8,
-                  top: 8,
-                  color: (theme) => theme.palette.grey[500],
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: 400,
+                  bgcolor: "background.paper",
+                  boxShadow: 24,
+                  p: 4,
+                  borderRadius: 2,
                 }}
               >
-                <Close />
-              </IconButton>
-              <Box display="flex" flexDirection="column" alignItems="center">
-                <CheckCircle sx={{ fontSize: 60, color: "green" }} />
-                <Typography variant="h6" sx={{ mt: 2 }}>
-                  Added
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 1, textAlign: "center" }}>
-                  Your pickup location has been published successfully.
-                </Typography>
-                <button
-                  type="button"
-                  className="border border-[#0d0d0d] text-[#0d0d0d] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] mt-6 bg-[#ffffff]"
+                <IconButton
+                  aria-label="close"
                   onClick={handleClose}
+                  sx={{
+                    position: "absolute",
+                    right: 8,
+                    top: 8,
+                    color: (theme) => theme.palette.grey[500],
+                  }}
                 >
-                  View pickup location
-                </button>
+                  <Close />
+                </IconButton>
+                <Box display="flex" flexDirection="column" alignItems="center">
+                  <CheckCircle sx={{ fontSize: 60, color: "green" }} />
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    Added
+                  </Typography>
+                  <Typography variant="body1" sx={{ mt: 1, textAlign: "center" }}>
+                    Your pickup location has been set successfully.
+                  </Typography>
+                  <button
+                    type="button"
+                    className="border border-[#0d0d0d] text-[#0d0d0d] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] mt-6 bg-[#ffffff]"
+                    onClick={handleClose}
+                  >
+                    View pickup location
+                  </button>
+                </Box>
               </Box>
-            </Box>
-          </Modal>
-        </div>
-      ) : null}
+            </Modal>
+          </div>
+        ) : null}</>
+      }
     </div>
   );
 };

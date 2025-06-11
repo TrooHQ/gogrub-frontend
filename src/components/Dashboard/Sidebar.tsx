@@ -63,8 +63,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
-  // console.log("userData", userData)
-  // console.log("userDetails", userDetails)
+  console.log("userData", userData)
+  console.log("userDetails", userDetails)
   useEffect(() => {
     if (userDetails?.email_verified === false) {
       navigate("/verify-account");
@@ -100,6 +100,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   useEffect(() => {
     setHasAccount(!accountDetails?.account_name && !accountDetails?.account_number)
   }, [accountDetails?.account_name, accountDetails?.account_number]);
+
+  console.log("hasAccount", hasAccount)
 
   const transformedBranches = branches.map((branch: any) => ({
     label: branch.branch_name,
@@ -143,6 +145,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
   const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
 
+  console.log("currentPlanName", currentPlanName)
   const commonMenu: MenuItem[] = [
     {
       subTitle: "RESTAURANT",
@@ -290,7 +293,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     >
       <div className="grid items-center gap-3">
         <div className="flex flex-col items-center justify-center mt-4 gap-x-4">
-          {userData?.onboarding_type === "gogrub" ? (
+          {userData?.business_type === "gogrub" ? (
             <img src={GoGrubLogo} alt="Logo" className="mb-8" />
           ) : (
             <>
@@ -444,7 +447,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               // (menu.link === "/business-information" && (!accountDetails?.account_name && !accountDetails?.account_number)) ?
               >
                 {menu.title && (
-                  (menu.link === "/business-information" && hasAccount) ?
+                  (menu.link === "/business-information" && !hasAccount) ?
                     <div className="text-white bg-red-500 rounded-full animate-ping size-4">
                       <RiErrorWarningLine className="w-full h-full" />
                     </div>
@@ -547,7 +550,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         <div className="flex items-start justify-start gap-0">
           <div>
             <div
-              className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center"
+              className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center cursor-pointer"
               // type="button"
               onClick={
                 !currentPlanName
@@ -556,17 +559,20 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               }
             >
               <span className="mr-2 text-base font-semibold text-white capitalize">
-                {userData?.onboarding_type === "gogrub" && currentPlanName
+                {
+                  currentPlanName ? currentPlanName : "Subscribe"
+                }
+                {/* {userData?.business_type === "gogrub" && currentPlanName
                   ? currentPlanName
                     .replace(`${userData.onboarding_type} `, "")
                     .replace("plan", "")
                     .trim()
-                  : userData?.onboarding_type === "troo" && currentPlanName
+                  : userData?.business_type === "troo" && currentPlanName
                     ? currentPlanName
                       .replace(`${userData.onboarding_type} `, "")
                       .replace("plan", "")
                       .trim()
-                    : "Subscribe"}
+                    : "Subscribe"} */}
               </span>
               <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
             </div>
