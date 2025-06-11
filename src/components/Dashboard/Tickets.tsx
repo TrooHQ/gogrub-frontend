@@ -4,7 +4,7 @@ import More from "../../assets/more_vert.svg";
 import Refresh from "../../assets/refresh.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ChangeBranchForTicket from "./ChangeBranchForTicket";
+// import ChangeBranchForTicket from "./ChangeBranchForTicket";
 import { truncateText } from "../../utils/truncateText";
 import { AppDispatch, RootState } from "@/src/store/store";
 import { DropdownMenuTicketStatusUpdate } from "./DropDownTicketStatusUpdate";
@@ -44,7 +44,7 @@ const Tickets = () => {
         <TopMenuNav pathName="Tickets" />
         <div className="">
           <div className="mt-[40px]">
-            <ChangeBranchForTicket handleRefresh={handleRefresh} />
+            {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}
             <div className="flex items-center justify-between">
               <div className="border border-purple500 bg-white w-[196px] rounded-[5px] px-[16px] py-[10px] font-[500] text-purple500">
                 <button
@@ -174,7 +174,7 @@ const Tickets = () => {
 export default Tickets;
 
 
-//  {userData?.onboarding_type !== "gogrub" && (
+//  {userData?.business_type !== "gogrub" && (
 //               <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
 //                 <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">
 //                   Tickets

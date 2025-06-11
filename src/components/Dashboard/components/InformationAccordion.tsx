@@ -219,7 +219,7 @@ export default function InformationAccordion() {
     dispatch(fetchAccountDetailState());
   }, [token]);
 
-  const { accountDetails } = useSelector((state: RootState) => state.business);
+  // const { accountDetails } = useSelector((state: RootState) => state.business);
 
   useEffect(() => {
     if (banks.length > 0 && formData.payoutBankDetails.bankName) {
@@ -808,7 +808,7 @@ export default function InformationAccordion() {
           {renderFields("personalInfo", [
             { label: "First Name", field: "firstName" },
             { label: "Last Name", field: "lastName" },
-            { label: "Address", field: "address" },
+            // { label: "Address", field: "address" },
             { label: "City", field: "city" },
             { label: "State", field: "state" },
             { label: "Country", field: "country" },
@@ -827,12 +827,17 @@ export default function InformationAccordion() {
         >
           <div className="relative flex gap-3 font-base text-normal text-blackish">
             Bank Information
-            {!accountDetails?.account_number &&
+            {!isBankFormComplete && (
+              <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
+                <RiErrorWarningLine className="w-full h-full" />
+              </div>
+            )}
+            {/* {!accountDetails?.account_number &&
               !accountDetails?.account_name && (
                 <div className="absolute top-0 text-white bg-red-500 rounded-full -right-7 animate-ping size-4">
                   <RiErrorWarningLine className="w-full h-full" />
                 </div>
-              )}
+              )} */}
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">

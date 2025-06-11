@@ -5,7 +5,7 @@ import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import ChangeBranchForTicket from "./ChangeBranchForTicket";
+// import ChangeBranchForTicket from "./ChangeBranchForTicket";
 import { CalendarMonth } from "@mui/icons-material";
 import * as XLSX from "xlsx"; // For Excel export
 import { saveAs } from "file-saver"; // To save files locally
@@ -173,9 +173,9 @@ const OrderHistory = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBranch]);
 
-  const handleRefresh = () => {
-    getTickets({ date_filter: "today" });
-  };
+  // const handleRefresh = () => {
+  //   getTickets({ date_filter: "today" });
+  // };
 
   // Function to export data as Excel
   // Function to export selected data as Excel
@@ -299,7 +299,7 @@ const OrderHistory = () => {
         ) : (
           <div className="">
             <div className="mt-[40px]">
-              <ChangeBranchForTicket handleRefresh={handleRefresh} />
+              {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-[32px]">
                   <div className="">
@@ -444,10 +444,10 @@ const OrderHistory = () => {
                         <p className="text-start" onClick={handleCustomerMenu}>
                           {item.order_number || "-"}
                         </p>
-                        <p className=" " onClick={handleTicketMenu}>
+                        <p className="" onClick={handleTicketMenu}>
                           {item.createdAt.slice(0, 10)}
                         </p>
-                        <p className=" " onClick={handleTicketMenu}>
+                        <p className="" onClick={handleTicketMenu}>
                           {item.createdAt.slice(11, 16)}
                         </p>
                         <p onClick={() => handleCustomerShow(item)}>
