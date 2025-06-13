@@ -18,9 +18,7 @@ import { stateOptions } from "../../utils/stateOptions";
 
 const PickupLocation = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { pickupLocations: locations, loading } = useSelector(
-    (state: RootState) => state.asset
-  );
+  const { pickupLocations: locations, loading } = useSelector((state: RootState) => state.asset);
 
   const [isPickupEnabled, setIsPickupEnabled] = useState(false);
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);

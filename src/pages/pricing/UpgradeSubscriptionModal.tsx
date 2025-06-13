@@ -12,6 +12,7 @@ import Logo from "../../assets/Union.svg";
 import CheckCirle from "../../assets/check_circle1.svg";
 import Pattern from "../../assets/ChhosePlan.svg";
 import { Link, useLocation } from "react-router-dom";
+import dayjs from "dayjs";
 import { setSubscription } from "../../slices/setupSlice";
 
 interface Plan {
@@ -197,7 +198,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       toast.success(response.data.message || "Payment Verified successfully!");
       // wait 3 seconds then route to online ordering
       setTimeout(() => {
-        dispatch(setSubscription(false));
+        // dispatch(setSubscription(false));
         // window.location.href = "/online-ordering";
       }, 3000);
 
@@ -208,6 +209,39 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       //
     }
   };
+
+  const [isNewUser, setIsNewUser] = useState<any>(null);
+  // using this to check if the user has subscribed
+  useEffect(() => {
+    const getUserOnboardChecks = async () => {
+      const headers = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${SERVER_DOMAIN}/userOnboardChecks`,
+          headers
+        );
+        const createdDate = dayjs(response?.data?.businessPlan?.createdAt);
+        const updatedDate = dayjs(response?.data?.businessPlan?.updatedAt);
+
+        // isSame = 
+        console.log("resp", response?.data?.businessPlan?.createdAt, response?.data?.businessPlan?.updatedAt);
+        setIsNewUser(createdDate?.format("YYYY-MM-DD") === updatedDate?.format("YYYY-MM-DD"));
+        // setUserChecks(response.data);
+      } catch (error) {
+        // console.error("Error getting Business Details:", error);
+      }
+    };
+
+    getUserOnboardChecks();
+
+  }, [token])
+
+  console.log("isNewUser:", isNewUser);
 
   useEffect(() => {
     if (reference) {
@@ -352,7 +386,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               )}
             </div>
 
-            {/* <Link
+            {isNewUser && <Link
               to="/online-ordering"
               onClick={() => dispatch(setSubscription(false))}
             >
@@ -365,7 +399,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               >
                 Get Your URL
               </button>
-            </Link> */}
+            </Link>}
           </div>
         </div>
       </Modal>

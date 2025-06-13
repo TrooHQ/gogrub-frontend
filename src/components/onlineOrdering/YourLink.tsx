@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAccountDetails } from "../../slices/businessSlice";
 import { RootState } from "../../store/store";
 import { fetchOnlineOrderingLink } from "../../slices/assetSlice";
+import { Link } from "react-router-dom";
+// import axios from "axios";
+// import { SERVER_DOMAIN } from "../../Api/Api";
+// import { toast } from "react-toastify";
 
 const YourLink = () => {
   const dispatch = useDispatch();
@@ -13,14 +17,20 @@ const YourLink = () => {
   const { userDetails } = useSelector((state: RootState) => state.user);
 
   // const businessDetails = useSelector((state: RootState) => state.business);
+  const { accountDetails } = useSelector((state: RootState) => state.business);
+
+  console.log("accountDetails", accountDetails?.account_name, accountDetails?.account_number);
+
   const { onlineOrderingLink, loading } = useSelector(
     (state: RootState) => state.asset
   );
+  const token = userDetails?.userData?.token;
 
   useEffect(() => {
     dispatch(fetchAccountDetails() as any);
-    console.log(selectedBranch?.id);
-  }, [dispatch]);
+    // console.log(selectedBranch?.id);
+
+  }, [dispatch, token]);
 
   useEffect(() => {
     if (selectedBranch?.id) {
@@ -40,15 +50,31 @@ const YourLink = () => {
 
   return (
     <div>
-      {businessLogo !== "" ? (
+      {(accountDetails?.account_name && accountDetails?.account_number) ?
         <div>
-          <YourLinkWithNoLogo
-            generateOnlineOrderingLink={generateOnlineOrderingLink}
-            businessLogo={businessLogo}
-            onlineOrderingLink={onlineOrderingLink}
-            loading={loading}
-          />
-          {/* <div className="flex flex-col gap-4 items-center justify-center h-full pt-[100px]">
+          <div className="flex flex-col items-center justify-center h-full pt-[100px]">
+            <h3 className="text-[#121212] text-center font-sans text-[20px] not-italic font-medium leading-[26px] tracking-[0.15px]">
+              Please fill in your bank information to generate your online ordering link.
+            </h3>
+            <p className="text-gray-500 text-center mt-4">
+            </p>
+            <Link to="/business-information" className="text-white mt-4 py-2 px-4 rounded bg-black">
+              {/* <span className="border border-purple-500 p-4 rounded hover:bg-purple-500 hover:text-white transition-colors"> */}
+              Complete Account Details
+              {/* </span> */}
+            </Link>
+          </div>
+        </div> :
+        <>
+          {businessLogo !== "" ? (
+            <div>
+              <YourLinkWithNoLogo
+                generateOnlineOrderingLink={generateOnlineOrderingLink}
+                businessLogo={businessLogo}
+                onlineOrderingLink={onlineOrderingLink}
+                loading={loading}
+              />
+              {/* <div className="flex flex-col gap-4 items-center justify-center h-full pt-[100px]">
             <h3 className="text-[#121212] text-center font-sans text-[20px] not-italic font-medium leading-[26px] tracking-[0.15px]">
               Your Generated Link
             </h3>
@@ -61,7 +87,7 @@ const YourLink = () => {
             </div>
           </div> */}
 
-          {/* {!isCustomizing && (
+              {/* {!isCustomizing && (
             <div className="mt-11 text-center">
               <button
                 className="text-[#3E3C7F] bg-white py-3 px-6 rounded mt-5 border border-purple500 w-fit"
@@ -72,7 +98,7 @@ const YourLink = () => {
             </div>
           )} */}
 
-          {/* {isCustomizing && (
+              {/* {isCustomizing && (
             <div className="flex flex-col items-center mt-8 gap-4">
               <div className="flex gap-2 items-center border border-gray-300 rounded-md overflow-hidden shadow-sm w-[60%]">
                 <span className="bg-gray-100 text-gray-500 px-3 py-2">
@@ -102,15 +128,16 @@ const YourLink = () => {
               </div>
             </div>
           )} */}
-        </div>
-      ) : (
-        <YourLinkWithNoLogo
-          generateOnlineOrderingLink={generateOnlineOrderingLink}
-          businessLogo={businessLogo}
-          onlineOrderingLink={onlineOrderingLink}
-          loading={loading}
-        />
-      )}
+            </div>
+          ) : (
+            <YourLinkWithNoLogo
+              generateOnlineOrderingLink={generateOnlineOrderingLink}
+              businessLogo={businessLogo}
+              onlineOrderingLink={onlineOrderingLink}
+              loading={loading}
+            />
+          )}
+        </>}
     </div>
   );
 };

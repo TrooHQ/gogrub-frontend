@@ -58,7 +58,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     hasDeliveryDetails: true,
   });
 
-  console.log(userDetails);
+  // console.log(userDetails);
   const queryParams = new URLSearchParams(location.search);
   const reference = queryParams.get("reference");
   const isToggled = useSelector(selectToggleState);
