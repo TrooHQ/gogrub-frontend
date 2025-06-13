@@ -462,7 +462,7 @@ const MenuList = () => {
                       Menu Group
                     </th>
                     <th className="px-4 py-2 text-base font-normal text-start">
-                      Menu Name
+                      Menu Item
                     </th>
                     {/* <th className="px-4 py-2 text-base font-normal">Quantity</th> */}
                     <th className="px-4 py-2 text-base font-normal">Price</th>
