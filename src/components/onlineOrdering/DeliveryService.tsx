@@ -18,7 +18,7 @@ import { stateOptions } from "../../utils/stateOptions";
 const DeliveryService = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [isPickupEnabled, setIsPickupEnabled] = useState(false);
+  const [isPickupEnabled, setIsPickupEnabled] = useState(true);
   const [selectedState, setSelectedState] = useState("");
   const [fixedPrice, setFixedPrice] = useState("");
   const [supportLink, setSupportLink] = useState("");
@@ -93,7 +93,7 @@ const DeliveryService = () => {
 
   return (
     <div className="h-full">
-      {state.showLocation && !deliveryDetails && (
+      {state.showLocation && (
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center g-2.5">
             <span className="text-[#121212] text-base font-normal">
