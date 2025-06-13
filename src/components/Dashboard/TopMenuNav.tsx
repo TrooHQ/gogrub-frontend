@@ -52,10 +52,10 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   const { userData, userDetails } = useSelector((state: any) => state.user);
   const location = useLocation();
   const [userCheck, setUserChecks] = useState<UserCheckState>({
-    hasMenu: false,
-    businessPlan: false,
-    hasPickUpLocation: false,
-    hasDeliveryDetails: false,
+    hasMenu: true,
+    businessPlan: true,
+    hasPickUpLocation: true,
+    hasDeliveryDetails: true,
   });
 
   console.log(userDetails);
