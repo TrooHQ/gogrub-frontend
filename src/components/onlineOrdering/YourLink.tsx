@@ -50,7 +50,7 @@ const YourLink = () => {
 
   return (
     <div>
-      {(accountDetails?.account_name && accountDetails?.account_number) ?
+      {!(accountDetails?.account_name && accountDetails?.account_number) ?
         <div>
           <div className="flex flex-col items-center justify-center h-full pt-[100px]">
             <h3 className="text-[#121212] text-center font-sans text-[20px] not-italic font-medium leading-[26px] tracking-[0.15px]">

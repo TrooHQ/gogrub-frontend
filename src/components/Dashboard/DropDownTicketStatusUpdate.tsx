@@ -23,10 +23,10 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets }
     };
 
     //     url: https://troox-backend-new.vercel.app/api/order/updateBranchOrder/
-
+    // /order/updateGoGrubBranchOrder/
     try {
       const response = await axios.put(
-        `${SERVER_DOMAIN}/order/updateBranchOrder/`,
+        `${SERVER_DOMAIN}/order/updateGoGrubBranchOrder/`,
         {
           branch_id: branchId,
           order_id: orderId,
@@ -52,7 +52,7 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets }
         Complete Order
       </li>
       <li
-        onClick={() => updateOrderStatus("cancelled")}
+        onClick={() => updateOrderStatus("cancel")}
         className="font-[400] cursor-pointer text-left"
       >
         Cancel Order
