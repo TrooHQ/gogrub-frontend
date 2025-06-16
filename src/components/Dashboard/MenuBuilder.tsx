@@ -11,7 +11,6 @@ import { AppDispatch } from "@/src/store/store";
 import {
   fetchMenuCategories,
   fetchMenuGroups,
-  fetchMenuItemsByMenuGroup,
   fetchMenuItemsWithoutStatus,
 } from "../../slices/menuSlice";
 import { truncateText } from "../../utils/truncateText";
@@ -391,11 +390,16 @@ const MenuBuilder = () => {
         headers
       );
       dispatch(
-        fetchMenuItemsByMenuGroup({
+        fetchMenuItemsWithoutStatus({
           branch_id: selectedBranch.id,
-          menu_group_name: activeGroup?.name,
           page: currentPage || 1,
+          menu_group_name: activeGroup?.name,
         })
+        // fetchMenuItemsByMenuGroup({
+        //   branch_id: selectedBranch.id,
+        //   menu_group_name: activeGroup?.name,
+        //   page: currentPage || 1,
+        // })
       );
       toast.success(response.data.message || "Menu group added successfully.");
       setMenuName("");

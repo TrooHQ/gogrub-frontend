@@ -300,6 +300,7 @@ export const fetchMenuItemsByMenuGroup = createAsyncThunk<
           },
         }
       );
+      console.log("response", response.data);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
