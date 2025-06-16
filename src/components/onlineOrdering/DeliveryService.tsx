@@ -18,7 +18,7 @@ import { stateOptions } from "../../utils/stateOptions";
 const DeliveryService = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [isPickupEnabled, setIsPickupEnabled] = useState(true);
+  const [isDeliveryEnabled, setIsDeliveryEnabled] = useState(true);
   const [selectedState, setSelectedState] = useState("");
   const [fixedPrice, setFixedPrice] = useState("");
   const [supportLink, setSupportLink] = useState("");
@@ -30,6 +30,11 @@ const DeliveryService = () => {
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);
 
   useEffect(() => {
+    const storedValue = localStorage.getItem("online_ordering_delivery_enabled");
+    setIsDeliveryEnabled(storedValue ? JSON.parse(storedValue) : false);
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchDeliveryDetails());
   }, [dispatch]);
 
@@ -38,7 +43,8 @@ const DeliveryService = () => {
   );
 
   const handleToggleChange = () => {
-    setIsPickupEnabled((prev) => !prev);
+    setIsDeliveryEnabled((prev) => !prev);
+    localStorage.setItem("online_ordering_delivery_enabled", JSON.stringify(!isDeliveryEnabled));
   };
 
   const handleScheduleToggleChange = () => {
@@ -100,34 +106,34 @@ const DeliveryService = () => {
               Do you want to offer delivery service?
             </span>
             <Switch
-              checked={isPickupEnabled}
+              checked={isDeliveryEnabled}
               onChange={handleToggleChange}
               color="primary"
-              style={{ color: isPickupEnabled ? "#5855B3" : "#929292" }}
+              style={{ color: isDeliveryEnabled ? "#5855B3" : "#929292" }}
             />
             <span
               className={clsx({
-                "text-[#5855B3]": isPickupEnabled,
-                "text-[#929292]": !isPickupEnabled,
+                "text-[#5855B3]": isDeliveryEnabled,
+                "text-[#929292]": !isDeliveryEnabled,
                 "text-base font-medium": true,
               })}
             >
-              {isPickupEnabled ? "Enabled" : "Disabled"}
+              {isDeliveryEnabled ? "Enabled" : "Disabled"}
             </span>
           </div>
 
           <button
             className="border border-[#090909] bg-[#090909] w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-[#ffffff]"
             onClick={handleCreateLocation}
-            disabled={!isPickupEnabled}
-            style={{ opacity: isPickupEnabled ? 1 : 0.5, cursor: isPickupEnabled ? "pointer" : "not-allowed" }}
+            disabled={!isDeliveryEnabled}
+            style={{ opacity: isDeliveryEnabled ? 1 : 0.5, cursor: isDeliveryEnabled ? "pointer" : "not-allowed" }}
           >
             Add New address
           </button>
         </div>
       )}
 
-      {!isPickupEnabled ? (
+      {!isDeliveryEnabled ? (
         <div className="flex items-center justify-center mt-10">
           <p className="text-xl font-semibold text-gray-500">You do not have delivery service enabled.</p>
         </div>
@@ -171,23 +177,23 @@ const DeliveryService = () => {
               Do you want to offer delivery service?
             </span>
             <Switch
-              checked={isPickupEnabled}
+              checked={isDeliveryEnabled}
               onChange={handleToggleChange}
               color="primary"
-              style={{ color: isPickupEnabled ? "#5855B3" : "#929292" }}
+              style={{ color: isDeliveryEnabled ? "#5855B3" : "#929292" }}
             />
             <span
               className={clsx({
-                "text-[#5855B3]": isPickupEnabled,
-                "text-[#929292]": !isPickupEnabled,
+                "text-[#5855B3]": isDeliveryEnabled,
+                "text-[#929292]": !isDeliveryEnabled,
                 "text-base font-medium": true,
               })}
             >
-              {isPickupEnabled ? "Enabled" : "Disabled"}
+              {isDeliveryEnabled ? "Enabled" : "Disabled"}
             </span>
           </div> */}
 
-              {isPickupEnabled && (
+              {isDeliveryEnabled && (
                 <div className="mt-[80px] w-[60%] m-auto">
                   <form className="space-y-6">
                     <CustomSelect5

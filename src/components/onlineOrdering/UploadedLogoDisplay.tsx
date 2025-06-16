@@ -91,8 +91,8 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
               {loading
                 ? "Loading..."
                 : onlineOrderingLink?.url
-                ? truncateText(onlineOrderingLink?.url, 30)
-                : "No link generated yet"}
+                  ? truncateText(onlineOrderingLink?.url, 30)
+                  : "No link generated yet"}
             </span>
             {copied ? (
               <CheckCircle className="w-5 h-5 text-green-500" />
@@ -137,7 +137,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
         <form className="w-4/5 mt-5 flex flex-col gap-4">
           <CustomInput
             type="text"
-            label="Add Business Full Name *"
+            label="Add Business Full Name*"
             value={businessFullName}
             onChange={handleBusinessFullNameChange}
             className="border-gray-500"
@@ -145,18 +145,18 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
           />
 
           <CustomTextarea
-            label="Add a simple description  *"
+            label="Add a simple description*"
             placeholder="E.g.  A top-rated restaurant serving fresh and delicious meals daily"
             value={simpleDescription}
             // maxLength={4}
             onChange={handleSimpleDescriptionChange}
           />
           <CustomTextarea
-            label="Add your instruction *"
+            label="Add your instruction*"
             placeholder="E.g. Orders are accepted from 12 PM to 5 PM, Monday to Friday. Tap the link to start receiving online orders."
             value={instruction}
             onChange={handleInstructionChange}
-            // maxLength={4}
+          // maxLength={4}
           />
 
           <button

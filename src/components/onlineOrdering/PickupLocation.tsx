@@ -35,8 +35,17 @@ const PickupLocation = () => {
     dispatch(fetchPickupLocations());
   }, [dispatch]);
 
+
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("online_ordering_pickup_enabled");
+    setIsPickupEnabled(storedValue ? JSON.parse(storedValue) : false);
+  }, []);
+
   const handleToggleChange = () => {
-    setIsPickupEnabled((prev) => !prev);
+    setIsPickupEnabled(isPickupEnabled => !isPickupEnabled);
+    localStorage.setItem("online_ordering_pickup_enabled", JSON.stringify(!isPickupEnabled));
+
   };
 
   const handleScheduleToggleChange = () => {
