@@ -78,7 +78,7 @@ export const fetchOpenTickets = createAsyncThunk<
       );
       return response.data.data;
     } catch (error: any) {
-      toast.error("Error retrieving open tickets");
+      // toast.error("Error retrieving open tickets");
       return rejectWithValue(
         error.response?.data?.message || "Error retrieving open tickets"
       );
@@ -101,7 +101,7 @@ export const fetchClosedTickets = createAsyncThunk<
       );
       return response.data.data;
     } catch (error: any) {
-      toast.error("Error retrieving closed tickets");
+      // toast.error("Error retrieving closed tickets");
       return rejectWithValue(
         error.response?.data?.message || "Error retrieving closed tickets"
       );
