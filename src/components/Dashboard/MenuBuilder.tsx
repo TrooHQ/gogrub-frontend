@@ -35,13 +35,12 @@ const MenuBuilder = () => {
     menuGroups,
     menuItemsWithoutStatus,
     totalItems,
-    totalPages,
+    // totalPages,
     currentPage: theCurrentPage,
     mgLoading,
   } = useSelector((state: any) => state.menu);
   const { selectedBranch } = useSelector((state: any) => state.branches);
   const [currentPage, setCurrentPage] = useState(theCurrentPage || 1);
-  console.log(totalItems, totalPages, currentPage, "allP");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addMenuGroup, setAddMenuGroup] = useState(false);
   const [addMenuItem, setAddMenuItem] = useState(false);
@@ -441,7 +440,7 @@ const MenuBuilder = () => {
         page: page,
       })
     );
-    console.log(`Fetching menu items for page ${page}`);
+    // console.log(`Fetching menu items for page ${page}`);
   };
 
   return (

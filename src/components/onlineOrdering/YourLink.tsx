@@ -16,31 +16,25 @@ const YourLink = () => {
   const { selectedBranch } = useSelector((state: RootState) => state.branches);
   const { userDetails } = useSelector((state: RootState) => state.user);
 
-  // const businessDetails = useSelector((state: RootState) => state.business);
   const { accountDetails } = useSelector((state: RootState) => state.business);
-
-  console.log("accountDetails", accountDetails?.account_name, accountDetails?.account_number);
 
   const { onlineOrderingLink, loading } = useSelector(
     (state: RootState) => state.asset
   );
-  const token = userDetails?.userData?.token;
 
   useEffect(() => {
     dispatch(fetchAccountDetails() as any);
-    // console.log(selectedBranch?.id);
 
-  }, [dispatch, token]);
+  }, [dispatch]);
+
 
   useEffect(() => {
     if (selectedBranch?.id) {
-      generateOnlineOrderingLink();
+      dispatch(fetchOnlineOrderingLink(selectedBranch?.id || "") as any);
     }
   }, [selectedBranch?.id, dispatch]);
 
-  const generateOnlineOrderingLink = () => {
-    dispatch(fetchOnlineOrderingLink(selectedBranch?.id || "") as any);
-  };
+
 
   useEffect(() => {
     if (userDetails) {
@@ -69,7 +63,7 @@ const YourLink = () => {
           {businessLogo !== "" ? (
             <div>
               <YourLinkWithNoLogo
-                generateOnlineOrderingLink={generateOnlineOrderingLink}
+                // generateOnlineOrderingLink={generateOnlineOrderingLink}
                 businessLogo={businessLogo}
                 onlineOrderingLink={onlineOrderingLink}
                 loading={loading}
@@ -131,7 +125,7 @@ const YourLink = () => {
             </div>
           ) : (
             <YourLinkWithNoLogo
-              generateOnlineOrderingLink={generateOnlineOrderingLink}
+              // generateOnlineOrderingLink={generateOnlineOrderingLink}
               businessLogo={businessLogo}
               onlineOrderingLink={onlineOrderingLink}
               loading={loading}
