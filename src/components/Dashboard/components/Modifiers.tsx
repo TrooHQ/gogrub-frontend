@@ -30,20 +30,20 @@ interface Modifier {
 }
 
 const Modifiers = ({
-  activeSubMenu,
+  // activeSubMenu,
   selectedBranch,
-  selectedMenuItem,
+  // selectedMenuItem,
   addModifierModar,
   setAddModifierModal,
   handleAddModifier,
 }: any) => {
   const dispatch = useDispatch<AppDispatch>();
-  console.log(selectedMenuItem);
+
   const [modifiers, setModifiers] = useState<Modifier[]>([
     { id: 1, name: "", price: "" },
   ]);
 
-  console.log(modifiers);
+  console.log("modifier", modifiers);
 
   const [confirmSaveModal, setConfirmSaveModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -73,9 +73,7 @@ const Modifiers = ({
     id: branch._id,
   }));
 
-  useEffect(() => {
-    // Clear the fetched modifiers when activeSubMenu changes
-  }, [activeSubMenu]);
+
 
   const fetchModifierGroups = async () => {
     setIsGroupFetching(true);
@@ -87,9 +85,12 @@ const Modifiers = ({
     };
     try {
       const response = await axios.get(
-        `${SERVER_DOMAIN}/menu/getMenuModifierGroupByItem/?attach_to=item&name=${selectedMenuItem.menu_item_name}&branch_id=${selectedBranch?.id}`,
+        // /menu/getAllModifierGroups/?branch_id=669e67afbe2d93ee11921119
+        `${SERVER_DOMAIN}/menu/getAllModifierGroups/?branch_id=${selectedBranch?.id}`,
+        // `${SERVER_DOMAIN}/menu/getMenuModifierGroupByItem/?attach_to=item&name=${selectedMenuItem.menu_item_name}&branch_id=${selectedBranch?.id}`,
         headers
       );
+      console.log("resp", response);
       setFetchedModifierGroups(response.data.data || []);
       // toast.success("Modifier groups fetched successfully.");
     } catch (error) {
@@ -100,13 +101,17 @@ const Modifiers = ({
   };
 
   useEffect(() => {
-    if (selectedMenuItem) {
-      const fetchData = async () => {
-        await Promise.all([fetchModifierGroups()]);
-      };
-      fetchData();
-    }
-  }, [selectedMenuItem, selectedBranch?.id, activeSubMenu]);
+    fetchModifierGroups()
+  }, []);
+
+  // useEffect(() => {
+  //   if (selectedMenuItem) {
+  //     const fetchData = async () => {
+  //       await Promise.all([fetchModifierGroups()]);
+  //     };
+  //     fetchData();
+  //   }
+  // }, [selectedMenuItem, selectedBranch?.id, activeSubMenu]);
 
   const removeModifier = (id: number) => {
     setModifiers((prev) => prev.filter((modifier) => modifier.id !== id));
@@ -118,7 +123,7 @@ const Modifiers = ({
 
   const handleConfirmSave = async () => {
     setLoading(true);
-    console.log(selectedModifier);
+    // console.log(selectedModifier);
 
     // Create the payload with branch_id, modifier_group_name, and modifiers array
     const payload = {
@@ -126,11 +131,13 @@ const Modifiers = ({
       attach_to: "modifier_group",
       modifier_name: selectedModifier.modifier_group_name,
       // modifier_group_name: selectedModifier.modifier_group_name,
-      price: selectedModifier.modifiers[0].modifier_price,
+      // price: selectedModifier.modifiers[0].modifier_price,
       // price: selectedModifier.modifier_price,
 
       modifier_group_id: selectedModifier._id,
     };
+
+    console.log("payload", payload);
 
     const headers = {
       headers: {
@@ -149,9 +156,11 @@ const Modifiers = ({
       navigate("/menu-list");
       setAddModifierModal(false);
       fetchModifierGroups();
+      setLoading(false);
       setModifiers([{ id: 1, name: "", price: "" }]); // Reset modifiers state
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to add modifiers.");
+      setLoading(false);
     } finally {
       setLoading(false);
       setConfirmSaveModal(false); // Close the confirmation modal
@@ -290,23 +299,23 @@ const Modifiers = ({
     };
 
     const payload = {
-      modifier_group_name: groupName,
+      group_name: groupName,
       branch_id: selectedBranch.id,
-      attach_to: "item",
-      menu_item_name: selectedMenuItem.menu_item_name,
     };
     try {
       setModGroupLoading(true);
       const response = await axios.post(
-        `${SERVER_DOMAIN}/menu/attachMenuModifierGroup/`,
+        `${SERVER_DOMAIN}/menu/createMenuModifierGroup/`,
         payload,
         headers
       );
       toast.success(response.data.message || "Successful");
       fetchModifierGroups();
       setGroupName("");
+      setModGroupLoading(false);
     } catch (error: any) {
       toast.error(error.response.data.message);
+      setModGroupLoading(false);
     } finally {
       setModGroupLoading(false);
     }
@@ -325,7 +334,7 @@ const Modifiers = ({
       branch_id: selectedBranch.id, // Replace with the correct branch ID
       modifier_group_name: modifier.modifier_group_name,
       new_group_name: newGroupName,
-      menu_item_name: selectedMenuItem.menu_item_name,
+      // menu_item_name: selectedMenuItem.menu_item_name,
       rule: "single", // Adjust as necessary
     };
 

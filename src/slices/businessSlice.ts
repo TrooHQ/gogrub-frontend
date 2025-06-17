@@ -11,6 +11,9 @@ interface BusinessDetails {
   tableNumber: string;
   URL: string;
   colour_scheme: string;
+  businessFullName: string;
+  orderingDescription: string;
+  orderingInstruction: string;
 }
 
 interface BusinessState {
@@ -51,8 +54,6 @@ export const fetchAccountDetails = createAsyncThunk(
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
-      console.log("account details store response", response.data);
       // return response.data.data.business_information;
       return response.data.data;
     } catch (error: any) {

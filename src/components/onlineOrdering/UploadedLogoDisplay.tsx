@@ -1,9 +1,11 @@
 import { CheckCircle, ContentCopy } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import fileDownload from "../../assets/file_download.svg";
 import { truncateText } from "../../utils/truncateText";
 import CustomInput from "../inputFields/CustomInput";
 import CustomTextarea from "../inputFields/CustomTextarea";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface UploadedLogoDisplayProps {
   logo: any;
@@ -17,7 +19,7 @@ interface UploadedLogoDisplayProps {
   setSimpleDescription: any;
   instruction: any;
   setInstruction: any;
-  showForm: any;
+  // showForm: any;
 }
 
 const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
@@ -32,7 +34,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
   setSimpleDescription,
   instruction,
   setInstruction,
-  showForm,
+  // showForm,
 }) => {
   const [copied, setCopied] = useState(false);
 
@@ -43,6 +45,17 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
     // Reset the icon after 2 seconds
     setTimeout(() => setCopied(false), 2000);
   };
+
+
+  const { businessDetails } = useSelector((state: RootState) => state.business);
+
+  useEffect(() => {
+    if (businessDetails?.businessFullName) {
+      setBusinessFullName(businessDetails?.businessFullName);
+      setSimpleDescription(businessDetails?.orderingDescription);
+      setInstruction(businessDetails?.orderingInstruction);
+    }
+  }, [businessDetails?.businessFullName, businessDetails?.orderingDescription, businessDetails?.orderingInstruction, setBusinessFullName, setSimpleDescription, setInstruction]);
 
   const handleDownloadQR = () => {
     const link = document.createElement("a");
@@ -133,41 +146,41 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
       </div>
 
       {/* Description and instruction form */}
-      {showForm && (
-        <form className="w-4/5 mt-5 flex flex-col gap-4">
-          <CustomInput
-            type="text"
-            label="Add Business Full Name*"
-            value={businessFullName}
-            onChange={handleBusinessFullNameChange}
-            className="border-gray-500"
-            fullWidth
-          />
+      {/* {showForm && ( */}
+      <form className="w-4/5 mt-5 flex flex-col gap-4">
+        <CustomInput
+          type="text"
+          label="Add Business Full Name*"
+          value={businessFullName}
+          onChange={handleBusinessFullNameChange}
+          className="border-gray-500"
+          fullWidth
+        />
 
-          <CustomTextarea
-            label="Add a simple description*"
-            placeholder="E.g.  A top-rated restaurant serving fresh and delicious meals daily"
-            value={simpleDescription}
-            // maxLength={4}
-            onChange={handleSimpleDescriptionChange}
-          />
-          <CustomTextarea
-            label="Add your instruction*"
-            placeholder="E.g. Orders are accepted from 12 PM to 5 PM, Monday to Friday. Tap the link to start receiving online orders."
-            value={instruction}
-            onChange={handleInstructionChange}
+        <CustomTextarea
+          label="Add a simple description*"
+          placeholder="E.g.  A top-rated restaurant serving fresh and delicious meals daily"
+          value={simpleDescription}
           // maxLength={4}
-          />
+          onChange={handleSimpleDescriptionChange}
+        />
+        <CustomTextarea
+          label="Add your instruction*"
+          placeholder="E.g. Orders are accepted from 12 PM to 5 PM, Monday to Friday. Tap the link to start receiving online orders."
+          value={instruction}
+          onChange={handleInstructionChange}
+        // maxLength={4}
+        />
 
-          <button
-            type="button"
-            className="bg-[#0d0d0d] text-center text-white py-3 px-4 rounded w-fit"
-            onClick={handleGenerateClick}
-          >
-            {loading ? "Generating..." : "Generate  Your link"}
-          </button>
-        </form>
-      )}
+        <button
+          type="button"
+          className="bg-[#0d0d0d] text-center text-white py-3 px-4 rounded w-fit"
+          onClick={handleGenerateClick}
+        >
+          {loading ? "Generating..." : "Generate  Your link"}
+        </button>
+      </form>
+      {/* )} */}
     </div>
   );
 };

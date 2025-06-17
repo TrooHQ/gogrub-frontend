@@ -10,30 +10,31 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { fetchAccountDetails } from "../../slices/businessSlice";
+
 
 const YourLinkWithNoLogo = ({
-  generateOnlineOrderingLink,
+  // generateOnlineOrderingLink,
   businessLogo,
   onlineOrderingLink,
-  loading,
+  // loading,
 }: {
-  generateOnlineOrderingLink: any;
+  // generateOnlineOrderingLink: any;
   businessLogo: any;
   onlineOrderingLink: any;
   loading: any;
 }) => {
   const { userData } = useSelector((state: RootState) => state.user);
-  const { selectedBranch } = useSelector((state: RootState) => state.branches);
+  // const { selectedBranch } = useSelector((state: RootState) => state.branches);
   const dispatch = useDispatch();
 
-  console.log(selectedBranch);
-  useEffect(() => {
-    if (selectedBranch?.id) {
-      generateOnlineOrderingLink();
-    }
-  }, [selectedBranch?.id, dispatch]);
 
-  console.log(onlineOrderingLink, businessLogo, "qqqqq", userData);
+  // useEffect(() => {
+  //   if (selectedBranch?.id) {
+  //     generateOnlineOrderingLink();
+  //   }
+  // }, [selectedBranch?.id, generateOnlineOrderingLink]);
+
 
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,7 +50,7 @@ const YourLinkWithNoLogo = ({
   const [instruction, setInstruction] = useState("");
   const [addLoading, setAddLoading] = useState(false);
 
-  const [showForm, setShowForm] = useState(true);
+  // const [showForm, setShowForm] = useState(true);
 
   const handleUploadLogo = () => {
     setIsModalOpen(true);
@@ -76,7 +77,6 @@ const YourLinkWithNoLogo = ({
   };
 
   const handleGenerateClick = () => {
-    console.log("Generated Link:", customLink);
     setIsCustomizing(false);
   };
 
@@ -102,7 +102,6 @@ const YourLinkWithNoLogo = ({
       setSelectedLogo(true);
     }
   }, [uploadedLogo]);
-  console.log(selectedLogo, "Uploaded Logo:", loading, showUploadProgress);
 
   const getYourLink = () => {
     setIsUploadSuccessful(true);
@@ -129,14 +128,14 @@ const YourLinkWithNoLogo = ({
         },
         headers
       );
-      console.log(response, "response here:");
+
       if (response.status === 200) {
-        console.log("Ordering details added successfully:", response.data);
         toast.success("Ordering details added successfully");
 
         // Call generateOnlineOrderingLink() if the API call is successful
-        setShowForm(false);
-        generateOnlineOrderingLink();
+        // setShowForm(false);
+        dispatch(fetchAccountDetails() as any)
+        // generateOnlineOrderingLink();
       } else {
         console.error("Failed to add ordering details:", response.data);
       }
@@ -147,7 +146,6 @@ const YourLinkWithNoLogo = ({
       setAddLoading(false);
     }
   };
-  console.log(uploadedLogo, "uploadedLogo");
   return (
     <div>
       {!businessLogo && !isUploadSuccessful ? (
@@ -214,7 +212,7 @@ const YourLinkWithNoLogo = ({
           setSimpleDescription={setSimpleDescription}
           instruction={instruction}
           setInstruction={setInstruction}
-          showForm={showForm}
+        // showForm={showForm}
         />
       )}
 
