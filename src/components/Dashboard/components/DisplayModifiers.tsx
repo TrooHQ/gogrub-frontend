@@ -89,14 +89,14 @@ const DisplayModifiers: React.FC<DisplayModifiersProps> = ({
                     {editId === modifierGroup._id ? (
                       <button
                         onClick={() => handleSaveClick(modifierGroup)}
-                        className="text-purple500 mr-3 cursor-pointer"
+                        className="mr-3 cursor-pointer text-purple500"
                       >
                         Save
                       </button>
                     ) : (
                       <EditOutlined
                         onClick={() => handleEditClick(modifierGroup)}
-                        className="text-purple500 mr-0 cursor-pointer"
+                        className="mr-0 cursor-pointer text-purple500"
                         fontSize="small"
                       />
                     )}
@@ -104,7 +104,7 @@ const DisplayModifiers: React.FC<DisplayModifiersProps> = ({
                       onClick={() =>
                         handleModifierGroupDeleteClick(modifierGroup.modifier_group_name)
                       }
-                      className="text-red-700 ml-3 cursor-pointer"
+                      className="ml-3 text-red-700 cursor-pointer"
                       fontSize="small"
                     />
                   </div>
@@ -116,39 +116,35 @@ const DisplayModifiers: React.FC<DisplayModifiersProps> = ({
                     handleKeepModifierGroupDetail(modifierGroup);
                   }}
                 >
-                  <img src={Add} alt="" /> Add - edit modifier item
+                  <img src={Add} alt="" /> Add modifier item
                 </button>
               </div>
 
               {/* Display modifiers when the group is expanded */}
               {expandedGroupId === modifierGroup._id && (
-                <div className="bg-gray-50 border-l-4 border-purple-500 rounded-md p-4 mt-2">
+                <div className="p-4 mt-2 border-l-4 border-purple-500 rounded-md bg-gray-50">
                   {modifierGroup.modifiers.length > 0 ? (
                     modifierGroup.modifiers.map((modifier, index) => (
                       <div
                         key={index}
-                        className={`flex justify-start gap-6 items-center py-2 ${
-                          index !== modifierGroup.modifiers.length - 1
-                            ? "border-b border-gray-300"
-                            : ""
-                        }`}
+                        className={`flex justify-start gap-6 items-center py-2 ${index !== modifierGroup.modifiers.length - 1
+                          ? "border-b border-gray-300"
+                          : ""
+                          }`}
                       >
-                        {/* Modifier name */}
-                        <p className="text-sm text-gray-700 flex-1">{modifier.modifier_name}</p>
+                        <p className="flex-1 text-sm text-gray-700">{modifier.modifier_name}</p>
 
-                        {/* Modifier price */}
-                        <p className="text-sm text-gray-700 font-semibold flex-none">
+                        <p className="flex-none text-sm font-semibold text-gray-700">
                           ₦{modifier.modifier_price}
                         </p>
 
-                        {/* Menu item name */}
-                        <p className="text-sm italic text-gray-500 flex-1">
+                        <p className="flex-1 text-sm italic text-gray-500">
                           {modifier.menu_item_name}
                         </p>
 
                         <DeleteForeverOutlined
                           onClick={() => handleDeleteClick(modifier._id)}
-                          className="text-red-700 ml-3 cursor-pointer"
+                          className="ml-3 text-red-700 cursor-pointer"
                         />
                       </div>
                     ))
@@ -166,3 +162,7 @@ const DisplayModifiers: React.FC<DisplayModifiersProps> = ({
 };
 
 export default DisplayModifiers;
+
+{/* Modifier name */ }
+{/* Modifier price */ }
+{/* Menu item name */ }

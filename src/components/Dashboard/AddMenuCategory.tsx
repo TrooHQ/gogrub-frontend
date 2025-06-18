@@ -140,6 +140,14 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
               error=""
               onChange={(newValue) => handleInputChange("menuName", newValue)}
             />
+            {/* <CustomInput
+              type="text"
+              label="label"
+              value={selectedBranch}
+              error=""
+              readOnly={true}
+              onChange={(newValue) => handleInputChange("menuName", newValue)}
+            /> */}
 
             <CustomSelect5
               options={branchOptions}
@@ -188,13 +196,13 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
                   <img
                     src={image}
                     alt="Uploaded Preview"
-                    className="mt-2 w-full h-auto"
+                    className="w-full h-auto mt-2"
                   />
                 </div>
               )}
             </div>
 
-            {error && <p className="text-red-500 text-center">{error}</p>}
+            {error && <p className="text-center text-red-500">{error}</p>}
           </div>
         </div>
 
