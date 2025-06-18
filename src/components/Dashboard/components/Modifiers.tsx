@@ -13,7 +13,7 @@ import Add from "../../../assets/addWhite.svg";
 import { truncateText } from "../../../utils/truncateText";
 import ModifierModal from "./ModifierModal";
 import DisplayModifiers from "./DisplayModifiers";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 type ModifierRules = {
   requireSelection: boolean;
@@ -57,7 +57,7 @@ const Modifiers = ({
   const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
   const [isGroupFetching, setIsGroupFetching] = useState(false);
   const [selectedModifier, setSelectedModifier] = useState({} as any);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { branches } = useSelector((state: any) => state.branches);
 
   useEffect(() => {
@@ -127,13 +127,12 @@ const Modifiers = ({
 
     // Create the payload with branch_id, modifier_group_name, and modifiers array
     const payload = {
-      branch_id: selectedBranch.id,
       attach_to: "modifier_group",
-      modifier_name: selectedModifier.modifier_group_name,
-      // modifier_group_name: selectedModifier.modifier_group_name,
-      // price: selectedModifier.modifiers[0].modifier_price,
-      // price: selectedModifier.modifier_price,
-
+      // modifier_name: selectedModifier.modifier_group_name,
+      modifier_name: modifiers[0].name,
+      menu_item_name: modifiers[0].name,
+      price: Number(modifiers[0].price),
+      branch_id: selectedBranch.id,
       modifier_group_id: selectedModifier._id,
     };
 
@@ -153,7 +152,7 @@ const Modifiers = ({
         headers
       );
       toast.success(response.data.message || "Modifiers added successfully.");
-      navigate("/menu-list");
+      // navigate("/menu-list");
       setAddModifierModal(false);
       fetchModifierGroups();
       setLoading(false);
@@ -392,36 +391,8 @@ const Modifiers = ({
         <div>
           {modifiers.map((modifier) => (
             <div key={modifier.id} className="grid gap-[8px]">
-              {/* <div className=" mt-[32px] flex items-center gap-[8px]"> */}
-              {/* <button
-                  className="w-[196px] border border-[#121212] rounded-[5px]  px-[16px] py-[8px] font-[500] text-purple500 text-[16px] flex items-center gap-[8px]"
-                  onClick={handleAddModifierGroup}
-                >
-                  {modGroupLoading ? "Loading..." : "Save Modifier Group"}
-                </button> */}
-              {/* <button
-                  className="px-[16px] py-[8px] font-[500]  rounded-[5px] text-purple500 text-[16px] flex items-center gap-[8px]"
-                  onClick={handleAddModifierGroup}
-                >
-                  <img src={Add} alt="" /> Add - edit modifier item
-                </button> */}
-              {/* </div> */}
-              <div className=" mt-[16px] flex items-center gap-[8px]">
-                {/* <input
-                  type="text"
-                  className=" border border-[#929292] rounded-[5px] placeholder:text-[#929292] py-[12px] w-[402px] px-[20px]"
-                  placeholder=" Enter modifier name "
-                  value={modifier.name}
-                  onChange={(e) => updateModifier(modifier.id, "name", e.target.value)}
-                /> */}
 
-                {/* <input
-                  type="text"
-                  className=" border border-[#929292] rounded-[5px] placeholder:text-[#929292] py-[12px] w-[127px] px-[20px]"
-                  placeholder=" Enter price "
-                  value={modifier.price}
-                  onChange={(e) => updateModifier(modifier.id, "price", e.target.value)}
-                /> */}
+              <div className=" mt-[16px] flex items-center gap-[8px]">
 
                 <input
                   type="text"
@@ -442,25 +413,12 @@ const Modifiers = ({
                     <Close onClick={() => removeModifier(modifier.id)} />
                   )}
                 </div>
-                {/* <button
-                  className="px-[16px] py-[8px] font-[500]  rounded-[5px] text-purple500 text-[16px] flex items-center gap-[8px]"
-                  onClick={handleAddModifierGroup}
-                >
-                  <img src={Add} alt="" /> Add - edit modifier item
-                </button> */}
+
               </div>
             </div>
           ))}
           <div className="mt-4 flex items-center gap-[8px]">
-            {/* <button
-              className=" border border-[#5855B3] px-[16px] py-[8px] font-[500]  rounded-[5px] text-purple500 text-[14px] flex items-center gap-[8px]"
-              onClick={addModifier}
-            >
-              Add
-            </button>
-            <button className=" border border-[#5855B3] px-[16px] py-[8px] font-[500]  rounded-[5px] text-purple500 text-[14px] flex items-center gap-[8px]">
-              Edit
-            </button> */}
+
           </div>
         </div>
 
