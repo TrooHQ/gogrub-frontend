@@ -63,8 +63,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const { userData, userDetails } = useSelector(
     (state: RootState) => state.user
   );
-  console.log("userData", userData)
-  console.log("userDetails", userDetails)
+  // console.log("userData", userData)
+  // console.log("userDetails", userDetails)
   useEffect(() => {
     if (userDetails?.email_verified === false) {
       navigate("/verify-account");
@@ -90,19 +90,19 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     dispatch(fetchAccountDetails());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log('from side bar')
-    const fetchAcc = async () => {
-      try {
-        const res = await "https://troox-backend-new.vercel.app/api/getAccountDetails"
+  // useEffect(() => {
+  //   // console.log('from side bar')
+  //   const fetchAcc = async () => {
+  //     try {
+  //       const res = await "https://troox-backend-new.vercel.app/api/getAccountDetails"
 
-        console.log("res from sidebar", res)
-      } catch (error) {
-        console.error("Error fetching account details:", error);
-      }
-    }
-    fetchAcc();
-  }, [])
+  //       // console.log("res from sidebar", res)
+  //     } catch (error) {
+  //       console.error("Error fetching account details:", error);
+  //     }
+  //   }
+  //   fetchAcc();
+  // }, [])
 
   const {
     accountDetails
@@ -113,7 +113,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     setHasAccount(accountDetails?.account_name && accountDetails?.account_number)
   }, [accountDetails?.account_name, accountDetails?.account_number]);
 
-  console.log("accountDetails", accountDetails);
+  // console.log("accountDetails", accountDetails);
 
   const transformedBranches = branches.map((branch: any) => ({
     label: branch.branch_name,
@@ -157,7 +157,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
   const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
 
-  console.log("currentPlanName", currentPlanName)
+  // console.log("currentPlanName", currentPlanName)
   const commonMenu: MenuItem[] = [
     {
       subTitle: "RESTAURANT",

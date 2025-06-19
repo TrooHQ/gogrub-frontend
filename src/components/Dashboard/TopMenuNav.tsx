@@ -102,7 +102,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
       );
       setUserChecks(response.data);
     } catch (error) {
-      console.error("Error getting Business Details:", error);
+      // console.error("Error getting Business Details:", error);
     }
   };
 
@@ -110,7 +110,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
     getUserOnboardChecks();
   }, []);
 
-  console.log(userCheck);
+  // console.log(userCheck);
 
   return (
     <div className="">

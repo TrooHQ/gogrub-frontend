@@ -62,7 +62,7 @@ const SetupModal: React.FC<SetupModalProps> = ({
       );
       setUserChecks(response.data);
     } catch (error) {
-      console.error("Error getting Business Details:", error);
+      // console.error("Error getting Business Details:", error);
     }
   };
 
@@ -70,7 +70,7 @@ const SetupModal: React.FC<SetupModalProps> = ({
     getUserOnboardChecks();
   }, []);
 
-  console.log(userCheck);
+  // console.log(userCheck);
 
   return (
     <div>

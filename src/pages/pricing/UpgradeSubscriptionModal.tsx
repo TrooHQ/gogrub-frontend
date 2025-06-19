@@ -40,7 +40,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     (state: RootState) => state.user
   );
 
-  console.log("User Data:", userData);
+  // console.log("User Data:", userData);
 
   // const currentPlanName = userDetails?.businessPlan?.plan?.name ?? null;
   const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +92,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           }
         }
       } catch (error) {
-        console.error("Error fetching plans data:", error);
+        // console.error("Error fetching plans data:", error);
       }
     };
 
@@ -130,7 +130,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       window.location.href =
         response.data.data.paystack_data.data.authorization_url;
     } catch (error) {
-      console.error("Error initiating payment:", error);
+      // console.error("Error initiating payment:", error);
       setLoading(false);
     } finally {
       setLoading(false);
@@ -145,7 +145,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   const reference = queryParams.get("reference");
   // const reference = "PLANSUB202504248DE350CA2699";
 
-  console.log("reference:", reference);
+  // console.log("reference:", reference);
   const dispatch = useDispatch();
 
   const businessPlan = JSON.parse(localStorage.getItem("businessInfo") || "{}");
@@ -174,7 +174,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       toast.success(response.data.message || "Plan subscribed successfully!");
       // navigate("/overview");
     } catch (error) {
-      console.error("Error adding employee:", error);
+      // console.error("Error adding employee:", error);
     } finally {
       //
     }
@@ -204,7 +204,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
       SubcribePlan();
     } catch (error) {
-      console.error("Error verifing payment:", error);
+      // console.error("Error verifing payment:", error);
     } finally {
       //
     }
@@ -229,7 +229,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         const updatedDate = dayjs(response?.data?.businessPlan?.updatedAt);
 
         // isSame = 
-        console.log("resp", response?.data?.businessPlan?.createdAt, response?.data?.businessPlan?.updatedAt);
+        // console.log("resp", response?.data?.businessPlan?.createdAt, response?.data?.businessPlan?.updatedAt);
         setIsNewUser(createdDate?.format("YYYY-MM-DD") === updatedDate?.format("YYYY-MM-DD"));
         // setUserChecks(response.data);
       } catch (error) {
@@ -241,7 +241,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
   }, [token])
 
-  console.log("isNewUser:", isNewUser);
+  // console.log("isNewUser:", isNewUser);
 
   useEffect(() => {
     if (reference) {

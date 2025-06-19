@@ -90,7 +90,7 @@ export const fetchCustomerData = createAsyncThunk(
       endDate,
       number_of_days,
     }: {
-      businessIdentifier: string;
+      businessIdentifier?: string;
       date_filter: string;
       startDate?: string;
       endDate?: string;
@@ -101,6 +101,7 @@ export const fetchCustomerData = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
 
+      // console.log("funtion call");
       const params: any = { businessIdentifier, date_filter };
       if (date_filter === "date_range") {
         params.date_filter = "date_range";
@@ -111,7 +112,7 @@ export const fetchCustomerData = createAsyncThunk(
       }
 
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOrderCustomerData`,
+        `${SERVER_DOMAIN}/order/getOrderCustomerData?businessIdentifier=${businessIdentifier}`,
         {
           params,
           headers: {
@@ -119,6 +120,8 @@ export const fetchCustomerData = createAsyncThunk(
           },
         }
       );
+      // console.log("post call");
+      // console.log("response", response);
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -255,7 +258,7 @@ export const fetchCustomerTransaction = createAsyncThunk(
       }
 
       const response = await axios.get(`${SERVER_DOMAIN}/customerTransaction`, {
-        params,
+        // params,
         headers: {
           Authorization: `Bearer ${token}`,
         },

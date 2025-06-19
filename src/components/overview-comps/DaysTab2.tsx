@@ -39,6 +39,9 @@ const DaysTab2 = ({
     null,
     null,
   ]);
+  dateRange.toLocaleString();
+
+
   const [displayDateRange, setDisplayDateRange] = useState<string>("");
 
   const handleChange = (event: any, newValue: number) => {
@@ -55,15 +58,15 @@ const DaysTab2 = ({
   const handleOpen = () => {
     setOpen(!open);
   };
-
   const handleDateChange = (dates: any, dateStrings: [string, string]) => {
     setDateRange(dateStrings);
-    console.log(dates);
+    // console.log(dates);
+    dates.toLocaleString();
     setDisplayDateRange(`${dateStrings[0]} - ${dateStrings[1]}`);
     onDateFilterChange("date_range", dateStrings[0], dateStrings[1]);
     setOpen(false);
   };
-  console.log(dateRange);
+  // console.log(dateRange);
 
   return (
     <Box sx={{ position: "relative" }}>

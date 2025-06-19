@@ -27,8 +27,8 @@ const CustomerData = () => {
   const userDetails = useSelector(
     (state: RootState) => state.business.businessDetails
   );
-  const businessIdentifier = userDetails?._id;
 
+  const businessIdentifier = userDetails?._id;
   const { customerData, customerDataLoading, totalCustomerTransaction } =
     useSelector((state: RootState) => state.overview);
 
@@ -40,17 +40,18 @@ const CustomerData = () => {
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
-
+  console.log("businessIdentifier", businessIdentifier)
   useEffect(() => {
-    businessIdentifier &&
-      dispatch(
-        fetchCustomerData({
-          businessIdentifier: businessIdentifier.toString(),
-          date_filter: "today",
-        })
-      );
-    dispatch(fetchCustomerTransaction({ date_filter: "today" }));
-  }, [businessIdentifier, dispatch]);
+    // businessIdentifier &&
+    // console.log("for here")
+    dispatch(
+      fetchCustomerData({
+        businessIdentifier: userDetails?._id?.toString(),
+        date_filter: "",
+      })
+    );
+    dispatch(fetchCustomerTransaction({ date_filter: "" }));
+  }, [dispatch, userDetails?._id]);
 
   const [orderCount, setOrderCount] = useState<any>({});
   const token = localStorage.getItem("token");
