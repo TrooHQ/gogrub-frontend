@@ -19,8 +19,7 @@ import { convertToBase64 } from "../../../utils/imageToBase64";
 import { toast } from "react-toastify";
 import { setUserData } from "../../../slices/UserSlice";
 import { AppDispatch, RootState } from "../../../store/store";
-// import { RiErrorWarningLine } from "react-icons/ri";
-import { TbInfoTriangleFilled } from "react-icons/tb";
+import { PiInfo } from "react-icons/pi";
 import { fetchAccountDetails as fetchAccountDetailState } from "../../../slices/businessSlice";
 type PersonalInfo = {
   firstName: string;
@@ -832,7 +831,7 @@ export default function InformationAccordion() {
         >
           <div className="relative flex gap-3 font-base text-normal text-blackish">
             Bank Information
-            {!isBankFormComplete && (<TbInfoTriangleFilled className="mt-1 text-orange-500 size-4" />)}
+            {!isBankFormComplete && (<PiInfo className="mt-1 text-black-500 size-4" />)}
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
