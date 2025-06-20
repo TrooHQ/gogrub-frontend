@@ -27,6 +27,7 @@ import CustomInput from "../inputFields/CustomInput";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import MenuItemForm from "./MenuBuilderModals/NewAddMenuModal";
 
 const CustomPagination = styled(Pagination)(() => ({
   "& .Mui-selected": {
@@ -118,7 +119,7 @@ const MenuList = () => {
     oldName: string;
   } | null>(null);
   const [newMenuName, setNewMenuName] = useState<string>("");
-
+  const [editItemId, setEditItemId] = useState()
   // Fetch menu items whenever the page or branch changes
   useEffect(() => {
     if (viewingBranch) {
@@ -761,7 +762,11 @@ const MenuList = () => {
 
         {editModalOpen && (
           <Modal isOpen={editModalOpen} onClose={() => setEditModalOpen(false)}>
-            <div className=" w-[539px] py-[32px] px-[52px]">
+            <MenuItemForm
+              onCancel={() => setEditModalOpen(false)}
+              editId={editItemId}
+            />
+            {/* <div className=" w-[539px] py-[32px] px-[52px]">
               <h2 className="text-[24px] mb-[11px] font-[500] text-purple500">
                 Edit Menu Item
               </h2>
@@ -787,7 +792,7 @@ const MenuList = () => {
                   Cancel
                 </button>
               </div>
-            </div>
+            </div> */}
           </Modal>
         )}
       </div>

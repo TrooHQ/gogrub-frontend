@@ -11,14 +11,16 @@ import { fetchMenuItemsWithoutStatus } from "../../../slices/menuSlice";
 import { AppDispatch } from "@/src/store/store";
 
 type Props = {
-  onCancel?: () => void;
+  onCancel: () => void;
   activeCategory?: any;
   activeGroup?: any;
+  editId?: string;
   // onSave?: (data: any) => void;
 };
 
 const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup }) => {
 
+  // const { menuItemsWithoutStatus: menuItems } = useSelector((state: any) => state.menu);
   const { selectedBranch } = useSelector((state: any) => state.branches);
 
   const [imageName, setImageName] = useState<string>("");
