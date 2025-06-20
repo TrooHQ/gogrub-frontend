@@ -377,7 +377,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                       <p className="font-[700] text-[#FFFFFF] text-[20px] lg:text-[32px] transition-all duration-500 ease-in-out">
                         Payment Successful
                       </p>
-                      {!userData?.businessPlan && <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
+                      {isNewUser && <p className="font-[500] text-[14px] lg:text-[16px] text-[#FFFFFF] transition-all duration-500 ease-in-out">
                         You can get your link <Link to={'/online-ordering'}>now</Link>.
                       </p>}
                     </div>

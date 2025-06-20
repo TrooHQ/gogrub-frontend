@@ -33,10 +33,10 @@ const AddMenuItem: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className=" py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px]  w-[539px] md:h-[600px] lg:h-screen overflow-y-scroll"
+      className=" py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px]  w-[539px] md:h-[600px] lg:h-screen overflow-y-scroll scrollbar-thin"
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
-      <div className=" ">
+      <div className="">
         <p className="text-[24px] pb-[24px] font-[500] leading-[36px] text-purple500">
           Add menu Item
         </p>
@@ -114,7 +114,7 @@ const AddMenuItem: React.FC<Props> = ({
                   <img
                     src={image}
                     alt="Uploaded Preview"
-                    className="mt-2 w-full h-auto"
+                    className="w-full h-auto mt-2"
                   />
                 </div>
               )}
