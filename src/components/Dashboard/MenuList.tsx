@@ -23,10 +23,11 @@ import axios from "axios";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import { toast } from "react-toastify";
 import Modal from "../Modal";
-import CustomInput from "../inputFields/CustomInput";
+// import CustomInput from "../inputFields/CustomInput";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import MenuItemForm from "./MenuBuilderModals/NewAddMenuModal";
 
 const CustomPagination = styled(Pagination)(() => ({
   "& .Mui-selected": {
@@ -113,12 +114,12 @@ const MenuList = () => {
     });
 
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState<{
-    id: string;
-    oldName: string;
-  } | null>(null);
-  const [newMenuName, setNewMenuName] = useState<string>("");
-
+  // const [editingItem, setEditingItem] = useState<{
+  //   id: string;
+  //   oldName: string;
+  // } | null>(null);
+  // const [newMenuName, setNewMenuName] = useState<string>("");
+  const [editItemId, setEditItemId] = useState()
   // Fetch menu items whenever the page or branch changes
   useEffect(() => {
     if (viewingBranch) {
@@ -146,52 +147,11 @@ const MenuList = () => {
 
   // Edit function
   const handleEditClick = (item: any) => {
-    setEditingItem({ id: item._id, oldName: item.menu_item_name });
-    setNewMenuName(item.menu_item_name); // Set initial value to the current name
+    setEditItemId(item._id)
+    // setEditingItem({ id: item._id, oldName: item.menu_item_name });
+    // setNewMenuName(item.menu_item_name); // Set initial value to the current name
     setEditModalOpen(true);
     setAnchorEl(null);
-  };
-
-  const [editLoading, setEditLoading] = useState(false);
-  const handleEditConfirm = async () => {
-    if (editingItem) {
-      try {
-        setEditLoading(true);
-        const response = await axios.put(
-          `${SERVER_DOMAIN}/menu/editMenu`,
-          {
-            branch_id: viewingBranch?._id,
-            menu_type: "item",
-            old_name: editingItem.oldName,
-            name: newMenuName,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          // Optionally refresh the list of menu items
-          toast.success("Menu item updated successfully");
-          dispatch(
-            fetchMenuItemsWithoutStatus({
-              branch_id: viewingBranch?._id as any,
-              page,
-            })
-          );
-        }
-      } catch (error) {
-        console.error("Error editing menu item:", error);
-        toast.error("Failed to edit menu item.");
-      } finally {
-        setEditModalOpen(false);
-        setEditingItem(null);
-        setNewMenuName("");
-        setEditLoading(false);
-      }
-    }
   };
 
   // Set toggleStates after menuItems are fetched
@@ -761,7 +721,11 @@ const MenuList = () => {
 
         {editModalOpen && (
           <Modal isOpen={editModalOpen} onClose={() => setEditModalOpen(false)}>
-            <div className=" w-[539px] py-[32px] px-[52px]">
+            <MenuItemForm
+              onCancel={() => setEditModalOpen(false)}
+              editId={editItemId}
+            />
+            {/* <div className=" w-[539px] py-[32px] px-[52px]">
               <h2 className="text-[24px] mb-[11px] font-[500] text-purple500">
                 Edit Menu Item
               </h2>
@@ -787,7 +751,7 @@ const MenuList = () => {
                   Cancel
                 </button>
               </div>
-            </div>
+            </div> */}
           </Modal>
         )}
       </div>
