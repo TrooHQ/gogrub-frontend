@@ -216,7 +216,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 
 
   return (
-    <div className="w-full p-6 space-y-6 bg-white rounded shadow">
+    <div className=" p-6 space-y-6 bg-white rounded shadow w-[539px]">
       <h2 className="text-lg font-semibold">Add menu item</h2>
 
       <div className="space-y-3">

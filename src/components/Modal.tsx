@@ -45,14 +45,6 @@ const Modal: React.FC<ModalProps> = ({
           className={`${bg} rounded-[20px] md:min-w-[30vw] max-w-full max-h-[90%] overflow-y-auto p-4`}
         >
           <div>{children}</div>
-          {/* <div className="text-right">
-            <button
-              className="px-4 py-2 mt-4 text-white bg-gray-500 rounded hover:bg-gray-700"
-              onClick={onClose}
-            >
-              Close
-            </button>
-          </div> */}
         </div>
       </div>
     </>
