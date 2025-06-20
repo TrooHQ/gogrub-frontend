@@ -86,13 +86,11 @@ export default function InformationAccordion() {
   } | null>(null);
   const [banks, setBanks] = useState<any[]>([]);
 
-  console.log(selectedBank);
+
 
   const { userData: DataInfo, userDetails: userInfo } = useSelector(
     (state: RootState) => state.user
   );
-  console.log("DataInfo", DataInfo);
-  console.log("userInfo", userInfo);
 
   const [formData, setFormData] = useState<FormData>({
     businessInfo: {
@@ -148,7 +146,7 @@ export default function InformationAccordion() {
       const { data } = response.data;
 
       setBanks(data);
-      console.log(data);
+
     } catch (error: any) {
       console.error("Error fetching Banks:", error);
       toast.error(error?.response?.data?.message || "Error fetching Banks");
@@ -170,7 +168,6 @@ export default function InformationAccordion() {
       );
       const { data } = response.data;
 
-      console.log("data", data);
       setFormData({
         personalInfo: {
           firstName: data.personal_information.first_name,
@@ -220,9 +217,8 @@ export default function InformationAccordion() {
     dispatch(fetchAccountDetailState());
   }, [token]);
 
-  const { accountDetails } = useSelector((state: RootState) => state.business);
+  // const { accountDetails } = useSelector((state: RootState) => state.business);
 
-  console.log("accountDetails", accountDetails);
   useEffect(() => {
     if (banks.length > 0 && formData.payoutBankDetails.bankName) {
       const foundBank = banks.find(
@@ -302,7 +298,6 @@ export default function InformationAccordion() {
 
         const response = await axios.put(endpoint, payload, { headers });
         fetchAccountDetails();
-        console.log(`${section} field updated successfully:`, response.data);
 
         dispatch(
           setUserData({
@@ -363,8 +358,6 @@ export default function InformationAccordion() {
         payload,
         { headers }
       );
-
-      console.log("Account verification response:", response.data);
 
       //this Updates account name if verification is successful and returns account name
 
@@ -427,7 +420,6 @@ export default function InformationAccordion() {
         { headers }
       );
 
-      console.log("Bank details added successfully:", response.data);
       toast.success("Bank details saved successfully!");
 
       //this  Optionally refresh the account details
@@ -563,13 +555,24 @@ export default function InformationAccordion() {
     ));
 
   const { payoutBankDetails } = formData;
-  const isBankFormComplete =
-    !!payoutBankDetails.accountNumber?.trim() &&
-    !!payoutBankDetails.bankName?.trim() &&
-    payoutBankDetails.bvn.trim().length >= 11 &&
-    !!payoutBankDetails.bankCountry?.trim();
 
-  console.log(isBankFormComplete);
+  const [isBankFormComplete, setIsBankFormComplete] = useState<boolean>(true);
+
+  useEffect(() => {
+    const isBankFormComplete =
+      !!payoutBankDetails.accountNumber?.trim() &&
+      !!payoutBankDetails.bankName?.trim() &&
+      payoutBankDetails.bvn.trim().length >= 11 &&
+      !!payoutBankDetails.bankCountry?.trim();
+
+
+    setIsBankFormComplete(isBankFormComplete)
+  }, [payoutBankDetails.accountNumber, payoutBankDetails.bankName, payoutBankDetails.bvn, payoutBankDetails.bankCountry])
+
+
+
+
+
 
   // Synchronous filterOptions function for Autocomplete
   // const bankFilterOptions = (

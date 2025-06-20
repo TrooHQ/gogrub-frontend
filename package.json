@@ -52,6 +52,7 @@
     "remixicon-react": "^1.0.0",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.3.0",
+    "tailwind-scrollbar": "^4.0.2",
     "tailwindcss-animate": "^1.0.7",
     "xlsx": "^0.18.5"
   },
