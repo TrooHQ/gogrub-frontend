@@ -18,9 +18,22 @@ type Props = {
   // onSave?: (data: any) => void;
 };
 
-const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup }) => {
+const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, editId }) => {
 
-  // const { menuItemsWithoutStatus: menuItems } = useSelector((state: any) => state.menu);
+  const { menuItemsWithoutStatus: menuItems } = useSelector((state: any) => state.menu);
+
+
+  const [editData, setEditData] = useState<any>({})
+
+  useEffect(() => {
+    if (editId) {
+      const data = menuItems.find((item: any) => item._id === editId)
+      setEditData(data)
+    }
+  }, [editId, menuItems])
+
+  console.log("editData", editData)
+
   const { selectedBranch } = useSelector((state: any) => state.branches);
 
   const [imageName, setImageName] = useState<string>("");
@@ -40,6 +53,18 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup }
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
+
+  useEffect(() => {
+    if (editData) {
+      setMenuName(editData?.menu_item_name || "");
+      setMenuDescription(editData?.description || "");
+      setMenuPrice(editData?.menu_item_price || "");
+      // setImage(editData?.image || "");
+      // setSelectedMod(editData?.modifiers || []); 
+    }
+  }, [editData]);
+
+
   const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
   const [isGroupFetching, setIsGroupFetching] = useState(false);
   const [selectedMod, setSelectedMod] = useState<string[]>([]);
@@ -61,6 +86,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup }
   const handleMenuPrice = (value: string) => {
     setMenuPrice(value);
   };
+
+
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -113,6 +140,47 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup }
       // setMenuGroupLoading(false);
       // setAddMenuGroup(false);
     }
+  };
+
+  const handleUpdateMenuItem = async () => {
+    // if (editingItem) {
+    try {
+      // setEditLoading(true);
+      const response = await axios.put(
+        `${SERVER_DOMAIN}/menu/editMenu`,
+        {
+          // branch_id: viewingBranch?._id,
+          // menu_type: "item",
+          // old_name: editingItem.oldName,
+          // name: newMenuName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        // Optionally refresh the list of menu items
+        toast.success("Menu item updated successfully");
+        dispatch(
+          fetchMenuItemsWithoutStatus({
+            branch_id: selectedBranch?._id as any,
+            page: 1,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Error editing menu item:", error);
+      toast.error("Failed to edit menu item.");
+    } finally {
+      // setEditModalOpen(false);
+      // setEditingItem(null);
+      // setNewMenuName("");
+      // setEditLoading(false);
+    }
+    // }
   };
 
 
@@ -264,7 +332,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup }
         <button
           type="button"
           className="px-4 py-2 text-white bg-black rounded"
-          onClick={handleSaveMenuItem}
+          onClick={(editId && editData) ? handleUpdateMenuItem : handleSaveMenuItem}
         >
           Save Menu Item
         </button>
