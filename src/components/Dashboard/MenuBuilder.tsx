@@ -44,7 +44,7 @@ const MenuBuilder = () => {
   const [currentPage, setCurrentPage] = useState(theCurrentPage || 1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addMenuGroup, setAddMenuGroup] = useState(false);
-  const [addMenuItem, setAddMenuItem] = useState(true);
+  const [addMenuItem, setAddMenuItem] = useState(false);
   const [addModifierModar, setAddModifierModal] = useState(false);
   const [menuGroupLoading, setMenuGroupLoading] = useState(false);
   const [menuItemLoading, setMenuItemLoading] = useState(false);
