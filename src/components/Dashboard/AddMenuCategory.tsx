@@ -5,7 +5,7 @@ import imageIcon from "../../assets/image.svg";
 import { convertToBase64 } from "../../utils/imageToBase64";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import { useDispatch, useSelector } from "react-redux";
-import CustomSelect5 from "../inputFields/CustomSelect5";
+// import CustomSelect5 from "../inputFields/CustomSelect5";
 import { AppDispatch } from "../../store/store";
 import { fetchBranches } from "../../slices/branchSlice";
 import { toast } from "react-toastify";
@@ -13,15 +13,16 @@ import { fetchMenuCategories } from "../../slices/menuSlice";
 
 const AddMenuCategory = ({ setIsModalOpen }: any) => {
   const dispatch = useDispatch<AppDispatch>();
-  const branches = useSelector((state: any) => state.branches.branches);
+  // const { branches } = useSelector((state: any) => state.branches.branches);
+  const { selectedBranch } = useSelector((state: any) => state.branches);
 
   const [menuName, setMenuName] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [imageName, setImageName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [selectedBranch, setSelectedBranch] = useState<string>("");
-  const [selectedBranchId, setSelectedBranchId] = useState<string>("");
+  // const [selectedBranch, setSelectedBranch] = useState<string>("");
+  // const [selectedBranchId, setSelectedBranchId] = useState<string>("");
 
   const handleInputChange = (key: string, value: string) => {
     if (key === "menuName") {
@@ -44,21 +45,21 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
     dispatch(fetchBranches());
   }, [dispatch]);
 
-  const handleBranchSelect = (branchId: string) => {
-    setSelectedBranch(branchId);
+  // const handleBranchSelect = (branchId: string) => {
+  //   setSelectedBranch(branchId);
 
-    const selectedBranchObj = branches.find(
-      (branch: any) => branch._id === branchId
-    );
-    if (selectedBranchObj) {
-      setSelectedBranchId(selectedBranchObj._id);
-    }
-  };
+  //   const selectedBranchObj = branches.find(
+  //     (branch: any) => branch._id === branchId
+  //   );
+  //   if (selectedBranchObj) {
+  //     setSelectedBranchId(selectedBranchObj._id);
+  //   }
+  // };
 
-  const branchOptions = branches.map((branch: any) => ({
-    label: branch.branch_name,
-    value: branch._id,
-  }));
+  // const branchOptions = branches.map((branch: any) => ({
+  //   label: branch.branch_name,
+  //   value: branch._id,
+  // }));
 
   const loggedInUser = useSelector((state: any) => state.user.userData);
   console.log(loggedInUser);
@@ -84,14 +85,14 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
         `${SERVER_DOMAIN}/menu/addMenuCategory`,
         {
           menu_category_name: menuName,
-          branch_id: selectedBranchId,
+          branch_id: selectedBranch.id,
           image,
         },
         headers
       );
       console.log(response);
       if (response.status === 200) {
-        dispatch(fetchMenuCategories(selectedBranchId));
+        dispatch(fetchMenuCategories(selectedBranch.id,));
 
         toast.success(
           response.data.message || "Menu category added successfully."
@@ -149,12 +150,12 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
               onChange={(newValue) => handleInputChange("menuName", newValue)}
             /> */}
 
-            <CustomSelect5
+            {/* <CustomSelect5
               options={branchOptions}
               label="Branch"
               value={selectedBranch}
               onChange={handleBranchSelect}
-            />
+            /> */}
 
             <div>
               <p className="text-[18px] mb-[8px] font-[500] text-grey500">

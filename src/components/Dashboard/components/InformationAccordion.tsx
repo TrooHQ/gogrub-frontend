@@ -832,9 +832,9 @@ export default function InformationAccordion() {
           aria-controls="panel3-content"
           id="panel3-header"
         >
-          <div className="relative flex gap-3 font-base text-normal text-blackish">
+          <div className="relative flex gap-2 font-base text-normal text-blackish">
             Bank Information
-            {!isBankFormComplete && (<PiInfo className="mt-1 text-black-500 size-4" />)}
+            {!isBankFormComplete && (<PiInfo className="mt-1 text-black-500 size-3.5" />)}
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
