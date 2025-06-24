@@ -37,14 +37,30 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
   const { selectedBranch } = useSelector((state: any) => state.branches);
 
   const [imageName, setImageName] = useState<string>("");
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<string>(editData ? editData?.menu_item_image : "");
+  const [hasUploadedImage, setHasUploadedImage] = useState<boolean>(false);
+
+  // console.log("oamge", image)
+  // const handleFileChange = async (e: any) => {
+  //   const file = e.target.files[0];
+  //   setImageName(file.name);
+  //   try {
+  //     const base64 = await convertToBase64(file);
+  //     setImage(base64 as string);
+  //   } catch (error) {
+  //     console.error("Error converting file to base64:", error);
+  //   }
+  // };
 
   const handleFileChange = async (e: any) => {
     const file = e.target.files[0];
+    if (!file) return;
+
     setImageName(file.name);
     try {
       const base64 = await convertToBase64(file);
       setImage(base64 as string);
+      setHasUploadedImage(true);
     } catch (error) {
       console.error("Error converting file to base64:", error);
     }
@@ -54,28 +70,45 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
   const [menuDescription, setMenuDescription] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
 
+  // useEffect(() => {
+  //   if (editData) {
+  //     setMenuName(editData?.menu_item_name || "");
+  //     setMenuDescription(editData?.description || "");
+  //     setMenuPrice(editData?.menu_item_price || "");
+  //     // setImage(editData?.image || "");
+  //     // setSelectedMod(editData?.modifiers || []); 
+  //   }
+  // }, [editData]);
+
   useEffect(() => {
     if (editData) {
       setMenuName(editData?.menu_item_name || "");
       setMenuDescription(editData?.description || "");
       setMenuPrice(editData?.menu_item_price || "");
-      // setImage(editData?.image || "");
-      // setSelectedMod(editData?.modifiers || []); 
+      setImageName("Existing Image"); // optional fallback label
     }
   }, [editData]);
+  const displayImage = hasUploadedImage ? image : editData?.menu_item_image;
 
 
   const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
   const [isGroupFetching, setIsGroupFetching] = useState(false);
-  const [selectedMod, setSelectedMod] = useState<string[]>([]);
+  // const [selectedMod, setSelectedMod] = useState<string[]>([]);
+  const [selectedMod, setSelectedMod] = useState<string>("");
 
-  const handleSelectedMod = (value: string) => {
-    if (selectedMod.includes(value)) {
-      setSelectedMod(selectedMod.filter((item) => item !== value));
-    } else {
-      setSelectedMod([...selectedMod, value]);
-    }
+  // const handleSelectedMod = (value: string) => {
+  //   if (selectedMod.includes(value)) {
+  //     setSelectedMod(selectedMod.filter((item) => item !== value));
+  //   } else {
+  //     setSelectedMod([...selectedMod, value]);
+  //   }
+  // };
+
+  const handleSingleSelectmod = (value: string) => {
+    setSelectedMod(value);
   };
+
+  console.log("selectedMod", selectedMod);
 
   const handleMenuName = (value: string) => {
     setMenuName(value);
@@ -100,9 +133,11 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
+    // /menu/editGogrubMenuItem
+    // const endpoint = editId ? `${SERVER_DOMAIN}/menu/editGogrubMenuItem/` : `${SERVER_DOMAIN}/menu/addMenuItem`;
+
     try {
-      const response = await axios.post(
-        `${SERVER_DOMAIN}/menu/addMenuItem`,
+      const response = await axios.post(`${SERVER_DOMAIN}/menu/addMenuItem`,
         {
           menu_category_name: activeCategory?.name,
           branch_id: selectedBranch.id,
@@ -110,7 +145,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           menu_item_name: menuName,
           description: menuDescription,
           price: Number(menuPrice),
-          image,
+          modifier_group_name: selectedMod,
+          image
         },
         headers
       );
@@ -144,33 +180,32 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 
   const handleUpdateMenuItem = async () => {
     // if (editingItem) {
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
     try {
       // setEditLoading(true);
-      const response = await axios.put(
-        `${SERVER_DOMAIN}/menu/editMenu`,
+      const response = await axios.put(`${SERVER_DOMAIN}/menu/editGogrubMenuItem`,
         {
-          // branch_id: viewingBranch?._id,
-          // menu_type: "item",
-          // old_name: editingItem.oldName,
-          // name: newMenuName,
+          menu_category_name: activeCategory?.name,
+          branch_id: selectedBranch.id,
+          menu_group_name: activeGroup?.name,
+          menu_item_name: menuName,
+          description: menuDescription,
+          price: Number(menuPrice),
+          modifier_group_name: selectedMod,
+          image
         },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        headers
       );
 
-      if (response.status === 200) {
-        // Optionally refresh the list of menu items
-        toast.success("Menu item updated successfully");
-        dispatch(
-          fetchMenuItemsWithoutStatus({
-            branch_id: selectedBranch?._id as any,
-            page: 1,
-          })
-        );
-      }
+      console.log("resp", response);
+
     } catch (error) {
       console.error("Error editing menu item:", error);
       toast.error("Failed to edit menu item.");
@@ -193,6 +228,9 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       };
+
+
+
       try {
         const response = await axios.get(
           `${SERVER_DOMAIN}/menu/getAllModifierGroups/?branch_id=${selectedBranch?.id}`,
@@ -254,7 +292,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           className="flex items-center justify-between w-full px-4 py-2 mb-2 border rounded"
           onClick={() => setShowMod(!showMod)}
         >
-          {selectedMod.length > 0 ? <p className="text-sm">{selectedMod.join(", ")}</p> : <p>Select modifier</p>}
+          {selectedMod.length > 0 ? <p className="text-sm">{selectedMod}</p> : <p>Select modifier</p>}
+          {/* {selectedMod.length > 0 ? <p className="text-sm">{selectedMod.join(", ")}</p> : <p>Select modifier</p>} */}
           <RxCaretDown className={`${showMod ? "rotate-180" : ""} w-6 h-6`} />
         </div>
         {showMod &&
@@ -263,7 +302,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
               {fetchedModifierGroups.length === 0 && !isGroupFetching && <p className="text-sm">No modifier groups found</p>}
               {fetchedModifierGroups.map((mod) => (
                 <span
-                  onClick={() => handleSelectedMod(mod?.modifier_group_name)}
+                  onClick={() => handleSingleSelectmod(mod?.modifier_group_name)}
+                  // onClick={() => handleSelectedMod(mod?.modifier_group_name)}
                   key={mod?.id}
                   className={`px-3 py-1 text-sm  rounded-full cursor-pointer hover:bg-gray-200 ${selectedMod.includes(mod?.modifier_group_name) ? "bg-gray-900 text-white" : "bg-gray-100"}`}
                 >
@@ -309,12 +349,23 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
             </p>
           </div>
         </div>
-        {image && (
+        {/* {(image || editData?.menu_item_image) && (
           <div className="mt-4">
             <p className="text-[14px] text-grey500">Image: {imageName}</p>
             <img
               src={image}
-              alt="Uploaded Preview"
+              alt={editData?.menu_item_image ? editData?.menu_item_image : "Uploaded Preview"}
+              className="w-full h-auto mt-2"
+            />
+          </div>
+        )} */}
+
+        {displayImage && (
+          <div className="mt-4">
+            <p className="text-[14px] text-grey500">Image: {imageName}</p>
+            <img
+              src={displayImage}
+              alt="Preview"
               className="w-full h-auto mt-2"
             />
           </div>
@@ -332,6 +383,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
         <button
           type="button"
           className="px-4 py-2 text-white bg-black rounded"
+          // onClick={handleSaveMenuItem}
           onClick={(editId && editData) ? handleUpdateMenuItem : handleSaveMenuItem}
         >
           Save Menu Item
