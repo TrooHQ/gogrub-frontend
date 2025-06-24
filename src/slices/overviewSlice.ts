@@ -212,7 +212,8 @@ export const fetchTotalSales = createAsyncThunk(
         params.number_of_days = number_of_days;
       }
 
-      const response = await axios.get(`${SERVER_DOMAIN}/getTotalSales`, {
+      // const response = await axios.get(`${SERVER_DOMAIN}/getTotalSales`, {
+      const response = await axios.get(`${SERVER_DOMAIN}/getGoGrubTotalSales`, {
         params,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -257,12 +258,16 @@ export const fetchCustomerTransaction = createAsyncThunk(
         params.number_of_days = number_of_days;
       }
 
-      const response = await axios.get(`${SERVER_DOMAIN}/customerTransaction`, {
-        // params,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // const response = await axios.get(`${SERVER_DOMAIN}/customerTransaction`, {
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/goGrubGetCustomerTransaction`,
+        {
+          // params,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -301,7 +306,7 @@ export const fetchAverageOrderValue = createAsyncThunk(
       } else if (date_filter !== "today") {
         params.number_of_days = number_of_days;
       }
-
+      // /averageOrderValue?date_filter=days&number_of_days=90
       const response = await axios.get(`${SERVER_DOMAIN}/averageOrderValue`, {
         params,
         headers: {
@@ -353,7 +358,7 @@ export const fetchSalesRevenueGraph = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("response data", response.data);
+      // console.log("response data", response.data);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -371,11 +376,14 @@ export const fetchSalesGrowthRate = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(`${SERVER_DOMAIN}/salesGrowthRate`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/goGrubSalesGrowthRate`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

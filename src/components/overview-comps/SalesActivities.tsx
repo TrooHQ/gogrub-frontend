@@ -34,15 +34,16 @@ const SalesActivities = () => {
     totalCustomerTransaction,
   } = useSelector((state: RootState) => state.overview);
 
-  console.log("salesGrowthRate", salesGrowthRate)
+  // console.log("salesGrowthRate", salesGrowthRate)
   console.log("totalSales", totalSales)
-  console.log("averageOrderValue", averageOrderValue)
-  console.log("totalCustomerTransaction", totalCustomerTransaction)
+  // console.log("averageOrderValue", averageOrderValue)
+  // console.log("totalCustomerTransaction", totalCustomerTransaction)
 
 
   useEffect(() => {
     dispatch(fetchSalesGrowthRate());
   }, [dispatch]);
+
 
   // Assuming salesGrowthRate.data is available
   const salesGrowthRateData = salesGrowthRate?.data || {
@@ -53,19 +54,19 @@ const SalesActivities = () => {
 
   const { getTotalSalesToday, prevDayTotalSales } = salesGrowthRateData;
 
-  let status = "No change from yesterday";
-  let statusIcon = ArrowNeutral;
+  // let status = "No change from yesterday";
+  // let statusIcon = ArrowNeutral;
   let percentageChange = 0;
 
   if (prevDayTotalSales !== 0) {
     percentageChange =
       ((getTotalSalesToday - prevDayTotalSales) / prevDayTotalSales) * 100;
     if (percentageChange > 0) {
-      status = `${percentageChange.toFixed(2)}% up from yesterday`;
-      statusIcon = ArrowUp;
+      // status = `${percentageChange.toFixed(2)}% up from yesterday`;
+      // statusIcon = ArrowUp;
     } else if (percentageChange < 0) {
-      status = `${Math.abs(percentageChange).toFixed(2)}% down from yesterday`;
-      statusIcon = ArrowDown;
+      // status = `${Math.abs(percentageChange).toFixed(2)}% down from yesterday`;
+      // statusIcon = ArrowDown;
     }
   }
 
@@ -81,17 +82,23 @@ const SalesActivities = () => {
         statusIcon: ArrowDown,
         status: "-25% from yesterday",
       },
+      // 
       {
-        icon: statusIcon,
+        icon: (salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 || salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales) ? ArrowNeutral
+          : salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday > salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales ? ArrowUp
+            : ArrowDown,
         title: "Sales Growth Rate",
         time: "12:45 PM",
-        amount: `${salesGrowthRate?.data?.salesGrowthRate?.toLocaleString("en-US") || 0
+        amount: salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 ? 0 : `${salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday?.toLocaleString("en-US") || 0
           }%`,
-        statusIcon: statusIcon,
-        status: status,
+        statusIcon: (salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 || salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales) ? ArrowNeutral
+          : salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday > salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales ? ArrowUp
+            : ArrowDown,
+        status: salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 ? "No sales today" : `${salesGrowthRate?.data?.salesGrowthRate?.salesGrowthRate?.toLocaleString("en-US") || 0} from yesterday`,
       },
+      // 
       {
-        icon: ArrowUp,
+        icon: ArrowNeutral,
         title: "Average Order Value",
         time: "12:45 PM",
         amount: `₦ ${Number(
@@ -100,17 +107,28 @@ const SalesActivities = () => {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}`,
-        statusIcon: ArrowUp,
-        status: "10% from yesterday",
+        statusIcon: ArrowNeutral,
+        status: "Total Orders Today",
+        // status: averageOrderValue?.data?.averageOrderValue === 0? "No orders today" : "10% from yesterday",
       },
+      // 
       {
-        icon: ArrowDown,
+        // if todays order is more then yesterdays
+        icon: totalCustomerTransaction?.today?.totalOrders > totalCustomerTransaction?.yesterday?.totalOrders ? ArrowUp
+          // if today equals yesterday, or there are no orders today
+          : (totalCustomerTransaction?.today?.totalOrders === totalCustomerTransaction?.yesterday?.totalOrders || totalCustomerTransaction?.today?.totalOrders === 0) ? ArrowNeutral
+            // when yesterday is more than today
+            : ArrowDown,
         title: "Customer Transaction Count",
         time: "12:45 PM",
         amount:
-          totalCustomerTransaction?.totalOrders?.toLocaleString("en-US") || 0,
-        statusIcon: ArrowDown,
-        status: "10% from yesterday",
+          totalCustomerTransaction?.today?.totalOrders.toLocaleString("en-US") || 0,
+        statusIcon: totalCustomerTransaction?.today?.totalOrders > totalCustomerTransaction?.yesterday?.totalOrders ? ArrowUp
+          // if today equals yesterday, or there are no orders today
+          : (totalCustomerTransaction?.today?.totalOrders === totalCustomerTransaction?.yesterday?.totalOrders || totalCustomerTransaction?.today?.totalOrders === 0) ? ArrowNeutral
+            // when yesterday is more than today
+            : ArrowDown,
+        status: totalCustomerTransaction?.today?.totalOrders === 0 ? "No orders yet today" : `${totalCustomerTransaction?.percentageChange} from yesterday`,
       },
     ],
   };
