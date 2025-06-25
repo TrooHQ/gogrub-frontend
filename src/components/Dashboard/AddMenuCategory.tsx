@@ -136,7 +136,7 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
           <div className="grid gap-[32px] lg:gap-[32px] text-[16px] font-[400] text-grey200">
             <CustomInput
               type="text"
-              label="Enter menu name"
+              label="Enter Category Name"
               value={menuName}
               error=""
               onChange={(newValue) => handleInputChange("menuName", newValue)}

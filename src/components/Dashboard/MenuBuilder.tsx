@@ -1,7 +1,7 @@
 import DashboardLayout from "./DashboardLayout";
 import TopMenuNav from "./TopMenuNav";
 // import Add from "../../assets/add.svg";
-import activeArrow from "../../assets/activeArrow.svg";
+// import activeArrow from "../../assets/activeArrow.svg";
 import { useEffect, useState } from "react";
 import Modal from "../Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +28,7 @@ import MenuGroup from "./MenuBuilderModals/MenuGroup";
 import CustomInput from "../inputFields/CustomInput";
 import EditCategoryNameModal from "./MenuBuilderModals/EditCategoryNameModal";
 import MenuItemForm from "./MenuBuilderModals/NewAddMenuModal";
+import { BsArrowRightCircleFill } from "react-icons/bs";
 
 const MenuBuilder = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -384,7 +385,7 @@ const MenuBuilder = () => {
                   className="text-[16px] flex items-center gap-[8px]"
                   onClick={handleAddMenu}
                 >
-                  Add new menu category
+                  Add New Menu Category
                 </button>
               </div>
               <div></div>
@@ -398,8 +399,8 @@ const MenuBuilder = () => {
                       onClick={() => getSubCategory(category)}
                       key={category._id}
                       className={`${activeCategory?.name === category?.name &&
-                        "bg-purple100 text-purple600 font-[500]"
-                        } text-grey200 hover:bg-purple100 uppercase flex justify-between items-center w-[201px] text-[16px] font-[400] py-[12px] px-[8px] cursor-pointer`}
+                        "bg-gray-100 text-gray-800 font-[500]"
+                        } text-grey200 hover:bg-gray-100 uppercase flex justify-between items-center w-[201px] text-[16px] font-[400] py-[12px] px-[8px] cursor-pointer`}
                     >
                       {truncateText(category.name, 10)}
                       {activeCategory?.name === category.name && (
@@ -454,7 +455,8 @@ const MenuBuilder = () => {
                         </Menu>
                       )}
                       {activeCategory?.name === category.name ? (
-                        <img src={activeArrow} alt="activearrow" />
+                        // <img src={activeArrow} alt="activearrow" />
+                        <BsArrowRightCircleFill />
                       ) : null}
                     </div>
                   ))}
@@ -552,7 +554,7 @@ const MenuBuilder = () => {
                 </button>
                 <button
                   onClick={() => setEditGroupModalOpen(false)}
-                  className="bg-[#F8F8F8] text-[#5855B3] rounded-[6px] px-4 py-2"
+                  className="bg-[#F8F8F8] text-[#121212] rounded-[6px] px-4 py-2"
                 >
                   Cancel
                 </button>

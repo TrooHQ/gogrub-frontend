@@ -19,7 +19,7 @@ const Built = () => {
         >
           <div className=" flex flex-col md:flex-row items-center gap-[10px] md:gap-[24px] ">
             <img src={Icon1} alt="" />
-            <p className=" text-[16px] md:text-[20px] font-[500] text-[#5855B3]">
+            <p className=" text-[16px] md:text-[20px] font-[500] text-[#121212]">
               24/7 Support
             </p>
           </div>
@@ -35,7 +35,7 @@ const Built = () => {
         >
           <div className=" flex flex-col md:flex-row items-center gap-[10px] md:gap-[24px] ">
             <img src={Icon2} alt="" />
-            <p className=" text-[16px] md:text-[20px] font-[500] text-[#5855B3]">
+            <p className=" text-[16px] md:text-[20px] font-[500] text-[#121212]">
               Built-in Tools
             </p>
           </div>
@@ -50,7 +50,7 @@ const Built = () => {
         >
           <div className=" flex flex-col md:flex-row items-center gap-[10px] md:gap-[24px] ">
             <img src={Icon3} alt="" />
-            <p className=" text-[16px] md:text-[20px] font-[500] text-[#5855B3]">
+            <p className=" text-[16px] md:text-[20px] font-[500] text-[#121212]">
               Analytics & Reporting
             </p>
           </div>
@@ -65,7 +65,7 @@ const Built = () => {
         >
           <div className=" flex flex-col md:flex-row items-center gap-[10px] md:gap-[24px] ">
             <img src={Icon4} alt="" />
-            <p className=" text-[16px] md:text-[20px] font-[500] text-[#5855B3]">
+            <p className=" text-[16px] md:text-[20px] font-[500] text-[#121212]">
               Team Friendly
             </p>
           </div>
@@ -80,7 +80,7 @@ const Built = () => {
         >
           <div className=" flex flex-col md:flex-row items-center gap-[10px] md:gap-[24px] ">
             <img src={Icon5} alt="" />
-            <p className=" text-[16px] md:text-[20px] font-[500] text-[#5855B3]">
+            <p className=" text-[16px] md:text-[20px] font-[500] text-[#121212]">
               Next Day Deposits
             </p>
           </div>
@@ -95,7 +95,7 @@ const Built = () => {
         >
           <div className=" flex flex-col md:flex-row items-center gap-[10px] md:gap-[24px] ">
             <img src={Icon6} alt="" />
-            <p className=" text-[16px] md:text-[20px] font-[500] text-[#5855B3]">
+            <p className=" text-[16px] md:text-[20px] font-[500] text-[#121212]">
               Troo Capital
             </p>
           </div>

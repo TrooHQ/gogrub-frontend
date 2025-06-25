@@ -556,22 +556,15 @@ export default function InformationAccordion() {
 
   const { payoutBankDetails } = formData;
 
-  const [isBankFormComplete, setIsBankFormComplete] = useState<boolean>(true);
+  const [showBankNotice, setShowBankNotice] = useState<boolean>(false);
 
   useEffect(() => {
-    const isBankFormComplete =
-      !!payoutBankDetails.accountNumber?.trim() &&
-      !!payoutBankDetails.bankName?.trim() &&
-      payoutBankDetails.bvn.trim().length >= 11 &&
-      !!payoutBankDetails.bankCountry?.trim();
+    if (payoutBankDetails?.bankName && payoutBankDetails?.accountNumber) {
 
+      setShowBankNotice(payoutBankDetails.accountNumber?.trim().length < 1 && payoutBankDetails.bankName?.trim().length < 1)
 
-    setIsBankFormComplete(isBankFormComplete)
-  }, [payoutBankDetails.accountNumber, payoutBankDetails.bankName, payoutBankDetails.bvn, payoutBankDetails.bankCountry])
-
-
-
-
+    }
+  }, [payoutBankDetails, payoutBankDetails.accountNumber, payoutBankDetails.bankName, payoutBankDetails.bvn, payoutBankDetails.bankCountry])
 
 
   // Synchronous filterOptions function for Autocomplete
@@ -782,7 +775,7 @@ export default function InformationAccordion() {
           {selectedFileBase64 && (
             <div className="flex gap-2 px-4 py-2">
               <button
-                className="bg-white text-[#5855B3] border border-[#5855B3] font-semibold py-2 px-4 rounded"
+                className="bg-white text-[#121212] border border-[#5855B3] font-semibold py-2 px-4 rounded"
                 onClick={(e: any) => handleSaveLogo(e)}
               >
                 {isSavingLogo ? "Saving..." : "Save Logo"}
@@ -834,7 +827,7 @@ export default function InformationAccordion() {
         >
           <div className="relative flex gap-2 font-base text-normal text-blackish">
             Bank Information
-            {!isBankFormComplete && (<PiInfo className="mt-1 text-black-500 size-3.5" />)}
+            {(showBankNotice) && (<PiInfo className="mt-1 text-black-500 size-4" />)}
           </div>
         </AccordionSummary>
         <AccordionDetails className="flex flex-col gap-4">
@@ -850,7 +843,7 @@ export default function InformationAccordion() {
             <Button
               variant="contained"
               onClick={handleBankDetailsSubmit}
-              disabled={isSubmittingBankDetails || !isBankFormComplete}
+              disabled={isSubmittingBankDetails || !showBankNotice}
               sx={{
                 backgroundColor: "#000000",
                 "&:hover": {

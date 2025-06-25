@@ -534,7 +534,7 @@ const MenuList = () => {
                               <span
                                 className={clsx(
                                   toggleStates[item._id]
-                                    ? "text-[#5855b3]"
+                                    ? "text-[#121212]"
                                     : "text-gray-700",
                                   "text-base font-medium",
                                   "w-full"
@@ -616,7 +616,7 @@ const MenuList = () => {
                               <span
                                 className={clsx(
                                   toggleStates2[item._id]
-                                    ? "text-[#5855b3]"
+                                    ? "text-[#121212]"
                                     : "text-gray-700",
                                   "text-[14px] font-medium",
                                   "w-full"
@@ -746,7 +746,7 @@ const MenuList = () => {
                 </button>
                 <button
                   onClick={() => setEditModalOpen(false)}
-                  className="bg-[#F8F8F8] text-[#5855B3] rounded-[6px] px-4 py-2"
+                  className="bg-[#F8F8F8] text-[#121212] rounded-[6px] px-4 py-2"
                 >
                   Cancel
                 </button>

@@ -7,8 +7,9 @@ import {
   VisibilityOutlined,
 } from "@mui/icons-material";
 import chevron_right from "../../../assets/chevron_right.svg";
-import activeArrow from "../../../assets/activeArrow.svg";
+// import activeArrow from "../../../assets/activeArrow.svg";
 import CoffeeImg from "../../../assets/coffeeImg.png";
+import { BsArrowRightCircleFill } from "react-icons/bs";
 
 interface Props {
   mgLoading: boolean;
@@ -83,11 +84,10 @@ const MenuGroup: React.FC<Props> = ({
                   className="flex items-center justify-between"
                 >
                   <p
-                    className={`${
-                      activeGroup?.name === group?.name
-                        ? "font-[500] text-[#5855B3]"
-                        : "text-grey200"
-                    } hover:bg-purple100 flex justify-between cursor-pointer items-center w-[201px] text-[16px] font-[400] py-[12px] px-[8px]`}
+                    className={`${activeGroup?.name === group?.name
+                      ? "font-[500] text-[#121212]"
+                      : "text-gray-500"
+                      } hover:bg-gray-100 flex justify-between cursor-pointer items-center w-[201px] text-[16px] font-[400] py-[12px] px-[8px]`}
                     key={group._id}
                     onClick={() => {
                       handleFetchMenuItems(group);
@@ -164,7 +164,8 @@ const MenuGroup: React.FC<Props> = ({
                       </Menu>
                     )}
                     {activeGroup?.name === group.name ? (
-                      <img src={activeArrow} alt="activearrow" />
+                      // <img src={activeArrow} alt="activearrow" />
+                      <BsArrowRightCircleFill />
                     ) : (
                       <img src={chevron_right} alt="" />
                     )}
@@ -188,9 +189,9 @@ const MenuGroup: React.FC<Props> = ({
         {activeGroup ? (
           <div className=" flex-grow space-y-[16px]">
             <p className=" font-[400] text-[12px] text-[#606060]">Menu Item</p>
-            <div className=" flex items-start justify-between ">
-              <p className=" text-[16px] font-[500] text-[#5855B3]">Type</p>
-              <div className=" ">
+            <div className="flex items-start justify-between ">
+              <p className=" text-[16px] font-[500] text-[#121212]">Type</p>
+              <div className="">
                 <button
                   className="w-[196px]  px-[10px] py-[6px] font-[500] text-purple500 text-[16px] flex items-center gap-[8px]"
                   onClick={handleAddMenuItem}
@@ -216,11 +217,10 @@ const MenuGroup: React.FC<Props> = ({
                     <div className="" key={index}>
                       <div
                         className={`flex items-center justify-between py-[8px] px-[16px] cursor-pointer mb-2
-          ${
-            selectedMenuItem?._id === item?._id
-              ? "bg-[#ebebeb] text-purple500"
-              : "bg-[#F8F8F8] text-grey500"
-          }`}
+          ${selectedMenuItem?._id === item?._id
+                            ? "bg-[#ebebeb] text-purple500"
+                            : "bg-[#F8F8F8] text-grey500"
+                          }`}
                         onClick={() => handleMenuItemClick(item)}
                       >
                         <div className="flex gap-[8px] items-center">
@@ -287,7 +287,7 @@ const MenuGroup: React.FC<Props> = ({
             )}
 
             {subMenuContent.length > 1 && (
-              <div className=" flex items-center justify-end">
+              <div className="flex items-center justify-end ">
                 <button
                   className="w-[196px] border border-[#121212] rounded-[5px]  px-[16px] py-[8px] font-[500] text-purple500 text-[16px] flex items-center gap-[8px]"
                   onClick={handleAddMenuItem}

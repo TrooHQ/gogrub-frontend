@@ -126,7 +126,7 @@ const CreatePassword = () => {
             </p>
             <Link to="/login">
               <div className=" flex items-end gap-[4px]">
-                <p className=" text-[#5855B3]">Proceed to Login</p>
+                <p className=" text-[#121212]">Proceed to Login</p>
                 <img src={ArrowRight} alt="" />
               </div>
             </Link>

@@ -19,24 +19,24 @@ const ProfileDetails = () => {
     <div className="space-y-8">
       <SectionHeader title="Profile Details" onEditClick={handleEditClick} />
 
-      <div className="flex items-center space-x-4 mb-8">
+      <div className="flex items-center mb-8 space-x-4">
         <img
           src={userDetails?.photo || userDetails?.business_logo || ""}
           alt={`${userDetails?.first_name} ${userDetails?.last_name}`}
-          className="w-16 h-16 rounded-full object-cover"
+          className="object-cover w-20 h-20 border border-gray-300 rounded-full "
         />
         <div>
           <h3 className="text-[16px] font-medium text-[#121212]">
             {userDetails?.first_name} {userDetails?.last_name}
           </h3>
           <p className="text-gray-600">{userDetails?.user_role}</p>
-          <p className="text-sm text-gray-500">All Outlets</p>
+          {/* <p className="text-sm text-gray-500">All Outlets</p> */}
         </div>
       </div>
 
       <div className="space-y-8">
         <div>
-          <SectionHeader title="Personal Information" onEditClick={handleEditClick} />
+          <SectionHeader title="Personal Information" onEditClick={handleEditClick} showEdit={false} />
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">First Name</p>
@@ -62,7 +62,7 @@ const ProfileDetails = () => {
         </div>
 
         <div>
-          <SectionHeader title="Address" onEditClick={handleEditClick} />
+          <SectionHeader title="Address" onEditClick={handleEditClick} showEdit={false} />
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Country</p>
@@ -74,7 +74,7 @@ const ProfileDetails = () => {
                 {userDetails?.city}, {userDetails?.state}
               </p>
             </div>
-            <div>
+            {/* <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Business Email</p>
               <p className="text-[#121212] font-medium text-base">{userDetails?.business_email}</p>
             </div>
@@ -83,7 +83,7 @@ const ProfileDetails = () => {
               <p className="text-[#121212] font-medium text-base">
                 {userDetails?.business_address}
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

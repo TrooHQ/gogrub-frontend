@@ -562,14 +562,9 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         <div className="flex items-start justify-start gap-0">
           <div>
             <div
-              className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center cursor-pointer"
-              // type="button"
-              onClick={
-                () => dispatch(setSubscription(true))
-                // currentPlanName
-                // ? () => dispatch(setSubscription(true))
-                // : undefined
-              }
+              className="ml-4 mr-4 px-5 py-[6px] bg-[#DB7F3B] rounded-[4px] mt-1 text-center cursor-default"
+            // type="button"
+            // onClick={() => dispatch(setSubscription(true))}
             >
               <span className="mr-2 text-base font-semibold text-white capitalize">
                 {

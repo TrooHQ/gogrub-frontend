@@ -155,7 +155,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         <p className="text-gray-700 text-lg font-medium mb-4">File Added</p>
         <div className="flex items-center gap-4 mb-4 justify-between">
           <div className="flex items-center gap-4">
-            <TaskOutlined className="text-[#5855B3] text-2xl" />
+            <TaskOutlined className="text-[#121212] text-2xl" />
             <p className="text-gray-700 truncate">
               {uploadedLogo ? truncateText(uploadedLogo.name, 15) : ""}
             </p>

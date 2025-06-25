@@ -136,7 +136,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             onClick={handleLogout}
           >
             <img src={LogoutIcon} alt="" />
-            <p className=" text-[#5855B3] font-[500] text-[14px]"> Logout</p>
+            <p className=" text-[#121212] font-[500] text-[14px]"> Logout</p>
           </div>
         </div>
       </div>
