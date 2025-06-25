@@ -36,7 +36,7 @@ const EditCategoryNameModal: React.FC<Props> = ({
         </button>
         <button
           onClick={() => setEditCategoryModalOpen(false)}
-          className="bg-[#F8F8F8] text-[#5855B3] rounded-[6px] px-4 py-2"
+          className="bg-[#F8F8F8] text-[#121212] rounded-[6px] px-4 py-2"
         >
           Cancel
         </button>

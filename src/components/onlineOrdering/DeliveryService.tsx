@@ -113,7 +113,7 @@ const DeliveryService = () => {
             />
             <span
               className={clsx({
-                "text-[#5855B3]": isDeliveryEnabled,
+                "text-[#121212]": isDeliveryEnabled,
                 "text-[#929292]": !isDeliveryEnabled,
                 "text-base font-medium": true,
               })}
@@ -184,7 +184,7 @@ const DeliveryService = () => {
             />
             <span
               className={clsx({
-                "text-[#5855B3]": isDeliveryEnabled,
+                "text-[#121212]": isDeliveryEnabled,
                 "text-[#929292]": !isDeliveryEnabled,
                 "text-base font-medium": true,
               })}
@@ -232,7 +232,7 @@ const DeliveryService = () => {
                       />
                       <span
                         className={clsx({
-                          "text-[#5855B3]": isSchedulingEnabled,
+                          "text-[#121212]": isSchedulingEnabled,
                           "text-[#929292]": !isSchedulingEnabled,
                           "text-base font-medium": true,
                         })}

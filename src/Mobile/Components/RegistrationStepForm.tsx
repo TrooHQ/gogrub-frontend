@@ -598,7 +598,7 @@ const RegistrationStepForm = () => {
                 <div className="">
                   <label
                     htmlFor="fileInput"
-                    className="text-[#5855B3] font-[500] text-[16px] cursor-pointer"
+                    className="text-[#121212] font-[500] text-[16px] cursor-pointer"
                   >
                     Add Business Logo{" "}
                   </label>

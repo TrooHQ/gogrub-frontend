@@ -62,9 +62,8 @@ const Navbar = () => {
   return (
     <div className=" pb-[120px]">
       <div
-        className={`fixed top-0 w-full  z-[99999999999] ${
-          !scroll && "shadow-md bg-slate-50"
-        }`}
+        className={`fixed top-0 w-full  z-[99999999999] ${!scroll && "shadow-md bg-slate-50"
+          }`}
       >
         <div className="  py-[35px] lg:mx-[158px] md:border-b border-[#CBCAE7] grid md:flex items-center justify-between gap-[20px] md:gap-0">
           <div className=" mx-[10px] md:mx-0">
@@ -73,16 +72,14 @@ const Navbar = () => {
             </Link>
           </div>
           <div
-            className={`md:flex md:items-center text-white font-[400] ${
-              !open ? "block" : "hidden"
-            }`}
+            className={`md:flex md:items-center text-white font-[400] ${!open ? "block" : "hidden"
+              }`}
           >
             <ul className=" hidden md:flex items-center gap-[20px]">
               <li className=" ">
                 <button
-                  className={`focus:outline-none flex items-center gap-[5px] text-[14px] font-[500] ${
-                    menu || includesTerm2 ? "text-[#5855B3]" : "text-[#414141]"
-                  }`}
+                  className={`focus:outline-none flex items-center gap-[5px] text-[14px] font-[500] ${menu || includesTerm2 ? "text-[#121212]" : "text-[#414141]"
+                    }`}
                   onClick={handleToggleMenu}
                 >
                   Troo for{" "}
@@ -94,9 +91,8 @@ const Navbar = () => {
 
               <li className=" ">
                 <button
-                  className={`focus:outline-none flex items-center gap-[5px] text-[14px] font-[500] ${
-                    menu2 || includesTerm ? "text-[#5855B3]" : "text-[#414141]"
-                  }`}
+                  className={`focus:outline-none flex items-center gap-[5px] text-[14px] font-[500] ${menu2 || includesTerm ? "text-[#121212]" : "text-[#414141]"
+                    }`}
                   onClick={handleToggleMenu2}
                 >
                   Troo Products{" "}
@@ -138,11 +134,10 @@ const Navbar = () => {
               <Link to="/lounges">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/lounges`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/lounges`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>Bars</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -162,11 +157,10 @@ const Navbar = () => {
               <Link to="/restaurant">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/restaurant`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/restaurant`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>Restaurants</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -186,11 +180,10 @@ const Navbar = () => {
               <Link to="/cafe">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/cafe`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/cafe`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>
                       Cafes & Bakeries
@@ -211,11 +204,10 @@ const Navbar = () => {
               <Link to="/fast-food">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/fast-food`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/fast-food`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>Fast food</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -234,11 +226,10 @@ const Navbar = () => {
               <Link to="/hotel">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/hotel`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/hotel`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>Hotels</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -257,11 +248,10 @@ const Navbar = () => {
               <Link to="/food-truck">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/food-truck`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/food-truck`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>Food Trucks</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -286,11 +276,10 @@ const Navbar = () => {
               <Link to="/pos">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/pos`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/pos`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>POS</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -310,11 +299,10 @@ const Navbar = () => {
               <Link to="/digital-ordering">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/digital-ordering`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/digital-ordering`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>
                       Digital Ordering
@@ -336,11 +324,10 @@ const Navbar = () => {
               <Link to="/kds">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/kds`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/kds`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>KDS</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -359,11 +346,10 @@ const Navbar = () => {
               <Link to="/payment">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/payment`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/payment`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>
                       Payment Processing
@@ -384,11 +370,10 @@ const Navbar = () => {
               <Link to="/table-ordering">
                 <div className=" flex items-center justify-between w-[301px]">
                   <div
-                    className={`${
-                      location.pathname === `/table-ordering`
-                        ? `text-[#5855B3]`
+                    className={`${location.pathname === `/table-ordering`
+                        ? `text-[#121212]`
                         : "text-[#414141] "
-                    }`}
+                      }`}
                   >
                     <p className={`text-[16px] font-[500] `}>Table Ordering</p>
                     <p className={`text-[14px] font-[400]`}>
@@ -410,11 +395,10 @@ const Navbar = () => {
       </div>
       {!open && (
         <div
-          className={`bg-[#E7E7E7] z-[99999999999999999] w-[100%] h-screen md:hidden fixed top-0 px-[24px] py-[40px] ${
-            !open
+          className={`bg-[#E7E7E7] z-[99999999999999999] w-[100%] h-screen md:hidden fixed top-0 px-[24px] py-[40px] ${!open
               ? "right-0 transition-transform transform translate-x-0 md:translate-x-full"
               : "right-[calc(100vw - 375px)] transition-transform transform translate-x-full md:translate-x-0"
-          }`}
+            }`}
         >
           <div
             className="flex items-center justify-end mb-[36px] md:hidden cursor-pointer"
@@ -442,9 +426,8 @@ const Navbar = () => {
                     <img
                       src={ArrowDown}
                       alt=""
-                      className={`transition-all ${
-                        toggle1 ? "rotate-180" : ""
-                      }`}
+                      className={`transition-all ${toggle1 ? "rotate-180" : ""
+                        }`}
                     />
                   </div>
                   {toggle1 && (
@@ -494,9 +477,8 @@ const Navbar = () => {
                     <img
                       src={ArrowDown}
                       alt=""
-                      className={`transition-all ${
-                        toggle2 ? "rotate-180" : ""
-                      }`}
+                      className={`transition-all ${toggle2 ? "rotate-180" : ""
+                        }`}
                     />
                   </div>
                   {toggle2 && (

@@ -42,7 +42,7 @@ const KDSPage = () => {
           className=" max-w-[271px] md:max-w-[607px] mx-auto text-center md:mt-[100px]"
           data-aos="fade-up"
         >
-          <p className=" text-[14px] font-[400] text-[#5855B3] hidden md:block">
+          <p className=" text-[14px] font-[400] text-[#121212] hidden md:block">
             PRODUCTS/KDS
           </p>
           <p className=" text-[24px] md:text-[44px] font-[500]  leading-[31px] md:leading-[66px]">
@@ -80,7 +80,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={NoPaper} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     No Papers, No Clutters
                   </p>
                 </div>
@@ -97,7 +97,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={Synchronize} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     Synchronized Operations
                   </p>
                 </div>
@@ -112,7 +112,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={SOT} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     One source of truth for fulfilment
                   </p>
                 </div>
@@ -130,7 +130,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={printer} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     Bulk Print
                   </p>
                 </div>
@@ -145,7 +145,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={Order} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     Process More Orders
                   </p>
                 </div>
@@ -160,7 +160,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={Cloud} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     Fulfilment Status
                   </p>
                 </div>
@@ -175,7 +175,7 @@ const KDSPage = () => {
               >
                 <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                   <img src={integration} alt="" />
-                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                  <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                     Integration
                   </p>
                 </div>

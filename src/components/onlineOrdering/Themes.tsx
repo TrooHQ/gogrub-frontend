@@ -52,7 +52,7 @@ const Themes = () => {
   return (
     <div className="p-4 flex gap-12">
       <div>
-        <h2 className="text-2xl font-medium text-[#5855b3] mb-4">
+        <h2 className="text-2xl font-medium text-[#121212] mb-4">
           Brand colors
         </h2>
         <p className="mb-2 text-base text-[#121212] font-normal">
@@ -65,11 +65,10 @@ const Themes = () => {
             <div
               key={color}
               className={`w-20 h-20 flex items-center justify-center cursor-pointer transition-all duration-300 
-              ${
-                color === selectedColor
+              ${color === selectedColor
                   ? "rounded-lg border-4 rounded-tl-[30px] rounded-tr-[30px] border-blue-500"
                   : "rounded-full border-2 border-gray-300"
-              } hover:scale-110 bg-[#F8F8F8] shadow-md`}
+                } hover:scale-110 bg-[#F8F8F8] shadow-md`}
               style={{ backgroundColor: color }}
               onClick={() => handleColorClick(color)}
             >

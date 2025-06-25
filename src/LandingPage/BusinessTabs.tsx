@@ -51,7 +51,7 @@ const BusinessTabs = () => {
             <div className=" flex flex-col gap-[16px] items-center">
               <img src={LocalRestaurant} alt="" />
               <div className=" flex items-center gap-[8px]">
-                <p className=" font-[500] text-[16px] text-[#5855B3]">
+                <p className=" font-[500] text-[16px] text-[#121212]">
                   Restaurants
                 </p>
                 <img src={Arrow} alt="" />
@@ -62,7 +62,7 @@ const BusinessTabs = () => {
             <div className=" flex flex-col gap-[16px] items-center">
               <img src={FoodTruck} alt="" />
               <div className=" flex items-center gap-[8px]">
-                <p className=" font-[500] text-[16px] text-[#5855B3]">
+                <p className=" font-[500] text-[16px] text-[#121212]">
                   Food Trucks
                 </p>
                 <img src={Arrow} alt="" />
@@ -74,7 +74,7 @@ const BusinessTabs = () => {
             <div className=" flex flex-col gap-[16px] items-center">
               <img src={LocalHotel} alt="" />
               <div className=" flex items-center gap-[8px]">
-                <p className=" font-[500] text-[16px] text-[#5855B3]">Hotels</p>
+                <p className=" font-[500] text-[16px] text-[#121212]">Hotels</p>
                 <img src={Arrow} alt="" />
               </div>
             </div>
@@ -84,7 +84,7 @@ const BusinessTabs = () => {
             <div className=" flex flex-col gap-[16px] items-center">
               <img src={FastFood} alt="" />
               <div className=" flex items-center gap-[8px]">
-                <p className=" font-[500] text-[16px] text-[#5855B3]">
+                <p className=" font-[500] text-[16px] text-[#121212]">
                   Fast Foods
                 </p>
                 <img src={Arrow} alt="" />
@@ -95,7 +95,7 @@ const BusinessTabs = () => {
             <div className=" flex flex-col gap-[16px] items-center">
               <img src={Nightlife} alt="" />
               <div className=" flex items-center gap-[8px]">
-                <p className=" font-[500] text-[16px] text-[#5855B3]">
+                <p className=" font-[500] text-[16px] text-[#121212]">
                   Clubs/Lounges
                 </p>
                 <img src={Arrow} alt="" />
@@ -107,7 +107,7 @@ const BusinessTabs = () => {
             <div className=" flex flex-col gap-[16px] items-center">
               <img src={LocalCafe} alt="" />
               <div className=" flex items-center gap-[8px]">
-                <p className=" font-[500] text-[16px] text-[#5855B3]">
+                <p className=" font-[500] text-[16px] text-[#121212]">
                   Cafes/Bakeries
                 </p>
                 <img src={Arrow} alt="" />

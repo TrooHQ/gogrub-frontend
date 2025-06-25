@@ -146,7 +146,7 @@ const PickupLocation = () => {
             />
             <span
               className={clsx({
-                "text-[#5855B3]": isPickupEnabled,
+                "text-[#121212]": isPickupEnabled,
                 "text-[#929292]": !isPickupEnabled,
                 "text-base font-medium": true,
               })}
@@ -214,7 +214,7 @@ const PickupLocation = () => {
             />
             <span
               className={clsx({
-                "text-[#5855B3]": isPickupEnabled,
+                "text-[#121212]": isPickupEnabled,
                 "text-[#929292]": !isPickupEnabled,
                 "text-base font-medium": true,
               })}
@@ -285,7 +285,7 @@ const PickupLocation = () => {
                     />
                     <span
                       className={clsx({
-                        "text-[#5855B3]": isSchedulingEnabled,
+                        "text-[#121212]": isSchedulingEnabled,
                         "text-[#929292]": !isSchedulingEnabled,
                         "text-base font-medium": true,
                       })}

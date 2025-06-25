@@ -86,7 +86,7 @@ export const AccordionItem = ({
           </IconButton>
           <span
             className={clsx(
-              isEnabled ? "text-[#5855b3]" : "text-gray-700",
+              isEnabled ? "text-[#121212]" : "text-gray-700",
               "text-base font-medium"
             )}
           >

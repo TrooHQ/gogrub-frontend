@@ -450,7 +450,7 @@ const MenuSettings = () => {
               </div>
             </div>
             <p
-              className=" text-[#5855B3] py-[11px] px-[4px] text-[14px] font-[400] flex items-center cursor-pointer"
+              className=" text-[#121212] py-[11px] px-[4px] text-[14px] font-[400] flex items-center cursor-pointer"
               onClick={handleAddMenuItem}
             >
               <img src={AddWhite} alt="" />
@@ -682,7 +682,7 @@ const MenuSettings = () => {
               )}
 
               <p
-                className=" text-[#5855B3] py-[11px] px-[4px] text-[14px] font-[400] flex items-center cursor-pointer"
+                className=" text-[#121212] py-[11px] px-[4px] text-[14px] font-[400] flex items-center cursor-pointer"
                 onClick={handleAddMenuItem}
               >
                 <img src={AddWhite} alt="" />
@@ -772,7 +772,7 @@ const MenuSettings = () => {
                   <div className="">
                     <label
                       htmlFor="fileInput"
-                      className="text-[#5855B3] font-[500] text-[16px] cursor-pointer"
+                      className="text-[#121212] font-[500] text-[16px] cursor-pointer"
                     >
                       Click to upload{" "}
                     </label>

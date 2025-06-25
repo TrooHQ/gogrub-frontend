@@ -41,7 +41,7 @@ const PosPage = () => {
           className=" max-w-[271px] md:max-w-[607px] mx-auto text-center md:mt-[100px]"
           data-aos="fade-up"
         >
-          <p className=" text-[14px] font-[400] text-[#5855B3] hidden md:block">
+          <p className=" text-[14px] font-[400] text-[#121212] hidden md:block">
             PRODUCTS/POS
           </p>
           <p className=" text-[24px] md:text-[44px] font-[500]  leading-[31px] md:leading-[66px]">
@@ -77,7 +77,7 @@ const PosPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Online} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Online & Offline Mode
                 </p>
               </div>
@@ -93,7 +93,7 @@ const PosPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Trending} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Increase Check Sizes
                 </p>
               </div>
@@ -108,7 +108,7 @@ const PosPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={RestaurantHardware} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Restaurant-grade Hardware
                 </p>
               </div>
@@ -123,7 +123,7 @@ const PosPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={RestaurantTable} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Map Tables
                 </p>
               </div>
@@ -138,7 +138,7 @@ const PosPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={RestaurantGuest} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Built for Guests
                 </p>
               </div>
@@ -154,7 +154,7 @@ const PosPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Integration} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Seamless Integration
                 </p>
               </div>

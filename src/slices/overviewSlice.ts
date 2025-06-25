@@ -352,12 +352,16 @@ export const fetchSalesRevenueGraph = createAsyncThunk(
         params.number_of_days = number_of_days;
       }
 
-      const response = await axios.get(`${SERVER_DOMAIN}/salesRevenueGraph`, {
-        params,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // const response = await axios.get(`${SERVER_DOMAIN}/salesRevenueGraph`, {
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/goGrubSalesRevenueGraph`,
+        {
+          params,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       // console.log("response data", response.data);
       return response.data;
     } catch (error) {

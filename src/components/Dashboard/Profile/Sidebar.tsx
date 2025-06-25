@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeComponent, setActiveComponent }
             className={`${isActive("branch") ? "text-[#121212] font-medium" : "text-[#929292] font-normal"
               } text-[16px] leading-[24px] tracking-[0.5px]`}
           >
-            Branch Details
+            Business Details
           </span>
         </button>
         <button

@@ -42,7 +42,7 @@ const TableOrderingPage = () => {
           className=" max-w-[271px] md:max-w-[607px] mx-auto text-center md:mt-[100px]"
           data-aos="fade-up"
         >
-          <p className=" text-[14px] font-[400] text-[#5855B3] hidden md:block">
+          <p className=" text-[14px] font-[400] text-[#121212] hidden md:block">
             PRODUCTS/TABLE ORDERING
           </p>
           <p className=" text-[24px] md:text-[44px] font-[500]  leading-[31px] md:leading-[66px]">
@@ -80,7 +80,7 @@ const TableOrderingPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={QRCode} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Order via QR Code
                 </p>
               </div>
@@ -96,7 +96,7 @@ const TableOrderingPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Order} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Order From the Menu
                 </p>
               </div>
@@ -111,7 +111,7 @@ const TableOrderingPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Synchronize} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Synchronized with your System
                 </p>
               </div>
@@ -125,7 +125,7 @@ const TableOrderingPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Trending} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   Increase Turnover
                 </p>
               </div>
@@ -139,7 +139,7 @@ const TableOrderingPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={Star} alt="" />
-                <p className=" text-[18px] md:text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[18px] md:text-[20px] font-[500] text-[#121212]">
                   The Best Experience
                 </p>
               </div>
@@ -154,7 +154,7 @@ const TableOrderingPage = () => {
             >
               <div className=" flex flex-col md:flex-row items-center gap-[8px] md:gap-[24px] ">
                 <img src={optimize} alt="" />
-                <p className=" text-[20px] font-[500] text-[#5855B3]">
+                <p className=" text-[20px] font-[500] text-[#121212]">
                   Optimize your Business
                 </p>
               </div>

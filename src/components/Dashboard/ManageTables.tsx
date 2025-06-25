@@ -46,9 +46,8 @@ const DropdownMenu = ({
       </li>
       <li
         onClick={() => handleItemClick("Enable Table")}
-        className={`font-[400] cursor-pointer ${
-          !isEnabled ? "  text-slate-300" : " text-black"
-        }`}
+        className={`font-[400] cursor-pointer ${!isEnabled ? "  text-slate-300" : " text-black"
+          }`}
       >
         {isEnabled ? (
           <ToggleOn className="mr-2 text-[#5955eb]" />
@@ -249,7 +248,7 @@ const ManageTables: React.FC = () => {
           </div>
 
           {roomData.length === 0 && tableData.length === 0 && (
-            <div className="my-auto flex items-center justify-center">
+            <div className="flex items-center justify-center my-auto">
               <p className="text-grey200 text-[20px] font-[400]">
                 No table information has been set yet
               </p>
@@ -259,7 +258,7 @@ const ManageTables: React.FC = () => {
           {Object.entries(combinedData).map(([category, items]) => (
             <div key={category}>
               <div className="mt-3 cursor-pointer flex items-center justify-between border-b py-[16px] border-[#E7E7E7]">
-                <h2 className="text-[#5855B3] text-[20px] font-[400]">
+                <h2 className="text-[#121212] text-[20px] font-[400]">
                   {category?.toUpperCase()}
                 </h2>
                 <div>
@@ -267,9 +266,8 @@ const ManageTables: React.FC = () => {
                     onClick={() => toggleOwner(category)}
                     src={ArrowToggle}
                     alt=""
-                    className={`transform inline transition-transform duration-300 ${
-                      expandedOwner === category ? "rotate-180" : ""
-                    }`}
+                    className={`transform inline transition-transform duration-300 ${expandedOwner === category ? "rotate-180" : ""
+                      }`}
                   />
                 </div>
               </div>
@@ -312,7 +310,7 @@ const ManageTables: React.FC = () => {
                             <p className="col-span-2 px-3 py-2 font-normal">
                               {groupName}
                             </p>
-                            <p className="col-span-7 text-right font-normal px-3 py-2">
+                            <p className="col-span-7 px-3 py-2 font-normal text-right">
                               {expandedGroups[groupName]
                                 ? "Collapse ▲"
                                 : "Expand ▼"}
@@ -324,9 +322,8 @@ const ManageTables: React.FC = () => {
                               (item: any, index: number) => (
                                 <li
                                   key={item._id}
-                                  className={`grid grid-cols-9 items-center px-5 py-[16px] text-grey300 text-[16px] font-[400] ${
-                                    index % 2 === 0 ? "bg-[#F8F8F8]" : ""
-                                  }`}
+                                  className={`grid grid-cols-9 items-center px-5 py-[16px] text-grey300 text-[16px] font-[400] ${index % 2 === 0 ? "bg-[#F8F8F8]" : ""
+                                    }`}
                                 >
                                   <p className="col-span-2 px-3 py-2">
                                     {item.group_name}
@@ -344,11 +341,10 @@ const ManageTables: React.FC = () => {
                                   </p>
                                   <div className="flex items-center justify-end gap-[16px] relative col-span-2 px-3 py-2">
                                     <div
-                                      className={`${
-                                        activeMenuIndex === item._id
-                                          ? "bg-slate-200"
-                                          : ""
-                                      } py-[10px] px-[20px] rounded-full`}
+                                      className={`${activeMenuIndex === item._id
+                                        ? "bg-slate-200"
+                                        : ""
+                                        } py-[10px] px-[20px] rounded-full`}
                                     >
                                       <div
                                         className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
@@ -415,7 +411,7 @@ const ManageTables: React.FC = () => {
                   />
                 </div>
                 {selectedType === "QR Scan at Table" && (
-                  <div className="mt-3 flex-grow  ">
+                  <div className="flex-grow mt-3 ">
                     <CustomInput
                       type="text"
                       label="How many tables do you have?"
@@ -425,7 +421,7 @@ const ManageTables: React.FC = () => {
                     />
                   </div>
                 )}
-                <div className="mt-3 flex-grow  ">
+                <div className="flex-grow mt-3 ">
                   <CustomInput
                     type="text"
                     label="Location"
@@ -437,7 +433,7 @@ const ManageTables: React.FC = () => {
               </div>
               <hr className="border mb-[16px] mt-[24px] border-[#E7E7E7]" />
 
-              <div className=" flex justify-end items-center  gap-2">
+              <div className="flex items-center justify-end gap-2 ">
                 <div
                   className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-purple500"
                   onClick={() => setAddModifierModal(false)}
@@ -467,7 +463,7 @@ const ManageTables: React.FC = () => {
           >
             <div className="">
               <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[539px]">
-                <div className="flex flex-col justify-center items-center gap-6">
+                <div className="flex flex-col items-center justify-center gap-6">
                   <p className="text-[24px] font-[500] text-purple500">
                     Delete Table
                   </p>{" "}

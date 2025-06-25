@@ -141,11 +141,10 @@ const MenuTab: React.FC = () => {
             menuGroup.map((menu) => (
               <button
                 key={menu.name}
-                className={`pb-[8px] ${
-                  selectedGroup === menu.name
+                className={`pb-[8px] ${selectedGroup === menu.name
                     ? "border-b-[4px] border-b-[#E16B07] text-[#121212] text-[16px] flex items-center justify-center font-[500]"
                     : "text-grey100 font-[400]"
-                }`}
+                  }`}
                 onClick={() => setSelectedGroup(menu.name)}
               >
                 {menu.name}
@@ -212,7 +211,7 @@ const MenuTab: React.FC = () => {
                   <input
                     type="file"
                     onChange={handleFileChange}
-                    className="text-[14px] font-[400] text-[#5855B3]"
+                    className="text-[14px] font-[400] text-[#121212]"
                   />
                 </div>
                 <div className="mb-[26px] grid gap-[16px]">
@@ -232,9 +231,8 @@ const MenuTab: React.FC = () => {
 
                 {price && name && (
                   <div
-                    className={`${
-                      loading ? "bg-[#B6B6B6] " : "bg-purple500"
-                    } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded cursor-pointer`}
+                    className={`${loading ? "bg-[#B6B6B6] " : "bg-purple500"
+                      } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded cursor-pointer`}
                   >
                     <p>Save Table</p>
                   </div>
