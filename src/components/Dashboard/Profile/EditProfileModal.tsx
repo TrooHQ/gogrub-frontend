@@ -1,7 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUserDetails, updateUserDetails } from "../../../slices/UserSlice";
+import { fetchUserDetails } from "../../../slices/UserSlice";
 import { AppDispatch } from "../../../store/store";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { SERVER_DOMAIN } from "../../../Api/Api";
 
 interface EditProfileModalProps {
   userDetails: {
@@ -41,6 +44,8 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
     city: userDetails?.city || "",
     business_email: userDetails?.business_email || "",
     business_address: userDetails?.business_address || "",
+    business_logo: userDetails?.business_logo
+      || null,
   });
   const [photo, setPhoto] = useState<string | null>(
     userDetails?.photo || userDetails?.photo || null
@@ -54,13 +59,25 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   };
 
   // Handle photo file change, convert to Base64
+  // const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files && e.target.files[0];
+  //   if (file) {
+  //     setImageFile(file);
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPhoto(reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
+    const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPhoto(reader.result as string);
+        const base64 = reader.result as string;
+        setPhoto(base64);
       };
       reader.readAsDataURL(file);
     }
@@ -70,38 +87,55 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Only include changed fields
-    const updatedData: any = {};
-    Object.keys(formData).forEach((key) => {
-      if (
-        formData[key as keyof typeof formData] !==
-        userDetails[key as keyof typeof userDetails]
-      ) {
-        updatedData[key] = formData[key as keyof typeof formData];
+    const updatedData: Partial<Record<keyof typeof formData, string | null>> = {};
+
+    Object.entries(formData).forEach(([key, value]) => {
+      const originalValue = userDetails[key as keyof typeof userDetails];
+
+      if (key === "photo") {
+        if (imageFile) {
+          updatedData.business_logo
+            = value;
+        }
+      } else if (value !== originalValue) {
+        updatedData[key as keyof typeof formData] = value;
       }
     });
 
-    if (imageFile) {
-      updatedData.photo = photo; // Add Base64 encoded image if changed
+    const token = localStorage.getItem("token");
+
+    if (Object.keys(updatedData).length === 0) {
+      toast.info("No changes detected");
+      return;
     }
 
-    console.log(updatedData, "update the data:");
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
 
-    if (Object.keys(updatedData).length > 0) {
-      await dispatch(updateUserDetails(updatedData)); // Dispatch Redux action to update user details
+      const response = await axios.put(
+        `${SERVER_DOMAIN}/updatePersonalInformation`,
+        updatedData,
+        { headers }
+      );
+      console.log(response.data);
+      toast.success("Details updated successfully");
+      dispatch(fetchUserDetails());
+      onClose();
+    } catch (error) {
+      console.error("Error updating details:", error);
+      toast.error("Update failed");
     }
-
-    dispatch(fetchUserDetails());
-
-    onClose(); // Close modal after submission
   };
 
   if (!isOpen) return null; // Do not render modal if not open
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-8 rounded-md shadow-md w-[80%] md:w-[50%] max-h-[80vh] overflow-y-scroll">
-        <h2 className="text-lg font-semibold mb-4">Edit Business Details</h2>
+        <h2 className="mb-4 text-lg font-semibold">Edit Business Details</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Photo Preview and Upload */}
           <div className="flex items-center mb-4 space-x-4">
@@ -109,7 +143,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
               <img
                 src={photo}
                 alt="Profile Preview"
-                className="w-16 h-16 rounded-full object-cover"
+                className="object-cover w-16 h-16 rounded-full"
               />
             )}
             <input type="file" accept="image/*" onChange={handlePhotoChange} />
@@ -122,7 +156,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -132,7 +166,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -143,7 +177,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 value={formData.personal_email}
                 onChange={handleChange}
                 readOnly
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -153,7 +187,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="phone_number"
                 value={formData.phone_number}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -163,7 +197,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -173,7 +207,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -183,7 +217,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -193,7 +227,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="business_email"
                 value={formData.business_email}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
             <div>
@@ -203,21 +237,21 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 name="business_address"
                 value={formData.business_address}
                 onChange={handleChange}
-                className="w-full border rounded-md p-2"
+                className="w-full p-2 border rounded-md"
               />
             </div>
           </div>
-          <div className="flex justify-end space-x-4 mt-6">
+          <div className="flex justify-end mt-6 space-x-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border rounded-md bg-gray-200"
+              className="px-4 py-2 bg-gray-200 border rounded-md"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-purple500 text-white rounded-md"
+              className="px-4 py-2 text-white rounded-md bg-purple500"
             >
               {loading ? "Saving..." : "Save"}
             </button>
