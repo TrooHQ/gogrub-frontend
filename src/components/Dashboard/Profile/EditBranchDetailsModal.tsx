@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useDispatch } from "react-redux";
-import { fetchUserDetails, } from "../../../slices/UserSlice";
-import { AppDispatch } from "../../../store/store";
+// import { useDispatch } from "react-redux";
+// import { fetchUserDetails, } from "../../../slices/UserSlice";
+// import { AppDispatch } from "../../../store/store";
 import axios from "axios";
 import { SERVER_DOMAIN } from '../../../Api/Api';
 import { toast } from "react-toastify";
@@ -32,7 +32,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
   onClose,
   loading,
 }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   // Local state for form fields and photo
   const [formData, setFormData] = useState({
@@ -47,9 +47,10 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
     business_email: userDetails.business_email || "",
     business_address: userDetails.business_address || "",
     photo: userDetails.photo || null,
+    business_logo: userDetails.business_logo || null,
   });
   const [photo, setPhoto] = useState<string | null>(userDetails.business_logo || null);
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  // const [imageFile, setImageFile] = useState<File | null>(null);
 
   // Handle form input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,16 +58,56 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const token = localStorage.getItem("token");
   // Handle photo file change, convert to Base64
+  // const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files && e.target.files[0];
+  //   if (file) {
+  //     setImageFile(file);
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPhoto(reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
+    const file = e.target.files?.[0];
     if (file) {
-      setImageFile(file);
+      // setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPhoto(reader.result as string);
+        const base64 = reader.result as string;
+        setPhoto(base64);
+        setFormData((prev) => ({ ...prev, business_logo: base64 })); // ✅ sync formData.photo
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const fetchAccountDetails = async () => {
+    console.log("fetching account details");
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/getAccountDetails`,
+        headers
+      );
+      const { data } = response.data;
+
+      console.log("data", data)
+
+    } catch (error: any) {
+      console.error("Error fetching account details:", error);
+      toast.error(
+        error?.response?.data?.message || "Error fetching information"
+      );
     }
   };
 
@@ -81,15 +122,25 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
     Object.entries(formData).forEach(([key, value]) => {
       const originalValue = userDetails[key as keyof typeof userDetails];
 
-      // Special handling for photo field (base64)
-      if (key === "photo" && imageFile && value !== originalValue) {
-        updatedData.photo = value;
-      } else if (value !== originalValue) {
+      if (value !== originalValue) {
         updatedData[key as keyof typeof formData] = value;
       }
     });
 
-    const token = localStorage.getItem("token");
+    // Object.entries(formData).forEach(([key, value]) => {
+    //   const originalValue = userDetails[key as keyof typeof userDetails];
+
+    //   // Special handling for photo field (base64)
+    //   if (key === "photo" && imageFile && value !== originalValue) {
+    //     updatedData.photo = value;
+    //   } else if (value !== originalValue) {
+    //     updatedData[key as keyof typeof formData] = value;
+    //   }
+    // });
+
+
+
+
 
     if (Object.keys(updatedData).length === 0) {
       toast.info("No changes detected");
@@ -111,9 +162,10 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
       console.log("Details updated successfully:", response.data);
 
       toast.success("Details updated successfully");
-
-      dispatch(fetchUserDetails());
+      fetchAccountDetails();
+      // dispatch(fetchUserDetails());
       onClose();
+      // window.location.reload();
     } catch (error) {
       console.error("Error updating details:", error);
       toast.error("Update failed");
@@ -125,15 +177,15 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-8 rounded-md shadow-md w-[80%] md:w-[50%] max-h-[80vh] overflow-y-scroll">
-        <h2 className="mb-4 text-lg font-semibold">Edit Business Details</h2>
+        <h2 className="mb-4 text-lg font-semibold">Edit Businesssss Details</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Photo Preview and Upload */}
           <div className="flex items-center mb-4 space-x-4">
             {photo && (
               <img
-                src={formData.photo as any}
+                src={photo as any}
                 alt="Profile Preview"
-                className="object-cover w-16 h-16 rounded-full"
+                className="object-cover w-16 h-16 border border-red-500 rounded-full"
               />
             )}
             <input type="file" accept="image/*" onChange={handlePhotoChange} />

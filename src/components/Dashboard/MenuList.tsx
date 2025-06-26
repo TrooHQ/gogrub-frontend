@@ -40,14 +40,29 @@ const CustomPagination = styled(Pagination)(() => ({
 }));
 
 interface Modifier {
-  name: string;
-  price: string;
+  _id: string;
+  created_by: string;
+  branch: string;
+  modifier_name: string;
+  modifier_price: number;
+  attached_to: string;
+  modifier_group_name: string;
+  modifier_group: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
-interface Modifiers {
-  addOns: Modifier[];
-  proteins: Modifier[];
-  menu_item_name: string;
+interface ModifierGroup {
+  _id: string;
+  created_by: string;
+  branch: string;
+  modifier_group_name: string;
+  modifiers: Modifier[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  rule?: "single" | "multiple" | string; // rule is optional and typed if known
 }
 
 interface Branch {
@@ -83,9 +98,7 @@ const MenuList = () => {
   };
 
   const [openModal, setOpenModal] = useState(false);
-  const [selectedModifiers, setSelectedModifiers] = useState<Modifiers | null>(
-    null
-  );
+  const [selectedModifiers, setSelectedModifiers] = useState<ModifierGroup[]>([]);
   const [viewingBranch, setViewingBranch] = useState<Branch | null>(null);
 
   const [toggleStates, setToggleStates] = useState<{ [key: string]: boolean }>(
@@ -94,8 +107,8 @@ const MenuList = () => {
   const [toggleStates2, setToggleStates2] = useState<{
     [key: string]: boolean;
   }>({});
-  const [isFetching, setIsFetching] = useState(false);
-  const [fetchedModifiers, setFetchedModifiers] = useState<any>([]);
+  // const [isFetching, setIsFetching] = useState(false);
+  // const [fetchedModifiers, setFetchedModifiers] = useState<any>([]);
   const [confirmationDialog, setConfirmationDialog] =
     useState<ConfirmationDialogState>({
       open: false,
@@ -253,30 +266,30 @@ const MenuList = () => {
     setConfirmationDialog({ open: false, id: null });
   };
 
-  const fetchModifiers = async ({ selectedMenuItem, selectedBranch }: any) => {
-    setIsFetching(true);
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-    try {
-      const encodedName = encodeURIComponent(selectedMenuItem);
+  // const fetchModifiers = async ({ selectedMenuItem, selectedBranch }: any) => {
+  //   setIsFetching(true);
+  //   const headers = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   };
+  //   try {
+  //     const encodedName = encodeURIComponent(selectedMenuItem);
 
-      const response = await axios.get(
-        `${SERVER_DOMAIN}/menu/getMenuModifierGroupByItem/?attach_to=item&name=${encodedName}&branch_id=${selectedBranch}`,
-        headers
-      );
+  //     const response = await axios.get(
+  //       `${SERVER_DOMAIN}/menu/getMenuModifierGroupByItem/?attach_to=item&name=${encodedName}&branch_id=${selectedBranch}`,
+  //       headers
+  //     );
 
-      setFetchedModifiers(response.data.data || []);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message || "Failed to fetch modifiers.");
-    } finally {
-      setIsFetching(false);
-    }
-  };
+  //     setFetchedModifiers(response.data.data || []);
+  //   } catch (error: any) {
+  //     console.log(error);
+  //     toast.error(error.response.data.message || "Failed to fetch modifiers.");
+  //   } finally {
+  //     setIsFetching(false);
+  //   }
+  // };
 
   const handleDeleteMenu = async (item: any) => {
     try {
@@ -311,20 +324,25 @@ const MenuList = () => {
     }
   };
 
-  const handleOpenModal = (modifiers: any) => {
-    fetchModifiers({
-      selectedMenuItem: modifiers.menu_item_name,
-      selectedBranch: viewingBranch?._id,
-    });
+  const [menu_item_name, setMenu_item_name] = useState("");
+  const handleOpenModal = (menuItem: any) => {
+    console.log("menuItem", menuItem)
+    setMenu_item_name(menuItem?.menu_item_name);
+    // fetchModifiers({
+    //   selectedMenuItem: modifiers.menu_item_name,
+    //   selectedBranch: viewingBranch?._id,
+    // });
+    setSelectedModifiers(menuItem?.modifierGroups);
     setOpenModal(true);
   };
 
-  console.log("fetchedModifiers", fetchedModifiers);
+  console.log("menuItems", menuItems);
+  console.log("selectedModifiers", selectedModifiers);
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setSelectedModifiers(null);
-    setFetchedModifiers([]);
+    // setSelectedModifiers(null);
+    // setFetchedModifiers([]);
   };
 
   const handleViewMore = (branch: Branch) => {
@@ -662,21 +680,20 @@ const MenuList = () => {
             <div className="fixed inset-0 bg-black opacity-50"></div>
             <div className="bg-white min-w-[30%] p-6 rounded-lg z-10 relative">
               <h2 className="mb-4 text-lg font-semibold">
-                {selectedModifiers?.menu_item_name}
-                <span className="ml-5 text-sm font-normal">MODIFIERS</span>
+                {/* {selectedModifiers?.menu_item_name} */}
+                {menu_item_name}
+                {/* <span className="ml-5 text-sm font-normal">MODIFIERS</span> */}
               </h2>
               <hr className="h-[1px] bg-[#929292] my-3" />
 
-              {isFetching ? (
-                "Fetching..."
-              ) : fetchedModifiers.length === 0 ? (
+              {selectedModifiers?.length === 0 ? (
                 "No modifier available for this item"
               ) : (
                 <>
                   <div>
                     {/* <h3 className="font-semibold text-sm mb-2 text-[#414141]">Add-Ons:</h3> */}
                     <ul>
-                      {fetchedModifiers.map((group: any, groupIndex: any) => (
+                      {selectedModifiers?.map((group: any, groupIndex: any) => (
                         <li key={groupIndex} className="mb-4">
                           {/* Display the Modifier Group Name */}
                           <h3 className="text-xl font-bold text-[#414141]">

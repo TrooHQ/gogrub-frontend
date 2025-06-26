@@ -50,6 +50,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
 
   const dispatch = useDispatch<AppDispatch>();
   const { userData, userDetails } = useSelector((state: any) => state.user);
+  console.log("userDetails", userDetails);
   const location = useLocation();
   const [userCheck, setUserChecks] = useState<UserCheckState>({
     hasMenu: true,
@@ -191,7 +192,9 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
               <Avatar sx={{ width: 40, height: 40 }}>
                 {userDetails ? (
                   <img
-                    src={userDetails?.photo || userDetails?.business_logo || ""}
+                    src={userData?.business_logo}
+                    // src={userDetails?.business_logo}
+                    // src={userDetails?.photo || userDetails?.business_logo || ""}
                     alt={`${userDetails?.first_name} ${userDetails?.last_name}`}
                     className="object-cover w-10 h-10 rounded-full"
                   />
