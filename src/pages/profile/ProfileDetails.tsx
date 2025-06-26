@@ -4,8 +4,12 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const ProfileDetails = () => {
-  const { userDetails, loading } = useSelector((state: any) => state.user);
+  const { userDetails, loading, userData } = useSelector((state: any) => state.user);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  console.log("userData from profile", userData);
+  console.log("userDetails from profile", userDetails);
+
 
   const handleEditClick = () => {
     setIsEditModalOpen(true);
@@ -19,7 +23,7 @@ const ProfileDetails = () => {
     <div className="space-y-8">
       <SectionHeader title="Profile Details" onEditClick={handleEditClick} />
 
-      <div className="flex items-center mb-8 space-x-4">
+      {/* <div className="flex items-center mb-8 space-x-4">
         <img
           src={userDetails?.photo || userDetails?.business_logo || ""}
           alt={`${userDetails?.first_name} ${userDetails?.last_name}`}
@@ -30,9 +34,8 @@ const ProfileDetails = () => {
             {userDetails?.first_name} {userDetails?.last_name}
           </h3>
           <p className="text-gray-600">{userDetails?.user_role}</p>
-          {/* <p className="text-sm text-gray-500">All Outlets</p> */}
         </div>
-      </div>
+      </div> */}
 
       <div className="space-y-8">
         <div>

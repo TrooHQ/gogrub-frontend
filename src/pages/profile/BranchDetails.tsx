@@ -4,7 +4,7 @@ import { useState } from "react";
 import EditBranchDetailsModal from "../../components/Dashboard/Profile/EditBranchDetailsModal";
 
 const BranchDetails = () => {
-  const { userDetails, loading } = useSelector((state: any) => state.user);
+  const { userDetails, loading, } = useSelector((state: any) => state.user);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleEditClick = () => {
@@ -26,6 +26,21 @@ const BranchDetails = () => {
           showEdit={userDetails.user_role === "admin" ? true : false}
         />
       }
+
+      <div className="flex items-center mb-8 space-x-4">
+        <img
+          src={userDetails?.business_logo}
+          alt={`${userDetails?.first_name} ${userDetails?.last_name}`}
+          className="object-cover w-20 h-20 border border-gray-300 rounded-full "
+        />
+        <div>
+          <h3 className="text-[16px] font-medium text-[#121212]">
+            {userDetails?.first_name} {userDetails?.last_name}
+          </h3>
+          <p className="text-gray-600">{userDetails?.user_role}</p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 gap-6">
         <div>
           <p className="mb-1 text-sm text-gray-600">Business Name</p>
@@ -42,6 +57,8 @@ const BranchDetails = () => {
           </p>
         </div>
       </div>
+
+
 
       {/* <div>
         <SectionHeader

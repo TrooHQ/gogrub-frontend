@@ -5,6 +5,7 @@ import { AppDispatch } from "../../../store/store";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { SERVER_DOMAIN } from "../../../Api/Api";
+import { fetchAccountDetails as fetchAccountDetailState } from "../../../slices/businessSlice";
 
 interface EditProfileModalProps {
   userDetails: {
@@ -116,12 +117,14 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       };
 
       const response = await axios.put(
-        `${SERVER_DOMAIN}/updatePersonalInformation`,
+        `${SERVER_DOMAIN}/updateUserDetails`,
         updatedData,
         { headers }
       );
       console.log(response.data);
       toast.success("Details updated successfully");
+      fetchAccountDetailState();
+      // fetchUserDetails();
       dispatch(fetchUserDetails());
       onClose();
     } catch (error) {
@@ -135,7 +138,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-8 rounded-md shadow-md w-[80%] md:w-[50%] max-h-[80vh] overflow-y-scroll">
-        <h2 className="mb-4 text-lg font-semibold">Edit Business Details</h2>
+        <h2 className="mb-4 text-lg font-semibold">Edit Profile Details</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Photo Preview and Upload */}
           <div className="flex items-center mb-4 space-x-4">
@@ -210,7 +213,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 className="w-full p-2 border rounded-md"
               />
             </div>
-            <div>
+            <div className="col-span-2">
               <label className="text-sm">City</label>
               <input
                 type="text"
@@ -220,7 +223,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 className="w-full p-2 border rounded-md"
               />
             </div>
-            <div>
+            {/* <div>
               <label className="text-sm">Business Email</label>
               <input
                 type="email"
@@ -229,8 +232,8 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 onChange={handleChange}
                 className="w-full p-2 border rounded-md"
               />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <label className="text-sm">Business Address</label>
               <input
                 type="text"
@@ -239,7 +242,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 onChange={handleChange}
                 className="w-full p-2 border rounded-md"
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex justify-end mt-6 space-x-4">
             <button

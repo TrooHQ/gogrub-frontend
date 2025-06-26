@@ -66,9 +66,29 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
     }
   };
 
+  const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
+  const [isGroupFetching, setIsGroupFetching] = useState(false);
+  // const [selectedMod, setSelectedMod] = useState<string[]>([]);
+  const [selectedMod, setSelectedMod] = useState<string[]>([]);
+
+  const handleSelectedMod = (value: string) => {
+    if (selectedMod.includes(value)) {
+      setSelectedMod(selectedMod.filter((item) => item !== value));
+    } else {
+      setSelectedMod([...selectedMod, value]);
+    }
+  };
+
+  // const handleSingleSelectmod = (value: string) => {
+  //   setSelectedMod(value);
+  // };
+
+  console.log("selectedMod", selectedMod);
+
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
+
 
   // useEffect(() => {
   //   if (editData) {
@@ -86,29 +106,21 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       setMenuDescription(editData?.description || "");
       setMenuPrice(editData?.menu_item_price || "");
       setImageName("Existing Image"); // optional fallback label
+
+      console.log("editData?.modifierGroups", editData?.modifierGroups)
+
+      if (editData?.modifierGroups) {
+        const mod = editData?.modifierGroups.map((item: any) => item.modifier_group_name);
+        console.log(mod)
+        setSelectedMod(mod);
+      }
+
     }
   }, [editData]);
   const displayImage = hasUploadedImage ? image : editData?.menu_item_image;
 
 
-  const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
-  const [isGroupFetching, setIsGroupFetching] = useState(false);
-  // const [selectedMod, setSelectedMod] = useState<string[]>([]);
-  const [selectedMod, setSelectedMod] = useState<string>("");
 
-  // const handleSelectedMod = (value: string) => {
-  //   if (selectedMod.includes(value)) {
-  //     setSelectedMod(selectedMod.filter((item) => item !== value));
-  //   } else {
-  //     setSelectedMod([...selectedMod, value]);
-  //   }
-  // };
-
-  const handleSingleSelectmod = (value: string) => {
-    setSelectedMod(value);
-  };
-
-  console.log("selectedMod", selectedMod);
 
   const handleMenuName = (value: string) => {
     setMenuName(value);
@@ -145,7 +157,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           menu_item_name: menuName,
           description: menuDescription,
           price: Number(menuPrice),
-          modifier_group_name: selectedMod,
+          modifier_groups: selectedMod,
           image
         },
         headers
@@ -188,21 +200,20 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       },
     };
 
+    const payload = {
+      menu_category_name: activeCategory?.name,
+      branch_id: selectedBranch.id,
+      menu_group_name: activeGroup?.name,
+      name: menuName,
+      description: menuDescription,
+      price: Number(menuPrice),
+      modifier_groups: selectedMod,
+      image
+    }
+
     try {
       // setEditLoading(true);
-      const response = await axios.put(`${SERVER_DOMAIN}/menu/editGogrubMenuItem`,
-        {
-          menu_category_name: activeCategory?.name,
-          branch_id: selectedBranch.id,
-          menu_group_name: activeGroup?.name,
-          menu_item_name: menuName,
-          description: menuDescription,
-          price: Number(menuPrice),
-          modifier_group_name: selectedMod,
-          image
-        },
-        headers
-      );
+      const response = await axios.put(`${SERVER_DOMAIN}/menu/editGogrubMenuItem`, { ...payload, menu_item_id: editId }, headers);
 
       console.log("resp", response);
 
@@ -292,8 +303,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           className="flex items-center justify-between w-full px-4 py-2 mb-2 border rounded"
           onClick={() => setShowMod(!showMod)}
         >
-          {selectedMod.length > 0 ? <p className="text-sm">{selectedMod}</p> : <p>Select modifier</p>}
-          {/* {selectedMod.length > 0 ? <p className="text-sm">{selectedMod.join(", ")}</p> : <p>Select modifier</p>} */}
+          {/* {selectedMod.length > 0 ? <p className="text-sm">{selectedMod}</p> : <p>Select modifier</p>} */}
+          {selectedMod.length > 0 ? <p className="text-sm">{selectedMod.join(", ")}</p> : <p>Select modifier</p>}
           <RxCaretDown className={`${showMod ? "rotate-180" : ""} w-6 h-6`} />
         </div>
         {showMod &&
@@ -302,8 +313,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
               {fetchedModifierGroups.length === 0 && !isGroupFetching && <p className="text-sm">No modifier groups found</p>}
               {fetchedModifierGroups.map((mod) => (
                 <span
-                  onClick={() => handleSingleSelectmod(mod?.modifier_group_name)}
-                  // onClick={() => handleSelectedMod(mod?.modifier_group_name)}
+                  // onClick={() => handleSingleSelectmod(mod?.modifier_group_name)}
+                  onClick={() => handleSelectedMod(mod?.modifier_group_name)}
                   key={mod?.id}
                   className={`px-3 py-1 text-sm  rounded-full cursor-pointer hover:bg-gray-200 ${selectedMod.includes(mod?.modifier_group_name) ? "bg-gray-900 text-white" : "bg-gray-100"}`}
                 >

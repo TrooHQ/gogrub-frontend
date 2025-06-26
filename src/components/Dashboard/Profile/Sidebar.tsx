@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeComponent, setActiveComponent }
           />
           <span
             className={`${isActive("branch") ? "text-[#121212] font-medium" : "text-[#929292] font-normal"
-              } text-[16px] leading-[24px] tracking-[0.5px]`}
+              } text-[14px] leading-[24px] tracking-[0.5px]`}
           >
             Business Details
           </span>
