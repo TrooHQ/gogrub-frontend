@@ -181,10 +181,10 @@ const SalesActivities = () => {
               {activity.title}
             </h5>
             <span>{activity.amount}</span>
-            <div className="flex items-center justify-start gap-2">
+            {/* <div className="flex items-center justify-start gap-2">
               <img src={activity.icon} alt="icon" />
               <p>{activity.status}</p>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
