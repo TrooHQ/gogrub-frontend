@@ -4,7 +4,7 @@ import { useState } from "react";
 import EditBranchDetailsModal from "../../components/Dashboard/Profile/EditBranchDetailsModal";
 
 const BranchDetails = () => {
-  const { userDetails, loading, } = useSelector((state: any) => state.user);
+  const { userDetails, loading, userData } = useSelector((state: any) => state.user);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleEditClick = () => {
@@ -78,6 +78,7 @@ const BranchDetails = () => {
 
       <EditBranchDetailsModal
         userDetails={userDetails}
+        userData={userData}
         isOpen={isEditModalOpen}
         onClose={handleCloseModal}
         loading={loading}

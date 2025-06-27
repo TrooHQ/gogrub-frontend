@@ -136,8 +136,10 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const [loading, setLoading] = useState(false);
+
   const handleSaveMenuItem = async () => {
-    // setMenuGroupLoading(true);
+    setLoading(true);
 
     const headers = {
       headers: {
@@ -179,20 +181,25 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       setImage("");
       // setAddMenuItem(false);
       if (onCancel) onCancel();
+      setLoading(false);
     } catch (error: any) {
       toast.error(
         error.response.data.message || "An error occurred. Please try again."
       );
+      setLoading(false);
     } finally {
       if (onCancel) onCancel();
+      setLoading(false);
       // setMenuGroupLoading(false);
       // setAddMenuGroup(false);
     }
   };
 
+
+
   const handleUpdateMenuItem = async () => {
     // if (editingItem) {
-
+    setLoading(true)
     const headers = {
       headers: {
         "Content-Type": "application/json",
@@ -215,12 +222,17 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       // setEditLoading(true);
       const response = await axios.put(`${SERVER_DOMAIN}/menu/editGogrubMenuItem`, { ...payload, menu_item_id: editId }, headers);
 
-      console.log("resp", response);
+      // console.log("response", response);
+      setLoading(false)
+      toast.success(response?.data?.message || "Menu item updated successfully.");
+      if (onCancel) onCancel();
 
     } catch (error) {
-      console.error("Error editing menu item:", error);
+      // console.error("Error editing menu item:", error);
       toast.error("Failed to edit menu item.");
+      setLoading(false)
     } finally {
+      setLoading(false)
       // setEditModalOpen(false);
       // setEditingItem(null);
       // setNewMenuName("");
@@ -397,7 +409,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           // onClick={handleSaveMenuItem}
           onClick={(editId && editData) ? handleUpdateMenuItem : handleSaveMenuItem}
         >
-          Save Menu Item
+          {loading ? editId ? "Updating..." : "Saving..." : editId ? "Update Menu Item" : "Save Menu Item"}
         </button>
       </div>
     </div>
