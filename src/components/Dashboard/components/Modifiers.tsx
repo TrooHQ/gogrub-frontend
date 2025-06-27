@@ -4,8 +4,8 @@ import axios from "axios";
 import { SERVER_DOMAIN } from "../../../Api/Api";
 import { toast } from "react-toastify";
 import Modal from "../../Modal";
-import OutletSelectionRadioGroup from "../OutletSelectionRadioGroup";
-import { useDispatch, useSelector } from "react-redux";
+// import OutletSelectionRadioGroup from "../OutletSelectionRadioGroup";
+import { useDispatch, } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import { fetchBranches } from "../../../slices/branchSlice";
 import ConfirmationDialog from "../ConfirmationDialog";
@@ -15,13 +15,13 @@ import ModifierModal from "./ModifierModal";
 import DisplayModifiers from "./DisplayModifiers";
 // import { useNavigate } from "react-router-dom";
 
-type ModifierRules = {
-  requireSelection: boolean;
-  optionalShown: boolean;
-  optionalNotShown: boolean;
-  multipleChoices: boolean;
-  singleChoice: boolean;
-};
+// type ModifierRules = {
+//   requireSelection: boolean;
+//   optionalShown: boolean;
+//   optionalNotShown: boolean;
+//   multipleChoices: boolean;
+//   singleChoice: boolean;
+// };
 
 interface Modifier {
   id: number;
@@ -47,18 +47,18 @@ const Modifiers = ({
 
   const [confirmSaveModal, setConfirmSaveModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [modifierRules, setModifierRules] = useState<ModifierRules>({
-    requireSelection: false,
-    optionalShown: false,
-    optionalNotShown: false,
-    multipleChoices: false,
-    singleChoice: false,
-  });
+  // const [modifierRules, setModifierRules] = useState<ModifierRules>({
+  //   requireSelection: false,
+  //   optionalShown: false,
+  //   optionalNotShown: false,
+  //   multipleChoices: false,
+  //   singleChoice: false,
+  // });
   const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
   const [isGroupFetching, setIsGroupFetching] = useState(false);
   const [selectedModifier, setSelectedModifier] = useState({} as any);
   // const navigate = useNavigate();
-  const { branches } = useSelector((state: any) => state.branches);
+  // const { branches } = useSelector((state: any) => state.branches);
 
   useEffect(() => {
     dispatch(fetchBranches());
@@ -68,10 +68,10 @@ const Modifiers = ({
     setSelectedModifier(modifier);
   };
 
-  const transformedBranches = branches.map((branch: any) => ({
-    label: branch.branch_name,
-    id: branch._id,
-  }));
+  // const transformedBranches = branches.map((branch: any) => ({
+  //   label: branch.branch_name,
+  //   id: branch._id,
+  // }));
 
 
 
@@ -117,9 +117,9 @@ const Modifiers = ({
     setModifiers((prev) => prev.filter((modifier) => modifier.id !== id));
   };
 
-  const saveModifiers = () => {
-    setConfirmSaveModal(true); // Open the confirmation modal
-  };
+  // const saveModifiers = () => {
+  //   setConfirmSaveModal(true); // Open the confirmation modal
+  // };
 
   const handleConfirmSave = async () => {
     setLoading(true);
@@ -166,17 +166,17 @@ const Modifiers = ({
     }
   };
 
-  const handleRuleChange = (rule: keyof ModifierRules) => {
-    setModifierRules((prevRules) => ({
-      ...prevRules,
-      [rule]: !prevRules[rule],
-    }));
-  };
+  // const handleRuleChange = (rule: keyof ModifierRules) => {
+  //   setModifierRules((prevRules) => ({
+  //     ...prevRules,
+  //     [rule]: !prevRules[rule],
+  //   }));
+  // };
 
   // Handle apply changes
-  const handleApplyChanges = (selectedOutletIds: string[]) => {
-    console.log("Selected Outlet IDs:", selectedOutletIds);
-  };
+  // const handleApplyChanges = (selectedOutletIds: string[]) => {
+  //   console.log("Selected Outlet IDs:", selectedOutletIds);
+  // };
 
   const [confirmationDialog, setConfirmationDialog] = useState({
     open: false,
@@ -263,28 +263,28 @@ const Modifiers = ({
     }
   };
 
-  const rules: { label: string; key: keyof ModifierRules }[] = [
-    {
-      label: "Servers must make a selection for this group",
-      key: "requireSelection",
-    },
-    {
-      label: "This group is optional and is shown on add",
-      key: "optionalShown",
-    },
-    {
-      label: "This group is optional and is not shown on add",
-      key: "optionalNotShown",
-    },
-    {
-      label: "More than one modifier can be chosen",
-      key: "multipleChoices",
-    },
-    {
-      label: "Only one modifier can be chosen",
-      key: "singleChoice",
-    },
-  ];
+  // const rules: { label: string; key: keyof ModifierRules }[] = [
+  //   {
+  //     label: "Servers must make a selection for this group",
+  //     key: "requireSelection",
+  //   },
+  //   {
+  //     label: "This group is optional and is shown on add",
+  //     key: "optionalShown",
+  //   },
+  //   {
+  //     label: "This group is optional and is not shown on add",
+  //     key: "optionalNotShown",
+  //   },
+  //   {
+  //     label: "More than one modifier can be chosen",
+  //     key: "multipleChoices",
+  //   },
+  //   {
+  //     label: "Only one modifier can be chosen",
+  //     key: "singleChoice",
+  //   },
+  // ];
 
   const [modGroupLoading, setModGroupLoading] = useState(false);
   const [groupName, setGroupName] = useState("");
@@ -422,7 +422,7 @@ const Modifiers = ({
           </div>
         </div>
 
-        <div className="">
+        {/* <div className="">
           <div className=" mt-[32px] max-w-[628px]">
             <p className=" text-[20px] font-[500] text-purple500 mb-[8px]">
               Modifier Rules
@@ -465,7 +465,7 @@ const Modifiers = ({
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Confirmation Modals */}

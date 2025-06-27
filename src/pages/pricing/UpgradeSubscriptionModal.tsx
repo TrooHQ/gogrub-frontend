@@ -49,7 +49,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
   const [selectedPlan, setSelectedPlan] = useState<{
     name: string;
     _id: string;
-    price: number;
+    billingFrequencyAmount: number;
   } | null>(null);
   const [plans, setPlans] = useState<Plan[]>([]);
   const [agreed, setAgreed] = useState(false);
@@ -81,6 +81,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         );
         const plansData = response.data.data;
         setPlans(plansData);
+        console.log("response", plansData)
 
         if (currentPlanId) {
           const plan = plansData.find(
@@ -98,6 +99,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
 
     fetchPlans();
   }, []);
+
 
   useEffect(() => {
     dispatchs(fetchUserDetails());
@@ -118,7 +120,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         {
           plan_id: selectedPlan?._id,
           business_email: userData?.business_email,
-          amount: selectedPlan?.price,
+          amount: selectedPlan?.billingFrequencyAmount,
           plan_description: selectedPlan?.name,
           callback_url: "https://gogrub-client.netlify.app/overview",
         },

@@ -19,6 +19,7 @@ import DoMoreModal from "./components/DoMoreModal";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { SERVER_DOMAIN } from "../../Api/Api";
+import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
 
 interface TopMenuNavProps {
   pathName: string;
@@ -49,8 +50,9 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
   }, []);
 
   const dispatch = useDispatch<AppDispatch>();
-  const { userData, userDetails } = useSelector((state: any) => state.user);
-  console.log("userDetails", userDetails);
+  // const { userDetails } = useSelector((state: any) => state.user);
+  const { personalInfo, businessInfo } = useSelector((state: any) => state.allBusinessInfo);
+
   const location = useLocation();
   const [userCheck, setUserChecks] = useState<UserCheckState>({
     hasMenu: true,
@@ -85,6 +87,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
 
   useEffect(() => {
     dispatch(fetchUserDetails());
+    dispatch(fetchAllBusinessInfo());
   }, [dispatch]);
 
   const token = localStorage.getItem("token");
@@ -182,20 +185,21 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
             </div>
             <div>
               <p className="text-grey500 text-[16px] font-[500]">
-                {userData && userData.personal_email}
+                {personalInfo && personalInfo.personal_email}
               </p>
               <p className="capitalize text-right text-grey300 text-[12px]">
-                {userData && userData.user_role}
+                {personalInfo && personalInfo.user_role}
               </p>
             </div>
             <div>
               <Avatar sx={{ width: 40, height: 40 }}>
-                {userDetails ? (
+                {(personalInfo && businessInfo) ? (
                   <img
-                    src={userData?.business_logo}
+                    // use personInfo.photo if you want to render the user's profile picture
+                    src={businessInfo?.business_logo}
                     // src={userDetails?.business_logo}
                     // src={userDetails?.photo || userDetails?.business_logo || ""}
-                    alt={`${userDetails?.first_name} ${userDetails?.last_name}`}
+                    alt={`${personalInfo?.first_name} ${personalInfo?.last_name}`}
                     className="object-cover w-10 h-10 rounded-full"
                   />
                 ) : (

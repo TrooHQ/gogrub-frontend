@@ -7,29 +7,15 @@ import { SERVER_DOMAIN } from '../../../Api/Api';
 import { toast } from "react-toastify";
 
 interface EditBranchDetailsModalProps {
-  userDetails: {
-    first_name: string;
-    last_name: string;
-    personal_email: string;
-    phone_number: string;
-    country: string;
-    state: string;
-    city: string;
-    business_email: string;
-    business_address: string;
-    business_logo: any;
-    business_name: string;
-    photo: string;
-  };
-  userData?: any;
+  personalInfo?: any;
+  businessInfo: any;
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
 }
 
 const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
-  userDetails,
-  userData,
+  businessInfo,
   isOpen,
   onClose,
   loading,
@@ -38,20 +24,14 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
 
   // Local state for form fields and photo
   const [formData, setFormData] = useState({
-    first_name: userDetails.first_name || "",
-    last_name: userDetails.last_name || "",
-    personal_email: userDetails.personal_email || "",
-    phone_number: userDetails.phone_number || "",
-    country: userDetails.country || "",
-    state: userDetails.state || "",
-    city: userDetails.city || "",
-    business_name: userData.business_name || "",
-    business_email: userDetails.business_email || "",
-    business_address: userDetails.business_address || "",
-    photo: userDetails.photo || null,
-    business_logo: userData.business_logo || null,
+    phone_number: businessInfo?.business_phone_number || "",
+    cac_number: businessInfo?.cac_number || "",
+    business_name: businessInfo?.business_name || "",
+    business_email: businessInfo?.business_email || "",
+    business_address: businessInfo?.business_address || "",
+    business_logo: businessInfo?.business_logo || null,
   });
-  const [photo, setPhoto] = useState<string | null>(userDetails.business_logo || null);
+  const [photo, setPhoto] = useState<string | null>(businessInfo?.business_logo || null);
   // const [imageFile, setImageFile] = useState<File | null>(null);
 
   // Handle form input changes
@@ -122,7 +102,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
 
     // Compare form values with original userDetails
     Object.entries(formData).forEach(([key, value]) => {
-      const originalValue = userDetails[key as keyof typeof userDetails];
+      const originalValue = businessInfo[key as keyof typeof businessInfo];
 
       if (value !== originalValue) {
         updatedData[key as keyof typeof formData] = value;
@@ -187,7 +167,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
               <img
                 src={photo as any}
                 alt="Profile Preview"
-                className="object-cover w-16 h-16 border border-red-500 rounded-full"
+                className="object-cover w-24 h-24 p-1 border border-gray-200 rounded-full"
               />
             )}
             <input type="file" accept="image/*" onChange={handlePhotoChange} />
@@ -233,16 +213,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
                 className="w-full p-2 border rounded-md"
               />
             </div>
-            <div>
-              <label className="text-sm">Country</label>
-              <input
-                type="text"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
+
             <div>
               <label className="text-sm">Phone Number</label>
               <input
@@ -253,23 +224,12 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
                 className="w-full p-2 border rounded-md"
               />
             </div>
-
             <div>
-              <label className="text-sm">State</label>
+              <label className="text-sm">Phone Number</label>
               <input
-                type="text"
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="text-sm">City</label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
+                type="tel"
+                name="phone_number"
+                value={formData.cac_number}
                 onChange={handleChange}
                 className="w-full p-2 border rounded-md"
               />

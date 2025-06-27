@@ -27,6 +27,7 @@ import tableReducer from "../slices/TableSlice";
 import outletReducer from "../slices/OutletSlice";
 import overviewReducer from "../slices/overviewSlice";
 import TicketReducer from "../slices/ticketsSlice";
+import allBusinessInfoReducer from "../slices/businessPersonalAccountSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -46,6 +47,7 @@ const rootReducer = combineReducers({
   outlet: outletReducer,
   overview: overviewReducer,
   tickets: TicketReducer,
+  allBusinessInfo: allBusinessInfoReducer,
 });
 
 const persistConfig = {

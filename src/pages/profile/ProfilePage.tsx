@@ -8,6 +8,7 @@ import Sidebar from "../../components/Dashboard/Profile/Sidebar";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { fetchUserDetails } from "../../slices/UserSlice";
+import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
 
 const ProfilePage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,6 +17,7 @@ const ProfilePage = () => {
   useEffect(() => {
     // Fetch user details
     dispatch(fetchUserDetails());
+    dispatch(fetchAllBusinessInfo());
   }, []);
 
   const [activeComponent, setActiveComponent] = useState("profile");

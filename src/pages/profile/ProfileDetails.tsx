@@ -4,12 +4,9 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const ProfileDetails = () => {
-  const { userDetails, loading, userData } = useSelector((state: any) => state.user);
+  // const { userDetails } = useSelector((state: any) => state.user);
+  const { personalInfo, loading } = useSelector((state: any) => state.allBusinessInfo);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  console.log("userData from profile", userData);
-  console.log("userDetails from profile", userDetails);
-
 
   const handleEditClick = () => {
     setIsEditModalOpen(true);
@@ -43,23 +40,23 @@ const ProfileDetails = () => {
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">First Name</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.first_name}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.first_name}</p>
             </div>
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Last Name</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.last_name}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.last_name}</p>
             </div>
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Email</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.personal_email}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.personal_email}</p>
             </div>
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Phone Number</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.phone_number}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.phone_number}</p>
             </div>
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Role</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.user_role}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.user_role}</p>
             </div>
           </div>
         </div>
@@ -69,22 +66,22 @@ const ProfileDetails = () => {
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Country</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.country}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.country}</p>
             </div>
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">City/State</p>
               <p className="text-[#121212] font-medium text-base">
-                {userDetails?.city}, {userDetails?.state}
+                {personalInfo?.city}, {personalInfo?.state}
               </p>
             </div>
             {/* <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Business Email</p>
-              <p className="text-[#121212] font-medium text-base">{userDetails?.business_email}</p>
+              <p className="text-[#121212] font-medium text-base">{personalInfo?.business_email}</p>
             </div>
             <div>
               <p className="text-sm text-[#606060] font-normal mb-1">Business Address</p>
               <p className="text-[#121212] font-medium text-base">
-                {userDetails?.business_address}
+                {personalInfo?.business_address}
               </p>
             </div> */}
           </div>
@@ -92,7 +89,7 @@ const ProfileDetails = () => {
       </div>
 
       <EditProfileModal
-        userDetails={userDetails}
+        personalInfo={personalInfo}
         isOpen={isEditModalOpen}
         onClose={handleCloseModal}
         loading={loading}
