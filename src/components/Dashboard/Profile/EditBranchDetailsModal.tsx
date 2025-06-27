@@ -21,6 +21,7 @@ interface EditBranchDetailsModalProps {
     business_name: string;
     photo: string;
   };
+  userData?: any;
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
@@ -28,6 +29,7 @@ interface EditBranchDetailsModalProps {
 
 const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
   userDetails,
+  userData,
   isOpen,
   onClose,
   loading,
@@ -43,11 +45,11 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
     country: userDetails.country || "",
     state: userDetails.state || "",
     city: userDetails.city || "",
-    business_name: userDetails.business_name || "",
+    business_name: userData.business_name || "",
     business_email: userDetails.business_email || "",
     business_address: userDetails.business_address || "",
     photo: userDetails.photo || null,
-    business_logo: userDetails.business_logo || null,
+    business_logo: userData.business_logo || null,
   });
   const [photo, setPhoto] = useState<string | null>(userDetails.business_logo || null);
   // const [imageFile, setImageFile] = useState<File | null>(null);
