@@ -298,7 +298,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       </div>
 
       <div>
-        <label className="block mb-1 font-medium">Pricing</label>
+        <label className="block mb-4 font-medium">Pricing</label>
         <CustomInput
           type="text"
           label="Enter price"
