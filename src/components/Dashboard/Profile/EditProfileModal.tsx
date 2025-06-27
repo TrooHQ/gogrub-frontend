@@ -1,14 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUserDetails } from "../../../slices/UserSlice";
+// import { fetchUserDetails } from "../../../slices/UserSlice";
 import { AppDispatch } from "../../../store/store";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { SERVER_DOMAIN } from "../../../Api/Api";
-import { fetchAccountDetails as fetchAccountDetailState } from "../../../slices/businessSlice";
+// import { fetchAccountDetails as fetchAccountDetailState } from "../../../slices/businessSlice";
+import { fetchAllBusinessInfo } from "../../../slices/businessPersonalAccountSlice";
 
 interface EditProfileModalProps {
-  userDetails: {
+  personalInfo: {
     first_name: string;
     last_name: string;
     personal_email: string;
@@ -16,18 +17,18 @@ interface EditProfileModalProps {
     country: string;
     state: string;
     city: string;
-    business_email: string;
-    business_address: string;
-    business_logo: any;
-    photo: string;
-  };
+    business_email?: string;
+    business_address?: string;
+    business_logo?: any;
+    photo?: string | null;
+  }; // Allow null if no personal info is available
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
 }
 
 const EditProfileModal: React.FC<EditProfileModalProps> = ({
-  userDetails,
+  personalInfo,
   isOpen,
   onClose,
   loading,
@@ -36,20 +37,20 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
 
   // Local state for form fields and photo
   const [formData, setFormData] = useState({
-    first_name: userDetails?.first_name || "",
-    last_name: userDetails?.last_name || "",
-    personal_email: userDetails?.personal_email || "",
-    phone_number: userDetails?.phone_number || "",
-    country: userDetails?.country || "",
-    state: userDetails?.state || "",
-    city: userDetails?.city || "",
-    business_email: userDetails?.business_email || "",
-    business_address: userDetails?.business_address || "",
-    business_logo: userDetails?.business_logo
+    first_name: personalInfo?.first_name || "",
+    last_name: personalInfo?.last_name || "",
+    personal_email: personalInfo?.personal_email || "",
+    phone_number: personalInfo?.phone_number || "",
+    country: personalInfo?.country || "",
+    state: personalInfo?.state || "",
+    city: personalInfo?.city || "",
+    business_email: personalInfo?.business_email || "",
+    business_address: personalInfo?.business_address || "",
+    business_logo: personalInfo?.business_logo
       || null,
   });
   const [photo, setPhoto] = useState<string | null>(
-    userDetails?.photo || userDetails?.photo || null
+    personalInfo?.photo || personalInfo?.photo || null
   );
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -91,7 +92,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
     const updatedData: Partial<Record<keyof typeof formData, string | null>> = {};
 
     Object.entries(formData).forEach(([key, value]) => {
-      const originalValue = userDetails[key as keyof typeof userDetails];
+      const originalValue = personalInfo[key as keyof typeof personalInfo];
 
       if (key === "photo") {
         if (imageFile) {
@@ -123,9 +124,10 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       );
       console.log(response.data);
       toast.success("Details updated successfully");
-      fetchAccountDetailState();
+      // fetchAccountDetailState();
       // fetchUserDetails();
-      dispatch(fetchUserDetails());
+      // dispatch(fetchUserDetails());
+      dispatch(fetchAllBusinessInfo());
       onClose();
     } catch (error) {
       console.error("Error updating details:", error);

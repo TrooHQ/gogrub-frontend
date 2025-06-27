@@ -36,6 +36,7 @@ import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
 import { setSubscription } from "../../slices/setupSlice";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { fetchAccountDetails } from "../../slices/businessSlice";
+import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
 // import { fetchAccountDetails } from "@/src/slices/businessSlice";
 
 interface MenuItem {
@@ -88,8 +89,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     dispatch(fetchBranches());
     dispatch(fetchUserDetails());
     dispatch(fetchAccountDetails());
+    dispatch(fetchAllBusinessInfo());
   }, [dispatch]);
 
+  const { businessInfo } = useSelector((state: any) => state.allBusinessInfo);
   // useEffect(() => {
   //   // console.log('from side bar')
   //   const fetchAcc = async () => {
@@ -104,9 +107,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   //   fetchAcc();
   // }, [])
 
-  const {
-    accountDetails
-  } = useSelector((state: RootState) => state.business);
+  const { accountDetails } = useSelector((state: RootState) => state.business);
 
   const [hasAccount, setHasAccount] = useState(true);
   useEffect(() => {
@@ -310,7 +311,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           ) : (
             <>
               <img
-                src={userData?.business_logo ? userData.business_logo : Logo}
+                src={businessInfo?.business_logo ? businessInfo.business_logo : Logo}
                 alt="logo"
                 className={`cursor-pointer duration-500 w-[100px] h-[100px] object-contain border-2 border-gray-300 rounded-lg shadow-lg p-2 bg-white ${!open ? "hidden" : "block"
                   } `}
@@ -326,7 +327,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
             </>
           )}
           <h4 className="mt-4 mb-0 text-base font-medium">
-            {userData?.business_name}
+            {businessInfo?.business_name}
           </h4>
         </div>
 
