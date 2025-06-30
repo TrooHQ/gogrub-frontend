@@ -144,7 +144,7 @@ export const fetchTopMenuItems = createAsyncThunk(
       endDate,
       number_of_days,
     }: {
-      branch_id: string;
+      branch_id: any;
       date_filter: string;
       startDate?: string;
       endDate?: string;
@@ -154,7 +154,7 @@ export const fetchTopMenuItems = createAsyncThunk(
   ) => {
     try {
       const token = localStorage.getItem("token");
-
+      console.log("branch", branch_id);
       const params: any = { branch_id, date_filter };
       if (date_filter === "date_range") {
         params.date_filter = "date_range";
@@ -163,6 +163,8 @@ export const fetchTopMenuItems = createAsyncThunk(
       } else if (date_filter !== "today") {
         params.number_of_days = number_of_days;
       }
+
+      console.log("params", params);
 
       const response = await axios.get(
         `${SERVER_DOMAIN}/order/getTopMenuItems/`,

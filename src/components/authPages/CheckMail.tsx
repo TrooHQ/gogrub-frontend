@@ -12,7 +12,7 @@ const CheckMail = () => {
         </div>{" "}
         <div className="bg-white  p-8 my-10 w-full md:w-[530px] rounded shadow-md">
           <div className="grid items-center gap-5">
-            <div className=" flex gap-5 flex-col items-center justify-center text-center">
+            <div className="flex flex-col items-center justify-center gap-5 text-center ">
               <img src={lockIcon} alt="" />
               <p className=" text-grey500 text-[24px] font-[600]">
                 Check your mail
@@ -21,8 +21,9 @@ const CheckMail = () => {
                 We have sent a password recover <br /> instruction to your email
               </p>
             </div>
-            <Link to="/reset-password">
-              <button className="bg-grey700 w-full text-center text-white py-3 rounded">
+            <Link to="#">
+              {/* <Link to="/reset-password"> */}
+              <button className="w-full py-3 text-center text-white rounded bg-grey700">
                 Check email
               </button>
             </Link>

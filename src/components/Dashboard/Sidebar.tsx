@@ -461,9 +461,9 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               >
                 {menu.title && (
                   (menu.link === "/business-information" && !hasAccount) ?
-                    <div className="text-white bg-red-500 rounded-full animate-ping size-4">
-                      <RiErrorWarningLine className="w-full h-full" />
-                    </div>
+                    // <div className="text-white bg-red-500 rounded-full animate-ping size-4">
+                    <RiErrorWarningLine className="size-4" />
+                    // </div>
                     : (
                       <img
                         src={menu.icon}
@@ -481,26 +481,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                       />
                     )
                 )}
-                {/* {menu.title && (
-                  
-                  <img
-                    src={menu.icon}
-                    alt={menu.title}
-                    style={{
-                      width: "24px",
-                      marginRight: "8px",
-                      fontWeight: isMenuItemActive(
-                        menu.link || "",
-                        menu.subMenu
-                      )
-                        ? "bold"
-                        : "normal",
-                      color: isMenuItemActive(menu.link || "", menu.subMenu)
-                        ? ""
-                        : "initial",
-                    }}
-                  />
-                )} */}
+
                 <NavLink to={menu.link || "#"} className="flex-grow">
                   <span
                     className={`${!open && "hidden"

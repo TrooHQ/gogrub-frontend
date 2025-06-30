@@ -94,7 +94,7 @@ const Modifiers = ({
       setFetchedModifierGroups(response.data.data || []);
       // toast.success("Modifier groups fetched successfully.");
     } catch (error) {
-      toast.error("Failed to fetch modifiers.");
+      // toast.error("Failed to fetch modifiers.");
     } finally {
       setIsGroupFetching(false);
     }

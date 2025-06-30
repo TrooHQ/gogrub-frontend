@@ -457,7 +457,7 @@ const MenuSettings = () => {
               Add new menu item
             </p>
             <Link to="">
-              <div className="border border-purple500 text-center bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[72px]">
+              <div className="border  text-center  rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[72px]">
                 <button className=" text-[16px] ">Save</button>
               </div>
             </Link>
