@@ -31,7 +31,7 @@ const KPI = () => {
 
   useEffect(() => {
     dispatch(
-      fetchTopMenuItems({ date_filter: "today", branch_id: selectedBranch })
+      fetchTopMenuItems({ date_filter: "today", branch_id: selectedBranch?.id })
     );
   }, [dispatch, selectedBranch]);
 
@@ -42,7 +42,7 @@ const KPI = () => {
         <h5 className={clsx(styles.salesRevenue)}>Highest Selling Product</h5>
       </div>
       {loading ? (
-        <div className="flex justify-center items-center h-64">
+        <div className="flex items-center justify-center h-64">
           <CircularProgress />
         </div>
       ) : (
