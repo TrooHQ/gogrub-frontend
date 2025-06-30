@@ -15,12 +15,16 @@ import { AppDispatch, RootState } from "../../store/store";
 import Loader from "../Loader";
 import { toast } from "react-toastify";
 import { stateOptions } from "../../utils/stateOptions";
+import axios from "axios";
+import { SERVER_DOMAIN } from "../../Api/Api";
 
 const PickupLocation = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { pickupLocations: locations, loading } = useSelector((state: RootState) => state.asset);
 
-  const [isPickupEnabled, setIsPickupEnabled] = useState(false);
+  const { businessInfo, } = useSelector((state: any) => state.allBusinessInfo);
+
+  const [isPickupEnabled, setIsPickupEnabled] = useState(businessInfo?.picklocationEnabled);
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);
   const [selectedState, setSelectedState] = useState("");
   const [addresses, setAddresses] = useState([""]);
@@ -37,15 +41,36 @@ const PickupLocation = () => {
 
 
 
-  useEffect(() => {
-    const storedValue = localStorage.getItem("online_ordering_pickup_enabled");
-    setIsPickupEnabled(storedValue ? JSON.parse(storedValue) : false);
-  }, []);
+  // useEffect(() => {
+  //   const storedValue = localStorage.getItem("online_ordering_pickup_enabled");
+  //   setIsPickupEnabled(storedValue ? JSON.parse(storedValue) : false);
+  // }, []);
 
-  const handleToggleChange = () => {
-    setIsPickupEnabled(isPickupEnabled => !isPickupEnabled);
-    localStorage.setItem("online_ordering_pickup_enabled", JSON.stringify(!isPickupEnabled));
+  const handleToggleChange = async () => {
+    setIsPickupEnabled((isPickupEnabled: boolean) => !isPickupEnabled);
+    // localStorage.setItem("online_ordering_pickup_enabled", JSON.stringify(!isPickupEnabled));
 
+    const token = localStorage.getItem("token");
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      // const response = 
+      await axios.put(
+        `${SERVER_DOMAIN}/updateBusinessDetails`,
+        {
+          picklocationEnabled: !isPickupEnabled,
+        },
+        { headers }
+      );
+
+      // console.log("res", response)
+    } catch (e) {
+      console.error("Error toggling delivery service:", e);
+      toast.error("Error toggling delivery service. Please try again.");
+    }
   };
 
   const handleScheduleToggleChange = () => {
