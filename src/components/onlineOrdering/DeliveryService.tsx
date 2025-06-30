@@ -14,11 +14,19 @@ import {
   fetchDeliveryDetails,
 } from "../../slices/assetSlice";
 import { stateOptions } from "../../utils/stateOptions";
+import axios from "axios";
+import { SERVER_DOMAIN } from "../../Api/Api";
 
 const DeliveryService = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [isDeliveryEnabled, setIsDeliveryEnabled] = useState(true);
+  const { businessInfo, } = useSelector((state: any) => state.allBusinessInfo);
+
+  console.log("businessInfo", businessInfo);
+
+
+  const [isDeliveryEnabled, setIsDeliveryEnabled] = useState(businessInfo?.deliveryEnabled);
+  console.log("isDeliveryEnabled", isDeliveryEnabled);
   const [selectedState, setSelectedState] = useState("");
   const [fixedPrice, setFixedPrice] = useState("");
   const [supportLink, setSupportLink] = useState("");
@@ -29,10 +37,10 @@ const DeliveryService = () => {
   });
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);
 
-  useEffect(() => {
-    const storedValue = localStorage.getItem("online_ordering_delivery_enabled");
-    setIsDeliveryEnabled(storedValue ? JSON.parse(storedValue) : false);
-  }, []);
+  // useEffect(() => {
+  //   const storedValue = localStorage.getItem("online_ordering_delivery_enabled");
+  //   setIsDeliveryEnabled(storedValue ? JSON.parse(storedValue) : false);
+  // }, []);
 
   useEffect(() => {
     dispatch(fetchDeliveryDetails());
@@ -42,9 +50,31 @@ const DeliveryService = () => {
     (state: RootState) => state.asset
   );
 
-  const handleToggleChange = () => {
-    setIsDeliveryEnabled((prev) => !prev);
-    localStorage.setItem("online_ordering_delivery_enabled", JSON.stringify(!isDeliveryEnabled));
+  const handleToggleChange = async () => {
+    setIsDeliveryEnabled((prev: boolean) => !prev);
+
+    const token = localStorage.getItem("token");
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      // const response = 
+      await axios.put(
+        `${SERVER_DOMAIN}/updateBusinessDetails`,
+        {
+          deliveryEnabled: !isDeliveryEnabled,
+        },
+        { headers }
+      );
+
+      // console.log("res", response)
+    } catch (e) {
+      console.error("Error toggling delivery service:", e);
+      toast.error("Error toggling delivery service. Please try again.");
+    }
+    // localStorage.setItem("online_ordering_delivery_enabled", JSON.stringify(!isDeliveryEnabled));
   };
 
   const handleScheduleToggleChange = () => {

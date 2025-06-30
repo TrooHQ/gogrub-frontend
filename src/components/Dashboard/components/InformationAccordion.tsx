@@ -205,9 +205,9 @@ export default function InformationAccordion() {
       }
     } catch (error: any) {
       console.error("Error fetching account details:", error);
-      toast.error(
-        error?.response?.data?.message || "Error fetching information"
-      );
+      // toast.error(
+      //   error?.response?.data?.message || "Error fetching information"
+      // );
     }
   };
 
@@ -843,7 +843,7 @@ export default function InformationAccordion() {
             <Button
               variant="contained"
               onClick={handleBankDetailsSubmit}
-              disabled={isSubmittingBankDetails || !showBankNotice}
+              disabled={isSubmittingBankDetails}
               sx={{
                 backgroundColor: "#000000",
                 "&:hover": {
@@ -854,7 +854,7 @@ export default function InformationAccordion() {
                 padding: "12px 24px",
               }}
             >
-              {isSubmittingBankDetails ? "Saving..." : formData?.payoutBankDetails?.accountNumber ? "Update Bank Details" : "Save Bank Details"}
+              {isSubmittingBankDetails ? "Saving..." : "Save Bank Details"}
             </Button>
           </div>
         </AccordionDetails>
