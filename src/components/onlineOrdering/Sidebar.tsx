@@ -15,10 +15,17 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const BusinessPlan = userDetails?.businessPlan?.plan?.name;
 
+  const param = new URLSearchParams(window.location.search);
+  const tab = param.get("pg");
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault();
-    setActiveComponent(newValue);
-  };
+    if (tab) {
+      window.location.href = '/online-ordering'
+    } else {
+      setActiveComponent(newValue);
+    }
+  }
 
   const tabStyle = {
     textTransform: "none",
@@ -38,9 +45,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   const tabs = [
     { label: "PICKUP LOCATION", value: "pickup location" },
     { label: "DELIVERY", value: "delivery service" },
-    ...(BusinessPlan ? [{ label: "GET YOUR LINK", value: "Your Link" }] : []),
+    ...(BusinessPlan ? [{ label: "GET YOUR LINK", value: "link" }] : []),
     { label: "THEMES", value: "themes" },
   ];
+
 
   return (
     <div className="w-full px-0 py-2 bg-white">
