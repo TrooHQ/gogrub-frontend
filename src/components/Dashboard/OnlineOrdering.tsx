@@ -13,7 +13,7 @@ const OnlineOrdering = () => {
   const param = new URLSearchParams(window.location.search);
   const tab = param.get("pg");
 
-  const [activeComponent, setActiveComponent] = useState(tab ? "your link" : "pickup location");
+  const [activeComponent, setActiveComponent] = useState(tab ? "link" : "pickup location");
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
@@ -21,7 +21,7 @@ const OnlineOrdering = () => {
         return <PickupLocation />;
       case "delivery service":
         return <DeliveryService />;
-      case "your link":
+      case "link":
         return <YourLink />;
       case "themes":
         return <Themes />;
