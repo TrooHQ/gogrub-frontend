@@ -38,12 +38,12 @@ const Sidebar: React.FC<SidebarProps> = ({
   const tabs = [
     { label: "PICKUP LOCATION", value: "pickup location" },
     { label: "DELIVERY", value: "delivery service" },
-    ...(BusinessPlan ? [{ label: "GET YOUR LINK", value: "your link" }] : []),
+    ...(BusinessPlan ? [{ label: "GET YOUR LINK", value: "Your Link" }] : []),
     { label: "THEMES", value: "themes" },
   ];
 
   return (
-    <div className="w-full bg-white py-2 px-0">
+    <div className="w-full px-0 py-2 bg-white">
       <Tabs
         value={activeComponent}
         onChange={handleTabChange}

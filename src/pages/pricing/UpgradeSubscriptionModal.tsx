@@ -389,7 +389,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
             </div>
 
             {isNewUser && <Link
-              to="/online-ordering"
+              to="/online-ordering?pg=link"
               onClick={() => dispatch(setSubscription(false))}
             >
               <button
