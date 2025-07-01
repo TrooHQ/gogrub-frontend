@@ -9,7 +9,11 @@ import Themes from "../onlineOrdering/Themes";
 
 const OnlineOrdering = () => {
   // const dispatch = useDispatch<AppDispatch>();
-  const [activeComponent, setActiveComponent] = useState("pickup location");
+
+  const param = new URLSearchParams(window.location.search);
+  const tab = param.get("pg");
+
+  const [activeComponent, setActiveComponent] = useState(tab ? "your link" : "pickup location");
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
