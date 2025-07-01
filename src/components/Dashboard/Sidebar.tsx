@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
-import Logo from "../../assets/troo-logo.png";
-import LogoMini from "../../assets/logo-mini-icon.svg";
+// import Logo from "../../assets/troo-logo.png";
+// import LogoMini from "../../assets/logo-mini-icon.svg";
 import OverviewIcon from "../../assets/OverviewIcon.svg";
 import TicketIcon from "../../assets/Tickets.svg";
 import MenuIcon from "../../assets/menuIcon.svg";
@@ -20,7 +20,7 @@ import {
   // ArrowDropDown,
   // Search,
 } from "@mui/icons-material";
-import GoGrubLogo from "../../assets/business_logo.svg";
+// import GoGrubLogo from "../../assets/business_logo.svg";
 
 // import { CustomAutocomplete } from "./Overview";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,6 +37,7 @@ import { setSubscription } from "../../slices/setupSlice";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { fetchAccountDetails } from "../../slices/businessSlice";
 import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
+import { FiLoader } from "react-icons/fi";
 // import { fetchAccountDetails } from "@/src/slices/businessSlice";
 
 interface MenuItem {
@@ -92,7 +93,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     dispatch(fetchAllBusinessInfo());
   }, [dispatch]);
 
-  const { businessInfo } = useSelector((state: any) => state.allBusinessInfo);
+  const { businessInfo, loading } = useSelector((state: any) => state.allBusinessInfo);
   // useEffect(() => {
   //   // console.log('from side bar')
   //   const fetchAcc = async () => {
@@ -112,6 +113,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const [hasAccount, setHasAccount] = useState(true);
   useEffect(() => {
     setHasAccount(accountDetails?.account_name && accountDetails?.account_number)
+
+    setOpen(true)
   }, [accountDetails?.account_name, accountDetails?.account_number]);
 
   // console.log("accountDetails", accountDetails);
@@ -306,26 +309,26 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     >
       <div className="grid items-center gap-3">
         <div className="flex flex-col items-center justify-center mt-4 gap-x-4">
-          {userData?.business_type === "gogrub" ? (
-            <img src={GoGrubLogo} alt="Logo" className="mb-8" />
-          ) : (
+          {
+
             <>
-              <img
-                src={businessInfo?.business_logo ? businessInfo.business_logo : Logo}
+              {loading ? <div className="w-[100px] h-[100px] flex items-center justify-center"><FiLoader /></div> : <img
+                src={businessInfo?.business_logo}
                 alt="logo"
                 className={`cursor-pointer duration-500 w-[100px] h-[100px] object-contain border-2 border-gray-300 rounded-lg shadow-lg p-2 bg-white ${!open ? "hidden" : "block"
                   } `}
-                onClick={() => setOpen(!open)}
-              />
-              <img
+              // onClick={() => setOpen(!open)}
+              />}
+              {/* <img
                 alt="logo-mini"
                 src={LogoMini}
                 className={`cursor-pointer duration-500 w-[100px] h-[100px] object-contain border-2 border-gray-300 rounded-lg shadow-lg p-2 bg-white ${!open ? "block" : "hidden"
                   } `}
-                onClick={() => setOpen(!open)}
-              />
+                // onClick={() => setOpen(!open)}
+              /> */}
             </>
-          )}
+
+          }
           <h4 className="mt-4 mb-0 text-base font-medium">
             {businessInfo?.business_name}
           </h4>

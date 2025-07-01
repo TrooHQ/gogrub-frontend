@@ -20,6 +20,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
+import { FiLoader } from "react-icons/fi";
 
 interface TopMenuNavProps {
   pathName: string;
@@ -51,7 +52,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
 
   const dispatch = useDispatch<AppDispatch>();
   // const { userDetails } = useSelector((state: any) => state.user);
-  const { personalInfo, businessInfo } = useSelector((state: any) => state.allBusinessInfo);
+  const { personalInfo, businessInfo, loading } = useSelector((state: any) => state.allBusinessInfo);
 
   const location = useLocation();
   const [userCheck, setUserChecks] = useState<UserCheckState>({
@@ -180,33 +181,35 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
               }
               `}
             </style>
-            <div className="ml-3 mr-5 ">
-              <img src={NotificationIcon} alt="" />
-            </div>
-            <div>
-              <p className="text-grey500 text-[16px] font-[500]">
-                {personalInfo && personalInfo.personal_email}
-              </p>
-              <p className="capitalize text-right text-grey300 text-[12px]">
-                {personalInfo && personalInfo.user_role}
-              </p>
-            </div>
-            <div>
-              <Avatar sx={{ width: 40, height: 40 }}>
-                {(personalInfo && businessInfo) ? (
-                  <img
-                    // use personInfo.photo if you want to render the user's profile picture
-                    src={businessInfo?.business_logo}
-                    // src={userDetails?.business_logo}
-                    // src={userDetails?.photo || userDetails?.business_logo || ""}
-                    alt={`${personalInfo?.first_name} ${personalInfo?.last_name}`}
-                    className="object-cover w-10 h-10 rounded-full"
-                  />
-                ) : (
-                  <PersonIcon />
-                )}
-              </Avatar>
-            </div>
+            {loading ? <div className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full animate-pulse"> <FiLoader /></div> : <>
+              <div className="ml-3 mr-5 ">
+                <img src={NotificationIcon} alt="" />
+              </div>
+              <div>
+                <p className="text-grey500 text-[16px] font-[500]">
+                  {personalInfo && personalInfo.personal_email}
+                </p>
+                <p className="capitalize text-right text-grey300 text-[12px]">
+                  {personalInfo && personalInfo.user_role}
+                </p>
+              </div>
+              <div>
+                <Avatar sx={{ width: 40, height: 40 }}>
+                  {(personalInfo && businessInfo) ? (
+                    <img
+                      // use personInfo.photo if you want to render the user's profile picture
+                      src={businessInfo?.business_logo}
+                      // src={userDetails?.business_logo}
+                      // src={userDetails?.photo || userDetails?.business_logo || ""}
+                      alt={`${personalInfo?.first_name} ${personalInfo?.last_name}`}
+                      className="object-cover w-10 h-10 rounded-full"
+                    />
+                  ) : (
+                    <PersonIcon />
+                  )}
+                </Avatar>
+              </div>
+            </>}
           </div>
         </div>
       </div>

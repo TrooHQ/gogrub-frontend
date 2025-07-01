@@ -6,7 +6,7 @@ const initialState: any = {
   businessInfo: {},
   personalInfo: {},
   AccountInfo: {},
-  loading: false,
+  loading: true,
   error: null,
 };
 
