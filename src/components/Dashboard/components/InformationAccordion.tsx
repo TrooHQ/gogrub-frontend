@@ -540,6 +540,7 @@ export default function InformationAccordion() {
           disabled={!editMode[item.field]}
           variant="outlined"
           label={item.label}
+          // maxLength={item.field === "cacNumber" ? 10 : undefined}
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": { borderColor: "black" },

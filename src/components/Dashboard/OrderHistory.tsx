@@ -78,7 +78,7 @@ const OrderHistory = () => {
     endDate,
     number_of_days,
   }: {
-    date_filter: string;
+    date_filter: string | number;
     startDate?: string;
     endDate?: string;
     number_of_days?: number;
@@ -102,12 +102,10 @@ const OrderHistory = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-
-        // https://troox-backend-new.vercel.app/api/order/getOrderbyType/branch_id=681e0c0fe373e648d293d4b9&queryType=history
-        // https://troox-backend-new.vercel.app/api/order/getOrderbyType/?branch_id=669e67afbe2d93ee11921119&queryType=ticket 
         `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history`,
         {
           ...headers,
+          params
           // params: { branch_id: selectedBranch.id, ...params },
           // paramsSerializer: (params) => new URLSearchParams(params).toString(),
         }
@@ -169,7 +167,7 @@ const OrderHistory = () => {
   // };
 
   useEffect(() => {
-    getTickets({ date_filter: "today" });
+    getTickets({ date_filter: selectedFilter });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBranch]);
 

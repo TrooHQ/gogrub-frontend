@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./Mobile/NotFound";
 import Login from "./Mobile/authPages/Login";
-import RegistrationStepForm from "./Mobile/Components/RegistrationStepForm";
+// import RegistrationStepForm from "./Mobile/Components/RegistrationStepForm";
 import MenuSetupForm from "./Mobile/Components/MenuSetupForm";
 import ScrollToTop from "./components/ScrollToTop";
 import TableSetupForm from "./Mobile/Components/TableSetupForm";
@@ -54,10 +54,11 @@ import { OnlineOrderingGetReceipt } from "./Mobile/OnlineOrdering/OnlineOrdering
 import ChooseColor from "./Mobile/Components/Settings/ChooseColor";
 import OrderHistory from "./Mobile/Components/OrderHistory";
 import AccountVerified from "./Mobile/Components/AccountVerified";
+import BusinessProfiles from "./components/authPages/BusinessProfiles";
 
 const MobileLayout = () => {
   return (
-    <div className=" font-GeneralSans overflow-hidden">
+    <div className="overflow-hidden font-GeneralSans">
       <ToastContainer />
       <Router>
         <ScrollToTop />
@@ -191,8 +192,10 @@ const MobileLayout = () => {
 
           <Route path="/demo/report/gogrub-portal" element={<Reporting />} />
           <Route
+            // path="/demo/register/gogrub-portal?/:id"
+            // element={<RegistrationStepForm />}
             path="/demo/register/gogrub-portal?/:id"
-            element={<RegistrationStepForm />}
+            element={<BusinessProfiles />}
           />
           <Route
             path="/demo/verify/gogrub-portal"

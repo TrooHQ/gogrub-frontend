@@ -226,6 +226,9 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       setLoading(false)
       toast.success(response?.data?.message || "Menu item updated successfully.");
       if (onCancel) onCancel();
+      dispatch(fetchMenuItemsWithoutStatus({ branch_id: selectedBranch.id, page: 1 }));
+
+
 
     } catch (error) {
       // console.error("Error editing menu item:", error);
