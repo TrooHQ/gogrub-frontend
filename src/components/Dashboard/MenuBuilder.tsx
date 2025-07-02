@@ -548,7 +548,7 @@ const MenuBuilder = () => {
               <div className="flex items-center justify-end gap-4 mt-8">
                 <button
                   onClick={handleEditGroupConfirm}
-                  className="bg-[#5855B3] text-white rounded-[6px] px-4 py-2"
+                  className="bg-black text-white rounded-[6px] px-4 py-2"
                 >
                   {editLoading ? "Loading..." : "Confirm"}
                 </button>

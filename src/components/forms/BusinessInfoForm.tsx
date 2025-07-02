@@ -155,6 +155,7 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
         label="CAC Number"
         value={cacNumber as any}
         required="true"
+        maxLength={10}
         onChange={(newValue) => handleInputChange("cacNumber", newValue)}
       />
       <CustomInput

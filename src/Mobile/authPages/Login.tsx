@@ -136,7 +136,8 @@ const Login = () => {
           </div>
         </div>
         <div className=" mt-[100px]">
-          <Link to="/demo/register/gogrub-portal">
+          {/* <Link to="/demo/register/gogrub-portal"> */}
+          <Link to="/business-profile">
             <p className="font-[500] text-[16px] text-purple500">
               Create a business account
             </p>

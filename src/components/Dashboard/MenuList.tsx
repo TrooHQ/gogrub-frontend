@@ -542,7 +542,7 @@ const MenuList = () => {
                                   ) : (
                                     <ToggleOnIcon
                                       style={{
-                                        color: "#5855B3",
+                                        color: "#efefef",
                                         fontSize: "40px",
                                       }}
                                     />
@@ -553,7 +553,7 @@ const MenuList = () => {
                                 className={clsx(
                                   toggleStates[item._id]
                                     ? "text-[#121212]"
-                                    : "text-gray-700",
+                                    : "text-gray-500",
                                   "text-base font-medium",
                                   "w-full"
                                 )}
