@@ -1,4 +1,3 @@
-import React from 'react'
 import { LuBadge } from "react-icons/lu";
 import { FaCheck } from "react-icons/fa";
 

@@ -34,8 +34,8 @@ const SalesActivities = () => {
     totalCustomerTransaction,
   } = useSelector((state: RootState) => state.overview);
 
-  // console.log("salesGrowthRate", salesGrowthRate)
-  console.log("totalSales", totalSales)
+  console.log("salesGrowthRate", salesGrowthRate)
+  // console.log("totalSales", totalSales)
   // console.log("averageOrderValue", averageOrderValue)
   // console.log("totalCustomerTransaction", totalCustomerTransaction)
 
@@ -89,8 +89,7 @@ const SalesActivities = () => {
             : ArrowDown,
         title: "Sales Growth Rate",
         time: "12:45 PM",
-        amount: salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 ? 0 : `${salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday?.toLocaleString("en-US") || 0
-          }%`,
+        amount: `${salesGrowthRate?.data?.salesGrowthRate?.toLocaleString("en-US") || 0}%`,
         statusIcon: (salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 || salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales) ? ArrowNeutral
           : salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday > salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales ? ArrowUp
             : ArrowDown,
