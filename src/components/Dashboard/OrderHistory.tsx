@@ -460,11 +460,11 @@ const OrderHistory = () => {
 
                         {
                           (item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "canceled") ? (
-                            <div className=" w-fit flex mx-auto items-center gap-[10px] bg-red-600 text-red-100 px-4 py-1.5 rounded-full text-sm">
+                            <div className=" w-fit flex mx-auto items-center gap-[10px] bg-red-500 text-red-100 px-4 py-1.5 rounded-full text-sm">
                               <p>{item.status}</p>
                             </div>
                           ) : item.status?.toLowerCase() === "completed" ? (
-                            <div className="w-fit mx-auto flex items-center gap-[10px] bg-green-600 text-green-100 px-4 py-1.5 rounded-full text-sm">
+                            <div className="w-fit mx-auto flex items-center gap-[10px] bg-green-500 text-green-100 px-4 py-1.5 rounded-full text-sm">
                               <p>{item.status}</p>
                             </div>
                           ) : (
