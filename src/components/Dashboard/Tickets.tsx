@@ -101,14 +101,14 @@ const Tickets = () => {
                           : ""}
                       </p>
                       <div className="mx-auto w-fit">
-                        <div className="flex items-center gap-[10px]">
-                          {item.status?.toLowerCase() === "cancelled" ?
+                        <div className="flex items-center gap-[10px] bg-orange-500 text-orange-100 px-[10px] py-[5px] rounded-full text-sm">
+                          {/* {item.status?.toLowerCase() === "cancelled" ?
                             <div className="w-[12px] h-[12px] rounded-full bg-red-600" />
                             : item.status?.toLowerCase() === "completed" ?
                               <div className="w-[12px] h-[12px] rounded-full bg-green-600" />
                               :
                               <div className="w-[12px] h-[12px] rounded-full bg-orange-600" />
-                          }
+                          } */}
                           <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
                         </div>
                       </div>

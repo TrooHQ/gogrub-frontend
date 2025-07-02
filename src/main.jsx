@@ -35,6 +35,7 @@ function Root() {
 
   if (isMobileScreen) {
     rootComponent = <MobileLayout />;
+    // rootComponent = <MobileNoticeLayout />;
   } else {
     rootComponent = <App />;
   }
