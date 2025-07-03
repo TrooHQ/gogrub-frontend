@@ -14,9 +14,9 @@ export default function MobileNoticeLayout() {
       <div className="  w-screen min-h-[50vh] bg-white flex flex-col items-center justify-center gap-4 my-16">
         <div className="relative flex flex-col items-center justify-center w-full gap-4 text-center">
           <div className="relative w-36">
-            <img src="/src/assets/mon.png" alt="monitor" className='w-full' />
-            <img src="/src/assets/vector 2.png" alt="thread" className="absolute -left-[65%] top-1/2 " />
-            <img src="/src/assets/vector 3.png" alt="thread" className="absolute -right-[65%] top-1/2" />
+            <img src="/assets/mon.png" alt="monitor" className='w-full' />
+            <img src="/assets/vector 2.png" alt="thread" className="absolute -left-[65%] top-1/2 " />
+            <img src="/assets/vector 3.png" alt="thread" className="absolute -right-[65%] top-1/2" />
           </div>
         </div>
         <p className='text-lg font-[600] text-[#121212] mt-5'>At the moment, the dashboard is <br /> best on <span className="text-[#FF4F00]">a desktop browser.</span></p>

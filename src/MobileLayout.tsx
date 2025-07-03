@@ -169,6 +169,7 @@ const MobileLayout = () => {
           />
           {/* <Route path="/demo/dashboard/gogrub-portal" element={<Dashboard />} /> */}
           <Route path="/demo/dashboard/gogrub-portal" element={<MobileNoticeLayout />} />
+
           <Route path={`/demo/login/gogrub-portal`} element={<Login />} />
           <Route
             path="/demo/employee-dashboard/gogrub-portal"
@@ -193,6 +194,11 @@ const MobileLayout = () => {
           <Route path="/demo/order/gogrub-portal" element={<Order />} />
 
           <Route path="/demo/report/gogrub-portal" element={<Reporting />} />
+          <Route
+            path="/business-profile"
+            element={<BusinessProfiles />}
+          // element={<RegistrationStepForm />}
+          />
           <Route
             path="/demo/register/gogrub-portal?/:id"
             element={<BusinessProfiles />}
