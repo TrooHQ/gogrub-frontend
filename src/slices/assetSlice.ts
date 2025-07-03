@@ -54,10 +54,10 @@ interface AddPickupLocationPayload {
 }
 
 interface DeliveryDetailsPayload {
-  fixedPrice: number;
-  support_link: string;
-  state: string;
-  canScheduleOrder: boolean;
+  fixedPrice: string | number | undefined;
+  support_link: string | undefined;
+  state: string | undefined;
+  canScheduleOrder: boolean | undefined;
 }
 
 interface AssetState {
