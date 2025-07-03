@@ -12,10 +12,10 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
               style={{
                 background:
                   SingleOrderItem?.status?.toLowerCase() === "completed"
-                    ? "green"
+                    ? "#22C55E"
                     : SingleOrderItem?.status?.toLowerCase() === "pending"
                       ? "#F97316"
-                      : "red",
+                      : "#EF4444",
               }}
             >
               {SingleOrderItem?.status?.toLowerCase() === "completed" ? <p>{SingleOrderItem.status}</p> : SingleOrderItem?.status?.toLowerCase() === "pending" ? <p>{SingleOrderItem.status}</p> : <p>{SingleOrderItem.status}</p>}
