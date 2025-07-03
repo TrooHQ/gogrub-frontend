@@ -57,7 +57,7 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
               src='/assets/order_det.png'
               alt="illustration_png"
             />
-            <p className='mb-10 text-xl font-medium text-gray-500'>Order Items</p>
+            <p className='mb-10 text-xl font-medium text-gray-500'>Items Ordered</p>
             <CloseRounded onClick={() => setOrderId(null)} className='absolute top-0 right-0 text-black cursor-pointer fill-black ' />
 
           </div>

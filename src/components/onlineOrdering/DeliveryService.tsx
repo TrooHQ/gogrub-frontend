@@ -1,8 +1,8 @@
 import { Switch, Modal, Box, Typography, IconButton } from "@mui/material";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import CustomSelect5 from "../inputFields/CustomSelect5";
-import CustomInput from "../inputFields/CustomInput";
+// import CustomSelect5 from "../inputFields/CustomSelect5";
+// import CustomInput from "../inputFields/CustomInput";
 import { Close, CheckCircle, ArrowBack } from "@mui/icons-material";
 import { FaPlus } from "react-icons/fa6";
 import DeliveryTable from "./DeliveryTable";
@@ -10,12 +10,13 @@ import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
-  addDeliveryDetails,
+  // addDeliveryDetails,
   fetchDeliveryDetails,
 } from "../../slices/assetSlice";
-import { stateOptions } from "../../utils/stateOptions";
+// import { stateOptions } from "../../utils/stateOptions";
 import axios from "axios";
 import { SERVER_DOMAIN } from "../../Api/Api";
+import AddDeliveryService from "./AddDeliveryService";
 
 const DeliveryService = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,15 +28,9 @@ const DeliveryService = () => {
 
   const [isDeliveryEnabled, setIsDeliveryEnabled] = useState(businessInfo?.deliveryEnabled);
   console.log("isDeliveryEnabled", isDeliveryEnabled);
-  const [selectedState, setSelectedState] = useState("");
-  const [fixedPrice, setFixedPrice] = useState("");
-  const [supportLink, setSupportLink] = useState("");
   const [open, setOpen] = useState(false);
-  const [state, setState] = useState({
-    createLocation: false,
-    showLocation: true,
-  });
-  const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(false);
+
+  const [showAdd, setShowAdd] = useState(false);
 
   // useEffect(() => {
   //   const storedValue = localStorage.getItem("online_ordering_delivery_enabled");
@@ -49,6 +44,8 @@ const DeliveryService = () => {
   const { deliveryDetails, loading } = useSelector(
     (state: RootState) => state.asset
   );
+
+  console.log("deliveryDetails service", deliveryDetails);
 
   const handleToggleChange = async () => {
     setIsDeliveryEnabled((prev: boolean) => !prev);
@@ -77,59 +74,20 @@ const DeliveryService = () => {
     // localStorage.setItem("online_ordering_delivery_enabled", JSON.stringify(!isDeliveryEnabled));
   };
 
-  const handleScheduleToggleChange = () => {
-    setIsSchedulingEnabled((prev) => !prev);
-  };
-
-  const handleStateChange = (value: string) => {
-    setSelectedState(value);
-  };
-
-  const handleOpen = () => {
-    // Dispatch action to add new delivery details
-    dispatch(
-      addDeliveryDetails({
-        state: selectedState,
-        fixedPrice: parseFloat(fixedPrice),
-        support_link: supportLink,
-        canScheduleOrder: isSchedulingEnabled,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        // Reset form fields after adding
-        setSelectedState("");
-        setFixedPrice("");
-        setSupportLink("");
-        setOpen(true);
-      })
-      .catch((error: any) => {
-        console.error("Error adding delivery service:", error);
-        toast.error(error || "Error while submitting. Try again");
-      })
-      .finally(() => {
-        dispatch(fetchDeliveryDetails());
-      });
-  };
-
   const handleClose = () => {
     setOpen(false);
-    setState({
-      createLocation: false,
-      showLocation: true,
-    });
+    setShowAdd(!showAdd);
   };
 
   const handleCreateLocation = () => {
-    setState({
-      createLocation: true,
-      showLocation: false,
-    });
+    setShowAdd(!showAdd);
   };
+
+
 
   return (
     <div className="h-full">
-      {state.showLocation && (
+      {!showAdd && (
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center g-2.5">
             <span className="text-[#121212] text-base font-normal">
@@ -169,7 +127,7 @@ const DeliveryService = () => {
         </div>
       ) :
         <>
-          {state.showLocation && !deliveryDetails && !loading ? (
+          {!showAdd && !deliveryDetails && !loading ? (
             <div className="flex flex-col gap-6 items-center justify-center h-full w-full mt-[-100px]">
               <p>No location has been set yet</p>
               <div className="border border-purple500 bg-white w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-purple500">
@@ -182,103 +140,23 @@ const DeliveryService = () => {
                 </button>
               </div>
             </div>
-          ) : state.showLocation && deliveryDetails ? (
+          ) : !showAdd && deliveryDetails ? (
             <DeliveryTable deliveryDetails={deliveryDetails} />
-          ) : state.createLocation ? (
+          ) : showAdd ? (
             <div className="">
               <div
                 className="cursor-pointer"
                 onClick={() => {
-                  setState((prev: any) => ({
-                    ...prev,
-                    createLocation: false,
-                    showLocation: true,
-                  }));
-                  setSelectedState("");
-                  setFixedPrice("");
-                  setSupportLink("");
+                  setShowAdd(!showAdd);
                 }}
               >
                 <ArrowBack />
                 Back
               </div>
-              {/* <div className="flex items-center g-2.5">
-            <span className="text-[#121212] text-base font-normal">
-              Do you want to offer delivery service?
-            </span>
-            <Switch
-              checked={isDeliveryEnabled}
-              onChange={handleToggleChange}
-              color="primary"
-              style={{ color: isDeliveryEnabled ? "#5855B3" : "#929292" }}
-            />
-            <span
-              className={clsx({
-                "text-[#121212]": isDeliveryEnabled,
-                "text-[#929292]": !isDeliveryEnabled,
-                "text-base font-medium": true,
-              })}
-            >
-              {isDeliveryEnabled ? "Enabled" : "Disabled"}
-            </span>
-          </div> */}
 
               {isDeliveryEnabled && (
                 <div className="mt-[80px] w-[60%] m-auto">
-                  <form className="space-y-6">
-                    <CustomSelect5
-                      label="Select a state"
-                      options={stateOptions}
-                      value={selectedState}
-                      onChange={handleStateChange}
-                    />
-                    <CustomInput
-                      type="text"
-                      label="Enter your fixed price"
-                      value={fixedPrice}
-                      onChange={(newValue) => setFixedPrice(newValue)}
-                      className="border-gray-500"
-                    />
-                    <CustomInput
-                      type="text"
-                      label="Add your support link to your profile, WhatsApp, Instagram)"
-                      value={supportLink}
-                      onChange={(newValue) => setSupportLink(newValue)}
-                      className="border-gray-500"
-                    />
-
-                    <div className="flex items-center g-2.5">
-                      <span className="text-[#121212] text-base font-normal">
-                        Do you want to enable scheduling of delivery for your
-                        customers?
-                      </span>
-                      <Switch
-                        checked={isSchedulingEnabled}
-                        onChange={handleScheduleToggleChange}
-                        color="primary"
-                        style={{
-                          color: isSchedulingEnabled ? "#5855B3" : "#929292",
-                        }}
-                      />
-                      <span
-                        className={clsx({
-                          "text-[#121212]": isSchedulingEnabled,
-                          "text-[#929292]": !isSchedulingEnabled,
-                          "text-base font-medium": true,
-                        })}
-                      >
-                        {isSchedulingEnabled ? "Enabled" : "Disabled"}
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      className="bg-[#0d0d0d] text-center text-white py-3 px-4 rounded"
-                      onClick={handleOpen}
-                    >
-                      {loading ? "Saving..." : "Save changes"}
-                    </button>
-                  </form>
+                  <AddDeliveryService />
                 </div>
               )}
 

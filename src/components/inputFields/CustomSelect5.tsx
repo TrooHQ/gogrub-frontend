@@ -8,7 +8,7 @@ interface Option {
 interface CustomSelectProps {
   label?: string;
   options: Option[];
-  value: string;
+  value: string | number | undefined;
   error?: string;
   onChange: (value: string) => void;
   disabledOption?: string;
@@ -44,9 +44,8 @@ const CustomSelect5: React.FC<CustomSelectProps> = ({
     <div>
       <div className="relative">
         <select
-          className={`border outline-grey200 text-grey500 border-gray-500 text-[16px] py-3 bg-white p-2 focus:outline-[#101010] w-full rounded ${
-            error ? "border-red-500" : ""
-          }`}
+          className={`border outline-grey200 text-grey500 border-gray-500 text-[16px] py-3 bg-white p-2 focus:outline-[#101010] w-full rounded ${error ? "border-red-500" : ""
+            }`}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={handleFocus}
@@ -71,18 +70,17 @@ const CustomSelect5: React.FC<CustomSelectProps> = ({
         {label && (
           <label
             style={{ left: "14px" }}
-            className={`absolute transition-all duration-300 cursor-text ${
-              isFocused || value
+            className={`absolute transition-all duration-300 cursor-text ${isFocused || value
                 ? "text-[14px] -top-3 left-2 bg-white px-2 text-[#000000]"
                 : "top-2 left-4 bg-white text-gray-400"
-            } ${error ? "text-red-500" : ""}`}
+              } ${error ? "text-red-500" : ""}`}
             onClick={() => selectRef.current?.focus()}
           >
             {label}
           </label>
         )}
       </div>
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };

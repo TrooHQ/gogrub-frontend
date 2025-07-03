@@ -21,7 +21,7 @@ export default function MobileNoticeLayout() {
         </div>
         <p className='text-lg font-[600] text-[#121212] mt-5'>At the moment, the dashboard is <br /> best on <span className="text-[#FF4F00]">a desktop browser.</span></p>
 
-        <img src="/src/assets/gogrub-logo.png" alt="monitor" className='mt-5' />
+        <img src="/assets/gogrub-logo.png" alt="monitor" className='mt-5' />
       </div>
 
       <div className='min-h-[25vh] w-full bg-black flex flex-col items-center justify-center gap-4 text-center px-20 py-10'>

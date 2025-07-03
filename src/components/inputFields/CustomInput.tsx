@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 interface CustomInputProps {
   label: string;
   type: string;
-  value: string | number;
+  value: string | number | undefined;
   error?: string;
   maxLength?: number;
   onChange: (value: string) => void;
