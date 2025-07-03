@@ -12,6 +12,7 @@ import { saveAs } from "file-saver"; // To save files locally
 import Papa from "papaparse"; // For CSV export
 import { truncateText } from "../../utils/truncateText";
 import { DatePicker, Space } from "antd";
+import ViewOrderModal from "./OrderModal";
 
 const { RangePicker } = DatePicker;
 
@@ -233,7 +234,23 @@ const OrderHistory = () => {
   const handleBack = () => {
     setShowCustomerDetail(false);
   };
-  console.log(data, "llllll");
+
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const [orderModal, setOrderModal] = useState<boolean>(true);
+  const [SingleOrderItem, setSingleOrderItem] = useState({});
+
+  useEffect(() => {
+    if (orderId) {
+
+      const order = data?.find((order: any) => order._id === orderId);
+      console.log("Order:", order);
+      setSingleOrderItem(order)
+
+      setOrderModal(true);
+    } else {
+      setOrderModal(false);
+    }
+  }, [orderId, data])
 
   return (
     <div>
@@ -443,11 +460,9 @@ const OrderHistory = () => {
                           {item.order_number || "-"}
                         </p>
                         <p className="" onClick={handleTicketMenu}>
-                          {item.createdAt.slice(0, 10)}
+                          {item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 16)}
                         </p>
-                        <p className="" onClick={handleTicketMenu}>
-                          {item.createdAt.slice(11, 16)}
-                        </p>
+
                         <p onClick={() => handleCustomerShow(item)}>
                           {item.customer_name
                             ? truncateText(
@@ -477,10 +492,20 @@ const OrderHistory = () => {
 
 
                         <p>&#x20A6;{item.total_price.toLocaleString()}</p>
+                        <p className="px-3 py-1 mx-auto text-sm text-gray-800 border border-gray-800 rounded-full cursor-pointer w-fit"
+                        onClick={()=> item?._id && setOrderId(item?._id)}>
+                          View Order
+                        </p>
                       </div>
                     ))
                   )}
                 </div>
+                {orderModal && <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/40">
+                  <ViewOrderModal
+                    setOrderId={setOrderId}
+                    SingleOrderItem={SingleOrderItem}
+                  />
+                </div>}
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ import { truncateText } from "../../utils/truncateText";
 import { AppDispatch, RootState } from "@/src/store/store";
 import { DropdownMenuTicketStatusUpdate } from "./DropDownTicketStatusUpdate";
 import { fetchTickets } from "../../slices/ticketsSlice";
+import ViewOrderModal from "./OrderModal";
 
 const Tickets = () => {
   const { selectedBranch } = useSelector((state: any) => state.branches);
@@ -37,6 +38,23 @@ const Tickets = () => {
   const handleRefresh = () => {
     dispatch(fetchTickets({ selectedBranch }));
   };
+
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const [orderModal, setOrderModal] = useState<boolean>(true);
+  const [SingleOrderItem, setSingleOrderItem] = useState({});
+
+  useEffect(() => {
+    if (orderId) {
+
+      const order = orderData?.find((order: any) => order._id === orderId);
+      // console.log("Order:", order);
+      setSingleOrderItem(order)
+
+      setOrderModal(true);
+    } else {
+      setOrderModal(false);
+    }
+  }, [orderId, orderData])
 
   return (
     <div>
@@ -129,6 +147,7 @@ const Tickets = () => {
                             getTickets={fetchTickets}
                             branchId={selectedBranch.id}
                             orderId={item._id}
+                            setOrderId={setOrderId}
                           />
 
                         )}
@@ -165,6 +184,12 @@ const Tickets = () => {
               /> */}
             </div>
           </div>
+          {orderModal && <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/40">
+            <ViewOrderModal
+              setOrderId={setOrderId}
+              SingleOrderItem={SingleOrderItem}
+            />
+          </div>}
         </div>
       </DashboardLayout>
     </div>
