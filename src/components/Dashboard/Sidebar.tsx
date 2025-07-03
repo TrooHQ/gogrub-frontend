@@ -291,6 +291,11 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     return false;
   };
 
+  const [logoutModal, setLogoutModal] = useState(false);
+
+  const handleLogoutModal = () => {
+    setLogoutModal(!logoutModal);
+  };
   const handleLogout = () => {
     dispatch(clearUserData());
     dispatch(clearSelectedBranch());
@@ -338,112 +343,10 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           className={`cursor-pointer duration-500 ${!open ? "hidden" : "block"
             } `}
         >
-          {/* <hr className="h-[2px] bg-[#929292] my-3" /> */}
-          {/* <div className="ml-[5px] flex flex-col items-start justify-center gap-2">
-            <h4 className="mb-0 text-base font-medium">
-              {userData?.business_name}
-            </h4>
-
-                        {userData?.user_role === "admin" ? (
-              <div>
-                <Button
-                  onClick={handleButtonClick}
-                  sx={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#121212",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    ml: 0,
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      color: "#121212",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                    },
-                    "&:focus": {
-                      outline: "none",
-                    },
-                  }}
-                >
-                  {selectedBranch?.label} <ArrowDropDown />
-                </Button>
-                <Popper
-                  open={isAutoOpen}
-                  anchorEl={anchorEl}
-                  placement="bottom-start"
-                  sx={{ zIndex: 10, boxShadow: 3 }}
-                >
-                  <Paper sx={{ boxShadow: 3 }}>
-                    <CustomAutocomplete
-                      disablePortal
-                      options={transformedBranches}
-                      value={
-                        selectedBranch
-                          ? selectedBranch.label
-                          : selectedOutlet.label
-                      }
-                      onChange={handleSelect}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          placeholder="Search outlet"
-                          variant="outlined"
-                          style={{ width: "220px", marginLeft: "0px" }}
-                          InputProps={{
-                            ...params.InputProps,
-                            startAdornment: (
-                              <>
-                                <Search
-                                  style={{ color: "gray", marginRight: "4px" }}
-                                />
-                                {params.InputProps.startAdornment}
-                              </>
-                            ),
-                          }}
-                        />
-                      )}
-                    />
-                  </Paper>
-                </Popper>
-              </div>
-            ) : (
-              <div>
-                <Button
-                  sx={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#121212",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    ml: 0,
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      color: "#121212",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                    },
-                    "&:focus": {
-                      outline: "none",
-                    },
-                  }}
-                >
-                  {userData?.branch_name}
-                </Button>
-              </div>
-            )}
-          </div> */}
           <hr className="h-[2px] bg-[#929292] my-3" />
         </div>
       </div>
 
-      {/* Subscribe */}
-      {/* <Link to="/subscription-plan">
-        <div className="flex items-center justify-start gap-3">
-          <span className="text-[16px] font-medium ml-3.5">Subscribe</span>
-          <BlinkerSubscribe />
-        </div>
-      </Link> */}
       <ul className="pt-2 pl-[1px] grid gap-[10px]">
         {selectedMenu.map((menu, index) => (
           <div key={index}>
@@ -555,36 +458,13 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                 {
                   currentPlanName ? currentPlanName : "Subscribe"
                 }
-                {/* {userData?.business_type === "gogrub" && currentPlanName
-                  ? currentPlanName
-                    .replace(`${userData.onboarding_type} `, "")
-                    .replace("plan", "")
-                    .trim()
-                  : userData?.business_type === "troo" && currentPlanName
-                    ? currentPlanName
-                      .replace(`${userData.onboarding_type} `, "")
-                      .replace("plan", "")
-                      .trim()
-                    : "Subscribe"} */}
               </span>
               <ArrowCircleRightOutlined sx={{ color: "var(--white, #FFF)" }} />{" "}
             </div>
           </div>
-          {/* {!currentPlanName && (
-            <div className="-ml-[8px] mt-0">
-              <BlinkerSubscribe />
-            </div>
-          )} */}
         </div>
         <hr className="h-[2px] bg-[#929292] mt-5 mb-3" />
       </div>
-      {/* Add the Logout item separately at the bottom */}
-      {/* <div
-        className="absolute bottom-0 w-full p-2 mt-6"
-        style={{
-          backgroundColor: isMenuItemActive("/logout") ? "#d3d3d3" : "transparent",
-        }}
-      > */}
       <div
         className="w-full p-2 mt-6"
         style={{
@@ -594,7 +474,8 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         }}
       >
         <div
-          onClick={handleLogout}
+          // onClick={handleLogout}
+          onClick={handleLogoutModal}
           className="flex items-center py-2 cursor-pointer gap-x-2"
         >
           <img
@@ -610,8 +491,31 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           <span className="text-[#000] font-semibold">Logout</span>
         </div>
       </div>
+      {
+        logoutModal && <LogOutModal handleLogoutModal={handleLogoutModal} handleLogout={handleLogout} />
+      }
     </div>
   );
 };
 
 export default SideBar;
+
+
+const LogOutModal = ({ handleLogoutModal, handleLogout }: { handleLogoutModal: () => void, handleLogout: () => void }) => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="p-6 text-center bg-white rounded-lg shadow-lg">
+        <img
+          src="/assets/logout.png"
+          alt="Logout Icon"
+          className="w-10 mx-auto mb-4"
+        />
+        <p>Are you sure you want to logout?</p>
+        <div className="flex items-center justify-between gap-4 mt-4">
+          <button className="w-full px-4 py-2 text-xs text-white bg-black rounded" onClick={handleLogout}>Yes</button>
+          <button className="w-full px-4 py-2 text-xs text-black bg-white border border-black rounded" onClick={handleLogoutModal}>No</button>
+        </div>
+      </div>
+    </div>
+  )
+}

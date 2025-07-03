@@ -437,12 +437,11 @@ const OrderHistory = () => {
                     <p className="text-start text-[14px] text-[#121212]">
                       Order No
                     </p>
-                    <p className=" text-[14px] text-[#121212]">Date</p>
-                    <p className=" text-[14px] text-[#121212]">Time</p>
+                    <p className=" text-[14px] text-[#121212]">Date/Time</p>
                     <p className=" text-[14px] text-[#121212]">Customer </p>
                     <p className=" text-[14px] text-[#121212]">Status </p>
                     <p className=" text-[14px] text-[#121212]">Bill </p>
-                    {/* <p className=" text-[14px] text-[#121212]">Actions </p> */}
+                    <p className=" text-[14px] text-[#121212]">Actions </p>
                   </div>
                   {isLoading ? (
                     <div className="px-8">Loading...</div>
@@ -493,7 +492,7 @@ const OrderHistory = () => {
 
                         <p>&#x20A6;{item.total_price.toLocaleString()}</p>
                         <p className="px-3 py-1 mx-auto text-sm text-gray-800 border border-gray-800 rounded-full cursor-pointer w-fit"
-                        onClick={()=> item?._id && setOrderId(item?._id)}>
+                          onClick={() => item?._id && setOrderId(item?._id)}>
                           View Order
                         </p>
                       </div>
