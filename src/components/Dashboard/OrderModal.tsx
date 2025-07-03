@@ -3,7 +3,7 @@ import dayjs from "dayjs"
 
 export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrderId: (id: string | null) => void, SingleOrderItem: any }) {
   return (
-    <div className='w-full lg:w-[55vw] max-w-[860px] bg-white rounded-md h-[65vh]  max-h-[540px] overflow-hidden'>
+    <div className='w-full lg:w-[55vw] max-w-[860px] bg-white rounded-md h-[65vh]  max-h-[540px] overflow-hidden z-50'>
       <div className='grid w-full h-full overflow-y-hidden grid-col-1 lg:grid-cols-5'>
 
         <div className='flex items-center justify-center w-full h-full col-span-2 p-8 bg-gray-100'>
@@ -50,19 +50,19 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
         </div>
 
 
-        <div className='col-span-3 px-5 py-8 '>
+        <div className='col-span-3 px-5 py-8 overflow-y-scroll'>
 
           <div className='relative flex flex-col items-center justify-center my-4 gap-y-3'>
             <img
               src='/assets/order_det.png'
               alt="illustration_png"
             />
-            <p className='text-xl font-medium text-gray-500'>Order Items</p>
+            <p className='mb-10 text-xl font-medium text-gray-500'>Order Items</p>
             <CloseRounded onClick={() => setOrderId(null)} className='absolute top-0 right-0 text-black cursor-pointer fill-black ' />
 
           </div>
 
-          <div className='overflow-y-scroll pr-1  h-3/5 max-h-[360px] '>
+          <div className='pr-1'>
 
             {SingleOrderItem?.menu_items?.map((item: any, index: number) => {
               return (
@@ -83,24 +83,6 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
 
 const OrderItemComp = ({ item }: any) => {
 
-  //   name
-  // : 
-  // "Semo"
-  // quantity
-  // : 
-  // 1
-  // selectedOptions
-  // : 
-  // []
-  // specialInstructions
-  // : 
-  // "another special"
-  // tableNumber
-  // : 
-  // ""
-  // totalPrice
-  // : 
-  // 800
   const { name, quantity, selectedOptions, specialInstructions } = item;
 
   console.log("selectedOptions", selectedOptions)
