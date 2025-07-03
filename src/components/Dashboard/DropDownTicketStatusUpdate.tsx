@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 // export const DropdownMenuTicketStatusUpdate = ({}: {}) => {
-export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets }: { branchId: any, orderId: any, getTickets: any }) => {
+export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, setOrderId }: { branchId: any, orderId: any, getTickets: any, setOrderId?: any }) => {
 
   const userDetails = useSelector((state: any) => state.user);
   const token = userDetails?.userData?.token;
@@ -45,6 +45,12 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets }
 
   return (
     <ul className="w-[200px] shadow grid gap-[18px] dropdown-menu absolute bg-white p-[12px] text-black right-[25px] top-[40px] z-10">
+      <li
+        onClick={() => setOrderId && setOrderId(orderId)}
+        className="font-[400] cursor-pointer text-left"
+      >
+        View Order
+      </li>
       <li
         onClick={() => updateOrderStatus("completed")}
         className="font-[400] cursor-pointer text-left"
