@@ -88,6 +88,7 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
                     onClose={handleMenuClose}
                   >
                     <MenuItem onClick={handleEditClick}>Edit</MenuItem>
+                    <MenuItem onClick={() => { }}>Delete</MenuItem>
                   </Menu>
                 </td>
               </tr>
