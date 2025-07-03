@@ -47,7 +47,7 @@ const Tickets = () => {
     if (orderId) {
 
       const order = orderData?.find((order: any) => order._id === orderId);
-      // console.log("Order:", order);
+      console.log("Order:", order);
       setSingleOrderItem(order)
 
       setOrderModal(true);
