@@ -142,8 +142,8 @@ const MenuTab: React.FC = () => {
               <button
                 key={menu.name}
                 className={`pb-[8px] ${selectedGroup === menu.name
-                    ? "border-b-[4px] border-b-[#E16B07] text-[#121212] text-[16px] flex items-center justify-center font-[500]"
-                    : "text-grey100 font-[400]"
+                  ? "border-b-[4px] border-b-[#E16B07] text-[#121212] text-[16px] flex items-center justify-center font-[500]"
+                  : "text-grey100 font-[400]"
                   }`}
                 onClick={() => setSelectedGroup(menu.name)}
               >
@@ -231,7 +231,7 @@ const MenuTab: React.FC = () => {
 
                 {price && name && (
                   <div
-                    className={`${loading ? "bg-[#B6B6B6] " : "bg-purple500"
+                    className={`${loading ? "bg-[#B6B6B6] " : "bg-black"
                       } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded cursor-pointer`}
                   >
                     <p>Save Table</p>

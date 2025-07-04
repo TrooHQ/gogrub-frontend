@@ -21,14 +21,14 @@ const PayoutDetails: React.FC = () => {
       </div>
       <div className=" flex items-center justify-end gap-[10px] mt-4  ">
         <button
-          className="border-2 border-purple500 rounded px-6 py-3 font-semibold text-gray-500 "
+          className="border-2 border-black rounded px-6 py-3 font-semibold text-gray-500 "
           onClick={() => navigate(-1)}
         >
           Back
         </button>
         <Link to="/overview">
           {" "}
-          <button className=" border-2 border-purple500 bg-purple500 rounded px-6 py-3 font-semibold text-white">
+          <button className=" border-2 border-black bg-black rounded px-6 py-3 font-semibold text-white">
             Save and continue
           </button>
         </Link>

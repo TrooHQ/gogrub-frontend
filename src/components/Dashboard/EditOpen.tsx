@@ -46,7 +46,7 @@ const EditOpen = ({ setIsEditOpen }: any) => {
                   value="yes"
                 // checked={applyPriceToAll === true}
                 // onChange={handleOptionChange}
-                // className={`mr-2 ${applyPriceToAll === true ? "bg-purple500" : ""}`}
+                // className={`mr-2 ${applyPriceToAll === true ? "bg-black" : ""}`}
                 />
                 <label
                   htmlFor="yes"
@@ -62,7 +62,7 @@ const EditOpen = ({ setIsEditOpen }: any) => {
                   value="no"
                 // checked={applyPriceToAll === false}
                 // onChange={handleOptionChange}
-                // className={`mr-2 ${applyPriceToAll === false ? "bg-purple500" : ""}`}
+                // className={`mr-2 ${applyPriceToAll === false ? "bg-black" : ""}`}
                 />
                 <label
                   htmlFor="no"
@@ -119,7 +119,7 @@ const EditOpen = ({ setIsEditOpen }: any) => {
 
         <div className=" flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
           <div
-            className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
+            className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
             onClick={() => setIsEditOpen(false)}
           >
             <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -129,7 +129,7 @@ const EditOpen = ({ setIsEditOpen }: any) => {
           </div>
 
           <div
-            className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
+            className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
           // onClick={handleSaveMenuGroup}
           >
             <button className=" text-[16px]">{"Save Menu"}</button>

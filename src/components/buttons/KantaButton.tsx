@@ -15,7 +15,7 @@ const KantaButton: React.FC<ButtonProps> = ({ text, link, buttonType = "button",
         <Link to={link}>
           <button
             type={buttonType}
-            className="bg-purple500 text-center text-white py-3 rounded px-2"
+            className="bg-black text-center text-white py-3 rounded px-2"
             onClick={onClick}
           >
             {text}
@@ -24,7 +24,7 @@ const KantaButton: React.FC<ButtonProps> = ({ text, link, buttonType = "button",
       ) : (
         <button
           type={buttonType}
-          className="bg-purple500 text-center text-white py-3 px-4 rounded"
+          className="bg-black text-center text-white py-3 px-4 rounded"
           onClick={onClick}
         >
           {text}

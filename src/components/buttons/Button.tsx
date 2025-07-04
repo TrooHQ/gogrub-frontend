@@ -11,12 +11,12 @@ const Button: React.FC<ButtonProps> = ({ text, link }) => {
     <div>
       {link ? (
         <Link to={link}>
-          <button className="bg-purple500 w-full text-center text-white py-3 rounded">
+          <button className="bg-black w-full text-center text-white py-3 rounded">
             {text}
           </button>
         </Link>
       ) : (
-        <button className="bg-purple500 w-full text-center text-white py-3 rounded">
+        <button className="bg-black w-full text-center text-white py-3 rounded">
           {text}
         </button>
       )}

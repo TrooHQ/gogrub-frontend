@@ -424,7 +424,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                 </p>
               </div>
               <button
-                className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+                className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
                 onClick={() => IntiatePayment()}
                 disabled={loading}
               >

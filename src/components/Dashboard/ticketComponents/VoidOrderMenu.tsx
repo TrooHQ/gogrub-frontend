@@ -27,13 +27,13 @@ const VoidOrderMenu = ({
               </p>
               <div className="flex items-center justify-center gap-4 mt-5">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
+                  className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setVoidOrderMenu(false)}
                 >
                   <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">No</p>
                 </div>
 
-                <div className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
+                <div className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
                   <button onClick={() => handleVoidOrder()} className=" text-[16px]">
                     Yes
                   </button>

@@ -112,7 +112,7 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
             >
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 text-white rounded-md bg-purple500">
+            <button type="submit" className="px-4 py-2 text-white rounded-md bg-black">
               Save
             </button>
           </div>

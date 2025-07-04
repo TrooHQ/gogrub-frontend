@@ -188,7 +188,7 @@ const TableList = () => {
 
           <div className=" flex items-center justify-end my-[28px]">
             <div
-              className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] inline"
+              className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] inline"
               onClick={handleAddModifier}
             >
               <button className=" text-[16px]">Save As</button>
@@ -319,7 +319,7 @@ const TableList = () => {
 
               <div className=" flex justify-end items-center  gap-2">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
+                  className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setAddModifierModal(false)}
                 >
                   <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -329,7 +329,7 @@ const TableList = () => {
                 </div>
 
                 <Link to="/manage-assets">
-                  <div className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
+                  <div className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
                     <button className=" text-[16px]">Save</button>
                   </div>
                 </Link>

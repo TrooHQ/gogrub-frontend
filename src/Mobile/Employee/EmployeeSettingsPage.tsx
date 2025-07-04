@@ -136,7 +136,7 @@ const EmployeeSettingsPage = () => {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="bg-purple500 w-full text-center text-white py-3 rounded mt-[32px]"
+                  className="bg-black w-full text-center text-white py-3 rounded mt-[32px]"
                 >
                   Save
                 </button>

@@ -266,7 +266,7 @@ const ManageUsers: React.FC = () => {
                 </p>
               ))}
             </div>
-            <div className="border-2 border-purple500 bg-purple500 rounded px-[16px] py-[8px] font-[500] text-[14px] text-[#ffffff]">
+            <div className="border-2 border-black bg-black rounded px-[16px] py-[8px] font-[500] text-[14px] text-[#ffffff]">
               <Link to={`${activeTab === 0 && "/new-roles"}`}>
                 <button
                   className=""
@@ -363,7 +363,7 @@ const ManageUsers: React.FC = () => {
               <hr className="border border-grey100" />
               <div className="flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+                  className="border cursor-pointer border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
                   onClick={() => setIsModalOpen(false)}
                 >
                   <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -372,7 +372,7 @@ const ManageUsers: React.FC = () => {
                 </div>
 
                 <div
-                  className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+                  className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
                   onClick={handleSendInvite}
                 >
                   <button className="text-[16px]">
@@ -396,7 +396,7 @@ const ManageUsers: React.FC = () => {
                 </p>
                 <div className="flex items-center justify-center gap-4 mt-5">
                   <div
-                    className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+                    className="border cursor-pointer border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
                     onClick={() => setIsModalOpen2(false)}
                   >
                     <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -500,7 +500,7 @@ const ManageUsers: React.FC = () => {
                 <hr className="border border-grey100" />
                 <div className="flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
                   <div
-                    className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+                    className="border cursor-pointer border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
                     onClick={() => setIsModalOpen3(false)}
                   >
                     <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -509,7 +509,7 @@ const ManageUsers: React.FC = () => {
                   </div>
 
                   <div
-                    className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+                    className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
                     onClick={handleEditUser}
                   >
                     <button className="text-[16px]">

@@ -423,7 +423,7 @@ const MenuList = () => {
             <div className="flex items-center justify-between">
               <button
                 onClick={handleBackToBranches}
-                className="border border-purple500 text-gray-500 rounded-[6px] px-2 py-2 flex items-center"
+                className="border border-black text-gray-500 rounded-[6px] px-2 py-2 flex items-center"
               >
                 {" "}
                 <ArrowBack />

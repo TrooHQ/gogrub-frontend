@@ -458,7 +458,7 @@ const Modifiers = ({
             <hr className=" border-[#B6B6B6] mt-3" />
             <div className="flex items-center justify-end py-[16px]">
               <div
-                className="cursor-pointer inline border mb-5 border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
+                className="cursor-pointer inline border mb-5 border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
                 onClick={saveModifiers}
               >
                 <button className=" text-[16px]">Save Modifier</button>
@@ -496,7 +496,7 @@ const Modifiers = ({
                 Are you sure you want to save the modifier(s)?
               </p>
               <div
-                className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+                className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
                 onClick={handleConfirmSave}
               >
                 <button className="text-[16px]">

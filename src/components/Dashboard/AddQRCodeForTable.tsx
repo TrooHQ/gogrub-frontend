@@ -82,14 +82,14 @@ const AddQRCodeForTable: React.FC<AddQRCodeProps> = ({
 
             <div className="flex justify-end items-center gap-2 mt-7">
               <button
-                className="border border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+                className="border border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
                 onClick={onClose}
               >
                 Cancel
               </button>
 
               <button
-                className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-white"
+                className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-white"
                 onClick={handleNext}
               >
                 Next
@@ -147,14 +147,14 @@ const AddQRCodeForTable: React.FC<AddQRCodeProps> = ({
 
             <div className="flex justify-end items-center gap-2 mt-7">
               <button
-                className="border border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+                className="border border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
                 onClick={handleBack}
               >
                 Back
               </button>
 
               <button
-                className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-white"
+                className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-white"
                 onClick={handleCreateAsset}
                 disabled={loading}
               >

@@ -20,7 +20,7 @@ const Organize = () => {
 
       <div className=" md:my-[59px] flex flex-col justify-center items-center md:items-start md:grid md:grid-cols-5 gap-[16px] md:mx-[40px] 2xl:mx-[158px]">
         <Link to="/pos" data-aos="fade-up">
-          <div className=" w-[224px]  max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-purple500 group duration-300">
+          <div className=" w-[224px]  max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-black group duration-300">
             <img
               src={POS}
               alt=""
@@ -38,7 +38,7 @@ const Organize = () => {
           </div>
         </Link>
         <Link to="/kds" data-aos="fade-up">
-          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-purple500 group duration-300">
+          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-black group duration-300">
             <img
               src={KDS}
               alt=""
@@ -57,7 +57,7 @@ const Organize = () => {
         </Link>
 
         <Link to="/table-ordering" data-aos="fade-up">
-          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-purple500 group duration-300">
+          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-black group duration-300">
             <img
               src={TableOrdering}
               alt=""
@@ -75,7 +75,7 @@ const Organize = () => {
           </div>
         </Link>
         <Link to="/digital-ordering" data-aos="fade-up">
-          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-purple500 group duration-300">
+          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-black group duration-300">
             <img
               src={DigitalOrdering}
               alt=""
@@ -94,7 +94,7 @@ const Organize = () => {
         </Link>
 
         <Link to="/payment" data-aos="fade-up">
-          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-purple500 group duration-300">
+          <div className=" w-[224px] max-h-[416px] bg-[#EEEEF7] rounded-[5px] overflow-hidden hover:bg-black group duration-300">
             <img
               src={Payment}
               alt=""

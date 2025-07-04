@@ -113,7 +113,7 @@ const Login = () => {
             </Link>
           </div>
           <div className="" onClick={handleLogin}>
-            <button className="w-full py-3 text-center text-white rounded bg-purple500">
+            <button className="w-full py-3 text-center text-white rounded bg-black">
               {loading ? "Please wait..." : "Login"}
             </button>
           </div>

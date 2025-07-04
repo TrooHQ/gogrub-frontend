@@ -30,13 +30,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         <DialogActions className="flex items-center justify-center gap-4 mt-0 !pb-[32px]">
           <button
             onClick={onClose}
-            className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+            className="border cursor-pointer border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
           >
             No
           </button>
           <button
             onClick={onConfirm}
-            className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+            className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
             disabled={isLoading}
           >
             {isLoading ? "Loading..." : "Yes"}

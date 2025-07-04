@@ -13,7 +13,7 @@ import HomeIcon from "../../assets/troo-logo-white.png";
 // import ManageUsersIcon from "../../assets/manageUsers.svg";
 // import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
-import ArrowToggle from "../../assets/arrowToggle.svg";
+// import ArrowToggle from "../../assets/arrowToggle.svg";
 // import { TextField, Button, Popper, Paper } from "@mui/material";
 import {
   ArrowCircleRightOutlined,
@@ -38,6 +38,7 @@ import { RiErrorWarningLine } from "react-icons/ri";
 import { fetchAccountDetails } from "../../slices/businessSlice";
 import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
 import { FiLoader } from "react-icons/fi";
+import { RxCaretUp } from "react-icons/rx";
 // import { fetchAccountDetails } from "@/src/slices/businessSlice";
 
 interface MenuItem {
@@ -398,16 +399,22 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                   </span>
                 </NavLink>
                 {menu.subMenu && (
-                  <img
-                    src={ArrowToggle}
-                    alt=""
-                    className={`text-[#606060] absolute right-[10px]  transition-transform ${openSubmenuIndex === index ? "rotate-180" : ""
-                      }`}
+                  <RxCaretUp className={`text-[#606060] absolute right-[10px]  transition-transform ${openSubmenuIndex === index ? "" : "rotate-180"}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleSubmenuToggle(index);
                     }}
                   />
+                  // <img
+                  //   src={ArrowToggle}
+                  //   alt=""
+                  // className={`text-[#606060] absolute right-[10px]  transition-transform ${openSubmenuIndex === index ? "rotate-180" : ""
+                  //   }`}
+                  // onClick={(e) => {
+                  //   e.stopPropagation();
+                  //   handleSubmenuToggle(index);
+                  // }}
+                  // />
                 )}
               </div>
               <div className="">

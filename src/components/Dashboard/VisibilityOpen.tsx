@@ -32,7 +32,7 @@ const VisibilityOpen = ({ setIsVisibilityOpen }: any) => {
             <input
               type="checkbox"
               id={rule.key}
-              className="h-6 w-6 border-[#87878780] checked:bg-purple500"
+              className="h-6 w-6 border-[#87878780] checked:bg-black"
               style={{ accentColor: "#5955b2" }}
               checked={modifierRules[rule.key] || false}
               onChange={() => handleRuleChange(rule.key)}
@@ -46,14 +46,14 @@ const VisibilityOpen = ({ setIsVisibilityOpen }: any) => {
 
       <div className="flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
         <div
-          className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+          className="border cursor-pointer border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
           onClick={() => setIsVisibilityOpen(false)}
         >
           <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">Cancel</p>
         </div>
 
         <div
-          className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+          className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
           onClick={() => {
             // Handle the save functionality here
             setIsVisibilityOpen(false);

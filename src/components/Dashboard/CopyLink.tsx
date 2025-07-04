@@ -42,7 +42,7 @@ const CopyLink: React.FC<CopyLinkProps> = ({ linkType, businessId, outletId }) =
     <div
       className="flex items-center cursor-pointer"
       onClick={handleClick}
-      style={{ color: copySuccess ? "#5855B3" : "black" }} // purple500 color code
+      style={{ color: copySuccess ? "#5855B3" : "black" }} // black color code
     >
       <IconButton style={{ color: copySuccess ? "#5855B3" : "black" }}>
         <LinkIcon />

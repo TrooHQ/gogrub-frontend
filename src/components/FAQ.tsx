@@ -105,7 +105,7 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                           htmlFor="soleTrader"
                           className={`flex flex-col items-center px-4 py-3 rounded cursor-pointer ${checkedLegalType ===
                             "Sole trader/Private Individual"
-                            ? "bg-purple500 text-white"
+                            ? "bg-black text-white"
                             : "bg-[#E7E7E7] text-grey500"
                             }`}
                         >
@@ -131,7 +131,7 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
                         <label
                           htmlFor="otherLegalType"
                           className={`flex flex-col items-center px-4 py-3 rounded cursor-pointer ${checkedLegalType === "Other legal type"
-                            ? "bg-purple500 text-white"
+                            ? "bg-black text-white"
                             : "bg-[#E7E7E7] text-grey500"
                             }`}
                         >

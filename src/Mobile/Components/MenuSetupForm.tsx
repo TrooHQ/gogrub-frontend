@@ -817,7 +817,7 @@ const MenuSetupForm: React.FC<Props> = () => {
           <div className=" grid py-[32px] gap-[8px]">
             {hasMenu === false && (
               <div
-                className={`${menuData?.length > 0 ? " bg-purple500" : "bg-[#B6B6B6]"
+                className={`${menuData?.length > 0 ? " bg-black" : "bg-[#B6B6B6]"
                   } text-[16px] font-[500] text-[#ffffff] border w-full text-center py-3 rounded`}
               >
                 {menuData?.length > 0 ? (
@@ -941,7 +941,7 @@ const MenuSetupForm: React.FC<Props> = () => {
               </div>
             </div>
             {base64String && menuCategory && (
-              <div className="border border-purple500 cursor-pointer text-center bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff] mt-[72px]">
+              <div className="border border-black cursor-pointer text-center bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff] mt-[72px]">
                 <button
                   className="text-[16px]"
                   type="submit"
@@ -1090,7 +1090,7 @@ const MenuSetupForm: React.FC<Props> = () => {
               )}
             </div>
             <div
-              className="border border-purple500 cursor-pointer text-center bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff] "
+              className="border border-black cursor-pointer text-center bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff] "
               onClick={createGroup}
             >
               <button className="text-[16px]" type="submit" disabled={loading}>
@@ -1176,7 +1176,7 @@ const MenuSetupForm: React.FC<Props> = () => {
             </div>
             {!loading && (
               <div
-                className="border border-purple500 cursor-pointer text-center bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[34px]"
+                className="border border-black cursor-pointer text-center bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[34px]"
                 onClick={createItem}
               >
                 <button className=" text-[16px] ">Save</button>
@@ -1214,7 +1214,7 @@ const MenuSetupForm: React.FC<Props> = () => {
 
             {!loading && (
               <div
-                className="border border-purple500 cursor-pointer text-center bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[34px]"
+                className="border border-black cursor-pointer text-center bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[34px]"
                 onClick={createModifierGroup}
               >
                 <button className=" text-[16px] ">Save</button>
@@ -1290,7 +1290,7 @@ const MenuSetupForm: React.FC<Props> = () => {
             </div>
             {base64String && (
               <div
-                className="border border-purple500 cursor-pointer text-center bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[34px]"
+                className="border border-black cursor-pointer text-center bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff] mt-[34px]"
                 onClick={createModifier}
               >
                 <button className=" text-[16px] ">Save</button>

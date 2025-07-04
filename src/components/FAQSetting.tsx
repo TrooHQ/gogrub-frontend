@@ -57,7 +57,7 @@ const FAQSetting: React.FC<FAQProps> = ({
       {faqData.map((faq, index) => (
         <div
           key={index}
-          className={`bg-purple500 border  border-purple500 focus:outline-[#121212] w-full rounded `}
+          className={`bg-black border  border-black focus:outline-[#121212] w-full rounded `}
         >
           <div
             className="flex items-center justify-between cursor-pointer font-bold py-[12px] px-[12px]"
@@ -187,8 +187,8 @@ const FAQSetting: React.FC<FAQProps> = ({
                               src={ArrowToggle2}
                               alt=""
                               className={`transform transition-transform duration-300 ${openIndexInner === innerIndex
-                                  ? "rotate-180"
-                                  : ""
+                                ? "rotate-180"
+                                : ""
                                 }`}
                             />
                           </div>
@@ -529,7 +529,7 @@ const FAQSetting: React.FC<FAQProps> = ({
       ))}
 
       <div className=" flex justify-end items-center gap-2">
-        <div className="border border-purple500 rounded px-[24px] py-[13px] font-[600] text-gray-500">
+        <div className="border border-black rounded px-[24px] py-[13px] font-[600] text-gray-500">
           <div onClick={() => navigate(-1)}>
             <p className=" font-[500] text-[16px] text-gray-500 cursor-pointer">
               Cancel
@@ -537,7 +537,7 @@ const FAQSetting: React.FC<FAQProps> = ({
           </div>
         </div>
 
-        <div className="border border-purple500 bg-purple500 rounded px-[24px] py-[13px] font-[500] text-[#ffffff]">
+        <div className="border border-black bg-black rounded px-[24px] py-[13px] font-[500] text-[#ffffff]">
           <Link to="/">
             <button className=" text-[16px]">Save and continue</button>
           </Link>
