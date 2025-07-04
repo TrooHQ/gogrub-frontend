@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CheckMail = () => {
   return (
-    <div className="bg-[#EFEFEF] h-screen">
+    <div className="bg-[#EFEFEF] h-screen px-2">
       <div className="flex flex-col items-center justify-center h-screen my-auto">
         <div className="">
           <img src={Logo} alt="" />

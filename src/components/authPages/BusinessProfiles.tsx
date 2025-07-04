@@ -130,13 +130,13 @@ const BusinessProfiles: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#fff] h-screen flex flex-col items-center justify-center">
+    <div className="bg-[#fff] lg:h-screen min-h-screen flex flex-col items-center justify-center px-2">
       {!isFromGoGrub ? (
         <img src={Logo} alt="Logo" className="mb-8" />
       ) : (
         <img src={GoGrubLogo} alt="Logo" className="mb-8" />
       )}
-      <div className="bg-white py-10 px-8 w-full md:w-3/5 rounded shadow-md h-[85vh] overflow-y-auto border-[1.5px] border-[#121212]">
+      <div className="bg-white py-10 px-8 w-full md:w-3/5 rounded shadow-md lg:h-[85vh] lg:overflow-y-auto border-[1.5px] border-[#121212]">
         {renderStepProgress()}
         <p className="mb-2 text-2xl font-medium text-text-gray-800">
           {stepTitles[currentStep]}
@@ -144,7 +144,7 @@ const BusinessProfiles: React.FC = () => {
         <p className="mb-8 text-gray-600">{stepDescriptions[currentStep]}</p>
         {renderStepContent()}
       </div>
-      <div className="flex justify-end w-full mt-4 md:w-3/5">
+      <div className="flex justify-end w-full mt-4 mb-2 md:w-3/5">
         {currentStep > 0 ? (
           <button
             onClick={handleBack}
@@ -166,7 +166,7 @@ const BusinessProfiles: React.FC = () => {
         {currentStep < stepTitles.length - 1 ? (
           <button
             onClick={handleNext}
-            className="px-6 py-3 ml-auto font-semibold text-white border-2 rounded border-text-gray-800 bg-text-gray-800"
+            className="px-6 py-3 ml-auto font-semibold text-white bg-gray-800 border-2 border-gray-800 rounded"
             disabled={!isStepValid || loading}
           >
             {loading

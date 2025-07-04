@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NotFound from "./Mobile/NotFound";
+// import NotFound from "./Mobile/NotFound";
 import Login from "./Mobile/authPages/Login";
 // import RegistrationStepForm from "./Mobile/Components/RegistrationStepForm";
 import MenuSetupForm from "./Mobile/Components/MenuSetupForm";
@@ -28,7 +28,10 @@ import { SelectPayment } from "./Mobile/Customers/SelectPayment";
 import { Receipt } from "./Mobile/Customers/Receipt";
 import { GetReceipt } from "./Mobile/Customers/GetReceipt";
 import VerifyAccount from "./Mobile/Components/VerifyAccount";
-import ForgotPassword from "./Mobile/authPages/ForgotPassword";
+// import ForgotPassword from "./Mobile/authPages/ForgotPassword";
+import ForgotPassword from "./components/authPages/ForgotPassword";
+import ResetPassword from "./components/authPages/ResetPassword.tsx";
+import CheckMail from "./components/authPages/CheckMail.tsx";
 import VerifyAccount2 from "./Mobile/Components/VerifyAccount2";
 import { CategoryDetails } from "./Mobile/Customers/CategoryDetails";
 import { AdminMenuPage } from "./Mobile/Components/AdminMenuPage";
@@ -167,6 +170,9 @@ const MobileLayout = () => {
             path="/demo/forgot-password/gogrub-portal"
             element={<ForgotPassword />}
           />
+          <Route path="/checkmail" element={<CheckMail />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          {/* <Route path="/password-changed" element={<PasswordChanged />} /> */}
           {/* <Route path="/demo/dashboard/gogrub-portal" element={<Dashboard />} /> */}
           <Route path="/demo/dashboard/gogrub-portal" element={<MobileNoticeLayout />} />
 
@@ -244,7 +250,8 @@ const MobileLayout = () => {
           />
           <Route path="/demo/room/gogrub-portal" element={<RoomSetupForm />} />
 
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<MobileNoticeLayout />} />
         </Routes>
       </Router>
     </div>
