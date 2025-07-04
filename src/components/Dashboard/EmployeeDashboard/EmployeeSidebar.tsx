@@ -151,10 +151,10 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
       <div
         className={`p-2 w-[253px] h-full fixed overflow-y-auto left-0 top-0 duration-300`}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        // className={` p-2 w-[253px] h-full fixed no-scrollbar overflow-y-auto left-0 top-0  pt-8 duration-300 `}
-        // ${
-        //   open ? "w-full" : "w-20"
-        // }
+      // className={` p-2 w-[253px] h-full fixed no-scrollbar overflow-y-auto left-0 top-0  pt-8 duration-300 `}
+      // ${
+      //   open ? "w-full" : "w-20"
+      // }
       >
         {/* <img
           src="./src/assets/Arrow2.png"
@@ -169,8 +169,8 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
               alt="logo"
               src={Logo}
               className={`cursor-pointer duration-500  `}
-              // ${
-              //   open && "rotate-[360deg]"}
+            // ${
+            //   open && "rotate-[360deg]"}
             />
           </div>
           <div className="flex gap-x-4 items-center justify-center">
@@ -178,9 +178,9 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
               alt="logo"
               src={RestaurantLogo}
               className={`cursor-pointer duration-500`}
-              // ${
-              //   open && "rotate-[360deg]"
-              // }
+            // ${
+            //   open && "rotate-[360deg]"
+            // }
             />
           </div>
         </div>
@@ -195,7 +195,7 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
                       menu.title && " px-[14px] cursor-pointer py-[8px]  "
                     }  ${
                       menu.subTitle && "text-[12px]"
-                    } text-purple200  items-center gap-x-2
+                    } text-gray-400  items-center gap-x-2
             ${menu.gap ? " mt-28" : ""} ${menu.Subgap && "my-5"} ${
                       isMenuItemActive(menu.link || "")
                         ? "  bg-selectedState font-[600] text-[16px] text-white "
@@ -242,7 +242,7 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
                           <NavLink to={subMenuItem.link || "#"}>
                             <li
                               key={subIndex}
-                              className={`flex  p-2 cursor-pointer py-2 hover:bg-purple700  text-purple200 text-sm items-center gap-x-4 ${
+                              className={`flex  p-2 cursor-pointer py-2 hover:bg-purple700  text-gray-400 text-sm items-center gap-x-4 ${
                                 isMenuItemActive(subMenuItem.link || "")
                                   ? "text-white"
                                   : ""
@@ -264,19 +264,16 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
               <NavLink to={menu.link || "#"}>
                 <li>
                   <p
-                    className={`flex relative ${
-                      menu.title && " px-[14px] cursor-pointer py-[8px]  "
-                    }  ${
-                      menu.subTitle && "text-[12px]"
-                    } text-purple200  items-center gap-x-2
-            ${menu.gap ? " mt-28" : ""} ${menu.Subgap && "my-5"} ${
-                      isMenuItemActive(menu.link || "", menu.subMenu)
+                    className={`flex relative ${menu.title && " px-[14px] cursor-pointer py-[8px]  "
+                      }  ${menu.subTitle && "text-[12px]"
+                      } text-gray-400  items-center gap-x-2
+            ${menu.gap ? " mt-28" : ""} ${menu.Subgap && "my-5"} ${isMenuItemActive(menu.link || "", menu.subMenu)
                         ? "  bg-selectedState font-[600] text-[16px] text-white "
                         : !isMenuItemActive(menu.link || "", menu.subMenu) &&
                           !menu.subTitle
-                        ? " hover:bg-[#504EA3] "
-                        : ""
-                    }`}
+                          ? " hover:bg-[#504EA3] "
+                          : ""
+                      }`}
                     onClick={() => menu.subMenu && handleSubmenuToggle(index)}
                   >
                     {menu.title && (
@@ -287,9 +284,8 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
                       />
                     )}
                     <span
-                      className={`${
-                        !open && "hidden"
-                      } origin-left duration-200 `}
+                      className={`${!open && "hidden"
+                        } origin-left duration-200 `}
                     >
                       {menu.title}
                       {menu.subTitle}
@@ -298,9 +294,8 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
                       <img
                         src={ArrowToggle}
                         alt=""
-                        className={`text-white absolute right-[10px]  transition-transform ${
-                          openSubmenuIndex === index ? "rotate-180" : ""
-                        }`}
+                        className={`text-white absolute right-[10px]  transition-transform ${openSubmenuIndex === index ? "rotate-180" : ""
+                          }`}
                       />
                     )}
                   </p>
@@ -313,11 +308,10 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
                           <NavLink to={subMenuItem.link || "#"}>
                             <li
                               key={subIndex}
-                              className={`flex  p-2 cursor-pointer py-2 hover:bg-purple700  text-purple200 text-sm items-center gap-x-4 ${
-                                isMenuItemActive(subMenuItem.link || "")
+                              className={`flex  p-2 cursor-pointer py-2 hover:bg-purple700  text-gray-400 text-sm items-center gap-x-4 ${isMenuItemActive(subMenuItem.link || "")
                                   ? "text-white"
                                   : ""
-                              }`}
+                                }`}
                             >
                               {subMenuItem.title}
                             </li>

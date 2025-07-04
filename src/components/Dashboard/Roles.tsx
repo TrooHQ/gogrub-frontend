@@ -92,7 +92,7 @@ const Roles = () => {
                     }
                     // You can add handlers for "Edit" and "Delete" actions here if needed
                   }}
-                  className={`px-3 py-2 ${action === "Delete" ? "text-[#B61C1C]" : "text-purple500"
+                  className={`px-3 py-2 ${action === "Delete" ? "text-[#B61C1C]" : "text-gray-500"
                     } ${index > 0 ? "border-l border-grey200" : ""}`}
                 >
                   {saveLoading && action === "Clone" ? "Loading..." : action}

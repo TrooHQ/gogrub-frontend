@@ -409,14 +409,14 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[372px]">
           <div className="text-center ">
-            <p className="text-[24px] font-[500] text-purple500">Payment</p>
+            <p className="text-[24px] font-[500] text-gray-500">Payment</p>
             <p className="text-[16px] font-[400] text-grey500">
               Make payment to selected plan
             </p>
 
             <div className="flex items-center justify-center gap-4 mt-[50px] ">
               <div
-                className="border cursor-pointer border-[#FF4F00] rounded px-[24px] py-[10px] font-[600] text-purple500"
+                className="border cursor-pointer border-[#FF4F00] rounded px-[24px] py-[10px] font-[600] text-gray-500"
                 onClick={() => setIsOpen(false)}
               >
                 <p className="font-[500] text-[16px] text-[#FF4F00] cursor-pointer">

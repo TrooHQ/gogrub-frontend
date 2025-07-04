@@ -229,16 +229,15 @@ const RolesAndPermission: React.FC<RolesAndPermissionProps> = ({
             onClick={() => toggleAnswer(index)}
             className="flex items-center justify-between cursor-pointer font-bold py-[12px] px-[12px]"
           >
-            <p className="text-purple500 font-[500] text-[14px] lg:text-[16px]">
+            <p className="text-gray-500 font-[500] text-[14px] lg:text-[16px]">
               {faq.question}
             </p>
             <div className="flex items-center">
               <img
                 src={ArrowToggle2}
                 alt=""
-                className={`transform transition-transform duration-300 ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
+                className={`transform transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                  }`}
               />
             </div>
           </div>
@@ -248,7 +247,7 @@ const RolesAndPermission: React.FC<RolesAndPermissionProps> = ({
                 <div className="flex flex-col">
                   <Tooltip title="Level 1 users have the highest access across the system. They can manage all aspects of the business, including menus, branches, tickets, and user permissions across all locations.">
                     <div className="flex items-start space-x-2 p-4 bg-white border border-gray-200 rounded-md shadow-sm">
-                      <div className="text-purple500">
+                      <div className="text-gray-500">
                         <InfoOutlined className="cursor-pointer text-2xl" />
                       </div>
                       <div className="text-gray-700">
@@ -290,7 +289,7 @@ const RolesAndPermission: React.FC<RolesAndPermissionProps> = ({
                 <div className="flex flex-col">
                   <Tooltip title="Level 2 users manage their specific branch. They can handle menus, tickets, QR codes, and user roles within their branch, but cannot oversee other branches.">
                     <div className="flex items-start space-x-2 p-4 bg-white border border-gray-200 rounded-md shadow-sm">
-                      <div className="text-purple500">
+                      <div className="text-gray-500">
                         <InfoOutlined className="cursor-pointer text-2xl" />
                       </div>
                       <div className="text-gray-700">
@@ -335,7 +334,7 @@ const RolesAndPermission: React.FC<RolesAndPermissionProps> = ({
                 <div className="flex flex-col">
                   <Tooltip title="Level 3 users have limited access, focusing on daily tasks such as handling tickets, tips, and orders. Their permissions are restricted to specific apps like Troo Till and Troo Waiter.">
                     <div className="flex items-start space-x-2 p-4 bg-white border border-gray-200 rounded-md shadow-sm">
-                      <div className="text-purple500">
+                      <div className="text-gray-500">
                         <InfoOutlined className="cursor-pointer text-2xl" />
                       </div>
                       <div className="text-gray-700">
@@ -346,11 +345,11 @@ const RolesAndPermission: React.FC<RolesAndPermissionProps> = ({
                           Level 3 users have limited access, focusing on daily
                           tasks such as handling tickets, tips, and orders.
                           Their permissions are restricted to specific apps like{" "}
-                          <span className="font-bold text-purple500">
+                          <span className="font-bold text-gray-500">
                             Troo Till
                           </span>{" "}
                           and{" "}
-                          <span className="font-bold text-purple500">
+                          <span className="font-bold text-gray-500">
                             Troo Waiter
                           </span>
                           .
@@ -386,7 +385,7 @@ const RolesAndPermission: React.FC<RolesAndPermissionProps> = ({
       ))}
 
       {/* <div className="flex items-center justify-between">
-        <p className="text-[24px] font-[500] text-purple500">Module setting</p>
+        <p className="text-[24px] font-[500] text-gray-500">Module setting</p>
         <FormControlLabel
           control={
             <Checkbox

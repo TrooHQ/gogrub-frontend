@@ -12,17 +12,17 @@ const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm }: any) => {
           <img src={Close} alt="Close" />
         </div>
         <div className="flex flex-col justify-center items-center gap-6">
-          <p className="text-[24px] font-[500] text-purple500">Delete User</p>
+          <p className="text-[24px] font-[500] text-gray-500">Delete User</p>
           <div>
             <p className="text-[16px] font-[400] text-grey500">
               Are you sure you want to delete this user?
             </p>
             <div className="flex items-center justify-center gap-4 mt-5">
               <div
-                className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+                className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
                 onClick={onClose}
               >
-                <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+                <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
                   No
                 </p>
               </div>

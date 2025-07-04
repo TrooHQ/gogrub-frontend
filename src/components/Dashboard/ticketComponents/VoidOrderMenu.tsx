@@ -19,7 +19,7 @@ const VoidOrderMenu = ({
             <img src={Close} alt="" className=" " />
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
-            <p className="text-[24px] font-[500] text-purple500">Void Order</p>
+            <p className="text-[24px] font-[500] text-gray-500">Void Order</p>
 
             <div>
               <p className="text-[16px] font-[400] text-grey500">
@@ -27,10 +27,10 @@ const VoidOrderMenu = ({
               </p>
               <div className="flex items-center justify-center gap-4 mt-5">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-purple500"
+                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setVoidOrderMenu(false)}
                 >
-                  <p className="font-[500] text-[16px] text-purple500 cursor-pointer">No</p>
+                  <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">No</p>
                 </div>
 
                 <div className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">

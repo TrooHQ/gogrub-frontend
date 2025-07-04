@@ -18,7 +18,7 @@ const MenuHome = () => {
                   <img src={Print} alt="" /> Print menu list
                 </button>
               </div>
-              <div className="rounded-[5px] px-[24px] py-[10px] font-[500] text-purple500">
+              <div className="rounded-[5px] px-[24px] py-[10px] font-[500] text-gray-500">
                 <button className="text-[14px] flex items-center gap-[8px]">
                   <img src={Publish} alt="" /> Publish changes
                 </button>

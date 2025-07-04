@@ -354,7 +354,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
               <div
                 className={`flex relative ${menu.title && "px-[4px] cursor-pointer py-[8px]"
                   }  ${menu.subTitle && "text-[12px] font-normal text-[#121212]"
-                  } text-purple200  items-center gap-x-2
+                  } text-gray-400  items-center gap-x-2
             ${menu.gap ? " mt-28" : ""} ${menu.Subgap && "my-5"} ${isMenuItemActive(menu.link || "", menu.subMenu)
                     ? "  bg-[#d3d3d3] font-semibold text-[16px] text-[#606060] "
                     : !isMenuItemActive(menu.link || "", menu.subMenu) &&
@@ -419,7 +419,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
                         <li
                           className={`flex p-2 cursor-pointer py-2  text-sm items-center gap-x-4 ${isMenuItemActive(subMenuItem.link || "")
                             ? "text-[#000] font-bold"
-                            : "text-purple200"
+                            : "text-gray-400"
                             }`}
                         >
                           {subMenuItem.title}

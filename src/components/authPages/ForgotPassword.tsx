@@ -78,7 +78,7 @@ const ForgotPassword = () => {
           </button>
           <div className="text-center py-3">
             <div onClick={() => navigate(-1)}>
-              <p className="font-[500] text-[16px] text-purple500 cursor-pointer">Go Back</p>
+              <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">Go Back</p>
             </div>
           </div>
         </div>

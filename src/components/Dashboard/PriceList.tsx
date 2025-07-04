@@ -115,7 +115,7 @@ const PriceList = () => {
                   <img src={Print} alt="" /> Print price list
                 </button>
               </div>
-              {/* <div className="rounded-[5px] px-[24px] py-[10px] font-[500] text-purple500">
+              {/* <div className="rounded-[5px] px-[24px] py-[10px] font-[500] text-gray-500">
                 <button className="text-[14px] flex items-center gap-[8px]">
                   <img src={Publish} alt="" /> Publish changes
                 </button>
@@ -148,9 +148,8 @@ const PriceList = () => {
                       {menuItems.map((item: any, index: number) => (
                         <tr
                           key={item._id}
-                          className={`${
-                            index % 2 === 1 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                          }`}
+                          className={`${index % 2 === 1 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                            }`}
                         >
                           <td className="text-base font-normal py-2 px-4">
                             {item.menu_group_name}
@@ -179,7 +178,7 @@ const PriceList = () => {
                             {editMode === item._id ? (
                               <div className="flex items-center gap-2 mt-2.5">
                                 <button
-                                  className="text-purple500"
+                                  className="text-gray-500"
                                   onClick={() => handleSave(item)}
                                 >
                                   {isSubmitting ? "Saving..." : "Save"}

@@ -142,7 +142,7 @@ const UpdateCredentials = () => {
           <div className="text-center py-3">
             <p
               onClick={() => navigate(-1)}
-              className="font-[500] text-[16px] text-purple500 cursor-pointer"
+              className="font-[500] text-[16px] text-gray-500 cursor-pointer"
             >
               Go Back
             </p>

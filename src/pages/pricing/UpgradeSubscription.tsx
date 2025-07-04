@@ -157,11 +157,10 @@ const UpgradeSubscription: React.FC = () => {
             {plans.map((plan, index) => (
               <div
                 key={index}
-                className={`px-[30px] py-[22px] rounded-[10px] border ${
-                  selectedPlan?.name === plan.name
+                className={`px-[30px] py-[22px] rounded-[10px] border ${selectedPlan?.name === plan.name
                     ? "border-[#FF4F00]"
                     : "border-[#929292]"
-                } text-[16px] font-[400] text-[#414141] w-full bg-white cursor-pointer transition-all duration-500 ease-in-out`}
+                  } text-[16px] font-[400] text-[#414141] w-full bg-white cursor-pointer transition-all duration-500 ease-in-out`}
                 onClick={() => handlePlanSelect(plan)}
               >
                 <div className="flex items-start gap-[24px] mb-[30px]">
@@ -190,7 +189,7 @@ const UpgradeSubscription: React.FC = () => {
                       <p className="font-[600] text-[#E10101] text-[14px] line-through transition-all duration-500 ease-in-out">
                         {plan.discount ||
                           (plan.name.includes("yearly") ||
-                          plan.name.includes("biannually")
+                            plan.name.includes("biannually")
                             ? "30,000"
                             : "10,000")}
                       </p>
@@ -287,13 +286,13 @@ const UpgradeSubscription: React.FC = () => {
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[372px]">
           <div className=" text-center">
-            <p className="text-[24px] font-[500] text-purple500">Payment</p>
+            <p className="text-[24px] font-[500] text-gray-500">Payment</p>
             <p className="text-[16px] font-[400] text-grey500">
               Make payment to selected plan
             </p>
             <div className="flex items-center justify-center gap-4 mt-[50px]">
               <div
-                className="border cursor-pointer border-[#FF4F00] rounded px-[24px] py-[10px] font-[600] text-purple500"
+                className="border cursor-pointer border-[#FF4F00] rounded px-[24px] py-[10px] font-[600] text-gray-500"
                 onClick={() => setIsOpen(false)}
               >
                 <p className="font-[500] text-[16px] text-[#FF4F00] cursor-pointer">

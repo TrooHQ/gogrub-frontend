@@ -128,7 +128,7 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
   return (
     <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[539px]">
       <div>
-        <p className="text-[24px] pb-[24px] font-[500] leading-[36px] text-purple500">
+        <p className="text-[24px] pb-[24px] font-[500] leading-[36px] text-gray-500">
           Add menu category
         </p>
 
@@ -209,10 +209,10 @@ const AddMenuCategory = ({ setIsModalOpen }: any) => {
 
         <div className="flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
           <div
-            className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+            className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
             onClick={() => setIsModalOpen(false)}
           >
-            <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+            <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
               Cancel
             </p>
           </div>

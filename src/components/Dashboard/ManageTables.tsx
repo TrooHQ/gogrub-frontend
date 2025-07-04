@@ -239,7 +239,7 @@ const ManageTables: React.FC = () => {
         <TopMenuNav pathName="Manage Branch Assets" />
         <div className=" mt-[40px]">
           <div
-            className="border inline-block border-purple500 bg-white  rounded-[5px] px-[24px] py-[10px] font-[500] text-purple500"
+            className="border inline-block border-purple500 bg-white  rounded-[5px] px-[24px] py-[10px] font-[500] text-gray-500"
             onClick={handleAddModifier}
           >
             <button className="text-[16px] flex items-center gap-[8px]">
@@ -391,7 +391,7 @@ const ManageTables: React.FC = () => {
         >
           <div className=" w-[539px] py-[32px] px-[52px]">
             <div className="">
-              <p className=" text-[24px] mb-[11px] font-[500] text-purple500">
+              <p className=" text-[24px] mb-[11px] font-[500] text-gray-500">
                 Asset Arrangement
               </p>
               <hr className="border my-[24px] border-[#E7E7E7]" />
@@ -435,10 +435,10 @@ const ManageTables: React.FC = () => {
 
               <div className="flex items-center justify-end gap-2 ">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-purple500"
+                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setAddModifierModal(false)}
                 >
-                  <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+                  <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
                     Cancel
                   </p>
                   {/* <CancelButton text="Cancel" /> */}
@@ -464,7 +464,7 @@ const ManageTables: React.FC = () => {
             <div className="">
               <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[539px]">
                 <div className="flex flex-col items-center justify-center gap-6">
-                  <p className="text-[24px] font-[500] text-purple500">
+                  <p className="text-[24px] font-[500] text-gray-500">
                     Delete Table
                   </p>{" "}
                   <p className="text-[16px] font-[400] text-grey500">
@@ -472,10 +472,10 @@ const ManageTables: React.FC = () => {
                   </p>
                   <div className="flex items-center justify-center gap-4 mt-5">
                     <div
-                      className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+                      className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
                       onClick={() => setIsDeleteModalOpen(false)}
                     >
-                      <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+                      <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
                         No
                       </p>
                     </div>

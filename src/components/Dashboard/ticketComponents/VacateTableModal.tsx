@@ -13,7 +13,7 @@ const VacateTableModal = ({ vacateTableMenu, handleVacateTableMenu, setVacateTab
             <img src={Close} alt="" className=" " />
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
-            <p className="text-[24px] font-[500] text-purple500">Vacate Table</p>
+            <p className="text-[24px] font-[500] text-gray-500">Vacate Table</p>
 
             <div>
               <p className="text-[16px] font-[400] text-grey500">

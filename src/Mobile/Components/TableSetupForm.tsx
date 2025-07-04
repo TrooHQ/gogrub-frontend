@@ -99,7 +99,7 @@ const TableSetupForm = () => {
             </div>
 
             <Link to="/demo/dashboard/gogrub-portal">
-              <button className=" text-[16px] font-[500] text-purple500  w-full text-center py-3 rounded">
+              <button className=" text-[16px] font-[500] text-gray-500  w-full text-center py-3 rounded">
                 Skip
               </button>
             </Link>

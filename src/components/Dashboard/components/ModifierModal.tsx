@@ -20,7 +20,7 @@ const ModifierModal = ({
     <Modal isOpen={addModifierModar} onClose={() => setAddModifierModal(false)}>
       <div className=" w-[539px] py-[32px] px-[52px]">
         <div className="">
-          <p className=" text-[24px] mb-[11px] font-[500] text-purple500">Add modifier</p>
+          <p className=" text-[24px] mb-[11px] font-[500] text-gray-500">Add modifier</p>
           <hr className="border my-[24px] border-[#E7E7E7]" />
 
           {/* Render input fields for each modifier */}
@@ -67,10 +67,10 @@ const ModifierModal = ({
 
           <div className="flex justify-end items-center gap-2">
             <div
-              className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+              className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
               onClick={() => setAddModifierModal(false)}
             >
-              <p className="font-[500] text-[16px] text-purple500 cursor-pointer">Cancel</p>
+              <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">Cancel</p>
             </div>
 
             <div

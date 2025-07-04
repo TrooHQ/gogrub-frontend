@@ -363,7 +363,7 @@ const Modifiers = ({
   return (
     <div className="">
       <div className=" mt-[32px] max-w-[628px]">
-        <p className=" text-[20px] font-[500] text-purple500 mb-[8px]">
+        <p className=" text-[20px] font-[500] text-gray-500 mb-[8px]">
           Modifiers
         </p>
         <hr className=" border-[#B6B6B6]" />
@@ -403,7 +403,7 @@ const Modifiers = ({
                 />
 
                 <button
-                  className=" border border-[#121212] rounded-[5px]  px-[16px] py-[8px] font-[500] text-purple500 text-[16px] flex items-center gap-[8px]"
+                  className=" border border-[#121212] rounded-[5px]  px-[16px] py-[8px] font-[500] text-gray-500 text-[16px] flex items-center gap-[8px]"
                   onClick={handleAddModifierGroup}
                 >
                   {modGroupLoading ? "Loading..." : "Save"}
@@ -424,7 +424,7 @@ const Modifiers = ({
 
         {/* <div className="">
           <div className=" mt-[32px] max-w-[628px]">
-            <p className=" text-[20px] font-[500] text-purple500 mb-[8px]">
+            <p className=" text-[20px] font-[500] text-gray-500 mb-[8px]">
               Modifier Rules
             </p>
             <hr className=" border-[#B6B6B6]" />

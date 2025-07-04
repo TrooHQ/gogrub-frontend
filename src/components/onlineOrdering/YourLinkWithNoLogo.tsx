@@ -190,7 +190,7 @@ const YourLinkWithNoLogo = ({
                   Generate link
                 </button>
                 <button
-                  className="bg-white text-purple500 border border-purple-500 py-2 px-4 rounded"
+                  className="bg-white text-gray-500 border border-purple-500 py-2 px-4 rounded"
                   onClick={handleCancelClick}
                 >
                   Cancel
@@ -282,8 +282,8 @@ const YourLinkWithNoLogo = ({
                             {truncateText(uploadedLogo.name, 16)}
                           </p>
                           <div className="flex gap-4">
-                            <p className="text-purple500">Uploading...</p>
-                            <p className="text-purple500">{uploadProgress}%</p>
+                            <p className="text-gray-500">Uploading...</p>
+                            <p className="text-gray-500">{uploadProgress}%</p>
                           </div>
                         </div>
                       ) : (
@@ -308,7 +308,7 @@ const YourLinkWithNoLogo = ({
                           </div>
                           <div className="flex justify-center items-center gap-4">
                             <button
-                              className="mt-6 border border-purple500 bg-white text-purple500 py-2 px-4 rounded"
+                              className="mt-6 border border-purple500 bg-white text-gray-500 py-2 px-4 rounded"
                               onClick={handleFileUpload}
                               disabled={isUploading}
                             >
@@ -318,7 +318,7 @@ const YourLinkWithNoLogo = ({
                         </div>
                       )}
                       {isUploading ? (
-                        <p className="text-purple500">
+                        <p className="text-gray-500">
                           Uploading... {uploadProgress}%
                         </p>
                       ) : null}

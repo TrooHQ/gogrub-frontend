@@ -84,7 +84,7 @@ const ForgotPassword = () => {
           <div className=" text-center py-3">
             <div onClick={() => history(-1)} className=" ">
               <button
-                className=" font-[500] text-[16px] text-purple500 cursor-pointer"
+                className=" font-[500] text-[16px] text-gray-500 cursor-pointer"
                 disabled={loading}
               >
                 Go Back

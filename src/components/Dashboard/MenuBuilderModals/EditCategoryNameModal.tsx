@@ -18,7 +18,7 @@ const EditCategoryNameModal: React.FC<Props> = ({
 }) => {
   return (
     <div className=" w-[539px] py-[32px] px-[52px]">
-      <h2 className="text-[24px] mb-[11px] font-[500] text-purple500">Edit Category Name</h2>
+      <h2 className="text-[24px] mb-[11px] font-[500] text-gray-500">Edit Category Name</h2>
       <CustomInput
         type="text"
         label=""
