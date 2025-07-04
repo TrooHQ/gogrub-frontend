@@ -44,7 +44,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="bg-[#EFEFEF] h-screen">
+    <div className="bg-[#EFEFEF] h-screen px-2">
       <div className="flex flex-col items-center justify-center h-screen my-auto">
         <div className="">
           <img src={Logo} alt="Logo" />
@@ -68,15 +68,15 @@ const ForgotPassword = () => {
               onChange={(newValue) => setValue(newValue)}
             />
           </div>
-          {error && <p className="text-red-500 text-center">{error}</p>}
+          {error && <p className="text-center text-red-500">{error}</p>}
           <button
-            className="bg-purple500 w-full text-center text-white py-3 rounded"
+            className="w-full py-3 text-center text-white rounded bg-purple500"
             onClick={handleSubmit}
             disabled={loading}
           >
             {loading ? "Sending..." : "Get a reset link"}
           </button>
-          <div className="text-center py-3">
+          <div className="py-3 text-center">
             <div onClick={() => navigate(-1)}>
               <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">Go Back</p>
             </div>
