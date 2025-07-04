@@ -100,7 +100,7 @@ const CreatePin = () => {
 
           {/* Go back option */}
           <div className="text-center mt-4">
-            <p className="font-medium text-purple500 cursor-pointer" onClick={() => navigate(-1)}>
+            <p className="font-medium text-gray-500 cursor-pointer" onClick={() => navigate(-1)}>
               Go Back
             </p>
           </div>

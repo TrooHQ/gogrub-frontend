@@ -175,7 +175,7 @@ const MenuGroup: React.FC<Props> = ({
             ) : null}
 
             <div
-              className=" w-[196px]  px-[10px] py-[6px] font-[500] text-purple500"
+              className=" w-[196px]  px-[10px] py-[6px] font-[500] text-gray-500"
               onClick={handleAddMenuGroup}
             >
               <button className="text-[16px] flex items-center gap-[8px]">
@@ -193,7 +193,7 @@ const MenuGroup: React.FC<Props> = ({
               <p className=" text-[16px] font-[500] text-[#121212]">Type</p>
               <div className="">
                 <button
-                  className="w-[196px]  px-[10px] py-[6px] font-[500] text-purple500 text-[16px] flex items-center gap-[8px]"
+                  className="w-[196px]  px-[10px] py-[6px] font-[500] text-gray-500 text-[16px] flex items-center gap-[8px]"
                   onClick={handleAddMenuItem}
                 >
                   <img src={AddWhite} alt="" /> Add Menu Item
@@ -218,7 +218,7 @@ const MenuGroup: React.FC<Props> = ({
                       <div
                         className={`flex items-center justify-between py-[8px] px-[16px] cursor-pointer mb-2
           ${selectedMenuItem?._id === item?._id
-                            ? "bg-[#ebebeb] text-purple500"
+                            ? "bg-[#ebebeb] text-gray-500"
                             : "bg-[#F8F8F8] text-grey500"
                           }`}
                         onClick={() => handleMenuItemClick(item)}
@@ -289,7 +289,7 @@ const MenuGroup: React.FC<Props> = ({
             {subMenuContent.length > 1 && (
               <div className="flex items-center justify-end ">
                 <button
-                  className="w-[196px] border border-[#121212] rounded-[5px]  px-[16px] py-[8px] font-[500] text-purple500 text-[16px] flex items-center gap-[8px]"
+                  className="w-[196px] border border-[#121212] rounded-[5px]  px-[16px] py-[8px] font-[500] text-gray-500 text-[16px] flex items-center gap-[8px]"
                   onClick={handleAddMenuItem}
                 >
                   <img src={AddWhite} alt="" /> Add Menu Item

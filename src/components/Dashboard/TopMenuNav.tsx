@@ -122,7 +122,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
       <div className="w-full">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[28px] font-[500] Capitalize text-purple500">
+            <p className="text-[28px] font-[500] Capitalize text-gray-500">
               {pathName}
             </p>
           </div>

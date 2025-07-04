@@ -72,9 +72,8 @@ const DropdownMenu = ({ onClose }: { onClose: () => void }) => {
       </li>
       <li
         onClick={(event) => handleItemClick(event, "Enable Table")}
-        className={`font-[400] text-sm cursor-pointer flex items-center ${
-          isEnabled ? "text-[#5955eb]" : "text-slate-300"
-        }`}
+        className={`font-[400] text-sm cursor-pointer flex items-center ${isEnabled ? "text-[#5955eb]" : "text-slate-300"
+          }`}
       >
         {isEnabled ? (
           <ToggleOnIcon className="mr-2 text-[#5955eb]" />
@@ -157,9 +156,8 @@ const TableList = () => {
                   {tables.map((table, index) => (
                     <li
                       key={index}
-                      className={`grid grid-cols-6 items-center px-5 py-[16px] text-grey300 text-[16px] font-[400] ${
-                        index % 2 === 0 ? "bg-[#F8F8F8]" : ""
-                      }`}
+                      className={`grid grid-cols-6 items-center px-5 py-[16px] text-grey300 text-[16px] font-[400] ${index % 2 === 0 ? "bg-[#F8F8F8]" : ""
+                        }`}
                     >
                       <p className="col-span-2 px-3 py-2 "> {table.tableNo}</p>
                       <p className="col-span-2 px-3 py-2 "> {table.id}</p>
@@ -321,10 +319,10 @@ const TableList = () => {
 
               <div className=" flex justify-end items-center  gap-2">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-purple500"
+                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setAddModifierModal(false)}
                 >
-                  <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+                  <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
                     Cancel
                   </p>
                   {/* <CancelButton text="Cancel" /> */}

@@ -70,9 +70,8 @@ const FAQSetting: React.FC<FAQProps> = ({
               <img
                 src={ArrowToggle}
                 alt=""
-                className={`transform transition-transform duration-300 ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
+                className={`transform transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                  }`}
               />
             </div>
           </div>
@@ -179,7 +178,7 @@ const FAQSetting: React.FC<FAQProps> = ({
                           onClick={() => toggleAnswer2(innerIndex)}
                         >
                           <div className="mb-2 cursor-pointer">
-                            <p className="text-purple500 font-[500] text-[14px] lg:text-[16px]">
+                            <p className="text-gray-500 font-[500] text-[14px] lg:text-[16px]">
                               {` ${innerFaq.question}`}
                             </p>
                           </div>
@@ -187,11 +186,10 @@ const FAQSetting: React.FC<FAQProps> = ({
                             <img
                               src={ArrowToggle2}
                               alt=""
-                              className={`transform transition-transform duration-300 ${
-                                openIndexInner === innerIndex
+                              className={`transform transition-transform duration-300 ${openIndexInner === innerIndex
                                   ? "rotate-180"
                                   : ""
-                              }`}
+                                }`}
                             />
                           </div>
                         </div>
@@ -531,9 +529,9 @@ const FAQSetting: React.FC<FAQProps> = ({
       ))}
 
       <div className=" flex justify-end items-center gap-2">
-        <div className="border border-purple500 rounded px-[24px] py-[13px] font-[600] text-purple500">
+        <div className="border border-purple500 rounded px-[24px] py-[13px] font-[600] text-gray-500">
           <div onClick={() => navigate(-1)}>
-            <p className=" font-[500] text-[16px] text-purple500 cursor-pointer">
+            <p className=" font-[500] text-[16px] text-gray-500 cursor-pointer">
               Cancel
             </p>
           </div>

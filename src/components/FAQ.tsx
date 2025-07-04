@@ -62,7 +62,7 @@ const FAQ: React.FC<FAQProps> = ({ faqData, openIndex, toggleAnswer }) => {
       {faqData.map((faq, index) => (
         <div
           key={index}
-          className={`text-purple500 border p-4 focus:outline-[#121212] w-full rounded border-[#484590] ${openIndex === index ? "overflow-y-scroll max-h-96" : ""
+          className={`text-gray-500 border p-4 focus:outline-[#121212] w-full rounded border-[#484590] ${openIndex === index ? "overflow-y-scroll max-h-96" : ""
             }`}
         >
           <div

@@ -534,7 +534,7 @@ const MenuBuilder = () => {
           >
             {/* <EditOpen setIsEditOpen={setIsEditOpen} /> */}
             <div className=" w-[539px] py-[32px] px-[52px]">
-              <h2 className="text-[24px] mb-[11px] font-[500] text-purple500">
+              <h2 className="text-[24px] mb-[11px] font-[500] text-gray-500">
                 Edit Group Name
               </h2>
               <CustomInput

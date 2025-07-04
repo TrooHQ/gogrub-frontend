@@ -641,7 +641,7 @@ const RegistrationStepForm = () => {
               onClick={prevStep}
             >
               <img src={Back} alt="" />
-              <p className=" font-[500] text-[16px] text-purple500 cursor-pointer">
+              <p className=" font-[500] text-[16px] text-gray-500 cursor-pointer">
                 Back
               </p>
             </div>
@@ -730,7 +730,7 @@ const RegistrationStepForm = () => {
               onClick={prevStep}
             >
               <img src={Back} alt="" />
-              <p className=" font-[500] text-[16px] text-purple500 cursor-pointer">
+              <p className=" font-[500] text-[16px] text-gray-500 cursor-pointer">
                 Back
               </p>
             </div>

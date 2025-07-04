@@ -134,7 +134,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         <div className="flex justify-start items-center">
           <button
             onClick={getYourLink}
-            className="px-4 py-2 text-purple500 border border-purple500 rounded-lg hover:bg-purple-100"
+            className="px-4 py-2 text-gray-500 border border-purple500 rounded-lg hover:bg-purple-100"
           >
             Get Your Link
           </button>
@@ -161,7 +161,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
             </p>
             <p
               onClick={handlePreviewClick}
-              className="text-purple500 underline text-sm"
+              className="text-gray-500 underline text-sm"
             >
               Preview
             </p>
@@ -181,7 +181,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         </p>
         <div className="flex justify-between items-center mb-4 mt-4">
           <button
-            className="px-4 py-2 text-purple500 border border-purple500 rounded-[5px] hover:bg-purple-100"
+            className="px-4 py-2 text-gray-500 border border-purple500 rounded-[5px] hover:bg-purple-100"
             onClick={backFromSelection}
           >
             Cancel
@@ -207,7 +207,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
       </button>
       <p className="text-gray-700 text-lg font-medium mb-4">File Added</p>
       <div className="flex items-center gap-4 mb-4">
-        <TaskOutlined className="text-purple500 text-2xl" />
+        <TaskOutlined className="text-gray-500 text-2xl" />
         <p className="text-gray-700 truncate">
           {uploadedLogo ? uploadedLogo.name : ""}
         </p>
@@ -223,7 +223,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
       </div>
       <div className="flex justify-between items-center mb-4">
         <button
-          className="px-4 py-2 text-purple500 border borderpurple-500 rounded-lg hover:bg-purple-100"
+          className="px-4 py-2 text-gray-500 border borderpurple-500 rounded-lg hover:bg-purple-100"
           onClick={backFromSelection}
         >
           Cancel

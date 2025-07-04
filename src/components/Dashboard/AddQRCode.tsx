@@ -32,7 +32,7 @@ const AddQRCode: React.FC<AddQRCodeProps> = ({
     <div className="w-[100%]">
       <div className="mt-3">
         <div>
-          <p className="text-[24px] mb-[24px] font-[500] text-purple500">
+          <p className="text-[24px] mb-[24px] font-[500] text-gray-500">
             Asset Arrangement
           </p>
           <CustomSelect5
@@ -62,10 +62,10 @@ const AddQRCode: React.FC<AddQRCodeProps> = ({
         </div>
         <div className="flex justify-end items-center gap-2 mt-7">
           <div
-            className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+            className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
             onClick={onClose}
           >
-            <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+            <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
               Cancel
             </p>
           </div>

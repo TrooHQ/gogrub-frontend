@@ -46,10 +46,10 @@ const VisibilityOpen = ({ setIsVisibilityOpen }: any) => {
 
       <div className="flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
         <div
-          className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+          className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
           onClick={() => setIsVisibilityOpen(false)}
         >
-          <p className="font-[500] text-[16px] text-purple500 cursor-pointer">Cancel</p>
+          <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">Cancel</p>
         </div>
 
         <div

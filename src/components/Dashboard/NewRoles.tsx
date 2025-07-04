@@ -97,7 +97,7 @@ const NewRoles = () => {
       <TopMenuNav pathName="Manage Users" />
       <div className="  max-w-[897px] 2xl:max-w-[1070px]">
         <div className="my-10 ">
-          <p className="text-[24px] font-[500] text-purple500">New Roles</p>
+          <p className="text-[24px] font-[500] text-gray-500">New Roles</p>
           <div className="my-8 w-full">
             <div className=" grid gap-[48px]">
               <div className="flex items-start">
@@ -139,7 +139,7 @@ const NewRoles = () => {
 
         <div className="my-10 ">
           <div className="flex items-center justify-between">
-            <p className="text-[24px] font-[500] text-purple500">Permissions Setting</p>
+            <p className="text-[24px] font-[500] text-gray-500">Permissions Setting</p>
           </div>
           <div className="my-8 w-full">
             <div className=" grid gap-[48px]">
@@ -160,7 +160,7 @@ const NewRoles = () => {
         </div>
         <div className="flex justify-end items-center gap-2">
           <div
-            className="border border-purple500 rounded px-[24px] py-[13px] font-[600] text-purple500 cursor-pointer"
+            className="border border-purple500 rounded px-[24px] py-[13px] font-[600] text-gray-500 cursor-pointer"
             onClick={() => navigate(-1)}
           >
             Cancel

@@ -37,7 +37,7 @@ const AddMenuItem: React.FC<Props> = ({
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
       <div className="">
-        <p className="text-[24px] pb-[24px] font-[500] leading-[36px] text-purple500">
+        <p className="text-[24px] pb-[24px] font-[500] leading-[36px] text-gray-500">
           Add menu Item
         </p>
         <hr className="border border-[#E7E7E7] mb-[24px]" />
@@ -124,10 +124,10 @@ const AddMenuItem: React.FC<Props> = ({
 
         <div className=" flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
           <div
-            className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-purple500"
+            className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
             onClick={() => setAddMenuItem(false)}
           >
-            <p className="font-[500] text-[16px] text-purple500 cursor-pointer">
+            <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
               Cancel
             </p>
             {/* <CancelButton text="Cancel" /> */}

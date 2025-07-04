@@ -219,7 +219,7 @@ const OrderHistory = () => {
         {showCustomerDetail ? (
           <div className="mt-8">
             <button
-              className="border border-purple500 rounded px-[24px] py-[10px] font-[600] text-purple500"
+              className="border border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
               onClick={handleBack}
             >
               Back

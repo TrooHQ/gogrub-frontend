@@ -10,7 +10,7 @@ const BackButton: React.FC<ButtonProps> = ({ text, loading }) => {
   return (
     <div onClick={() => navigate(-1)} className=" ">
       <button
-        className=" font-[500] text-[16px] text-purple500 cursor-pointer"
+        className=" font-[500] text-[16px] text-gray-500 cursor-pointer"
         disabled={loading}
       >
         {text}
