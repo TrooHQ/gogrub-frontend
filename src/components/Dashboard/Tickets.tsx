@@ -40,7 +40,7 @@ const Tickets = () => {
   };
 
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [orderModal, setOrderModal] = useState<boolean>(true);
+  const [orderModal, setOrderModal] = useState<boolean>(false);
   const [SingleOrderItem, setSingleOrderItem] = useState({});
 
   useEffect(() => {
