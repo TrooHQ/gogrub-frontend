@@ -159,7 +159,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-8 rounded-md shadow-md w-[80%] md:w-[50%] max-h-[80vh] overflow-y-scroll">
-        <h2 className="mb-4 text-lg font-semibold">Edit Businesssss Details</h2>
+        <h2 className="mb-4 text-lg font-semibold">Edit Business Details</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Photo Preview and Upload */}
           <div className="flex items-center mb-4 space-x-4">
@@ -225,7 +225,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
               />
             </div>
             <div>
-              <label className="text-sm">Phone Number</label>
+              <label className="text-sm">CAC Number</label>
               <input
                 type="tel"
                 name="phone_number"
@@ -254,7 +254,7 @@ const EditBranchDetailsModal: React.FC<EditBranchDetailsModalProps> = ({
             >
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 text-white rounded-md bg-black">
+            <button type="submit" className="px-4 py-2 text-white bg-black rounded-md">
               {loading ? "Saving..." : "Save"}
             </button>
           </div>
