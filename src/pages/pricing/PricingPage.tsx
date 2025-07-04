@@ -628,7 +628,7 @@ const PricingPage = () => {
                 </p>
               </div>
               <button
-                className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+                className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
                 onClick={() => SubcribePlan()}
                 disabled={loading}
               >
@@ -656,7 +656,7 @@ const PricingPage = () => {
               </p>
               <div className="flex items-center justify-center gap-4 mt-5">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
+                  className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setAreYouSure(false)}
                 >
                   <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -664,7 +664,7 @@ const PricingPage = () => {
                   </p>
                 </div>
 
-                <div className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
+                <div className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
                   <button
                     onClick={() => SubcribePlan()}
                     className=" text-[16px]"

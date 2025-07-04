@@ -158,8 +158,8 @@ const UpgradeSubscription: React.FC = () => {
               <div
                 key={index}
                 className={`px-[30px] py-[22px] rounded-[10px] border ${selectedPlan?.name === plan.name
-                    ? "border-[#FF4F00]"
-                    : "border-[#929292]"
+                  ? "border-[#FF4F00]"
+                  : "border-[#929292]"
                   } text-[16px] font-[400] text-[#414141] w-full bg-white cursor-pointer transition-all duration-500 ease-in-out`}
                 onClick={() => handlePlanSelect(plan)}
               >
@@ -300,7 +300,7 @@ const UpgradeSubscription: React.FC = () => {
                 </p>
               </div>
               <button
-                className="border border-purple500 bg-purple500 rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
+                className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]"
                 onClick={() => IntiatePayment()}
                 disabled={loading}
               >

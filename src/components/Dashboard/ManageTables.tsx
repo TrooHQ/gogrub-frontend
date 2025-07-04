@@ -239,7 +239,7 @@ const ManageTables: React.FC = () => {
         <TopMenuNav pathName="Manage Branch Assets" />
         <div className=" mt-[40px]">
           <div
-            className="border inline-block border-purple500 bg-white  rounded-[5px] px-[24px] py-[10px] font-[500] text-gray-500"
+            className="border inline-block border-black bg-white  rounded-[5px] px-[24px] py-[10px] font-[500] text-gray-500"
             onClick={handleAddModifier}
           >
             <button className="text-[16px] flex items-center gap-[8px]">
@@ -435,7 +435,7 @@ const ManageTables: React.FC = () => {
 
               <div className="flex items-center justify-end gap-2 ">
                 <div
-                  className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
+                  className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setAddModifierModal(false)}
                 >
                   <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -445,7 +445,7 @@ const ManageTables: React.FC = () => {
                 </div>
 
                 {/* <Link to="/table-list"> */}
-                <div className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
+                <div className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
                   <button onClick={handleCreateAsset} className=" text-[16px]">
                     {loading ? "Saving..." : "Save"}
                   </button>
@@ -472,7 +472,7 @@ const ManageTables: React.FC = () => {
                   </p>
                   <div className="flex items-center justify-center gap-4 mt-5">
                     <div
-                      className="border cursor-pointer border-purple500 rounded px-[24px] py-[10px] font-[600] text-gray-500"
+                      className="border cursor-pointer border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
                       onClick={() => setIsDeleteModalOpen(false)}
                     >
                       <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">

@@ -256,7 +256,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
             </button>
             <button
               type="submit"
-              className="px-4 py-2 text-white rounded-md bg-purple500"
+              className="px-4 py-2 text-white rounded-md bg-black"
             >
               {loading ? "Saving..." : "Save"}
             </button>

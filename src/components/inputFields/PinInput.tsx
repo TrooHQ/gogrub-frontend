@@ -35,9 +35,8 @@ const PinInput: React.FC<PinInputProps> = ({ label, value, onChange, maxLength =
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           maxLength={maxLength}
-          className={`w-full px-4 py-2 border rounded-md outline-none transition-all ${
-            isFocused ? "border-purple500" : "border-gray-300"
-          }`}
+          className={`w-full px-4 py-2 border rounded-md outline-none transition-all ${isFocused ? "border-black" : "border-gray-300"
+            }`}
           placeholder="●●●●" // This placeholder mimics PIN dots for clarity
         />
         {/* Toggle Icon for Show/Hide */}

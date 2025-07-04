@@ -184,7 +184,7 @@ const YourLinkWithNoLogo = ({
               </div>
               <div className="flex gap-4">
                 <button
-                  className="bg-purple500 text-white py-2 px-4 rounded"
+                  className="bg-black text-white py-2 px-4 rounded"
                   onClick={handleGenerateClick}
                 >
                   Generate link
@@ -308,7 +308,7 @@ const YourLinkWithNoLogo = ({
                           </div>
                           <div className="flex justify-center items-center gap-4">
                             <button
-                              className="mt-6 border border-purple500 bg-white text-gray-500 py-2 px-4 rounded"
+                              className="mt-6 border border-black bg-white text-gray-500 py-2 px-4 rounded"
                               onClick={handleFileUpload}
                               disabled={isUploading}
                             >

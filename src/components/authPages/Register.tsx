@@ -60,7 +60,7 @@ const Register: React.FC = () => {
           />
           <div className=" ">
             <Link to="/business-profile">
-              <button className="bg-purple500 w-full text-center text-white py-3 rounded">
+              <button className="bg-black w-full text-center text-white py-3 rounded">
                 Create Account
               </button>
             </Link>

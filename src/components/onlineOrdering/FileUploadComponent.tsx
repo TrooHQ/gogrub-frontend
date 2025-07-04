@@ -134,7 +134,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         <div className="flex justify-start items-center">
           <button
             onClick={getYourLink}
-            className="px-4 py-2 text-gray-500 border border-purple500 rounded-lg hover:bg-purple-100"
+            className="px-4 py-2 text-gray-500 border border-black rounded-lg hover:bg-purple-100"
           >
             Get Your Link
           </button>
@@ -181,13 +181,13 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         </p>
         <div className="flex justify-between items-center mb-4 mt-4">
           <button
-            className="px-4 py-2 text-gray-500 border border-purple500 rounded-[5px] hover:bg-purple-100"
+            className="px-4 py-2 text-gray-500 border border-black rounded-[5px] hover:bg-purple-100"
             onClick={backFromSelection}
           >
             Cancel
           </button>
           <button
-            className="px-4 py-2 text-white bg-purple500 rounded-[5px]"
+            className="px-4 py-2 text-white bg-black rounded-[5px]"
             onClick={handleUploadClick}
           >
             {loading ? "Uploading..." : "Upload"}
@@ -217,7 +217,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
       </div>
       <div className="w-full bg-gray-200 rounded-full h-1 mb-4">
         <div
-          className="bg-purple500 h-1 rounded-full"
+          className="bg-black h-1 rounded-full"
           style={{ width: `${uploadProgress}%` }}
         ></div>
       </div>

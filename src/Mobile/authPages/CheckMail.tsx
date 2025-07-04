@@ -21,7 +21,7 @@ const CheckMail = () => {
               </p>
             </div>
             <Link to="/reset-password">
-              <button className="bg-purple500 w-full text-center text-white py-3 rounded">
+              <button className="bg-black w-full text-center text-white py-3 rounded">
                 Check email
               </button>
             </Link>

@@ -21,7 +21,7 @@ const VacateTableModal = ({ vacateTableMenu, handleVacateTableMenu, setVacateTab
               </p>
               <div className="flex items-center justify-center gap-4 mt-5">
                 <div
-                  className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
+                  className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]"
                   onClick={() => setVacateTableMenu(false)}
                 >
                   <button className=" text-[16px]">Continue</button>

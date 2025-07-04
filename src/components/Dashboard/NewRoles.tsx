@@ -160,13 +160,13 @@ const NewRoles = () => {
         </div>
         <div className="flex justify-end items-center gap-2">
           <div
-            className="border border-purple500 rounded px-[24px] py-[13px] font-[600] text-gray-500 cursor-pointer"
+            className="border border-black rounded px-[24px] py-[13px] font-[600] text-gray-500 cursor-pointer"
             onClick={() => navigate(-1)}
           >
             Cancel
           </div>
           <div
-            className="border border-purple500 bg-purple500 rounded px-[24px] py-[13px] font-[500] text-[#ffffff] cursor-pointer"
+            className="border border-black bg-black rounded px-[24px] py-[13px] font-[500] text-[#ffffff] cursor-pointer"
             onClick={handleSaveAndContinue}
           >
             {saveLoading ? "Saving..." : "Save"}

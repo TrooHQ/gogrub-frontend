@@ -112,7 +112,7 @@ const ManageBranches = () => {
                   <p className="font-[500] text-[16px] text-[#121212]">Filter by:</p>
                 </div>
                 <div className="flex items-center gap-[8px]">
-                  <div className="border border-purple500 bg-purple500 rounded-[5px] px-[16px] py-[8px] font-[400] text-[#ffffff]">
+                  <div className="border border-black bg-black rounded-[5px] px-[16px] py-[8px] font-[400] text-[#ffffff]">
                     <button className="text-[12px]">Add</button>
                   </div>
                   <div className="border border-[#B6B6B6] rounded-[5px] px-[16px] py-[8px] font-[400] text-[121212]">
@@ -129,7 +129,7 @@ const ManageBranches = () => {
                   </div>
                 </div>
               </div>
-              {/* <div className="border border-purple500 bg-purple500 w-[196px] rounded-[5px] px-[16px] py-[10px] font-[500] text-[#ffffff]"> */}
+              {/* <div className="border border-black bg-black w-[196px] rounded-[5px] px-[16px] py-[10px] font-[500] text-[#ffffff]"> */}
               <button className="bg-black  w-[196px] rounded-[5px] px-[16px] py-[10px] font-[500] text-[#ffffff] text-[14px] " onClick={handleAddMenu}>Create New Branch</button>
               {/* </div> */}
             </div>

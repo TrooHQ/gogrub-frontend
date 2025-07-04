@@ -124,7 +124,7 @@ const AddMenuItem: React.FC<Props> = ({
 
         <div className=" flex justify-end items-center pt-[12px] lg:pt-[24px] gap-2">
           <div
-            className="border cursor-pointer border-purple500 rounded px-[24px]  py-[10px] font-[600] text-gray-500"
+            className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
             onClick={() => setAddMenuItem(false)}
           >
             <p className="font-[500] text-[16px] text-gray-500 cursor-pointer">
@@ -133,7 +133,7 @@ const AddMenuItem: React.FC<Props> = ({
             {/* <CancelButton text="Cancel" /> */}
           </div>
 
-          <div className="border border-purple500 bg-purple500 rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
+          <div className="border border-black bg-black rounded px-[24px]  py-[10px] font-[500] text-[#ffffff]">
             <button onClick={handleSaveMenuItem} className=" text-[16px]">
               {menuGroupLoading ? "Saving..." : "Save Menu Item"}
             </button>

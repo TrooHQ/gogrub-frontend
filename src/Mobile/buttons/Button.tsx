@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({ text, link, loading }) => {
       {link ? (
         <Link to={link}>
           <button
-            className="bg-purple500 w-full text-center text-white py-3 rounded"
+            className="bg-black w-full text-center text-white py-3 rounded"
             disabled={loading}
           >
             {text}
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({ text, link, loading }) => {
         </Link>
       ) : (
         <button
-          className="bg-purple500 w-full text-center text-white py-3 rounded"
+          className="bg-black w-full text-center text-white py-3 rounded"
           disabled={loading}
         >
           {loading ? `${text}...` : text}

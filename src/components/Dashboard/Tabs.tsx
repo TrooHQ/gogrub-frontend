@@ -28,8 +28,8 @@ const Tabs: React.FC<TabsProps> = ({
             <p
               key={index}
               className={` text-[22px] px-3 py-2 font-GeneralSans  cursor-pointer ${index === activeTab
-                  ? " text-gray-500 font-[500] border-b-4 border-b-[#121212]"
-                  : "text-grey300"
+                ? " text-gray-500 font-[500] border-b-4 border-b-[#121212]"
+                : "text-grey300"
                 }`}
               onClick={() => handleTabChange(index)}
             >
@@ -37,7 +37,7 @@ const Tabs: React.FC<TabsProps> = ({
             </p>
           ))}
         </div>
-        <div className="border-2 border-purple500 bg-purple500 rounded px-[16px] py-[8px] font-[500] text-[14px] text-[#ffffff]">
+        <div className="border-2 border-black bg-black rounded px-[16px] py-[8px] font-[500] text-[14px] text-[#ffffff]">
           <Link to={`${activeTab === 0 && "/new-roles"}`}>
             <button
               className=""

@@ -84,7 +84,7 @@ const YourLink = () => {
               {/* {!isCustomizing && (
             <div className="mt-11 text-center">
               <button
-                className="text-[#3E3C7F] bg-white py-3 px-6 rounded mt-5 border border-purple500 w-fit"
+                className="text-[#3E3C7F] bg-white py-3 px-6 rounded mt-5 border border-black w-fit"
                 onClick={handleCustomizeClick}
               >
                 Customize Link
@@ -108,7 +108,7 @@ const YourLink = () => {
               </div>
               <div className="flex gap-4">
                 <button
-                  className="bg-purple500 text-white py-2 px-4 rounded"
+                  className="bg-black text-white py-2 px-4 rounded"
                   onClick={handleGenerateClick}
                 >
                   Generate link
