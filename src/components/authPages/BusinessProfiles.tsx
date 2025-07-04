@@ -111,7 +111,7 @@ const BusinessProfiles: React.FC = () => {
           <div key={index} className="flex items-center">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= index
-                ? "bg-text-gray-800 text-white"
+                ? "bg-gray-800 text-white"
                 : "bg-gray-300 text-gray-600"
                 }`}
             >
@@ -119,7 +119,7 @@ const BusinessProfiles: React.FC = () => {
             </div>
             {index < stepTitles.length - 1 && (
               <div
-                className={`flex-1 h-1 ${currentStep > index ? "bg-text-gray-800" : "bg-gray-300"
+                className={`flex-1 h-1 ${currentStep > index ? "bg-gray-800" : "bg-gray-300"
                   }`}
               ></div>
             )}
