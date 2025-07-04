@@ -168,7 +168,7 @@ const VerifyAccount = () => {
             onClick={resendOTP}
           >
             <button
-              className=" font-[400] text-[16px] text-[#121212]"
+              className=" font-[400] text-xs text-blue-500 underline hover:rounded-full hover:bg-blue-500 hover:text-white px-2 py-1 hover:no-underline text-semibold"
               disabled={loading}
             >
               Resend Code
@@ -177,7 +177,7 @@ const VerifyAccount = () => {
           {allInputsFilled() ? (
             <div className=" mt-[16px]" onClick={verify}>
               <button
-                className="w-full py-3 text-center text-white rounded bg-black"
+                className="w-full py-3 text-center text-white bg-black rounded"
                 disabled={loading}
               >
                 {loading ? "Loading..." : "Activate Account"}
