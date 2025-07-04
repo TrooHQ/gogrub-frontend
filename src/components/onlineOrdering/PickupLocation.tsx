@@ -166,8 +166,8 @@ const PickupLocation = () => {
             <Switch
               checked={isPickupEnabled}
               onChange={handleToggleChange}
-              color="primary"
-              style={{ color: isPickupEnabled ? "#5855B3" : "#929292" }}
+              color="default"
+              style={{ color: isPickupEnabled ? "black" : "#929292" }}
             />
             <span
               className={clsx({

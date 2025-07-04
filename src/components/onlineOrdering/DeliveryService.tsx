@@ -96,8 +96,9 @@ const DeliveryService = () => {
             <Switch
               checked={isDeliveryEnabled}
               onChange={handleToggleChange}
-              color="primary"
-              style={{ color: isDeliveryEnabled ? "#5855B3" : "#929292" }}
+              // color="primary"
+              color="default"
+              style={{ color: isDeliveryEnabled ? "black" : "#929292" }}
             />
             <span
               className={clsx({
