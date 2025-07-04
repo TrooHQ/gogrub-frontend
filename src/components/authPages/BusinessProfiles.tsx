@@ -138,7 +138,7 @@ const BusinessProfiles: React.FC = () => {
       )}
       <div className="bg-white py-10 px-8 w-full md:w-3/5 rounded shadow-md lg:h-[85vh] lg:overflow-y-auto border-[1.5px] border-[#121212]">
         {renderStepProgress()}
-        <p className="mb-2 text-2xl font-medium text-text-gray-800">
+        <p className="mb-2 text-2xl font-medium text-gray-800">
           {stepTitles[currentStep]}
         </p>
         <p className="mb-8 text-gray-600">{stepDescriptions[currentStep]}</p>
