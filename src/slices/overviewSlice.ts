@@ -154,7 +154,7 @@ export const fetchTopMenuItems = createAsyncThunk(
   ) => {
     try {
       const token = localStorage.getItem("token");
-      console.log("branch", branch_id);
+      // console.log("branch", branch_id);
       const params: any = { branch_id, date_filter };
       if (date_filter === "date_range") {
         params.date_filter = "date_range";
@@ -164,7 +164,7 @@ export const fetchTopMenuItems = createAsyncThunk(
         params.number_of_days = number_of_days;
       }
 
-      console.log("params", params);
+      // console.log("params", params);
 
       const response = await axios.get(
         `${SERVER_DOMAIN}/order/getTopMenuItems/`,

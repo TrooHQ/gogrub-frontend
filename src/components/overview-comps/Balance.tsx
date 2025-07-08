@@ -8,13 +8,14 @@ import DaysTab2 from "./DaysTab2";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
-  fetchOpenAndClosedTickets,
-  fetchTotalSales,
+
+  fetchTotalSales, fetchOpenAndClosedTickets,
   fetchAverageOrderValue,
   fetchSalesRevenueGraph,
   fetchTopMenuItems,
   fetchCustomerTransaction,
 } from "../../slices/overviewSlice";
+import { fetchOpenClosedTickets } from "../../slices/OpenCloseTicketSlice";
 
 const BalanceComp = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +24,19 @@ const BalanceComp = () => {
     (state: RootState) => state.overview
   );
   const { selectedBranch } = useSelector((state: any) => state.branches);
+  const openAndClosedTickets = useSelector((state: any) => state.openCloseTickets);
+
+  console.log("openAndClosedTickets", openAndClosedTickets?.openAndClosedTickets?.data);
+  console.log("openTickets", openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets);
+  console.log("closedTickets", openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets);
+
+
+  const [dateFilter, setDateFilter] = useState("today");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [numberOfDays, setNumberOfDays] = useState(0);
+
+
 
   useEffect(() => {
     // dispatch(fetchOpenAndClosedTickets({ date_filter: "today" }));
@@ -32,8 +46,19 @@ const BalanceComp = () => {
     dispatch(
       fetchTopMenuItems({ branch_id: selectedBranch?.id, date_filter: "today" })
     );
+
     dispatch(fetchCustomerTransaction({ date_filter: "today" }));
-  }, [dispatch]);
+
+    dispatch(fetchOpenClosedTickets({
+      date_filter: dateFilter,
+      startDate,
+      endDate,
+      number_of_days: numberOfDays,
+      branch_id: selectedBranch?.id,
+    }))
+
+
+  }, [dispatch, selectedBranch?.id, dateFilter, startDate, endDate, numberOfDays]);
 
   const changeVisibility = () => {
     setShowBalance(!showBalance);
@@ -45,6 +70,12 @@ const BalanceComp = () => {
     endDate?: string,
     number_of_days?: number
   ) => {
+
+    setDateFilter(date_filter);
+    setStartDate(startDate || "");
+    setEndDate(endDate || "");
+    setNumberOfDays(number_of_days || 0);
+
     dispatch(
       fetchOpenAndClosedTickets({
         date_filter,
@@ -53,6 +84,13 @@ const BalanceComp = () => {
         number_of_days,
       })
     );
+    fetchOpenClosedTickets({
+      date_filter,
+      startDate,
+      endDate,
+      number_of_days,
+      branch_id: selectedBranch.id,
+    });
     dispatch(
       fetchTotalSales({ date_filter, startDate, endDate, number_of_days })
     );
@@ -89,18 +127,8 @@ const BalanceComp = () => {
         number_of_days,
       })
     );
+
   };
-
-
-
-
-  const { openOrderData, closedOrderData } = useSelector((state: RootState) => state.tickets);
-
-  const closedTickets = closedOrderData?.length || 0;
-  const processedOrders = openOrderData?.length || 0;
-
-  // console.log("Open Order Data:", openOrderData);
-  // console.log("Closed Order Data:", closedOrderData);
 
   return (
     <div>
@@ -143,14 +171,14 @@ const BalanceComp = () => {
             <img src={restaurant_menu} alt="confirmation_number" />
             <h6 className={clsx(styles.manage)}>
               {" "}
-              {loading ? "Loading..." : `${processedOrders} Open Orders`}
+              {loading ? "Loading..." : `${openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets || 0} Open Orders`}
             </h6>
           </div>
           <div className="flex items-center justify-start gap-1">
             <img src={confirmation_number} alt="confirmation_number" />
             <h6 className={clsx(styles.manage)}>
               {" "}
-              {loading ? "Loading..." : `${closedTickets} Closed Tickets`}
+              {loading ? "Loading..." : `${openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets || 0} Closed Tickets`}
             </h6>
           </div>
         </div>

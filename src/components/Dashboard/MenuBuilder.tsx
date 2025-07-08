@@ -83,7 +83,7 @@ const MenuBuilder = () => {
     if (selectedBranch) {
       dispatch(fetchMenuCategories(selectedBranch.id));
     }
-  }, [selectedBranch]);
+  }, [selectedBranch, dispatch]);
 
   // Add new menu category
   const handleAddMenu = () => {
