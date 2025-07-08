@@ -2,13 +2,14 @@ import { convertToBase64 } from "../../../utils/imageToBase64";
 import React, { useEffect, useState } from "react";
 import imageIcon from "../../../assets/image.svg";
 import CustomInput from "../../inputFields/CustomInput";
-import { RxCaretDown } from "react-icons/rx";
+// import { RxCaretDown } from "react-icons/rx";
 import axios from "axios";
 import { SERVER_DOMAIN } from "../../../Api/Api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMenuItemsWithoutStatus } from "../../../slices/menuSlice";
 import { AppDispatch } from "@/src/store/store";
+import MultiSelectCustomComp from "./MultiSelectCustomComp";
 
 type Props = {
   onCancel: () => void;
@@ -68,22 +69,19 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 
   const [fetchedModifierGroups, setFetchedModifierGroups] = useState<any[]>([]);
   const [isGroupFetching, setIsGroupFetching] = useState(false);
-  // const [selectedMod, setSelectedMod] = useState<string[]>([]);
-  const [selectedMod, setSelectedMod] = useState<string[]>([]);
 
-  const handleSelectedMod = (value: string) => {
-    if (selectedMod.includes(value)) {
-      setSelectedMod(selectedMod.filter((item) => item !== value));
-    } else {
-      setSelectedMod([...selectedMod, value]);
-    }
-  };
+  // const [selectedMod, setSelectedMod] = useState<string[]>([]);
+  const [extras, setExtras] = useState<string[]>([]);
+  const [complimentary, setComplimentary] = useState<string[]>([]);
+
 
   // const handleSingleSelectmod = (value: string) => {
   //   setSelectedMod(value);
   // };
 
-  console.log("selectedMod", selectedMod);
+  // console.log("selectedMod", selectedMod);
+  console.log("extras", extras);
+  console.log("complimentary", complimentary);
 
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
@@ -111,8 +109,10 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 
       if (editData?.modifierGroups) {
         const mod = editData?.modifierGroups.map((item: any) => item.modifier_group_name);
+        const com = editData?.complimentary.map((item: any) => item.modifier_group_name);
         console.log(mod)
-        setSelectedMod(mod);
+        setExtras(mod);
+        setComplimentary(com);
       }
 
     }
@@ -159,7 +159,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
           menu_item_name: menuName,
           description: menuDescription,
           price: Number(menuPrice),
-          modifier_groups: selectedMod,
+          modifier_groups: extras,
+          complimentary,
           image
         },
         headers
@@ -214,7 +215,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       name: menuName,
       description: menuDescription,
       price: Number(menuPrice),
-      modifier_groups: selectedMod,
+      modifier_groups: extras,
+      complimentary,
       image
     }
 
@@ -274,9 +276,8 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
     fetchModifierGroups()
   }, [selectedBranch?.id]);
 
-  console.log("fetchedModifierGroups", fetchedModifierGroups);
+  // console.log("fetchedModifierGroups", fetchedModifierGroups);
 
-  const [showMod, setShowMod] = useState(false);
 
 
   return (
@@ -311,35 +312,27 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
         />
       </div>
 
-      <div>
-        <label className="block mb-1 font-medium">Add modifier</label>
+      <h3 className="text-base py-2 mt-8 mb-2 font-[500] Capitalize text-black border-b-gray-300 border-b">{editId ? "Edit Menu Item Modifiers" : "Select Menu Item Modifiers"}</h3>
 
-        <div
-          className="flex items-center justify-between w-full px-4 py-2 mb-2 border rounded"
-          onClick={() => setShowMod(!showMod)}
-        >
-          {/* {selectedMod.length > 0 ? <p className="text-sm">{selectedMod}</p> : <p>Select modifier</p>} */}
-          {selectedMod.length > 0 ? <p className="text-sm">{selectedMod.join(", ")}</p> : <p>Select modifier</p>}
-          <RxCaretDown className={`${showMod ? "rotate-180" : ""} w-6 h-6`} />
-        </div>
-        {showMod &&
-          <div className={`duration-500 ease-in-out ${showMod ? "duration-500 ease-in-out h-[100%] block" : "duration-500 ease-in-out h-0 hidden"}`}>
-            <div className={`flex flex-wrap gap-2 `}>
-              {fetchedModifierGroups.length === 0 && !isGroupFetching && <p className="text-sm">No modifier groups found</p>}
-              {fetchedModifierGroups.map((mod) => (
-                <span
-                  // onClick={() => handleSingleSelectmod(mod?.modifier_group_name)}
-                  onClick={() => handleSelectedMod(mod?.modifier_group_name)}
-                  key={mod?.id}
-                  className={`px-3 py-1 text-sm  rounded-full cursor-pointer hover:bg-gray-200 ${selectedMod.includes(mod?.modifier_group_name) ? "bg-gray-900 text-white" : "bg-gray-100"}`}
-                >
-                  {mod?.modifier_group_name}
-                </span>
-              ))}
-            </div>
-          </div>
-        }
-      </div>
+      <MultiSelectCustomComp
+        label="Select Complimentary"
+        description="These items will not be charged"
+        placeholder="Select complimentary items..."
+        menuItemList={fetchedModifierGroups}
+        isFetchingItemList={isGroupFetching}
+        setSelectedItems={setComplimentary}
+        selectedItems={complimentary}
+      />
+
+      <MultiSelectCustomComp
+        label="Select Extras"
+        description="These items will be charged"
+        placeholder="Select extras..."
+        menuItemList={fetchedModifierGroups}
+        isFetchingItemList={isGroupFetching}
+        setSelectedItems={setExtras}
+        selectedItems={extras}
+      />
 
       <div className="">
         <p className=" text-[18px] mb-[8px] font-[500] text-grey500">
@@ -420,3 +413,35 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 };
 
 export default MenuItemForm;
+
+
+
+//  <div>
+//         <label className="block mb-1 font-medium">Add modifier</label>
+
+//         <div
+//           className="flex items-center justify-between w-full px-4 py-2 mb-2 border rounded"
+//           onClick={() => setShowMod(!showMod)}
+//         >
+//           {/* {selectedMod.length > 0 ? <p className="text-sm">{selectedMod}</p> : <p>Select modifier</p>} */}
+//           {selectedMod.length > 0 ? <p className="text-sm">{selectedMod.join(", ")}</p> : <p>Select modifier</p>}
+//           <RxCaretDown className={`${showMod ? "rotate-180" : ""} w-6 h-6`} />
+//         </div>
+//         {showMod &&
+//           <div className={`duration-500 ease-in-out ${showMod ? "duration-500 ease-in-out h-[100%] block" : "duration-500 ease-in-out h-0 hidden"}`}>
+//             <div className={`flex flex-wrap gap-2 `}>
+//               {fetchedModifierGroups.length === 0 && !isGroupFetching && <p className="text-sm">No modifier groups found</p>}
+//               {fetchedModifierGroups.map((mod) => (
+//                 <span
+//                   // onClick={() => handleSingleSelectmod(mod?.modifier_group_name)}
+//                   onClick={() => handleSelectedMod(mod?.modifier_group_name)}
+//                   key={mod?.id}
+//                   className={`px-3 py-1 text-sm  rounded-full cursor-pointer hover:bg-gray-200 ${selectedMod.includes(mod?.modifier_group_name) ? "bg-gray-900 text-white" : "bg-gray-100"}`}
+//                 >
+//                   {mod?.modifier_group_name}
+//                 </span>
+//               ))}
+//             </div>
+//           </div>
+//         }
+//       </div>
