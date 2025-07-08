@@ -27,6 +27,7 @@ import tableReducer from "../slices/TableSlice";
 import outletReducer from "../slices/OutletSlice";
 import overviewReducer from "../slices/overviewSlice";
 import TicketReducer from "../slices/ticketsSlice";
+import OpenCloseTicketReducer from "../slices/OpenCloseTicketSlice";
 import allBusinessInfoReducer from "../slices/businessPersonalAccountSlice";
 
 const rootReducer = combineReducers({
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   outlet: outletReducer,
   overview: overviewReducer,
   tickets: TicketReducer,
+  openCloseTickets: OpenCloseTicketReducer,
   allBusinessInfo: allBusinessInfoReducer,
 });
 

@@ -20,7 +20,7 @@ export const fetchAllBusinessInfo = createAsyncThunk(
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log("all business info", response);
+      // console.log("all business info", response);
       // return response.data.data.business_information;
       return response.data.data;
     } catch (error: any) {

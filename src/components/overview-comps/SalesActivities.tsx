@@ -34,7 +34,7 @@ const SalesActivities = () => {
     totalCustomerTransaction,
   } = useSelector((state: RootState) => state.overview);
 
-  console.log("salesGrowthRate", salesGrowthRate)
+  // console.log("salesGrowthRate", salesGrowthRate)
   // console.log("totalSales", totalSales)
   // console.log("averageOrderValue", averageOrderValue)
   // console.log("totalCustomerTransaction", totalCustomerTransaction)
