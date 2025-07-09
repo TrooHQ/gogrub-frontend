@@ -178,7 +178,7 @@ const BusinessProfiles: React.FC = () => {
         ) : (
           <button
             onClick={handleNext}
-            className="px-6 py-3 ml-auto font-semibold text-white border-2 rounded border-text-gray-800 bg-text-gray-800"
+            className="px-6 py-3 ml-auto font-semibold text-white bg-gray-800 border-2 border-gray-800 rounded"
             disabled={loading}
           >
             {loading ? "Loading..." : "Save and continue"}
