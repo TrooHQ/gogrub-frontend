@@ -2,6 +2,9 @@ import { CloseRounded } from "@mui/icons-material"
 import dayjs from "dayjs"
 
 export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrderId: (id: string | null) => void, SingleOrderItem: any }) {
+
+  console.log("SingleOrderItem", SingleOrderItem);
+
   return (
     <div className='w-full lg:w-[55vw] max-w-[860px] bg-white rounded-md h-[65vh]  max-h-[540px] overflow-hidden z-50'>
       <div className='grid w-full h-full overflow-y-hidden grid-col-1 lg:grid-cols-5'>
