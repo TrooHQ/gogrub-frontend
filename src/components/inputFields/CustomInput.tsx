@@ -11,7 +11,7 @@ interface CustomInputProps {
   fullWidth?: boolean;
   readOnly?: boolean;
   placeholder?: string;
-  required?: string;
+  required?: string | boolean;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({

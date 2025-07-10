@@ -73,10 +73,10 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
       businessAddress.trim() !== "" &&
       businessPhoneNumber.trim() !== "" &&
       businessType.trim() !== "" &&
-      cacNumber?.trim() !== "" &&
       password.trim() !== "" &&
       confirmPassword.trim() !== "" &&
       password === confirmPassword // Add matching logic
+      // cacNumber?.trim() !== "" &&
     );
   };
 
@@ -89,11 +89,11 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
     businessAddress,
     businessPhoneNumber,
     businessType,
-    cacNumber,
     password,
     confirmPassword,
   ]);
 
+  // cacNumber,
 
   return (
     <div className="grid gap-5">
@@ -101,21 +101,21 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
         type="text"
         label="Business name"
         value={businessName as any}
-        required="true"
+        required={true}
         onChange={(newValue) => handleInputChange("businessName", newValue)}
       />
       <CustomInput
         type="email"
         label="Business email"
         value={businessEmail as any}
-        required="true"
+        required={true}
         onChange={(newValue) => handleInputChange("businessEmail", newValue)}
       />
       <CustomInput
         type="text"
         label="Business contact (Owner's name)"
         value={business_contract_person as any}
-        required="true"
+        required={true}
         onChange={(newValue) =>
           handleInputChange("business_contract_person", newValue)
         }
@@ -124,14 +124,14 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
         type="text"
         label="Business address"
         value={businessAddress}
-        required="true"
+        required={true}
         onChange={(newValue) => handleInputChange("businessAddress", newValue)}
       />
       <CustomInput
         type="text"
         label="Business phone number"
         value={businessPhoneNumber}
-        required="true"
+        required={true}
         onChange={(newValue) =>
           handleInputChange("businessPhoneNumber", newValue)
         }
@@ -146,7 +146,7 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
         type="text"
         label="Category"
         value={businessType}
-        required="true"
+        required={true}
         readOnly={true}
         onChange={(value) => handleInputChange("businessType", value)}
       />
@@ -154,7 +154,7 @@ const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({ onValidityChange })
         type="text"
         label="CAC Number"
         value={cacNumber as any}
-        required="true"
+        required={false}
         maxLength={10}
         onChange={(newValue) => handleInputChange("cacNumber", newValue)}
       />
