@@ -5,6 +5,10 @@ import Modal from "../Modal";
 // import CustomInput from "../inputFields/CustomInput";
 // import { toast } from "react-toastify";
 import AddDeliveryService from "./AddDeliveryService";
+import { SERVER_DOMAIN } from "../../Api/Api";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { fetchDeliveryDetails } from "../../slices/assetSlice";
 
 // interface DeliveryDetails {
 //   state: string;
@@ -44,6 +48,26 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
 
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
+  };
+
+  const deleteDeliveryAddress = async () => {
+    // Handle delete delivery service logic here
+    // /asset/deleteDeliveryDetails/:delivery_id
+    try {
+      const token = localStorage.getItem("token");
+      const resp = await axios.delete(
+        `${SERVER_DOMAIN}/asset/deleteDeliveryDetails/${deliveryDetails._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(resp)
+      toast.success("Successfully deleted");
+      fetchDeliveryDetails();
+      window.location.reload();
+    } catch (error: any) {
+      console.log(error)
+      toast.error("Error deleting");
+    }
+
   };
 
   return (
@@ -88,7 +112,7 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
                     onClose={handleMenuClose}
                   >
                     <MenuItem onClick={handleEditClick}>Edit</MenuItem>
-                    <MenuItem onClick={() => { }}>Delete</MenuItem>
+                    <MenuItem onClick={deleteDeliveryAddress}>Delete</MenuItem>
                   </Menu>
                 </td>
               </tr>
