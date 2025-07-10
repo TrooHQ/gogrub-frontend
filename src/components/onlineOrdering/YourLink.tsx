@@ -48,12 +48,12 @@ const YourLink = () => {
         <div>
           <div className="flex flex-col items-center justify-center h-full pt-[100px]">
             <h3 className="text-[#121212] text-center font-sans text-[20px] not-italic font-medium leading-[26px] tracking-[0.15px]">
-              Please fill in your bank information to generate your online ordering link.
+              Fill in your bank information for your payment remittance
             </h3>
-            <p className="text-gray-500 text-center mt-4">
+            <p className="mt-4 text-center text-gray-500">
             </p>
-            <Link to="/business-information" className="text-white mt-4 py-2 px-4 rounded bg-black">
-              {/* <span className="border border-purple-500 p-4 rounded hover:bg-purple-500 hover:text-white transition-colors"> */}
+            <Link to="/business-information" className="px-4 py-2 mt-4 text-white bg-black rounded">
+              {/* <span className="p-4 transition-colors border border-purple-500 rounded hover:bg-purple-500 hover:text-white"> */}
               Complete Account Details
               {/* </span> */}
             </Link>
@@ -82,7 +82,7 @@ const YourLink = () => {
           </div> */}
 
               {/* {!isCustomizing && (
-            <div className="mt-11 text-center">
+            <div className="text-center mt-11">
               <button
                 className="text-[#3E3C7F] bg-white py-3 px-6 rounded mt-5 border border-black w-fit"
                 onClick={handleCustomizeClick}
@@ -93,9 +93,9 @@ const YourLink = () => {
           )} */}
 
               {/* {isCustomizing && (
-            <div className="flex flex-col items-center mt-8 gap-4">
+            <div className="flex flex-col items-center gap-4 mt-8">
               <div className="flex gap-2 items-center border border-gray-300 rounded-md overflow-hidden shadow-sm w-[60%]">
-                <span className="bg-gray-100 text-gray-500 px-3 py-2">
+                <span className="px-3 py-2 text-gray-500 bg-gray-100">
                   https://gogrub.com/
                 </span>
                 <input
@@ -103,18 +103,18 @@ const YourLink = () => {
                   placeholder="Please enter your preferred URL"
                   value={customLink}
                   onChange={(e) => setCustomLink(e.target.value)}
-                  className="focus:outline-none px-2 py-2 text-gray-500 w-full"
+                  className="w-full px-2 py-2 text-gray-500 focus:outline-none"
                 />
               </div>
               <div className="flex gap-4">
                 <button
-                  className="bg-black text-white py-2 px-4 rounded"
+                  className="px-4 py-2 text-white bg-black rounded"
                   onClick={handleGenerateClick}
                 >
                   Generate link
                 </button>
                 <button
-                  className="bg-white text-gray-500 border border-purple-500 py-2 px-4 rounded"
+                  className="px-4 py-2 text-gray-500 bg-white border border-purple-500 rounded"
                   onClick={handleCancelClick}
                 >
                   Cancel
