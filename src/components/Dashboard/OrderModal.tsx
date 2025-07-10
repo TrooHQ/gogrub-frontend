@@ -87,17 +87,18 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
 
 const OrderItemComp = ({ item }: any) => {
 
-  const { name, quantity, selectedOptions, specialInstructions } = item;
+  const { name, quantity, selectedOptions, specialInstructions, complimentary } = item;
 
   console.log("selectedOptions", selectedOptions)
 
   return (
     <div className="w-full p-3 my-3 bg-gray-100 rounded-md">
-      <div className='flex items-center justify-between'>
+      <div className='flex items-center justify-between pb-2 mb-2 border-b border-gray-200'>
         <p className='text-sm font-medium text-gray-900'>{name}</p>
         <p className='text-xs font-medium text-gray-900'>{quantity}x</p>
       </div>
-      <p className='mt-1 mb-2.5 text-xs text-gray-500'>{selectedOptions.map((opt: any) => opt.name).join(", ")}</p>
+      {complimentary.length > 0 && <p className='mt-1 mb-2.5 text-xs text-gray-500 pb-2 border-b border-gray-200'><span className="mr-2 font-semibold">Complimentary:</span>{complimentary.map((opt: any) => opt).join(", ")}</p>}
+      {selectedOptions.length > 0 && <p className='mt-1 mb-2.5 text-xs text-gray-500 pb-2 border-b border-gray-200'><span className="mr-2 font-semibold">Extras:</span>{selectedOptions.map((opt: any) => opt.name).join(", ")}</p>}
       <p className='text-xs font-semibold text-gray-800'>Special Instructions: <span className='font-medium text-gray-500'>{specialInstructions ?? "not specified"}</span></p>
     </div>
   )
