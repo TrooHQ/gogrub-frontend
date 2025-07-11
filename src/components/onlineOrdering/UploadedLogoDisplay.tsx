@@ -118,7 +118,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
           </div>
         </div>
         {/* Generated Link Box */}
-        <div className="rounded-lg p-0 w-full flex items-center justify-between">
+        <div className="flex items-center justify-between w-full p-0 rounded-lg">
           <div className="flex items-center gap-4">
             {/* QR Code Placeholder */}
             <div className="w-[50px] h-[50px] bg-gray-300 flex items-center justify-center rounded-md">
@@ -147,7 +147,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
 
       {/* Description and instruction form */}
       {/* {showForm && ( */}
-      <form className="w-4/5 mt-5 flex flex-col gap-4">
+      <form className="flex flex-col w-4/5 gap-4 mt-5">
         <CustomInput
           type="text"
           label="Add Business Full Name*"
@@ -166,7 +166,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
         />
         <CustomTextarea
           label="Add your instruction*"
-          placeholder="E.g. Orders are accepted from 12 PM to 5 PM, Monday to Friday. Tap the link to start receiving online orders."
+          placeholder="E.g. Orders are accepted from 12 PM to 5 PM, Monday to Friday. Tap the button to start ordering."
           value={instruction}
           onChange={handleInstructionChange}
         // maxLength={4}
