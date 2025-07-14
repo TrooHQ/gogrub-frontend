@@ -91,7 +91,7 @@ const CreatePin = () => {
 
           {/* Button and loading state */}
           <button
-            className="bg-black w-full text-center text-white py-3 rounded mt-4 hover:bg-purple600 transition"
+            className="bg-black w-full text-center text-white py-3 rounded mt-4 hover:bg-gray-600 transition"
             onClick={handleSubmit}
             disabled={loading}
           >

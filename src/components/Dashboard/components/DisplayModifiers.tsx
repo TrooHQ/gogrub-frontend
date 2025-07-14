@@ -122,7 +122,7 @@ const DisplayModifiers: React.FC<DisplayModifiersProps> = ({
 
               {/* Display modifiers when the group is expanded */}
               {expandedGroupId === modifierGroup._id && (
-                <div className="p-4 mt-2 border-l-4 border-purple-500 rounded-md bg-gray-50">
+                <div className="p-4 mt-2 border-l-4 border-gray-500 rounded-md bg-gray-50">
                   {modifierGroup.modifiers.length > 0 ? (
                     modifierGroup.modifiers.map((modifier, index) => (
                       <div
