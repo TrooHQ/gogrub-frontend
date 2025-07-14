@@ -53,9 +53,7 @@ const YourLink = () => {
             <p className="mt-4 text-center text-gray-500">
             </p>
             <Link to="/business-information" className="px-4 py-2 mt-4 text-white bg-black rounded">
-              {/* <span className="p-4 transition-colors border border-purple-500 rounded hover:bg-purple-500 hover:text-white"> */}
               Complete Account Details
-              {/* </span> */}
             </Link>
           </div>
         </div> :

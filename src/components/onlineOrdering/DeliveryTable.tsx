@@ -9,6 +9,8 @@ import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { fetchDeliveryDetails } from "../../slices/assetSlice";
+import DeleteAlert from "../../assets/mdi_delete.png";
+import Close from "../../assets/closeIcon.svg";
 
 // interface DeliveryDetails {
 //   state: string;
@@ -70,6 +72,12 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
 
   };
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleDeleteModal = () => {
+    setIsDeleteModalOpen(!isDeleteModalOpen);
+  };
+
   return (
     <div>
       {deliveryDetails ? (
@@ -112,7 +120,7 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
                     onClose={handleMenuClose}
                   >
                     <MenuItem onClick={handleEditClick}>Edit</MenuItem>
-                    <MenuItem onClick={deleteDeliveryAddress}>Delete</MenuItem>
+                    <MenuItem onClick={() => setIsDeleteModalOpen(!isDeleteModalOpen)}>Delete</MenuItem>
                   </Menu>
                 </td>
               </tr>
@@ -125,6 +133,8 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
         </p>
       )}
 
+      <DeleteModal handleConfirmDelete={deleteDeliveryAddress} isDeleteModalOpen={isDeleteModalOpen} handleDeleteModal={handleDeleteModal} />
+
       {/* Edit Delivery Details Modal */}
       <Modal isOpen={isEditModalOpen} onClose={handleCloseEditModal}>
         <AddDeliveryService editId={deliveryDetails?._id} onClose={handleCloseEditModal} />
@@ -134,3 +144,42 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
 };
 
 export default DeliveryTable;
+
+
+const DeleteModal = ({ handleConfirmDelete, isDeleteModalOpen, handleDeleteModal }: { handleConfirmDelete: () => void, isDeleteModalOpen: boolean, handleDeleteModal: () => void }) => {
+
+
+
+  return (
+    <Modal isOpen={isDeleteModalOpen} onClose={handleDeleteModal}>
+      <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[539px]">
+        <div
+          className="flex items-center justify-end cursor-pointer"
+          onClick={handleDeleteModal}
+        >
+          <img src={Close} alt="Close" />
+        </div>
+        <div className="flex flex-col items-center justify-center gap-6">
+          <img src={DeleteAlert} alt="Close" className="w-[64px] h-[64px]" />
+          <p className="text-[16px] font-[400] text-grey500">
+            Are you sure you want to delete this?
+          </p>
+          <div className="flex items-center justify-center gap-4 mt-5">
+            <button
+              className="border cursor-pointer border-[#090909] rounded px-[24px] py-[10px] font-[600] text-[#090909]"
+              onClick={handleDeleteModal}
+            >
+              No
+            </button>
+            <button
+              className="border border-[#090909] bg-[#090909] rounded px-[24px] py-[10px] font-[500] text-white"
+              onClick={handleConfirmDelete}
+            >
+              {"Yes"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  )
+}

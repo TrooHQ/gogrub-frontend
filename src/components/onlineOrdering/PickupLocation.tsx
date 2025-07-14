@@ -40,12 +40,6 @@ const PickupLocation = () => {
   }, [dispatch]);
 
 
-
-  // useEffect(() => {
-  //   const storedValue = localStorage.getItem("online_ordering_pickup_enabled");
-  //   setIsPickupEnabled(storedValue ? JSON.parse(storedValue) : false);
-  // }, []);
-
   const handleToggleChange = async () => {
     setIsPickupEnabled((isPickupEnabled: boolean) => !isPickupEnabled);
     // localStorage.setItem("online_ordering_pickup_enabled", JSON.stringify(!isPickupEnabled));

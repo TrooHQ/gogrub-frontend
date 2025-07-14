@@ -308,9 +308,9 @@ const EmployeeSidebar: React.FC<EmployeeSidebarProps> = ({ userType }) => {
                           <NavLink to={subMenuItem.link || "#"}>
                             <li
                               key={subIndex}
-                              className={`flex  p-2 cursor-pointer py-2 hover:bg-purple700  text-gray-400 text-sm items-center gap-x-4 ${isMenuItemActive(subMenuItem.link || "")
-                                  ? "text-white"
-                                  : ""
+                              className={`flex  p-2 cursor-pointer py-2 hover:bg-gray-700  text-gray-400 text-sm items-center gap-x-4 ${isMenuItemActive(subMenuItem.link || "")
+                                ? "text-white"
+                                : ""
                                 }`}
                             >
                               {subMenuItem.title}

@@ -75,7 +75,6 @@ export default function App() {
           <Route path="/fast-food" element={<FastFoodPage />} />
           <Route path="/food-truck" element={<FoodTruckPage />} />
           <Route path="/request-demo" element={<DemoPage />} />
-
           <Route path="/tabs" element={<BusinessTabs />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/manage-users" element={<ManageUsers />} />

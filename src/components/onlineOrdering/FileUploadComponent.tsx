@@ -134,7 +134,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         <div className="flex justify-start items-center">
           <button
             onClick={getYourLink}
-            className="px-4 py-2 text-gray-500 border border-black rounded-lg hover:bg-purple-100"
+            className="px-4 py-2 text-gray-500 border border-black rounded-lg hover:bg-gray-100"
           >
             Get Your Link
           </button>
@@ -181,7 +181,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
         </p>
         <div className="flex justify-between items-center mb-4 mt-4">
           <button
-            className="px-4 py-2 text-gray-500 border border-black rounded-[5px] hover:bg-purple-100"
+            className="px-4 py-2 text-gray-500 border border-black rounded-[5px] hover:bg-gray-100"
             onClick={backFromSelection}
           >
             Cancel
@@ -223,13 +223,13 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
       </div>
       <div className="flex justify-between items-center mb-4">
         <button
-          className="px-4 py-2 text-gray-500 border borderpurple-500 rounded-lg hover:bg-purple-100"
+          className="px-4 py-2 text-gray-500 border borderpurple-500 rounded-lg hover:bg-gray-100"
           onClick={backFromSelection}
         >
           Cancel
         </button>
         <button
-          className={`px-4 py-2 text-white rounded-lg ${uploadProgress === 100 ? "bgpurple-500" : "bg-purple-300"
+          className={`px-4 py-2 text-white rounded-lg ${uploadProgress === 100 ? "bgpurple-500" : "bg-gray-300"
             }`}
           disabled={uploadProgress < 100}
         >
