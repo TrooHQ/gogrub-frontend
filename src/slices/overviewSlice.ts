@@ -91,10 +91,10 @@ export const fetchCustomerData = createAsyncThunk(
       number_of_days,
     }: {
       businessIdentifier?: string;
-      date_filter: string;
-      startDate?: string;
-      endDate?: string;
-      number_of_days?: number;
+      date_filter?: string | number;
+      startDate?: string | number;
+      endDate?: string | number;
+      number_of_days?: string | number;
     },
     { rejectWithValue }
   ) => {
@@ -242,10 +242,10 @@ export const fetchCustomerTransaction = createAsyncThunk(
       endDate,
       number_of_days,
     }: {
-      date_filter: string;
-      startDate?: string;
-      endDate?: string;
-      number_of_days?: number;
+      date_filter?: string | number;
+      startDate?: string | number;
+      endDate?: string | number;
+      number_of_days?: string | number;
     },
     { rejectWithValue }
   ) => {
@@ -287,13 +287,13 @@ export const fetchAverageOrderValue = createAsyncThunk(
   async (
     {
       date_filter,
-      startDate,
-      endDate,
+      start_date,
+      end_date,
       number_of_days,
     }: {
       date_filter: string;
-      startDate?: string;
-      endDate?: string;
+      start_date?: string;
+      end_date?: string;
       number_of_days?: number;
     },
     { rejectWithValue }
@@ -303,8 +303,8 @@ export const fetchAverageOrderValue = createAsyncThunk(
 
       const params: any = { date_filter };
       if (date_filter === "date_range") {
-        params.startDate = startDate;
-        params.endDate = endDate;
+        params.start_date = start_date;
+        params.end_date = end_date;
       } else if (date_filter !== "today") {
         params.number_of_days = number_of_days;
       }

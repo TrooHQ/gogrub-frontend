@@ -40,7 +40,7 @@ export const fetchOpenClosedTickets = createAsyncThunk(
       });
       // https://troox-backend-new.vercel.app/api/getOpenAndClosedTickets?date_filter=days&number_of_days=90
       const response = await axios.get(
-        `${SERVER_DOMAIN}/getOpenAndClosedTickets/?branch_id=${branch_id}&date_filter=${date_filter}&startDate=${startDate}&endDate=${endDate}&number_of_days=${number_of_days}`,
+        `${SERVER_DOMAIN}/getGoGrubOpenAndClosedTickets/?branch_id=${branch_id}&date_filter=${date_filter}&startDate=${startDate}&endDate=${endDate}&number_of_days=${number_of_days}`,
         headers
       );
       // console.log("call made", response.data);

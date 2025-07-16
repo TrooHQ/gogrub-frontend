@@ -20,6 +20,7 @@ import chip from "../../assets/chip.svg";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { FiArrowDownRight, FiArrowUpRight, FiArrowRight } from "react-icons/fi";
+import DateFilterComp from "./components/DateFilterComp";
 
 const CustomerData = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,6 +36,25 @@ const CustomerData = () => {
   console.log("totalCustomerTransaction", totalCustomerTransaction);
   console.log("customerData", customerData);
 
+  const [filterValue, setFilterValue] = useState<string | number | undefined>("today")
+  const [noOfDays, setNoOfDays] = useState<string | number | undefined>("today")
+  const [start_date, setStartDate] = useState<string | undefined>();
+  const [end_date, setEndDate] = useState<string | undefined>();
+
+  const handleFilterChange = (
+    filter?: string | number,
+    number_of_days?: string | number,
+    startDate?: string,
+    endDate?: string
+  ) => {
+
+    setFilterValue(filter);
+    setNoOfDays(number_of_days);
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
+
+
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
@@ -47,11 +67,11 @@ const CustomerData = () => {
     dispatch(
       fetchCustomerData({
         businessIdentifier: userDetails?._id?.toString(),
-        date_filter: "",
+        date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date,
       })
     );
-    dispatch(fetchCustomerTransaction({ date_filter: "" }));
-  }, [dispatch, userDetails?._id]);
+    dispatch(fetchCustomerTransaction({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date }));
+  }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date]);
 
   const [orderCount, setOrderCount] = useState<any>({});
   const token = localStorage.getItem("token");
@@ -187,7 +207,18 @@ const CustomerData = () => {
       <DashboardLayout>
         <TopMenuNav pathName="Customer Data" />
 
-        <div className="rounded-[10px] border border-[#f1f0f0] bg-white px-6 py-7 mt-10">
+        <div className="my-4">
+
+          <DateFilterComp
+            handleFilterChange={handleFilterChange}
+            noOfDays={noOfDays}
+            filterValue={filterValue}
+            setFilterValue={setFilterValue}
+            setNoOfDays={setNoOfDays}
+          />
+        </div>
+
+        <div className="rounded-[10px] border border-[#f1f0f0] bg-white px-6 py-7 ">
           <div className="hidden ">
             <div className="flex items-center justify-between ">
               <h3 className="text-2xl font-normal text-[#121212]">

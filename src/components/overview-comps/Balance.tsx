@@ -97,8 +97,8 @@ const BalanceComp = () => {
     dispatch(
       fetchAverageOrderValue({
         date_filter,
-        startDate,
-        endDate,
+        start_date: startDate,
+        end_date: endDate,
         number_of_days,
       })
     );
