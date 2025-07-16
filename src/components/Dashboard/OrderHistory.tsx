@@ -6,15 +6,17 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 // import ChangeBranchForTicket from "./ChangeBranchForTicket";
-import { CalendarMonth } from "@mui/icons-material";
+// import { CalendarMonth } from "@mui/icons-material";
 import * as XLSX from "xlsx"; // For Excel export
 import { saveAs } from "file-saver"; // To save files locally
 import Papa from "papaparse"; // For CSV export
 import { truncateText } from "../../utils/truncateText";
-import { DatePicker, Space } from "antd";
 import ViewOrderModal from "./OrderModal";
+import DateFilterComp from "./components/DateFilterComp";
 
-const { RangePicker } = DatePicker;
+// export interface filterProps {
+
+// }
 
 const OrderHistory = () => {
   const { selectedBranch } = useSelector((state: any) => state.branches);
@@ -22,13 +24,12 @@ const OrderHistory = () => {
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [data, setData] = useState<any[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<string | number>(
-    "today"
-  );
-  const [selectedFilter2, setSelectedFilter2] = useState<string | number>(
-    "today"
-  );
-  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const [filterValue, setFilterValue] = useState<string | number | undefined>("today")
+  const [noOfDays, setNoOfDays] = useState<string | number | undefined>("today")
+  const [start_date, setStartDate] = useState<string | undefined>();
+  const [end_date, setEndDate] = useState<string | undefined>();
+
   const [showCustomerDetail, setShowCustomerDetail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<any>();
@@ -50,39 +51,39 @@ const OrderHistory = () => {
     setShowCustomerDetail(true);
   };
 
+  useEffect(() => {
+    getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date })
+  }, [filterValue, noOfDays, start_date, end_date]);
+
   const handleFilterChange = (
-    filter: string,
-    number_of_days?: number,
+    filter?: string | number,
+    number_of_days?: string | number,
     startDate?: string,
     endDate?: string
   ) => {
-    setSelectedFilter(number_of_days as any);
-    setSelectedFilter2(filter);
-    getTickets({ date_filter: filter, number_of_days, startDate, endDate });
+
+    setFilterValue(filter);
+    setNoOfDays(number_of_days);
+    setStartDate(startDate);
+    setEndDate(endDate);
+
+    // setSelectedFilter(number_of_days as any);
+    // setSelectedFilter2(filter);
+    // getTickets({ date_filter: filter, number_of_days, startDate, endDate });
   };
 
-  const handleDateChange = (dates: any, dateStrings: [string, string]) => {
-    if (dates) {
-      handleFilterChange(
-        "date_range",
-        undefined,
-        dateStrings[0],
-        dateStrings[1]
-      );
-    }
-    setShowDatePicker(false);
-  };
-  console.log(selectedFilter, "selectedFilter");
+
+  console.log(noOfDays, "noOfDays");
   const getTickets = async ({
     date_filter,
     startDate,
     endDate,
     number_of_days,
   }: {
-    date_filter: string | number;
+    date_filter?: string | number;
     startDate?: string;
     endDate?: string;
-    number_of_days?: number;
+    number_of_days?: string | number;
   }) => {
     const headers = {
       headers: {
@@ -128,7 +129,7 @@ const OrderHistory = () => {
   };
 
   useEffect(() => {
-    getTickets({ date_filter: selectedFilter });
+    getTickets({ date_filter: noOfDays });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBranch, statusFilter]);
 
@@ -276,88 +277,13 @@ const OrderHistory = () => {
             <div className="mt-[40px]">
               {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-[32px]">
-                  <div className="">
-                    <p className="font-[500] text-[16px] text-[#121212]">
-                      Filter by:
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <button
-                      className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter2 === "today"
-                        ? "bg-black text-white"
-                        : "border-gray-400 text-black"
-                        }`}
-                      onClick={() => handleFilterChange("today")}
-                    >
-                      Today
-                    </button>
-                    <button
-                      className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 7
-                        ? "bg-black text-white"
-                        : "border-gray-400 text-black"
-                        }`}
-                      onClick={() => handleFilterChange("days", 7)}
-                    >
-                      7 Days
-                    </button>
-                    <button
-                      className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 30
-                        ? "bg-black text-white"
-                        : "border-gray-400 text-black"
-                        }`}
-                      onClick={() => handleFilterChange("days", 30)}
-                    >
-                      1 Month
-                    </button>
-                    <button
-                      className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 90
-                        ? "bg-black text-white"
-                        : "border-gray-400 text-black"
-                        }`}
-                      onClick={() => handleFilterChange("days", 90)}
-                    >
-                      3 Months
-                    </button>
-
-                    <button
-                      className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 180
-                        ? "bg-black text-white"
-                        : "border-gray-400 text-black"
-                        }`}
-                      onClick={() => handleFilterChange("days", 180)}
-                    >
-                      6 Months
-                    </button>
-
-                    <button
-                      className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${selectedFilter === 365
-                        ? "bg-black text-white"
-                        : "border-gray-400 text-black"
-                        }`}
-                      onClick={() => handleFilterChange("days", 365)}
-                    >
-                      1 Year
-                    </button>
-
-                    {/* Custom Date Picker */}
-                    <div
-                      className="border border-[#B6B6B6] rounded-[5px] px-[16px] py-[8px] font-[400] text-[#121212] cursor-pointer"
-                      onClick={() => setShowDatePicker(!showDatePicker)}
-                    >
-                      <span className="text-[12px] flex items-center gap-1">
-                        <CalendarMonth className="w-4 h-4" />
-                        <span>Custom</span>
-                      </span>
-                    </div>
-
-                    {showDatePicker && (
-                      <Space direction="vertical">
-                        <RangePicker onChange={handleDateChange} />
-                      </Space>
-                    )}
-                  </div>
-                </div>
+                <DateFilterComp
+                  handleFilterChange={handleFilterChange}
+                  noOfDays={noOfDays}
+                  filterValue={filterValue}
+                  setFilterValue={setFilterValue}
+                  setNoOfDays={setNoOfDays}
+                />
                 {/* Export buttons */}
                 <div className="flex items-center gap-[12px]">
                   <div className="relative">
