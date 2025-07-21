@@ -40,8 +40,8 @@ const Login = () => {
 
     try {
       setLoading(true);
-      // const response = await axios.post(`${SERVER_DOMAIN}/login`, {
-      const response = await axios.post(`${SERVER_DOMAIN}/goGrubLogin`, {
+      // const response = await axios.post(`${SERVER_DOMAIN}/goGrubLogin`, {
+      const response = await axios.post(`${SERVER_DOMAIN}/login`, {
         email: Email,
         password: Password,
       });
@@ -113,7 +113,7 @@ const Login = () => {
             </Link>
           </div>
           <div className="" onClick={handleLogin}>
-            <button className="w-full py-3 text-center text-white rounded bg-black">
+            <button className="w-full py-3 text-center text-white bg-black rounded">
               {loading ? "Please wait..." : "Login"}
             </button>
           </div>
