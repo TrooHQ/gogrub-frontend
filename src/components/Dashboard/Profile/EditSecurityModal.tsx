@@ -4,7 +4,9 @@ import { AppDispatch } from "../../../store/store";
 import { SERVER_DOMAIN } from "../../../Api/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { fetchUserDetails } from "../../../slices/UserSlice";
+import { clearUserData, fetchUserDetails } from "../../../slices/UserSlice";
+import { clearSelectedBranch } from "../../../slices/branchSlice";
+import { useNavigate } from "react-router-dom";
 
 interface EditSecurityModalProps {
   credentialType: "email" | "pin";
@@ -30,7 +32,17 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const navigate = useNavigate()
 
+  const handleLogout = () => {
+    dispatch(clearUserData());
+    dispatch(clearSelectedBranch());
+
+    localStorage.clear();
+    sessionStorage.clear();
+
+    navigate("/");
+  };
   // Submit new credentials
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,7 +56,7 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
       // Dispatch Redux action or call the endpoint here
       const token = localStorage.getItem("token");
 
-      await axios.put(`${SERVER_DOMAIN}/updateUserDetails`, payload, {
+      await axios.post(`${SERVER_DOMAIN}/resetPassword`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,6 +64,7 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
       toast.success("Successful!");
       dispatch(fetchUserDetails());
       onClose();
+      handleLogout();
     } catch (error) {
       console.error("Failed to update credentials:", error);
       toast.error("An error occured");
@@ -112,7 +125,7 @@ const EditSecurityModal: React.FC<EditSecurityModalProps> = ({
             >
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 text-white rounded-md bg-black">
+            <button type="submit" className="px-4 py-2 text-white bg-black rounded-md">
               Save
             </button>
           </div>
