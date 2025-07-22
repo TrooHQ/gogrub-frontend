@@ -65,6 +65,12 @@ export const CustomAutocomplete = styled(Autocomplete)({
 });
 
 const Overview: React.FC = () => {
+
+  useEffect(() => {
+    document.title = "Business Dashboard Overview of Your Restaurant’s Performance"
+  }, [])
+
+
   const dispatch = useDispatch<AppDispatch>();
   const { branches, selectedBranch } = useSelector(
     (state: any) => state.branches

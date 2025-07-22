@@ -79,6 +79,12 @@ interface ConfirmationDialogState {
 }
 
 const MenuList = () => {
+
+  useEffect(() => {
+    document.title = "Browse and Review Your Complete Menu Items in One Place"
+  }, [])
+
+
   const dispatch = useDispatch<AppDispatch>();
 
   const branches = useSelector((state: any) => state.branches.branches);

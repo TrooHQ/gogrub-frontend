@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
 import TopMenuNav from "./TopMenuNav";
 import DeliveryService from "../onlineOrdering/DeliveryService";
@@ -9,6 +9,10 @@ import Themes from "../onlineOrdering/Themes";
 
 const OnlineOrdering = () => {
   // const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    document.title = "Control How Customers Place Orders Online Seamlessly and Efficiently"
+  }, [])
 
   const param = new URLSearchParams(window.location.search);
   const tab = param.get("pg");

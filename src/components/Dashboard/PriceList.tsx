@@ -25,6 +25,11 @@ const CustomPagination = styled(Pagination)(() => ({
 }));
 
 const PriceList = () => {
+
+  useEffect(() => {
+    document.title = "Set and Adjust Prices for Each Menu Item with Flexibility"
+  }, [])
+
   const dispatch = useDispatch<AppDispatch>();
   const {
     menuItems2: menuItems,

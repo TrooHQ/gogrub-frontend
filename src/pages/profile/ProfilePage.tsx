@@ -11,6 +11,11 @@ import { fetchUserDetails } from "../../slices/UserSlice";
 import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
 
 const ProfilePage = () => {
+
+  useEffect(() => {
+    document.title = "Update Your Account Profile, Passwords, and Personal Preferences"
+  }, [])
+
   const dispatch = useDispatch<AppDispatch>();
   // const { userDetails, loading, error } = useSelector((state: any) => state.user);
 

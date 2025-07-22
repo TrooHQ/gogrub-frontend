@@ -12,6 +12,12 @@ import { fetchTickets } from "../../slices/ticketsSlice";
 import ViewOrderModal from "./OrderModal";
 
 const Tickets = () => {
+
+  useEffect(() => {
+    document.title = "View and Manage All Incoming Order Tickets in Real Time"
+  }, [])
+
+
   const { selectedBranch } = useSelector((state: any) => state.branches);
   const { orderData, loadingOrder } = useSelector((state: RootState) => state.tickets);
   const [openTicket, setOpenTicket] = useState<boolean>(false); // to open ticket details modal
