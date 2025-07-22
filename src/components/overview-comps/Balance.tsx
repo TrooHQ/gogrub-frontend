@@ -26,9 +26,9 @@ const BalanceComp = () => {
   const { selectedBranch } = useSelector((state: any) => state.branches);
   const openAndClosedTickets = useSelector((state: any) => state.openCloseTickets);
 
-  console.log("openAndClosedTickets", openAndClosedTickets?.openAndClosedTickets?.data);
-  console.log("openTickets", openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets);
-  console.log("closedTickets", openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets);
+  // console.log("openAndClosedTickets", openAndClosedTickets?.openAndClosedTickets?.data);
+  // console.log("openTickets", openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets);
+  // console.log("closedTickets", openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets);
 
 
   const [dateFilter, setDateFilter] = useState("today");
@@ -58,7 +58,7 @@ const BalanceComp = () => {
     }))
 
 
-  }, [dispatch, selectedBranch?.id, dateFilter, startDate, endDate, numberOfDays]);
+  }, []);
 
   const changeVisibility = () => {
     setShowBalance(!showBalance);

@@ -19,6 +19,12 @@ import DateFilterComp from "./components/DateFilterComp";
 // }
 
 const OrderHistory = () => {
+
+  useEffect(() => {
+    document.title = "Track Your Past Orders, Sales Trends, and Transaction History"
+  }, [])
+
+
   const { selectedBranch } = useSelector((state: any) => state.branches);
   console.log(selectedBranch);
 

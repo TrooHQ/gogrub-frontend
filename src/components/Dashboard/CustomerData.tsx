@@ -23,6 +23,11 @@ import { FiArrowDownRight, FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import DateFilterComp from "./components/DateFilterComp";
 
 const CustomerData = () => {
+
+  useEffect(() => {
+    document.title = "Access and Analyze Valuable Customer Data and Ordering Patterns"
+  }, [])
+
   const dispatch = useDispatch<AppDispatch>();
 
   const userDetails = useSelector(
