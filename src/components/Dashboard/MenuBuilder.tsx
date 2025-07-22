@@ -31,6 +31,11 @@ import MenuItemForm from "./MenuBuilderModals/NewAddMenuModal";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 
 const MenuBuilder = () => {
+
+  useEffect(() => {
+    document.title = "Easily Build, Organize, and Update Your Restaurant Menu"
+  }, [])
+
   const dispatch = useDispatch<AppDispatch>();
   const {
     categories,

@@ -41,11 +41,13 @@ const DaysTab2 = ({
   ]);
   dateRange.toLocaleString();
 
+  console.log("value", value);
 
   const [displayDateRange, setDisplayDateRange] = useState<string>("");
 
   const handleChange = (event: any, newValue: number) => {
     event.preventDefault();
+    console.log("new value", newValue);
     setValue(newValue);
     const date_filter = newValue === 0 ? "today" : "days";
     const number_of_days = parseInt(days[newValue]);

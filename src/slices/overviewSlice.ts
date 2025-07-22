@@ -214,6 +214,7 @@ export const fetchTotalSales = createAsyncThunk(
         params.number_of_days = number_of_days;
       }
 
+      console.log("params", params);
       // const response = await axios.get(`${SERVER_DOMAIN}/getTotalSales`, {
       const response = await axios.get(`${SERVER_DOMAIN}/getGoGrubTotalSales`, {
         params,

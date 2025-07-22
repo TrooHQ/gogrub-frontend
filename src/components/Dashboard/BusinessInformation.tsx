@@ -1,10 +1,15 @@
 import DashboardLayout from "./DashboardLayout";
 import TopMenuNav from "./TopMenuNav";
 import InformationAccordion from "./components/InformationAccordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BranchModal from "./components/BranchModal";
 
 const BusinessInformation = () => {
+
+  useEffect(() => {
+    document.title = "Manage Your Business Details Including Name, Contact, and Address"
+  }, [])
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
