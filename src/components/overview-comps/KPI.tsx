@@ -78,7 +78,7 @@ const KPI = () => {
         </div>
 
         <div className="bg-white rounded-[10px] px-5 py-[48px] flex-grow flex flex-col gap-[22px]">
-          {topMenuItems?.data?.slice(0, 5).map((product: any, index: any) => {
+          {topMenuItems?.data?.map((product: any, index: any) => {
             const indicator = colors[index % colors.length];
             return (
               <div key={index} className="flex items-center justify-between">
