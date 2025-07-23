@@ -21,7 +21,7 @@ export const fetchOpenClosedTickets = createAsyncThunk(
     },
     { rejectWithValue }
   ) => {
-    // console.log("Fetching open and closed tickets with params:");
+    console.log("Fetching open and closed tickets with params:");
 
     try {
       const token = localStorage.getItem("token");
@@ -43,7 +43,7 @@ export const fetchOpenClosedTickets = createAsyncThunk(
         `${SERVER_DOMAIN}/getGoGrubOpenAndClosedTickets/?branch_id=${branch_id}&date_filter=${date_filter}&startDate=${startDate}&endDate=${endDate}&number_of_days=${number_of_days}`,
         headers
       );
-      // console.log("call made", response.data);
+      console.log("call made", response.data);
       return response.data;
     } catch (error: any) {
       toast.error("Error retrieving open tickets");

@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
 
-  fetchTotalSales, fetchOpenAndClosedTickets,
+  fetchTotalSales,
+  // fetchOpenAndClosedTickets,
   fetchAverageOrderValue,
   fetchSalesRevenueGraph,
   fetchTopMenuItems,
@@ -26,9 +27,9 @@ const BalanceComp = () => {
   const { selectedBranch } = useSelector((state: any) => state.branches);
   const openAndClosedTickets = useSelector((state: any) => state.openCloseTickets);
 
-  // console.log("openAndClosedTickets", openAndClosedTickets?.openAndClosedTickets?.data);
-  // console.log("openTickets", openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets);
-  // console.log("closedTickets", openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets);
+  console.log("openAndClosedTickets", openAndClosedTickets?.openAndClosedTickets?.data);
+  console.log("openTickets", openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets);
+  console.log("closedTickets", openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets);
 
 
   const [dateFilter, setDateFilter] = useState("today");
@@ -76,21 +77,21 @@ const BalanceComp = () => {
     setEndDate(endDate || "");
     setNumberOfDays(number_of_days || 0);
 
-    dispatch(
-      fetchOpenAndClosedTickets({
-        date_filter,
-        startDate,
-        endDate,
-        number_of_days,
-      })
-    );
-    fetchOpenClosedTickets({
+    // dispatch(
+    //   fetchOpenAndClosedTickets({
+    //     date_filter,
+    //     startDate,
+    //     endDate,
+    //     number_of_days,
+    //   })
+    // );
+    dispatch(fetchOpenClosedTickets({
       date_filter,
       startDate,
       endDate,
       number_of_days,
       branch_id: selectedBranch.id,
-    });
+    }));
     dispatch(
       fetchTotalSales({ date_filter, startDate, endDate, number_of_days })
     );
