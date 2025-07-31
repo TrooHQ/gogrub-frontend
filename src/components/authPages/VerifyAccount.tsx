@@ -24,16 +24,19 @@ const VerifyAccount = () => {
   const { userDetails } = useSelector((state: RootState) => state.user);
   console.log(userDetails, "userDetails:");
 
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const [userEmail, setUserEmail] = useState<string | null>(searchParams.get("verify-account") || null);
   const [emailInput, setEmailInput] = useState<string>("");
+
 
   console.log("userEmail:", userEmail);
   console.log("emailInput:", emailInput);
+  setUserEmail(searchParams.get("verify-account"));
 
-  useEffect(() => {
-    const email = localStorage.getItem("registeredUserEmail");
-    setUserEmail(email);
-  }, []);
+  // useEffect(() => {
+  //   // const email = localStorage.getItem("registeredUserEmail");
+  // }, [searchParams]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
