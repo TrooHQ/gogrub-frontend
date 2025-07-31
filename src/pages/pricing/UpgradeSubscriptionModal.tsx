@@ -115,7 +115,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           Authorization: "",
         },
       };
-      const response = await axios.post(`${PAYMENT_DOMAIN}/api/v1/transaction/subscription_payment/`,
+      const response = await axios.post(`${PAYMENT_DOMAIN}/v1/transaction/subscription_payment/`,
         {
           plan_id: selectedPlan?._id,
           business_email: userData?.business_email,
