@@ -7,7 +7,7 @@ import CheckCirle from "../../assets/check_circle.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/troo-logo.png";
 import { setPlanDetails } from "../../slices/UserSlice";
-import { SERVER_DOMAIN } from "../../Api/Api";
+import { PAYMENT_DOMAIN, SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import Modal from "../../components/Modal";
@@ -62,7 +62,7 @@ const VerifiedPayment: React.FC = () => {
         },
       };
       const response = await axios.post(
-        `https://payment.trootab.com/api/v1/transaction/verify_subscription_payment/`,
+        `${PAYMENT_DOMAIN}/api/v1/transaction/verify_subscription_payment/`,
         {
           reference: reference,
         },

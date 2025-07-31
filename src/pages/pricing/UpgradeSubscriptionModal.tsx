@@ -121,7 +121,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           business_email: userData?.business_email,
           amount: selectedPlan?.billingFrequencyAmount,
           plan_description: selectedPlan?.name,
-          callback_url: "https://gogrub-client.netlify.app/overview",
+          callback_url: "https://admin.gogrub.co/overview",
+          // callback_url: "https://gogrub-client.netlify.app/overview",
         },
         headers
       );
@@ -189,7 +190,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         },
       };
       const response = await axios.post(
-        `https://payment.trootab.com/api/v1/transaction/verify_subscription_payment/`,
+        `${PAYMENT_DOMAIN}/v1/transaction/verify_subscription_payment/`,
         {
           reference: reference,
         },
