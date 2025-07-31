@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SERVER_DOMAIN } from "../../Api/Api";
+import { PAYMENT_DOMAIN, SERVER_DOMAIN } from "../../Api/Api";
 import { AppDispatch, RootState } from "@/src/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal";
@@ -115,8 +115,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           Authorization: "",
         },
       };
-      const response = await axios.post(
-        `https://payment.trootab.com/api/v1/transaction/subscription_payment/`,
+      const response = await axios.post(`${PAYMENT_DOMAIN}/api/v1/transaction/subscription_payment/`,
         {
           plan_id: selectedPlan?._id,
           business_email: userData?.business_email,
