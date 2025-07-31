@@ -24,23 +24,22 @@ const VerifyAccount = () => {
   const { userDetails } = useSelector((state: RootState) => state.user);
   console.log(userDetails, "userDetails:");
 
-  const searchParams = new URLSearchParams(window.location.search);
-
-  const [userEmail, setUserEmail] = useState<string | null>(searchParams.get("verify-account") || null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [emailInput, setEmailInput] = useState<string>("");
-
 
   console.log("userEmail:", userEmail);
   console.log("emailInput:", emailInput);
-  setUserEmail(searchParams.get("verify-account"));
 
-  // useEffect(() => {
-  //   // const email = localStorage.getItem("registeredUserEmail");
-  // }, [searchParams]);
+  const params = new URLSearchParams(location.search);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    if (params.get("coming-from") === "gogrub") {
+    const email = params.get("verify_email");
+    setUserEmail(email);
+  }, []);
+
+  useEffect(() => {
+    // const params = new URLSearchParams(location.search);
+    if (params.get("verify_email") === "gogrub") {
       setIsFromGoGrub(true);
     }
   }, []);
@@ -51,7 +50,7 @@ const VerifyAccount = () => {
     try {
       setLoading(true);
       const response = await axios.post(`${SERVER_DOMAIN}/resendOTP`, {
-        email: userEmail ?? emailInput,
+        email: userEmail || emailInput,
       });
       setLoading(false);
       toast.success(response.data.message || "Check your email for the OTP");
