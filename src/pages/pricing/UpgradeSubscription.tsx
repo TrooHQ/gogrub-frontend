@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SERVER_DOMAIN } from "../../Api/Api";
+import { PAYMENT_DOMAIN, SERVER_DOMAIN } from "../../Api/Api";
 import { AppDispatch, RootState } from "@/src/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal";
@@ -113,7 +113,7 @@ const UpgradeSubscription: React.FC = () => {
         },
       };
       const response = await axios.post(
-        `https://payment.trootab.com/api/v1/transaction/subscription_payment/`,
+        `${PAYMENT_DOMAIN}/v1/transaction/subscription_payment/`,
         {
           plan_id: selectedPlan?._id,
           business_email: userData?.business_email,
@@ -137,7 +137,7 @@ const UpgradeSubscription: React.FC = () => {
   };
 
   return (
-    // <div className="flex justify-center items-center h-screen">
+    // <div className="flex items-center justify-center h-screen">
     //   <p className="text-[24px] font-[500] text-[#414141]">Loading plans...</p>
     // </div>
     // ) : (
@@ -173,7 +173,7 @@ const UpgradeSubscription: React.FC = () => {
                     className="w-[23px] h-[23px] mt-[15px] transition-all duration-500 ease-in-out"
                   />
                   <div className="w-full space-y-[13px]">
-                    <div className="w-full grid md:flex items-center md:justify-between">
+                    <div className="grid items-center w-full md:flex md:justify-between">
                       <p className="capitalize font-[700] text-[18px] md:text-[24px] text-[#414141] transition-all duration-500 ease-in-out">
                         {plan.name}
                       </p>
@@ -182,7 +182,7 @@ const UpgradeSubscription: React.FC = () => {
                         {plan.price.toLocaleString()}
                       </p>
                     </div>
-                    <div className="grid md:flex items-center md:justify-between">
+                    <div className="grid items-center md:flex md:justify-between">
                       <p className="capitalize font-[400] text-[18px] md:text-[24px] text-[#414141] transition-all duration-500 ease-in-out">
                         Billed {plan.billingCycle}
                       </p>
@@ -285,7 +285,7 @@ const UpgradeSubscription: React.FC = () => {
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[372px]">
-          <div className=" text-center">
+          <div className="text-center ">
             <p className="text-[24px] font-[500] text-gray-500">Payment</p>
             <p className="text-[16px] font-[400] text-grey500">
               Make payment to selected plan
