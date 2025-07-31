@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchAccountDetails } from "../../slices/businessSlice";
+import { SERVER_DOMAIN } from "../../Api/Api";
 
 
 const YourLinkWithNoLogo = ({
@@ -120,7 +121,7 @@ const YourLinkWithNoLogo = ({
       setAddLoading(true);
       // Make the API call to add ordering details
       const response = await axios.post(
-        "https://troox-backend-new.vercel.app/api/asset/addOrderingDetails",
+        `${SERVER_DOMAIN}/asset/addOrderingDetails`,
         {
           businessFullName: businessFullName,
           orderingDescription: simpleDescription,
@@ -169,9 +170,9 @@ const YourLinkWithNoLogo = ({
           </div>
 
           {isCustomizing && (
-            <div className="flex flex-col items-center mt-8 gap-4">
+            <div className="flex flex-col items-center gap-4 mt-8">
               <div className="flex gap-2 items-center border border-gray-300 rounded-md overflow-hidden shadow-sm w-[60%]">
-                <span className="bg-gray-100 text-gray-500 px-3 py-2">
+                <span className="px-3 py-2 text-gray-500 bg-gray-100">
                   https://gogrub.com/
                 </span>
                 <input
@@ -179,18 +180,18 @@ const YourLinkWithNoLogo = ({
                   placeholder="Please enter your preferred URL"
                   value={customLink}
                   onChange={(e) => setCustomLink(e.target.value)}
-                  className="focus:outline-none px-2 py-2 text-gray-500 w-full"
+                  className="w-full px-2 py-2 text-gray-500 focus:outline-none"
                 />
               </div>
               <div className="flex gap-4">
                 <button
-                  className="bg-black text-white py-2 px-4 rounded"
+                  className="px-4 py-2 text-white bg-black rounded"
                   onClick={handleGenerateClick}
                 >
                   Generate link
                 </button>
                 <button
-                  className="bg-white text-gray-500 border border-gray-500 py-2 px-4 rounded"
+                  className="px-4 py-2 text-gray-500 bg-white border border-gray-500 rounded"
                   onClick={handleCancelClick}
                 >
                   Cancel
@@ -218,7 +219,7 @@ const YourLinkWithNoLogo = ({
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 w-[60%] shadow-lg flex gap-7">
             <div className="w-[50%]">
               <img
@@ -229,22 +230,22 @@ const YourLinkWithNoLogo = ({
             </div>
             {!selectedLogo || !showUploadProgress ? (
               <div className="w-[50%] flex flex-col">
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <h2 className="text-xl font-medium text-[#3E3C7F] text-center">
                     Upload Your Business LOGO
                   </h2>
                   <button
                     onClick={handleModalClose}
-                    className="text-gray-500 hover:text-gray-700 text-20 -mt-8"
+                    className="-mt-8 text-gray-500 hover:text-gray-700 text-20"
                   >
                     &times;
                   </button>
                 </div>
-                <p className="text-sm text-gray-500 mt-4">
+                <p className="mt-4 text-sm text-gray-500">
                   Upload your business logo that is to be displayed via your
                   online ordering link page.
                 </p>
-                <div className="border-2 border-dashed border-gray-300 mt-6 flex flex-col items-center p-4 rounded-md flex-grow">
+                <div className="flex flex-col items-center flex-grow p-4 mt-6 border-2 border-gray-300 border-dashed rounded-md">
                   <input
                     type="file"
                     accept="image/*"
@@ -254,7 +255,7 @@ const YourLinkWithNoLogo = ({
                   />
                   <label
                     htmlFor="file-upload"
-                    className="cursor-pointer flex flex-col items-center justify-center flex-grow"
+                    className="flex flex-col items-center justify-center flex-grow cursor-pointer"
                   >
                     <img
                       src={uploadImage}
@@ -262,12 +263,12 @@ const YourLinkWithNoLogo = ({
                       className="w-[70px] h-[70px]"
                     />
                     {!uploadedLogo && (
-                      <p className="text-sm text-gray-500 mt-2 text-center">
+                      <p className="mt-2 text-sm text-center text-gray-500">
                         Select a file or drag and drop here
                       </p>
                     )}
                     {!uploadedLogo && (
-                      <p className="text-xs text-gray-400 text-center italic">
+                      <p className="text-xs italic text-center text-gray-400">
                         (JPG, PNG, file size no more than 10MB)
                       </p>
                     )}
@@ -306,9 +307,9 @@ const YourLinkWithNoLogo = ({
                               onClick={handleModalClose}
                             />
                           </div>
-                          <div className="flex justify-center items-center gap-4">
+                          <div className="flex items-center justify-center gap-4">
                             <button
-                              className="mt-6 border border-black bg-white text-gray-500 py-2 px-4 rounded"
+                              className="px-4 py-2 mt-6 text-gray-500 bg-white border border-black rounded"
                               onClick={handleFileUpload}
                               disabled={isUploading}
                             >
