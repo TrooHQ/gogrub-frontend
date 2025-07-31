@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 // import DigitInput from "./DigitInput";
 import { MuiOtpInput } from "mui-one-time-password-input";
+import CustomInput from "../inputFields/CustomInput";
 
 const VerifyAccount = () => {
   const OTPInput = MuiOtpInput as React.ElementType;
@@ -23,7 +24,16 @@ const VerifyAccount = () => {
   const { userDetails } = useSelector((state: RootState) => state.user);
   console.log(userDetails, "userDetails:");
 
-  const userEmail = localStorage.getItem("registeredUserEmail");
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [emailInput, setEmailInput] = useState<string>("");
+
+  console.log("userEmail:", userEmail);
+  console.log("emailInput:", emailInput);
+
+  useEffect(() => {
+    const email = localStorage.getItem("registeredUserEmail");
+    setUserEmail(email);
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -32,33 +42,13 @@ const VerifyAccount = () => {
     }
   }, []);
 
-  // const handleChange = (index: number, newValue: string) => {
-  //   const newDigits = [...digits];
-  //   newDigits[index] = newValue.toString();
-  //   setDigits(newDigits);
-  // };
 
-  // const handleFocus = (index: number) => {
-  //   if (digits[index] === "") {
-  //     const newDigits = [...digits];
-  //     newDigits[index] = "";
-  //     setDigits(newDigits);
-  //   }
-  // };
-
-  // const handleBlur = (index: number) => {
-  //   if (digits[index] === "") {
-  //     const newDigits = [...digits];
-  //     newDigits[index] = "";
-  //     setDigits(newDigits);
-  //   }
-  // };
 
   const resendOTP = async () => {
     try {
       setLoading(true);
       const response = await axios.post(`${SERVER_DOMAIN}/resendOTP`, {
-        email: userEmail,
+        email: userEmail ?? emailInput,
       });
       setLoading(false);
       toast.success(response.data.message || "Check your email for the OTP");
@@ -92,6 +82,9 @@ const VerifyAccount = () => {
   const handleChange = (newValue: string) => {
     setOtp(newValue);
   };
+
+
+
   const verify = async () => {
     console.log("OTP:", otp);
     try {
@@ -149,51 +142,66 @@ const VerifyAccount = () => {
               six-digit OTP that was sent to your email
             </p>
           </div>
+          {userEmail ? (
+            <>
+              <OTPInput value={otp} onChange={handleChange} length={6} />
 
-          <OTPInput value={otp} onChange={handleChange} length={6} />
-          {/* <div className="grid grid-cols-6 gap-0">
-            {digits.map((value, index) => (
-              <DigitInput
-                key={index}
-                value={value}
-                onChange={(newValue: string) => handleChange(index, newValue)}
-                onFocus={() => handleFocus(index)}
-                onBlur={() => handleBlur(index)}
-              />
-            ))}
-          </div> */}
 
-          <div
-            className=" mt-[24px] flex items-center justify-start cursor-pointer"
-            onClick={resendOTP}
-          >
-            <button
-              className=" font-[400] text-xs text-blue-500 underline hover:rounded-full hover:bg-blue-500 hover:text-white px-2 py-1 hover:no-underline text-semibold"
-              disabled={loading}
-            >
-              Resend Code
-            </button>
-          </div>
-          {allInputsFilled() ? (
-            <div className=" mt-[16px]" onClick={verify}>
-              <button
-                className="w-full py-3 text-center text-white bg-black rounded"
-                disabled={loading}
+              <div
+                className=" mt-[24px] flex items-center justify-start cursor-pointer"
+                onClick={resendOTP}
               >
-                {loading ? "Loading..." : "Activate Account"}
-              </button>
-            </div>
+                <button
+                  className=" font-[400] text-xs text-blue-500 underline hover:rounded-full hover:bg-blue-500 hover:text-white px-2 py-1 hover:no-underline text-semibold"
+                  disabled={loading}
+                >
+                  Resend Code
+                </button>
+              </div>
+              {allInputsFilled() ? (
+                <div className=" mt-[16px]" onClick={verify}>
+                  <button
+                    className="w-full py-3 text-center text-white bg-black rounded"
+                    disabled={loading}
+                  >
+                    {loading ? "Loading..." : "Activate Account"}
+                  </button>
+                </div>
+              ) : (
+                <div className=" mt-[16px]">
+                  <button
+                    // onClick={verify}
+                    className="bg-[#E7E7E7] text-[#B6B6B6] w-full text-center  py-3 rounded"
+                    disabled
+                  >
+                    Activate account
+                  </button>
+                </div>
+              )}
+
+            </>
           ) : (
-            <div className=" mt-[16px]">
-              <button
-                // onClick={verify}
-                className="bg-[#E7E7E7] text-[#B6B6B6] w-full text-center  py-3 rounded"
-                disabled
-              >
-                Activate account
-              </button>
-            </div>
-          )}
+            <>
+              <CustomInput
+                type="email"
+                label="Business email"
+                value={userEmail || emailInput || ""}
+                error={error}
+                onChange={(newValue) => setEmailInput(newValue)}
+              />
+
+              <div className=" mt-[16px]" onClick={() => { setUserEmail(emailInput); resendOTP() }}>
+                <button
+                  className="w-full py-3 text-center text-white bg-black rounded"
+                  disabled={loading}
+                >
+                  {loading ? "Loading..." : "Activate Account"}
+                </button>
+              </div>
+            </>
+          )
+
+          }
         </div>
       </div>
     </div>
