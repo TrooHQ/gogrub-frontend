@@ -14,7 +14,7 @@ import { AppDispatch, RootState } from '@/src/store/store';
 import { toast } from 'react-toastify';
 
 
-export default function AddDeliveryService({ editId, onClose }: { editId?: string | null, onClose?: () => void }) {
+export default function AddDeliveryService({ editId, onClose, setOpen }: { editId?: string | null, onClose?: () => void, setOpen: (open: boolean) => void }) {
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -34,9 +34,9 @@ export default function AddDeliveryService({ editId, onClose }: { editId?: strin
   const [fixedPrice, setFixedPrice] = useState(editId ? deliveryDetails?.fixedPrice : "");
   const [supportLink, setSupportLink] = useState(editId ? deliveryDetails?.support_link : "");
   const [isSchedulingEnabled, setIsSchedulingEnabled] = useState(editId ? deliveryDetails?.canScheduleOrder : false);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  open && console.log("open")
+  // open && console.log("open")
   console.log("editIs", editId)
 
 

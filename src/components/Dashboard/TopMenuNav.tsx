@@ -132,7 +132,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
               showSetupPrompt &&
               (!userCheck.hasMenu ||
                 !userCheck.businessPlan ||
-                !userCheck.hasDeliveryDetails ||
+                // !userCheck.hasDeliveryDetails ||
                 !userCheck.hasPickUpLocation) && (
                 <div
                   className="cursor-pointer flex items-center space-x-[8px] text-white bg-[#FF4F00] rounded-[8px] border border-[#FF4F00] text-[16px] font-[600] text-center px-[24px] py-[16px] animate-pulse"
@@ -145,7 +145,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
                     {[
                       userCheck.hasMenu,
                       userCheck.businessPlan,
-                      userCheck.hasDeliveryDetails &&
+                      // userCheck.hasDeliveryDetails &&
                       userCheck.hasPickUpLocation,
                     ].every((check) => !check) ? (
                       "Begin Setup"
@@ -157,7 +157,7 @@ const TopMenuNav: React.FC<TopMenuNavProps> = ({ pathName }) => {
                             [
                               userCheck.hasMenu,
                               userCheck.businessPlan,
-                              userCheck.hasDeliveryDetails &&
+                              // userCheck.hasDeliveryDetails &&
                               userCheck.hasPickUpLocation,
                             ].filter(Boolean).length
                           }
