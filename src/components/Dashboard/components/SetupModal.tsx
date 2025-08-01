@@ -139,14 +139,13 @@ const SetupModal: React.FC<SetupModalProps> = ({
                 </div>
 
                 <div className=" flex items-center gap-[16px]">
-                  {userCheck.hasPickUpLocation &&
-                    userCheck.hasDeliveryDetails && (
-                      <img
-                        src={CheckIcon}
-                        alt="check icon"
-                        className=" w-[40px] h-[40px] object-contain]"
-                      />
-                    )}
+                  {userCheck.hasPickUpLocation && (
+                    <img
+                      src={CheckIcon}
+                      alt="check icon"
+                      className=" w-[40px] h-[40px] object-contain]"
+                    />
+                  )}
                   <p className=" text-[44px] font-[400] text-[#000000]">2.</p>
                   <div
                     className="cursor-pointer bg-[#FFFFFF] shadow shadow-[#0000001F] p-[24px] rounded-[8px] max-w-[248px] w-full text-start"
