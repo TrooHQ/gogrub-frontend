@@ -45,7 +45,7 @@ const DeliveryService = () => {
     (state: RootState) => state.asset
   );
 
-  console.log("deliveryDetails service", deliveryDetails);
+  // console.log("deliveryDetails service", deliveryDetails);
 
   const handleToggleChange = async () => {
     setIsDeliveryEnabled((prev: boolean) => !prev);
@@ -142,7 +142,7 @@ const DeliveryService = () => {
               </div>
             </div>
           ) : !showAdd && deliveryDetails ? (
-            <DeliveryTable deliveryDetails={deliveryDetails} />
+            <DeliveryTable deliveryDetails={deliveryDetails} setOpen={setOpen} />
           ) : showAdd ? (
             <div className="">
               <div
@@ -157,7 +157,7 @@ const DeliveryService = () => {
 
               {isDeliveryEnabled && (
                 <div className="mt-[80px] w-[60%] m-auto">
-                  <AddDeliveryService />
+                  <AddDeliveryService setOpen={setOpen} />
                 </div>
               )}
 

@@ -19,7 +19,7 @@ import Close from "../../assets/closeIcon.svg";
 //   canScheduleOrder: boolean;
 // }
 
-const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
+const DeliveryTable = ({ deliveryDetails, setOpen }: { deliveryDetails?: any; setOpen: React.Dispatch<React.SetStateAction<boolean>>; }) => {
 
 
   console.log("deliveryDetails table", deliveryDetails);
@@ -137,7 +137,7 @@ const DeliveryTable = ({ deliveryDetails }: { deliveryDetails?: any; }) => {
 
       {/* Edit Delivery Details Modal */}
       <Modal isOpen={isEditModalOpen} onClose={handleCloseEditModal}>
-        <AddDeliveryService editId={deliveryDetails?._id} onClose={handleCloseEditModal} />
+        <AddDeliveryService editId={deliveryDetails?._id} onClose={handleCloseEditModal} setOpen={setOpen} />
       </Modal>
     </div>
   );
