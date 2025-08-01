@@ -190,7 +190,7 @@ const DeliveryService = () => {
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <CheckCircle sx={{ fontSize: 60, color: "green" }} />
                     <Typography variant="h6" sx={{ mt: 2 }}>
-                      Updated
+                      Added
                     </Typography>
                     <Typography variant="body1" sx={{ mt: 1, textAlign: "center" }}>
                       Your delivery location has been set successfully.
