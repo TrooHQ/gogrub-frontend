@@ -142,7 +142,7 @@ const DeliveryService = () => {
               </div>
             </div>
           ) : !showAdd && deliveryDetails ? (
-            <DeliveryTable deliveryDetails={deliveryDetails} />
+            <DeliveryTable deliveryDetails={deliveryDetails} setOpen={setOpen} />
           ) : showAdd ? (
             <div className="">
               <div
