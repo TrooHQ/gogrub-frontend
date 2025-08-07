@@ -133,7 +133,7 @@ export default function AddDeliveryService({ editId, onClose, setOpen }: { editI
         />
         <CustomInput
           type="text"
-          label="Add your support link to your profile, WhatsApp, Instagram)"
+          label="Provide a support contact link your customers can use to reach you"
           value={supportLink}
           onChange={(newValue) => setSupportLink(newValue)}
           className="border-gray-500"
