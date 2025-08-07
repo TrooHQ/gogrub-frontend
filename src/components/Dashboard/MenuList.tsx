@@ -498,12 +498,12 @@ const MenuList = () => {
                           &#8358;
                           {parseFloat(item.menu_item_price).toLocaleString()}
                         </td>
-                        <td className="px-4 py-2 text-base font-normal text-center break-words">
+                        <td className="px-4 py-2 text-sm font-normal text-center break-words">
                           <button
-                            className="text-blue-500"
+                            className="px-2 py-1 border border-gray-600 rounded-md"
                             onClick={() => handleOpenModal(item)}
                           >
-                            See modifiers
+                            View modifiers
                           </button>
                         </td>
 
