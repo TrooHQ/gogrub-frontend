@@ -27,7 +27,7 @@ import { Tip } from "./Mobile/Customers/Tip";
 import { SelectPayment } from "./Mobile/Customers/SelectPayment";
 import { Receipt } from "./Mobile/Customers/Receipt";
 import { GetReceipt } from "./Mobile/Customers/GetReceipt";
-import VerifyAccount from "./Mobile/Components/VerifyAccount";
+// import VerifyAccount from "./Mobile/Components/VerifyAccount";
 // import ForgotPassword from "./Mobile/authPages/ForgotPassword";
 import ForgotPassword from "./components/authPages/ForgotPassword";
 import ResetPassword from "./components/authPages/ResetPassword.tsx";
@@ -58,8 +58,9 @@ import ChooseColor from "./Mobile/Components/Settings/ChooseColor";
 import OrderHistory from "./Mobile/Components/OrderHistory";
 import AccountVerified from "./Mobile/Components/AccountVerified";
 import MobileNoticeLayout from "./MobileNoticeLayout";
-import BusinessProfiles from "./components/authPages/BusinessProfiles";
 
+import BusinessProfiles from "./components/authPages/BusinessProfiles";
+import VerifyAccount from "./components/authPages/VerifyAccount.tsx";
 const MobileLayout = () => {
   return (
     <div className="overflow-hidden font-GeneralSans">
@@ -172,6 +173,7 @@ const MobileLayout = () => {
           />
           <Route path="/checkmail" element={<CheckMail />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/verify-account" element={<VerifyAccount />} />
           {/* <Route path="/password-changed" element={<PasswordChanged />} /> */}
           {/* <Route path="/demo/dashboard/gogrub-portal" element={<Dashboard />} /> */}
           <Route path="/demo/dashboard/gogrub-portal" element={<MobileNoticeLayout />} />
@@ -210,10 +212,10 @@ const MobileLayout = () => {
             element={<BusinessProfiles />}
           // element={<RegistrationStepForm />}
           />
-          <Route
+          {/* <Route
             path="/demo/verify/gogrub-portal"
             element={<VerifyAccount />}
-          />
+          /> */}
           <Route
             path="/demo/verified/gogrub-portal"
             element={<AccountVerified />}
