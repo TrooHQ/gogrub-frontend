@@ -597,21 +597,6 @@ const MenuBuilder = () => {
               activeCategory={activeCategory}
               onCancel={() => setAddMenuItem(false)}
             />
-
-            {/* <AddMenuItem
-              setAddMenuItem={setAddMenuItem}
-              menuName={menuName}
-              handleMenuName={handleMenuName}
-              menuDescription={menuDescription}
-              handleMenuDescription={handleMenuDescription}
-              menuPrice={menuPrice}
-              handleMenuPrice={handleMenuPrice}
-              handleFileChange={handleFileChange}
-              image={image}
-              imageName={imageName}
-              handleSaveMenuItem={handleSaveMenuItem}
-              menuGroupLoading={menuGroupLoading}
-            /> */}
           </Modal>
         </div>
       </DashboardLayout>
