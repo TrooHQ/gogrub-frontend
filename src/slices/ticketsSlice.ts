@@ -8,6 +8,12 @@ interface TicketState {
   orderData: any[];
   loadingOrder: boolean;
   orderError: string | null;
+  orderDataPagination: {
+    totalOrders: number;
+    totalPages: number;
+    currentPage: number;
+    pageSize: number;
+  };
 
   openOrderData: any[];
   loadingOpenOrder: boolean;
@@ -22,6 +28,12 @@ const initialState: TicketState = {
   orderData: [],
   loadingOrder: false,
   orderError: null,
+  orderDataPagination: {
+    totalOrders: 0,
+    totalPages: 0,
+    currentPage: 1,
+    pageSize: 10,
+  },
 
   openOrderData: [],
   loadingOpenOrder: false,
@@ -45,23 +57,34 @@ const getAuthHeaders = () => {
 
 // Async thunk for getting tickets
 export const fetchTickets = createAsyncThunk<
-  [],
-  { selectedBranch: { id: string } },
+  {
+    data: any[];
+    pagination: {
+      totalOrders: number;
+      totalPages: number;
+      currentPage: number;
+      pageSize: number;
+    };
+  },
+  { selectedBranch: { id: string }; page: number },
   { rejectValue: string }
->("tickets/fetchTickets", async ({ selectedBranch }, { rejectWithValue }) => {
-  try {
-    const response = await axios.get(
-      `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=ticket`,
-      getAuthHeaders()
-    );
-    return response.data.data;
-  } catch (error: any) {
-    toast.error("Error retrieving tickets");
-    return rejectWithValue(
-      error.response?.data?.message || "Error retrieving tickets"
-    );
+>(
+  "tickets/fetchTickets",
+  async ({ selectedBranch, page }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=ticket&page=${page}&limit=10`,
+        getAuthHeaders()
+      );
+      return { data: response.data.data, pagination: response.data.pagination };
+    } catch (error: any) {
+      toast.error("Error retrieving tickets");
+      return rejectWithValue(
+        error.response?.data?.message || "Error retrieving tickets"
+      );
+    }
   }
-});
+);
 
 // Async thunk for getting open tickets
 export const fetchOpenTickets = createAsyncThunk<
@@ -127,10 +150,25 @@ const ticketSlice = createSlice({
         state.loadingOrder = true;
         state.orderError = null;
       })
-      .addCase(fetchTickets.fulfilled, (state, action: PayloadAction<[]>) => {
-        state.loadingOrder = false;
-        state.orderData = action.payload;
-      })
+      .addCase(
+        fetchTickets.fulfilled,
+        (
+          state,
+          action: PayloadAction<{
+            data: any[];
+            pagination: {
+              totalOrders: number;
+              totalPages: number;
+              currentPage: number;
+              pageSize: number;
+            };
+          }>
+        ) => {
+          state.loadingOrder = false;
+          state.orderData = action.payload.data;
+          state.orderDataPagination = action.payload.pagination;
+        }
+      )
       .addCase(
         fetchTickets.rejected,
         (state, action: PayloadAction<string | undefined>) => {

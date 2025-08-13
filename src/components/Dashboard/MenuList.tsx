@@ -272,31 +272,6 @@ const MenuList = () => {
     setConfirmationDialog({ open: false, id: null });
   };
 
-  // const fetchModifiers = async ({ selectedMenuItem, selectedBranch }: any) => {
-  //   setIsFetching(true);
-  //   const headers = {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   };
-  //   try {
-  //     const encodedName = encodeURIComponent(selectedMenuItem);
-
-  //     const response = await axios.get(
-  //       `${SERVER_DOMAIN}/menu/getMenuModifierGroupByItem/?attach_to=item&name=${encodedName}&branch_id=${selectedBranch}`,
-  //       headers
-  //     );
-
-  //     setFetchedModifiers(response.data.data || []);
-  //   } catch (error: any) {
-  //     console.log(error);
-  //     toast.error(error.response.data.message || "Failed to fetch modifiers.");
-  //   } finally {
-  //     setIsFetching(false);
-  //   }
-  // };
-
   const handleDeleteMenu = async (item: any) => {
     try {
       const authToken = localStorage.getItem("token"); // Retrieve the auth token from local storage
