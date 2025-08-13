@@ -21,6 +21,7 @@ import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { FiArrowDownRight, FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import DateFilterComp from "./components/DateFilterComp";
+import PaginationComponent from "./PaginationComponent";
 
 const CustomerData = () => {
 
@@ -35,7 +36,7 @@ const CustomerData = () => {
   );
 
   const businessIdentifier = userDetails?._id;
-  const { customerData, customerDataLoading, totalCustomerTransaction } =
+  const { customerData, customerDataLoading, totalCustomerTransaction, customerDataPagination } =
     useSelector((state: RootState) => state.overview);
 
   console.log("totalCustomerTransaction", totalCustomerTransaction);
@@ -45,6 +46,8 @@ const CustomerData = () => {
   const [noOfDays, setNoOfDays] = useState<string | number | undefined>("today")
   const [start_date, setStartDate] = useState<string | undefined>();
   const [end_date, setEndDate] = useState<string | undefined>();
+  const [page, setPage] = useState(1);
+
 
   const handleFilterChange = (
     filter?: string | number,
@@ -72,11 +75,11 @@ const CustomerData = () => {
     dispatch(
       fetchCustomerData({
         businessIdentifier: userDetails?._id?.toString(),
-        date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date,
+        date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page
       })
     );
     dispatch(fetchCustomerTransaction({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date }));
-  }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date]);
+  }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date, page]);
 
   const [orderCount, setOrderCount] = useState<any>({});
   const token = localStorage.getItem("token");
@@ -121,6 +124,7 @@ const CustomerData = () => {
         startDate,
         endDate,
         number_of_days,
+        page
       })
     )
       .unwrap()
@@ -329,6 +333,9 @@ const CustomerData = () => {
                   <div className="px-8">No data during this period</div>
                 )}
               </div>
+            </div>
+            <div className="flex items-center justify-center w-full my-4">
+              <PaginationComponent setPage={setPage} pagination={customerDataPagination} />
             </div>
           </div>
         </div>

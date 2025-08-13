@@ -14,8 +14,13 @@ interface OverviewState {
   customerDataLoading: boolean;
   loading: boolean;
   error: string | null;
+  customerDataPagination: {
+    currentPage: number;
+    totalPages: number;
+    pageSize: number;
+    totalOrders: number;
+  };
 }
-
 const initialState: OverviewState = {
   openAndClosedTickets: [],
   customerData: [],
@@ -28,6 +33,12 @@ const initialState: OverviewState = {
   customerDataLoading: false,
   loading: false,
   error: null,
+  customerDataPagination: {
+    currentPage: 1,
+    totalPages: 1,
+    pageSize: 10,
+    totalOrders: 0,
+  },
 };
 
 // Create async thunk for fetching open and closed tickets
@@ -89,12 +100,14 @@ export const fetchCustomerData = createAsyncThunk(
       startDate,
       endDate,
       number_of_days,
+      page,
     }: {
       businessIdentifier?: string;
       date_filter?: string | number;
       startDate?: string | number;
       endDate?: string | number;
       number_of_days?: string | number;
+      page?: number;
     },
     { rejectWithValue }
   ) => {
@@ -114,7 +127,7 @@ export const fetchCustomerData = createAsyncThunk(
       const response = await axios.get(
         `${SERVER_DOMAIN}/order/getOrderCustomerData?businessIdentifier=${businessIdentifier}`,
         {
-          params,
+          params: { ...params, page, limit: 10 },
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -122,7 +135,15 @@ export const fetchCustomerData = createAsyncThunk(
       );
       // console.log("post call");
       // console.log("response", response);
-      return response.data.data;
+      return {
+        data: response.data.data,
+        pagination: {
+          currentPage: response.data.pagination.currentPage,
+          totalPages: response.data.pagination.totalPages,
+          pageSize: response.data.pagination.pageSize,
+          totalOrders: response.data.pagination.totalOrders,
+        },
+      };
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
@@ -429,9 +450,21 @@ const overviewSlice = createSlice({
       })
       .addCase(
         fetchCustomerData.fulfilled,
-        (state, action: PayloadAction<any[]>) => {
+        (
+          state,
+          action: PayloadAction<{
+            data: any;
+            pagination: {
+              currentPage: number;
+              totalPages: number;
+              pageSize: number;
+              totalOrders: number;
+            };
+          }>
+        ) => {
           state.customerDataLoading = false;
-          state.customerData = action.payload;
+          state.customerData = action.payload.data;
+          state.customerDataPagination = action.payload.pagination;
         }
       )
       .addCase(fetchCustomerData.rejected, (state, action) => {

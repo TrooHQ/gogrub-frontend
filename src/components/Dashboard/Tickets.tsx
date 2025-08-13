@@ -10,6 +10,7 @@ import { AppDispatch, RootState } from "@/src/store/store";
 import { DropdownMenuTicketStatusUpdate } from "./DropDownTicketStatusUpdate";
 import { fetchTickets } from "../../slices/ticketsSlice";
 import ViewOrderModal from "./OrderModal";
+import PaginationComponent from "./PaginationComponent";
 
 const Tickets = () => {
 
@@ -19,10 +20,11 @@ const Tickets = () => {
 
 
   const { selectedBranch } = useSelector((state: any) => state.branches);
-  const { orderData, loadingOrder } = useSelector((state: RootState) => state.tickets);
+  const { orderData, loadingOrder, orderDataPagination } = useSelector((state: RootState) => state.tickets);
   const [openTicket, setOpenTicket] = useState<boolean>(false); // to open ticket details modal
+  const [page, setPage] = useState(1);
 
-  console.log("Selected Branch:", selectedBranch);
+  console.log("orderDataPagination:", orderDataPagination);
   console.log("Order Data:", orderData);
 
   const [activeMenuIndex2, setActiveMenuIndex2] = useState<number | null>(null);
@@ -38,11 +40,11 @@ const Tickets = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchTickets({ selectedBranch }));
-  }, [dispatch, selectedBranch]);
+    dispatch(fetchTickets({ selectedBranch, page }));
+  }, [dispatch, selectedBranch, page]);
 
   const handleRefresh = () => {
-    dispatch(fetchTickets({ selectedBranch }));
+    dispatch(fetchTickets({ selectedBranch, page }));
   };
 
   const [orderId, setOrderId] = useState<string | null>(null);
@@ -161,6 +163,9 @@ const Tickets = () => {
                     </div>
                   ))
                 )}
+                <div className="flex items-center justify-center w-full my-4">
+                  <PaginationComponent setPage={setPage} pagination={orderDataPagination} />
+                </div>
               </div>
 
               {/* <RefundMenu
