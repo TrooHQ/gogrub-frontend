@@ -13,6 +13,7 @@ import Papa from "papaparse"; // For CSV export
 import { truncateText } from "../../utils/truncateText";
 import ViewOrderModal from "./OrderModal";
 import DateFilterComp from "./components/DateFilterComp";
+import PaginationComponent from "./PaginationComponent";
 
 // export interface filterProps {
 
@@ -39,6 +40,13 @@ const OrderHistory = () => {
   const [showCustomerDetail, setShowCustomerDetail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<any>();
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState<{ totalOrders: number; totalPages: number; currentPage: number; pageSize: number }>({
+    totalOrders: 0,
+    totalPages: 0,
+    currentPage: 1,
+    pageSize: 10,
+  });
 
   const userDetails = useSelector((state: any) => state.user);
 
@@ -58,8 +66,8 @@ const OrderHistory = () => {
   };
 
   useEffect(() => {
-    getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date })
-  }, [filterValue, noOfDays, start_date, end_date]);
+    getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page })
+  }, [filterValue, noOfDays, start_date, end_date, page]);
 
   const handleFilterChange = (
     filter?: string | number,
@@ -85,11 +93,13 @@ const OrderHistory = () => {
     startDate,
     endDate,
     number_of_days,
+    page
   }: {
     date_filter?: string | number;
     startDate?: string;
     endDate?: string;
     number_of_days?: string | number;
+    page?: number;
   }) => {
     const headers = {
       headers: {
@@ -110,7 +120,7 @@ const OrderHistory = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history&status=${statusFilter}`,
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history&status=${statusFilter}&page=${page}&limit=10`,
         {
           ...headers,
           params
@@ -120,6 +130,12 @@ const OrderHistory = () => {
       );
       console.log("res data", response.data);
       setData(response.data?.data);
+      setPagination({
+        totalOrders: response.data?.totalOrders || 0,
+        totalPages: response.data?.totalPages || 0,
+        currentPage: response.data?.currentPage || 1,
+        pageSize: response.data?.pageSize || 10,
+      });
       // toast.success(response.data.message || "Successful");
     } catch (error) {
       toast.error("Error retrieving tickets");
@@ -408,6 +424,9 @@ const OrderHistory = () => {
                     SingleOrderItem={SingleOrderItem}
                   />
                 </div>}
+              </div>
+              <div className="flex items-center justify-center w-full my-4">
+                <PaginationComponent setPage={setPage} pagination={pagination} />
               </div>
             </div>
           </div>
