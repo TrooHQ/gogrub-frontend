@@ -102,7 +102,7 @@ export default function App() {
           <Route path="/roles" element={<Roles />} />
           <Route path="/new-roles" element={<NewRoles />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/business-profile" element={<BusinessProfiles />} />
+          <Route path="/register" element={<BusinessProfiles />} />
           <Route path="/verify-account" element={<VerifyAccount />} />
           <Route path="/checkmail" element={<CheckMail />} />
           <Route path="/password-changed" element={<PasswordChanged />} />

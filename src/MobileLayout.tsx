@@ -203,7 +203,7 @@ const MobileLayout = () => {
 
           <Route path="/demo/report/gogrub-portal" element={<Reporting />} />
           <Route
-            path="/business-profile"
+            path="/register"
             element={<BusinessProfiles />}
           // element={<RegistrationStepForm />}
           />
