@@ -59,7 +59,7 @@ const Register: React.FC = () => {
             onChange={(newValue) => handleChange("pin", newValue)}
           />
           <div className=" ">
-            <Link to="/business-profile">
+            <Link to="/register">
               <button className="bg-black w-full text-center text-white py-3 rounded">
                 Create Account
               </button>

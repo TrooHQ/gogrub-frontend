@@ -119,7 +119,7 @@ const Login = () => {
           </div>
         </div>
         <div className=" mt-[40px]">
-          <Link to="/business-profile">
+          <Link to="/register">
             <p className="font-[500] text-[16px] text-gray-500">
               Create a business account
             </p>

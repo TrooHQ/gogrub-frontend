@@ -68,20 +68,20 @@ const Register = () => {
             onChange={(newValue) => setConfirmPin(newValue)}
           />
           <div className=" ">
-            <Link to="/business-profile">
+            <Link to="/register">
               <button
                 className="bg-grey700 w-full text-center text-white py-3 rounded"
-                // disabled={loading}
+              // disabled={loading}
               >
                 Create Account
               </button>
             </Link>
-            {/* <Button link="/business-profile" text="Create Account" /> */}
+            {/* <Button link="/register" text="Create Account" /> */}
             <div className=" flex items-center justify-center my-5">
               <div onClick={() => navigate(-1)} className=" ">
                 <button
                   className=" font-[500] text-[16px] text-grey700 cursor-pointer"
-                  // disabled={loading}
+                // disabled={loading}
                 >
                   Go Back
                 </button>
