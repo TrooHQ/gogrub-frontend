@@ -112,6 +112,8 @@ const UpgradeSubscription: React.FC = () => {
           Authorization: "",
         },
       };
+
+
       const response = await axios.post(
         `${PAYMENT_DOMAIN}/v1/transaction/subscription_payment/`,
         {
