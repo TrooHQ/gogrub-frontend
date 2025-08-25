@@ -102,7 +102,7 @@ const Login = () => {
         <div className=" grid  p-[40px] mt-[128px] mb-[40px] w-full md:w-[530px]">
           <div className=" mb-[40px] text-center">
             <p className="text-2xl text-grey500 ">Login Details</p>
-            {error && <p className="text-red-500 pt-4">{error}</p>}
+            {error && <p className="pt-4 text-red-500">{error}</p>}
           </div>
           <div className=" grid gap-[16px]">
             <CustomInput
@@ -128,7 +128,7 @@ const Login = () => {
           </div>
           <div className="" onClick={handleLogin}>
             <button
-              className="bg-grey700 w-full text-center text-white py-3 rounded"
+              className="w-full py-3 text-center text-white rounded bg-grey700"
               disabled={loading}
             >
               Login
@@ -137,7 +137,7 @@ const Login = () => {
         </div>
         <div className=" mt-[100px]">
           {/* <Link to="/demo/register/gogrub-portal"> */}
-          <Link to="/register">
+          <Link to="gogrub.co/register">
             <p className="font-[500] text-[16px] text-gray-500">
               Create a business account
             </p>
