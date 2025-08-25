@@ -8,7 +8,7 @@ import ForgotPassword from "./components/authPages/ForgotPassword.tsx";
 import ResetPassword from "./components/authPages/ResetPassword.tsx";
 import PasswordChanged from "./components/authPages/PasswordChanged.tsx";
 import BusinessProfiles from "./components/authPages/BusinessProfiles.tsx";
-import Register from "./components/authPages/Register.tsx";
+// import Register from "./components/authPages/Register.tsx";
 import VerifyAccount from "./components/authPages/VerifyAccount.tsx";
 import Dashboard from "./components/Dashboard/Dashboard.tsx";
 import ManageUsers from "./components/Dashboard/ManageUsers.tsx";
@@ -101,7 +101,7 @@ export default function App() {
           <Route path="/overview-admin" element={<OverviewAdmin />} />
           <Route path="/roles" element={<Roles />} />
           <Route path="/new-roles" element={<NewRoles />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="/register" element={<BusinessProfiles />} />
           <Route path="/verify-account" element={<VerifyAccount />} />
           <Route path="/checkmail" element={<CheckMail />} />
