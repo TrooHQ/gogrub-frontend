@@ -101,7 +101,7 @@ export default function App() {
           <Route path="/overview-admin" element={<OverviewAdmin />} />
           <Route path="/roles" element={<Roles />} />
           <Route path="/new-roles" element={<NewRoles />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="/register" element={<BusinessProfiles />} />
           <Route path="/verify-account" element={<VerifyAccount />} />
           <Route path="/checkmail" element={<CheckMail />} />
