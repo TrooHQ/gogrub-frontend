@@ -14,6 +14,7 @@ import { truncateText } from "../../utils/truncateText";
 import ViewOrderModal from "./OrderModal";
 import DateFilterComp from "./components/DateFilterComp";
 import PaginationComponent from "./PaginationComponent";
+import { SearchRounded } from "@mui/icons-material";
 
 // export interface filterProps {
 
@@ -27,7 +28,7 @@ const OrderHistory = () => {
 
 
   const { selectedBranch } = useSelector((state: any) => state.branches);
-  console.log(selectedBranch);
+
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [data, setData] = useState<any[]>([]);
@@ -47,6 +48,7 @@ const OrderHistory = () => {
     currentPage: 1,
     pageSize: 10,
   });
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const userDetails = useSelector((state: any) => state.user);
 
@@ -66,7 +68,7 @@ const OrderHistory = () => {
   };
 
   useEffect(() => {
-    getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page })
+    getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue })
   }, [filterValue, noOfDays, start_date, end_date, page]);
 
   const handleFilterChange = (
@@ -87,19 +89,20 @@ const OrderHistory = () => {
   };
 
 
-  console.log(noOfDays, "noOfDays");
   const getTickets = async ({
     date_filter,
     startDate,
     endDate,
     number_of_days,
-    page
+    page,
+    order_number
   }: {
     date_filter?: string | number;
     startDate?: string;
     endDate?: string;
     number_of_days?: string | number;
     page?: number;
+    order_number?: string
   }) => {
     const headers = {
       headers: {
@@ -120,7 +123,7 @@ const OrderHistory = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history&status=${statusFilter}&page=${page}&limit=10`,
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history&status=${statusFilter}&page=${page}&limit=10&order_number=${order_number}`,
         {
           ...headers,
           params
@@ -128,7 +131,7 @@ const OrderHistory = () => {
           // paramsSerializer: (params) => new URLSearchParams(params).toString(),
         }
       );
-      console.log("res data", response.data);
+
       setData(response.data?.data);
       setPagination({
         totalOrders: response.data?.totalOrders || 0,
@@ -147,11 +150,10 @@ const OrderHistory = () => {
   const [statusFilter, setStatusFilter] = useState<string>("");
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStatusFilter(e.target.value);
-    console.log('Selected:', e.target.value);
   };
 
   useEffect(() => {
-    getTickets({ date_filter: noOfDays });
+    getTickets({ date_filter: noOfDays, order_number: searchValue });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBranch, statusFilter]);
 
@@ -226,7 +228,6 @@ const OrderHistory = () => {
     if (orderId) {
 
       const order = data?.find((order: any) => order._id === orderId);
-      console.log("Order:", order);
       setSingleOrderItem(order)
 
       setOrderModal(true);
@@ -342,14 +343,28 @@ const OrderHistory = () => {
                     <p className="   font-[400] text-[24px] text-[#121212]">
                       Orders
                     </p>
+                    <div>
+                      <select className="border border-[#B6B6B6] bg-transparent  px-[16px] py-[8px] font-[400] text-[#121212] rounded-lg"
+                        value={statusFilter} // Controlled input
+                        onChange={handleStatusChange}>
+                        <option value="">All</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                      </select>
 
-                    <select className="border border-[#B6B6B6] bg-transparent  px-[16px] py-[8px] font-[400] text-[#121212] rounded-lg"
-                      value={statusFilter} // Controlled input
-                      onChange={handleStatusChange}>
-                      <option value="">All</option>
-                      <option value="Completed">Completed</option>
-                      <option value="Cancelled">Cancelled</option>
-                    </select>
+                      {/* search  */}
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="Search by order id"
+                          className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-[300px]"
+                          onChange={(e) => setSearchValue(e.target.value)}
+                        />
+                        <button className="p-2 bg-black border border-black rounded" onClick={() => getTickets({ order_number: searchValue })}>
+                          <SearchRounded className="text-white" />
+                        </button>
+                      </div>
+                    </div>
 
                   </div>
                   <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-6 border-b">
