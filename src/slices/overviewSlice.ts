@@ -101,6 +101,7 @@ export const fetchCustomerData = createAsyncThunk(
       endDate,
       number_of_days,
       page,
+      phone_number,
     }: {
       businessIdentifier?: string;
       date_filter?: string | number;
@@ -108,6 +109,7 @@ export const fetchCustomerData = createAsyncThunk(
       endDate?: string | number;
       number_of_days?: string | number;
       page?: number;
+      phone_number?: string;
     },
     { rejectWithValue }
   ) => {
@@ -127,7 +129,7 @@ export const fetchCustomerData = createAsyncThunk(
       const response = await axios.get(
         `${SERVER_DOMAIN}/order/getOrderCustomerData?businessIdentifier=${businessIdentifier}`,
         {
-          params: { ...params, page, limit: 10 },
+          params: { ...params, page, limit: 10, phone_number },
           headers: {
             Authorization: `Bearer ${token}`,
           },

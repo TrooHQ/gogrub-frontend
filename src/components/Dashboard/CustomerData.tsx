@@ -22,6 +22,7 @@ import axios from "axios";
 import { FiArrowDownRight, FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import DateFilterComp from "./components/DateFilterComp";
 import PaginationComponent from "./PaginationComponent";
+import { SearchRounded } from "@mui/icons-material";
 
 const CustomerData = () => {
 
@@ -47,6 +48,7 @@ const CustomerData = () => {
   const [start_date, setStartDate] = useState<string | undefined>();
   const [end_date, setEndDate] = useState<string | undefined>();
   const [page, setPage] = useState(1);
+  const [searchValue, setSearchValue] = useState<string>("");
 
 
   const handleFilterChange = (
@@ -75,11 +77,12 @@ const CustomerData = () => {
     dispatch(
       fetchCustomerData({
         businessIdentifier: userDetails?._id?.toString(),
-        date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page
+        date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, phone_number: searchValue
+
       })
     );
     dispatch(fetchCustomerTransaction({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date }));
-  }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date, page]);
+  }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date, page, searchValue]);
 
   const [orderCount, setOrderCount] = useState<any>({});
   const token = localStorage.getItem("token");
@@ -124,7 +127,8 @@ const CustomerData = () => {
         startDate,
         endDate,
         number_of_days,
-        page
+        page,
+        phone_number: searchValue
       })
     )
       .unwrap()
@@ -266,6 +270,35 @@ const CustomerData = () => {
           </div>
         </div>
 
+        <div className="flex items-center justify-end w-full my-2 gap-[12px]">
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="border border-[#B6B6B6] rounded-[5px] px-[16px] py-[8px] font-[400] text-[#121212] flex items-center justify-start gap-2"
+            >
+              <img src={chip} alt="" className="" />
+              Export Data
+            </button>
+            {dropdownVisible && (
+              <div className="absolute mt-2 w-[150px] bg-white border border-[#B6B6B6] rounded-[5px] shadow-lg">
+                <button
+                  onClick={handleDownloadCSV}
+                  className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
+                >
+                  Export in CSV
+                </button>
+                <button
+                  onClick={handleDownloadExcel}
+                  className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
+                >
+                  Export in Excel
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+
         {/* Filter and table */}
         <div className="">
           <div className="mt-[40px]">
@@ -275,33 +308,20 @@ const CustomerData = () => {
                   <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">
                     All Customers Data
                   </p>
-                  {/* Export buttons */}
-                  <div className="flex items-center gap-[12px]">
-                    <div className="relative">
-                      <button
-                        onClick={toggleDropdown}
-                        className="border border-[#B6B6B6] rounded-[5px] px-[16px] py-[8px] font-[400] text-[#121212] flex items-center justify-start gap-2"
-                      >
-                        <img src={chip} alt="" className="" />
-                        Export Data
-                      </button>
-                      {dropdownVisible && (
-                        <div className="absolute mt-2 w-[150px] bg-white border border-[#B6B6B6] rounded-[5px] shadow-lg">
-                          <button
-                            onClick={handleDownloadCSV}
-                            className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
-                          >
-                            Export in CSV
-                          </button>
-                          <button
-                            onClick={handleDownloadExcel}
-                            className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
-                          >
-                            Export in Excel
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                  {/* search button */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      placeholder="Search by order id"
+                      className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-[300px]"
+                      onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    <button className="p-2 bg-black border border-black rounded" onClick={() => dispatch(fetchCustomerData({
+                      businessIdentifier: userDetails?._id?.toString(),
+                      phone_number: searchValue
+                    }))}>
+                      <SearchRounded className="text-white" />
+                    </button>
                   </div>
                 </div>
 
