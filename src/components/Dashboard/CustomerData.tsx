@@ -312,7 +312,7 @@ const CustomerData = () => {
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
-                      placeholder="Search by order id"
+                      placeholder="Search by phone number"
                       className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-[300px]"
                       onChange={(e) => setSearchValue(e.target.value)}
                     />
