@@ -343,7 +343,7 @@ const OrderHistory = () => {
                     <p className="   font-[400] text-[24px] text-[#121212]">
                       Orders
                     </p>
-                    <div>
+                    <div className="flex items-center gap-4">
                       <select className="border border-[#B6B6B6] bg-transparent  px-[16px] py-[8px] font-[400] text-[#121212] rounded-lg"
                         value={statusFilter} // Controlled input
                         onChange={handleStatusChange}>
@@ -356,7 +356,7 @@ const OrderHistory = () => {
                       <div className="flex items-center gap-2">
                         <input
                           type="text"
-                          placeholder="Search by order id"
+                          placeholder="Search by order number"
                           className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-[300px]"
                           onChange={(e) => setSearchValue(e.target.value)}
                         />
