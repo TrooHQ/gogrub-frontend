@@ -19,7 +19,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 // import { convertToBase64 } from "../../utils/imageToBase64";
 import { Menu, MenuItem, IconButton } from "@mui/material";
-import { EditOutlined, MoreVert } from "@mui/icons-material";
+import { CancelOutlined, EditOutlined, MoreVert } from "@mui/icons-material";
 import VisibilityOpen from "./VisibilityOpen";
 import ConfirmationDialog from "./ConfirmationDialog";
 import AddMenuGroup from "./MenuBuilderModals/AddMenuGroup";
@@ -29,6 +29,7 @@ import CustomInput from "../inputFields/CustomInput";
 import EditCategoryNameModal from "./MenuBuilderModals/EditCategoryNameModal";
 import MenuItemForm from "./MenuBuilderModals/NewAddMenuModal";
 import { BsArrowRightCircleFill } from "react-icons/bs";
+import { fetchBranches } from "../../slices/branchSlice";
 
 const MenuBuilder = () => {
 
@@ -55,6 +56,12 @@ const MenuBuilder = () => {
   const [menuGroupLoading, setMenuGroupLoading] = useState(false);
   const [menuItemLoading, setMenuItemLoading] = useState(false);
   const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
+
+
+  useEffect(() => {
+    dispatch(fetchBranches());
+  }, [dispatch]);
+
 
   const [groupName, setGroupName] = useState("");
   // const [menuName, setMenuName] = useState("");
@@ -86,6 +93,7 @@ const MenuBuilder = () => {
   // Useeffects
   useEffect(() => {
     if (selectedBranch) {
+      console.log("selectedBranch", selectedBranch)
       dispatch(fetchMenuCategories(selectedBranch.id));
     }
   }, [selectedBranch, dispatch]);
@@ -113,6 +121,30 @@ const MenuBuilder = () => {
 
   const handleClose2 = () => {
     setAnchorEl2(null);
+  };
+
+  const handleDeleteCategory = async (category: any) => {
+
+    if (category) {
+      try {
+        const res = await axios.delete(
+          // `${SERVER_DOMAIN}/menu/deleteMenuCategory?category_id=${category._id}&branch_id=${selectedBranch.id}`,
+          `${SERVER_DOMAIN}/menu/menu_type=category&name=${category.name}&branch_id=${selectedBranch.id}`,
+          // api/menu?menu_type=category&name=${categoryName}&branch_id=${branchId}`
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        toast.success(res?.data?.message);
+        console.log(res);
+        dispatch(fetchMenuCategories(selectedBranch.id));
+      }
+      catch (e) {
+        toast.error("An error occurred, please try again");
+      }
+    }
   };
 
   const handleCategoryEdit = (category: any) => {
@@ -374,7 +406,6 @@ const MenuBuilder = () => {
         page: page,
       })
     );
-    // console.log(`Fetching menu items for page ${page}`);
   };
 
   return (
@@ -441,22 +472,23 @@ const MenuBuilder = () => {
                             />
                             <span style={{ fontWeight: "300" }}>Edit</span>
                           </MenuItem>
-                          {/* <MenuItem
-                          onClick={() => handleCategoryDeleteClick(category)}
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "8px",
-                          }}
-                        >
-                          <CancelOutlined
+                          <MenuItem
+                            // onClick={() => console.log("delete")}
+                            onClick={() => handleDeleteCategory(category)}
                             sx={{
-                              fontSize: "20px",
-                              fontWeight: "300",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "8px",
                             }}
-                          />
-                          <span style={{ fontWeight: "300" }}>Remove</span>
-                        </MenuItem> */}
+                          >
+                            <CancelOutlined
+                              sx={{
+                                fontSize: "20px",
+                                fontWeight: "300",
+                              }}
+                            />
+                            <span style={{ fontWeight: "300" }}>Delete</span>
+                          </MenuItem>
                         </Menu>
                       )}
                       {activeCategory?.name === category.name ? (
