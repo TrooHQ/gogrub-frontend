@@ -131,18 +131,17 @@ const MenuBuilder = () => {
 
     if (category) {
       try {
-        const res = await axios.delete(
-          // `${SERVER_DOMAIN}/menu/deleteMenuCategory?category_id=${category._id}&branch_id=${selectedBranch.id}`,
-          `${SERVER_DOMAIN}/menu/menu_type=category&name=${category.name}&branch_id=${selectedBranch.id}`,
-          // api/menu?menu_type=category&name=${categoryName}&branch_id=${branchId}`
+        await axios.delete(
+          `${SERVER_DOMAIN}/menu/removeMenu/?menu_type=category&name=${category.name}&branch_id=${selectedBranch.id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         )
-        toast.success(res?.data?.message);
-        console.log(res);
+        // toast.success(res?.data?.message);
+        toast.success("Item deleted successfully");
+        // console.log(res);
         dispatch(fetchMenuCategories(selectedBranch.id));
       }
       catch (e) {
@@ -151,22 +150,15 @@ const MenuBuilder = () => {
     }
   };
 
-  // const handleCategoryEdit = (category: any) => {
-  //   setEditCategoryModalOpen(true);
-  //   setEditingCategory({ id: category._id, oldName: category.name });
-  //   setNewCategoryName(category.name);
-  //   handleClose2();
-  // };
-
   const handleEditCategoryConfirm = async () => {
     if (categoryEdit) {
       setEditLoading(true);
       try {
         const res = await axios.put(
-          `${SERVER_DOMAIN}/menu/editMenu`,
+          `${SERVER_DOMAIN}/menu/editGogrubMenuCategory/`,
           {
-            branch_id: selectedBranch?.id,
-            menu_type: "category",
+            // branch_id: selectedBranch?.id,
+            // menu_type: "category",
             ...categoryEdit,
           },
           {
@@ -178,6 +170,7 @@ const MenuBuilder = () => {
         if (res.status === 200) {
           toast.success("Category name updated successfully");
           // setEditCategoryModalOpen(false);
+          setCategoryEdit({});
           setIsModalOpen(false);
           dispatch(fetchMenuCategories(selectedBranch.id));
         }
@@ -463,7 +456,7 @@ const MenuBuilder = () => {
                         >
                           <MenuItem
                             // onClick={() => handleCategoryEdit(category)}
-                            onClick={() => { setIsModalOpen(true); setCategoryEdit({ old_name: category.name, image: category.image, name: category.name }); handleClose2(); }}
+                            onClick={() => { setIsModalOpen(true); setCategoryEdit({ image: category.image, menu_category_name: category.name, branch_id: category.branch, category_id: category._id, }); handleClose2(); }}
                             sx={{
                               display: "flex",
                               alignItems: "center",
