@@ -13,18 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { fetchOpenTickets, fetchClosedTickets } from "../../slices/ticketsSlice";
 
-// export const storeData = {
-//   id: 1,
-//   name: "Chicken Republic",
-//   outlet: "Ajah outlet",
-//   address: "No 1, Kanta Street, Lagos",
-//   phoneNo: "0817 8901 234",
-//   availableBalance: "₦ 10,500,000",
-//   noOfWarehouses: "450",
-//   noOfProducts: "12,450",
-//   noOfTransactions: "N2.25M",
-//   noOfReturns: "24",
-// };
 
 export const CustomAutocomplete = styled(Autocomplete)({
   "& .MuiOutlinedInput-root": {
@@ -210,26 +198,3 @@ const Overview: React.FC = () => {
 };
 
 export default Overview;
-
-
-
-//   const headers = {
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-//   try {
-//     // setIsLoading(true);
-//     const response = await axios.get(
-//       // https://troox-backend-new.vercel.app/api/order/getGogrubClosedTicket/?branch_id=669e67afbe2d93ee11921119
-//       // https://troox-backend-new.vercel.app/api/order/getGogrubOpenTickets/?branch_id=669e67afbe2d93ee11921119
-//       `${SERVER_DOMAIN}/order/getGogrubOpenTickets/?branch_id=${selectedBranch.id}`,
-//       headers
-//     );
-//     // setOpenOrderData(response.data.data);
-//     return response.data.data;
-//   } catch (error) {
-//     // toast.error("Error retrieving tickets");
-//   }
-// };

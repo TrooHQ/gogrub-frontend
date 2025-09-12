@@ -26,15 +26,17 @@ const AddMenuCategory = ({ setIsModalOpen, editCategory, handleEditCategoryConfi
 
   useEffect(() => {
     if (editCategory) {
-      setMenuName(editCategory.old_name);
+      setMenuName(editCategory.menu_category_name);
       setImage(editCategory.image);
+
     }
   }, []);
 
   const handleInputChange = (key: string, value: string) => {
     if (key === "menuName") {
       setMenuName(value);
-      setCategoryEdit((prev: any) => ({ ...prev, name: value }));
+      setCategoryEdit?.((prev: any) => ({ ...prev, menu_category_name: value }));
+
     }
   };
 
@@ -54,24 +56,6 @@ const AddMenuCategory = ({ setIsModalOpen, editCategory, handleEditCategoryConfi
     dispatch(fetchBranches());
   }, [dispatch]);
 
-  // const handleBranchSelect = (branchId: string) => {
-  //   setSelectedBranch(branchId);
-
-  //   const selectedBranchObj = branches.find(
-  //     (branch: any) => branch._id === branchId
-  //   );
-  //   if (selectedBranchObj) {
-  //     setSelectedBranchId(selectedBranchObj._id);
-  //   }
-  // };
-
-  // const branchOptions = branches.map((branch: any) => ({
-  //   label: branch.branch_name,
-  //   value: branch._id,
-  // }));
-
-  // const loggedInUser = useSelector((state: any) => state.user.userData);
-  // console.log(loggedInUser);
 
   const handleSubmit = async () => {
     if (!menuName || !image) {
@@ -229,10 +213,13 @@ const AddMenuCategory = ({ setIsModalOpen, editCategory, handleEditCategoryConfi
           <div className="border border-black bg-black rounded px-[24px] py-[10px] font-[500] text-[#ffffff]">
             <button
               className="text-[16px]"
-              onClick={editCategory ? handleEditCategoryConfirm : handleSubmit}
+              onClick={editCategory?.category_id
+                ? handleEditCategoryConfirm : handleSubmit}
               disabled={loading}
             >
-              {loading ? (editCategory ? "Updating..." : "Saving...") : editCategory ? "Update Menu" : "Save Menu"}
+              {loading ? (editCategory?.category_id
+                ? "Updating..." : "Saving...") : editCategory?.category_id
+                ? "Update Menu" : "Save Menu"}
             </button>
           </div>
         </div>
