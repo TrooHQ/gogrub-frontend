@@ -14,6 +14,7 @@ import Pattern from "../../assets/ChhosePlan.svg";
 import { Link, useLocation } from "react-router-dom";
 import dayjs from "dayjs";
 import { setSubscription } from "../../slices/setupSlice";
+import { MdReportGmailerrorred } from "react-icons/md";
 
 interface Plan {
   _id: string;
@@ -81,7 +82,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
         );
         const plansData = response.data.data;
         setPlans(plansData);
-        console.log("response", plansData)
+        console.log("plan response", plansData)
 
         if (currentPlanId) {
           const plan = plansData.find(
@@ -275,7 +276,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
               <img src={CancelIcon} alt="" />
             </div>
 
-            <div
+            {plans.length > 0 ? <div
               className="  py-[30px]"
               style={{
                 backgroundImage: `url(${Pattern})`,
@@ -386,7 +387,23 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                   </div>
                 </div>
               )}
-            </div>
+            </div> : (
+              <div className=" flex flex-col items-center justify-center max-w-[421px] mx-auto w-full h-[404px] border border-red-500 rounded-[8px]">
+                <div className="font-GeneralSans space-y-[40px]  flex flex-col items-center justify-center text-red-500">
+
+                  <MdReportGmailerrorred className="text-7xl" />
+
+                  <div className="space-y-[28px] text-center w-[316px]">
+                    <p className="font-[700]  text-[20px] lg:text-[32px] transition-all duration-500 ease-in-out">
+                      Something Went Wrong
+                    </p>
+                    {isNewUser && <p className="font-[500] text-[14px] lg:text-[16px]  transition-all duration-500 ease-in-out">
+                      Could not fetch plans
+                    </p>}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {isNewUser && <Link
               to="/online-ordering?pg=link"
