@@ -7,14 +7,14 @@ import styles from "../overview-comps/Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
-  fetchCustomerData,
+  // fetchCustomerData,
   fetchCustomerTransaction,
 } from "../../slices/overviewSlice";
 import ArrowDown from "../../assets/ArrowDown.svg";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 import chip from "../../assets/chip.svg";
 import { SERVER_DOMAIN } from "../../Api/Api";
@@ -37,11 +37,10 @@ const CustomerData = () => {
   );
 
   const businessIdentifier = userDetails?._id;
-  const { customerData, customerDataLoading, totalCustomerTransaction, customerDataPagination } =
+  const { totalCustomerTransaction } =
     useSelector((state: RootState) => state.overview);
 
   console.log("totalCustomerTransaction", totalCustomerTransaction);
-  console.log("customerData", customerData);
 
   const [filterValue, setFilterValue] = useState<string | number | undefined>("today")
   const [noOfDays, setNoOfDays] = useState<string | number | undefined>("today")
@@ -49,7 +48,14 @@ const CustomerData = () => {
   const [end_date, setEndDate] = useState<string | undefined>();
   const [page, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState<string>("");
-
+  const [loading, setLoading] = useState<boolean>(true);
+  const [customerData, setCustomerData] = useState([]);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    pageSize: 10,
+    totalOrders: 0,
+  });
 
   const handleFilterChange = (
     filter?: string | number,
@@ -74,14 +80,62 @@ const CustomerData = () => {
   useEffect(() => {
     // businessIdentifier &&
     // console.log("for here")
-    dispatch(
-      fetchCustomerData({
-        businessIdentifier: userDetails?._id?.toString(),
-        date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, phone_number: searchValue
 
-      })
-    );
     dispatch(fetchCustomerTransaction({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date }));
+  }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date, page, searchValue]);
+
+
+
+  const fetchCustomerData = async ({ businessIdentifier, date_filter, startDate, endDate, number_of_days, page, phone_number }: {
+    businessIdentifier?: string;
+    date_filter?: string | number;
+    startDate?: string | number;
+    endDate?: string | number;
+    number_of_days?: string | number;
+    page?: number;
+    phone_number?: string;
+  }) => {
+
+    try {
+      setLoading(true)
+      const params: any = { businessIdentifier, date_filter };
+      if (date_filter === "date_range") {
+        params.date_filter = "date_range";
+        params.startDate = startDate;
+        params.endDate = endDate;
+      } else if (date_filter !== "today") {
+        params.number_of_days = number_of_days;
+      }
+
+      const res = await axios.get(`${SERVER_DOMAIN}/order/getOrderCustomerData?businessIdentifier=${businessIdentifier}`,
+        {
+          params: { ...params, page, limit: 10, phone_number },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      console.log("res", res);
+      setCustomerData(res?.data?.data)
+      setPagination({
+        currentPage: res?.data?.pagination?.currentPage,
+        totalPages: res?.data?.pagination?.totalPages,
+        pageSize: res?.data?.pagination?.pageSize,
+        totalOrders: res?.data?.pagination?.totalOrders
+      })
+
+    } catch (e) {
+      console.error("Error fetching transaction count data:", e);
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchCustomerData({
+      businessIdentifier: userDetails?._id?.toString(),
+      date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, phone_number: searchValue
+    });
   }, [dispatch, userDetails?._id, filterValue, noOfDays, start_date, end_date, page, searchValue]);
 
   const [orderCount, setOrderCount] = useState<any>({});
@@ -90,6 +144,7 @@ const CustomerData = () => {
     const getTransactionCountData = async () => {
 
       try {
+        setLoading(true)
         const res = await axios.get(`${SERVER_DOMAIN}/getCustomerTransaction`,
           {
             headers: {
@@ -102,6 +157,8 @@ const CustomerData = () => {
 
       } catch (e) {
         console.error("Error fetching transaction count data:", e);
+      } finally {
+        setLoading(false)
       }
     }
     if (token) {
@@ -120,21 +177,16 @@ const CustomerData = () => {
   ) => {
     if (!businessIdentifier) return;
 
-    dispatch(
-      fetchCustomerData({
-        businessIdentifier: businessIdentifier.toString(),
-        date_filter,
-        startDate,
-        endDate,
-        number_of_days,
-        page,
-        phone_number: searchValue
-      })
-    )
-      .unwrap()
-      .then(() => {
-        toast.success("Successful");
-      });
+
+    fetchCustomerData({
+      businessIdentifier: businessIdentifier.toString(),
+      date_filter,
+      startDate,
+      endDate,
+      number_of_days,
+      page,
+      phone_number: searchValue
+    });
 
     dispatch(
       fetchCustomerTransaction({
@@ -148,7 +200,7 @@ const CustomerData = () => {
 
   const exportToExcel = () => {
     // Create an array with only the desired fields
-    const selectedData = customerData.map(
+    const selectedData = customerData?.map(
       (item: {
         customerName: any;
         email: any;
@@ -176,7 +228,7 @@ const CustomerData = () => {
   // Function to export selected data as CSV
   const exportToCSV = () => {
     // Create an array with only the desired fields
-    const selectedData = customerData.map((item: any) => ({
+    const selectedData = customerData?.map((item: any) => ({
       "Customer Name": item.customerName,
       Email: item.email,
       "Phone Number": item.phoneNumber,
@@ -316,10 +368,10 @@ const CustomerData = () => {
                       className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-[300px]"
                       onChange={(e) => setSearchValue(e.target.value)}
                     />
-                    <button className="p-2 bg-black border border-black rounded" onClick={() => dispatch(fetchCustomerData({
+                    <button className="p-2 bg-black border border-black rounded" onClick={() => fetchCustomerData({
                       businessIdentifier: userDetails?._id?.toString(),
                       phone_number: searchValue
-                    }))}>
+                    })}>
                       <SearchRounded className="text-white" />
                     </button>
                   </div>
@@ -331,7 +383,7 @@ const CustomerData = () => {
                   <p className=" text-[14px] text-[#121212]">Phone Number</p>
                   <p className=" text-[14px]  text-[#121212]">Address </p>
                 </div>
-                {customerDataLoading ? (
+                {loading ? (
                   <div className="px-8">Loading...</div>
                 ) : customerData?.length === 0 ? (
                   <div className="px-8">No data during this period</div>
@@ -355,7 +407,7 @@ const CustomerData = () => {
               </div>
             </div>
             <div className="flex items-center justify-center w-full my-4">
-              <PaginationComponent setPage={setPage} pagination={customerDataPagination} />
+              <PaginationComponent setPage={setPage} pagination={pagination} />
             </div>
           </div>
         </div>
