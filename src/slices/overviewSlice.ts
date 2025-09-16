@@ -135,17 +135,30 @@ export const fetchCustomerData = createAsyncThunk(
           },
         }
       );
-      // console.log("post call");
-      // console.log("response", response);
-      return {
-        data: response.data.data,
-        pagination: {
-          currentPage: response.data.pagination.currentPage,
-          totalPages: response.data.pagination.totalPages,
-          pageSize: response.data.pagination.pageSize,
-          totalOrders: response.data.pagination.totalOrders,
-        },
+      console.log("post call");
+      // console.log("response from overview", response?.data?.data);
+
+      const data = response?.data?.data;
+      const pagination = {
+        currentPage: response.data.pagination.currentPage,
+        totalPages: response.data.pagination.totalPages,
+        pageSize: response.data.pagination.pageSize,
+        totalOrders: response.data.pagination.totalOrders,
       };
+
+      console.log("data", data);
+      console.log("pagination", pagination);
+
+      return { data, pagination };
+      // return {
+      //   data: response.data.data,
+      //   pagination: {
+      //     currentPage: response.data.pagination.currentPage,
+      //     totalPages: response.data.pagination.totalPages,
+      //     pageSize: response.data.pagination.pageSize,
+      //     totalOrders: response.data.pagination.totalOrders,
+      //   },
+      // };
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
@@ -464,6 +477,7 @@ const overviewSlice = createSlice({
             };
           }>
         ) => {
+          console.log("tge", action.payload.data);
           state.customerDataLoading = false;
           state.customerData = action.payload.data;
           state.customerDataPagination = action.payload.pagination;
