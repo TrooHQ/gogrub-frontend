@@ -1,6 +1,6 @@
 import DashboardLayout from "./DashboardLayout";
 import TopMenuNav from "./TopMenuNav";
-import More from "../../assets/more_vert.svg";
+// import More from "../../assets/more_vert.svg";
 import Refresh from "../../assets/refresh.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import { DropdownMenuTicketStatusUpdate } from "./DropDownTicketStatusUpdate";
 import { fetchTickets } from "../../slices/ticketsSlice";
 import ViewOrderModal from "./OrderModal";
 import PaginationComponent from "./PaginationComponent";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import RefundModal from "./RefundModal";
 
 const Tickets = () => {
 
@@ -27,15 +29,15 @@ const Tickets = () => {
   // console.log("orderDataPagination:", orderDataPagination);
   // console.log("Order Data:", orderData);
 
-  const [activeMenuIndex2, setActiveMenuIndex2] = useState<number | null>(null);
+  // const [activeMenuIndex2, setActiveMenuIndex2] = useState<number | null>(null);
 
   const handleTicketMenu = () => {
     setOpenTicket(!openTicket);
   };
 
-  const toggleMenu2 = (index: number) => {
-    setActiveMenuIndex2((prevIndex) => (prevIndex === index ? null : index));
-  };
+  // const toggleMenu2 = (index: number) => {
+  //   setActiveMenuIndex2((prevIndex) => (prevIndex === index ? null : index));
+  // };
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -64,6 +66,30 @@ const Tickets = () => {
     }
   }, [orderId, orderData])
 
+
+  // refund order process
+  const [showMenuOptions, setShowMenuOptions] = useState<number | null>(null);
+  const [showRefundModal, setShowRefundModal] = useState(false);
+
+  const [refundOrder, setRefundOrder] = useState<any | null>(null);
+
+  const handleShowMenu = (index: number) => {
+    setShowMenuOptions((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const handleRefundData = (id: any) => {
+    const rd = orderData?.find((item: any) => item._id === id);
+    setRefundOrder(rd);
+    setShowRefundModal(!showRefundModal);
+    // setOrder(rd);
+    // setRefundOrder(!refundOrder);
+  }
+
+  const handleCancelRefundData = () => {
+    setRefundOrder(null);
+    setShowRefundModal(!showRefundModal);
+  }
+
   return (
     <div>
       <DashboardLayout>
@@ -86,7 +112,7 @@ const Tickets = () => {
             <div className="">
 
               <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
-                <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">                  Tickets                </p>
+                <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">Tickets</p>
 
                 <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-7 border-b">
                   <p className=" text-[14px] text-[#121212]">Date</p>
@@ -128,19 +154,12 @@ const Tickets = () => {
                       </p>
                       <div className="mx-auto w-fit">
                         <div className="flex items-center gap-[10px] bg-orange-500 text-orange-100 px-[10px] py-[5px] rounded-full text-sm">
-                          {/* {item.status?.toLowerCase() === "cancelled" ?
-                            <div className="w-[12px] h-[12px] rounded-full bg-red-600" />
-                            : item.status?.toLowerCase() === "completed" ?
-                              <div className="w-[12px] h-[12px] rounded-full bg-green-600" />
-                              :
-                              <div className="w-[12px] h-[12px] rounded-full bg-orange-600" />
-                          } */}
                           <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
                         </div>
                       </div>
                       <p>&#x20A6;{item.total_price.toLocaleString()}</p>
                       <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
-                        <div
+                        {/* <div
                           className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
                           onClick={() => toggleMenu2(index)}
                         >
@@ -149,17 +168,28 @@ const Tickets = () => {
                               <img src={More} alt="" className="w-[5px]" />
                             }
                           </>
-                        </div>
-                        {activeMenuIndex2 === index && (
-                          <DropdownMenuTicketStatusUpdate
+                        </div> */}
+                        <div className="relative flex items-center justify-center">
+                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="text-2xl mx-auto" />
+
+                          {showMenuOptions === index && <DropdownMenuTicketStatusUpdate
                             getTickets={fetchTickets}
                             branchId={selectedBranch.id}
+                            orderId={item._id}
+                            setOrderId={setOrderId}
+                            toggleOff={() => setShowMenuOptions(null)}
+                            handleRefundData={handleRefundData}
+                          />}
+                        </div>
+
+                        {/* {activeMenuIndex2 === index && (
+                          <DropdownMenuTicketStatusUpdate
                             orderId={item._id}
                             setOrderId={setOrderId}
                             toggleOff={() => setActiveMenuIndex2(null)}
                           />
 
-                        )}
+                        )} */}
                       </div>
                     </div>
                   ))
@@ -170,6 +200,10 @@ const Tickets = () => {
               </div>
             </div>
           </div>
+          {refundOrder && <RefundModal
+            cancelVoidOrder={handleCancelRefundData}
+            voidOrderItem={refundOrder}
+          />}
           {orderModal && <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/40">
             <ViewOrderModal
               setOrderId={setOrderId}
@@ -183,126 +217,3 @@ const Tickets = () => {
 };
 
 export default Tickets;
-
-
-//  {userData?.business_type !== "gogrub" && (
-//               <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
-//                 <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">
-//                   Tickets
-//                 </p>
-
-//                 <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-7 border-b">
-//                   <p className=" text-[14px] text-[#121212]">Date</p>
-//                   <p className=" text-[14px] text-[#121212]">Time</p>
-//                   <p className=" text-[14px] text-[#121212]">Order No</p>
-//                   <p className=" text-[14px] text-[#121212]">Customer </p>
-//                   <p className=" text-[14px] text-[#121212]">Status </p>
-//                   <p className=" text-[14px] text-[#121212]">Bill </p>
-//                   <p className=" text-[14px] text-[#121212]">Actions </p>
-//                 </div>
-//                 {isLoading ? (
-//                   <p className="px-8">Loading...</p>
-//                 ) : orderData.length === 0 ? (
-//                   <p className="px-8">No order available</p>
-//                 ) : (
-//                   orderData.map((item, index) => (
-//                     <div
-//                       className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-7 items-center  font-base text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-//                         }`}
-//                       key={index}
-//                     >
-//                       <p className="" onClick={handleTicketMenu}>
-//                         {item.createdAt.slice(0, 10)}
-//                       </p>
-//                       <p className="" onClick={handleTicketMenu}>
-//                         {item.createdAt.slice(11, 16)}
-//                       </p>
-//                       <p onClick={handleTicketMenu}>
-//                         {item.order_number || "-"}
-//                       </p>
-//                       <p onClick={handleTicketMenu}>
-//                         {item.customer_name
-//                           ? truncateText(
-//                             item.customer_name.charAt(0).toUpperCase() +
-//                             item.customer_name.slice(1),
-//                             10
-//                           )
-//                           : ""}
-//                       </p>
-//                       <div className="flex items-center justify-center gap-[10px]">
-//                         {item.status?.toLowerCase() === "cancelled" && (
-//                           <img
-//                             src={red}
-//                             alt=""
-//                             className="w-[12px] h-[12px]"
-//                           />
-//                         )}
-//                         {item.status === "Ordered" && (
-//                           <img
-//                             src={red}
-//                             alt=""
-//                             className="w-[12px] h-[12px]"
-//                           />
-//                         )}
-//                         {item.status === "Served" && (
-//                           <img
-//                             src={green}
-//                             alt=""
-//                             className="w-[12px] h-[12px]"
-//                           />
-//                         )}
-//                         {item.status === "Ready" && (
-//                           <img
-//                             src={orange}
-//                             alt=""
-//                             className="w-[12px] h-[12px]"
-//                           />
-//                         )}
-//                         {item.status === "Pending" && (
-//                           <img
-//                             src={orange}
-//                             alt=""
-//                             className="w-[12px] h-[12px]"
-//                           />
-//                         )}
-//                         <p className="capitalize">{item.status}</p>
-//                       </div>
-//                       <p>&#x20A6;{item.total_price.toLocaleString()}</p>
-//                       <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
-//                         <div
-//                           className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
-//                           onClick={() => toggleMenu(index)}
-//                         >
-//                           <img
-//                             src={More}
-//                             alt="More Options"
-//                             className="w-[5px]"
-//                           />
-//                         </div>
-//                         {activeMenuIndex === index && (
-//                           <DropdownMenu
-//                             handleVoidOrderMenu={() => handleVoidOrderMenu()}
-//                           />
-//                         )}
-//                       </div>
-//                     </div>
-//                   ))
-//                 )}
-//               </div>
-//             )}
-
-//             {activeMenuIndex !== null ? (
-//               <VoidOrderMenu
-//                 voidOrderMenu={voidOrderMenu}
-//                 handleVoidOrderMenu={handleVoidOrderMenu}
-//                 setVoidOrderMenu={setVoidOrderMenu}
-//                 handleVoidOrder={handleVoidOrder}
-//               />
-//             ) : (
-//               <VoidOrderMenu
-//                 voidOrderMenu={voidOrderMenu}
-//                 handleVoidOrderMenu={handleVoidOrderMenu}
-//                 setVoidOrderMenu={setVoidOrderMenu}
-//                 handleVoidOrder={handleVoidOrder2}
-//               />
-//             )}
