@@ -270,7 +270,7 @@ const CustomerData = () => {
     <div>
       {" "}
       <DashboardLayout>
-        <TopMenuNav pathName="Customer Data" />
+        <TopMenuNav pathName="Customers" />
 
         <div className="my-4">
 
