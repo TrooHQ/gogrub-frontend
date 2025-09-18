@@ -1,15 +1,15 @@
 // import { SERVER_DOMAIN } from "@/src/Api/Api";
-import { AppDispatch, RootState } from "@/src/store/store";
+import { AppDispatch, } from "@/src/store/store";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 // import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import RefundModal from "./RefundModal";
-import { useState } from "react";
+// import RefundModal from "./RefundModal";
+// import { useState } from "react";
 
 // export const DropdownMenuTicketStatusUpdate = ({}: {}) => {
-export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, setOrderId, toggleOff }: { branchId: any, orderId: any, getTickets: any, setOrderId?: any, toggleOff?: any }) => {
+export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, setOrderId, toggleOff, handleRefundData }: { branchId: any, orderId: any, getTickets: any, setOrderId?: any, toggleOff?: any, handleRefundData?: any }) => {
 
   const userDetails = useSelector((state: any) => state.user);
   const token = userDetails?.userData?.token;
@@ -46,22 +46,22 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
   }
 
   // refund order process
-  const [refundOrder, setRefundOrder] = useState<any>(false);
+  // const [refundOrder, setRefundOrder] = useState<any>(false);
 
-  const { orderData } = useSelector((state: RootState) => state.tickets);
-  const [order, setOrder] = useState<any | null>(null);
+  // const { orderData } = useSelector((state: RootState) => state.tickets);
+  // const [order, setOrder] = useState<any | null>(null);
 
-  const handleRefundData = (id: any) => {
-    const rd = orderData?.find((item: any) => item._id === id);
-    setOrder(rd);
-    setRefundOrder(!refundOrder);
-  }
+  // const handleRefundData = (id: any) => {
+  //   const rd = orderData?.find((item: any) => item._id === id);
+  //   setOrder(rd);
+  //   setRefundOrder(!refundOrder);
+  // }
 
-  const handleCancelRefundData = () => {
-    setOrder(null);
-    setRefundOrder(!refundOrder);
-    toggleOff && toggleOff();
-  }
+  // const handleCancelRefundData = () => {
+  //   setOrder(null);
+  //   setRefundOrder(!refundOrder);
+  //   toggleOff && toggleOff();
+  // }
 
 
   return (
@@ -87,10 +87,45 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
         </li>
       </ul>
 
-      {order && <RefundModal
+      {/* {order && <RefundModal
         cancelVoidOrder={handleCancelRefundData}
         voidOrderItem={order}
-      />}
+      />} */}
+    </div>
+  );
+};
+
+// ***************************************************************************
+// ***************************************************************************
+// ***************************************************************************
+// ***************************************************************************
+// ***************************************************************************
+// ***************************************************************************
+
+
+
+export const DropdownMenuHistorStatusUpdate = ({ orderId, setOrderId, toggleOff, handleRefundData }: { orderId: any, setOrderId?: any, toggleOff?: any, handleRefundData?: any }) => {
+
+
+
+  return (
+    <div>
+      <ul className="w-[200px] shadow grid gap-[18px] dropdown-menu absolute bg-white p-[12px] text-black right-[25px] top-8 z-10">
+        <li
+          onClick={() => { setOrderId && setOrderId(orderId); toggleOff && toggleOff(); }}
+          className="font-[400] cursor-pointer text-left"
+        >
+          View Order
+        </li>
+
+        <li
+          onClick={() => { handleRefundData(orderId); toggleOff && toggleOff(); }}
+          className="font-[400] cursor-pointer text-left text-red-500"
+        >
+          Refund Order
+        </li>
+      </ul>
+
     </div>
   );
 };
