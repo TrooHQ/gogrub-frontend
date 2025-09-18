@@ -15,6 +15,10 @@ import ViewOrderModal from "./OrderModal";
 import DateFilterComp from "./components/DateFilterComp";
 import PaginationComponent from "./PaginationComponent";
 import { SearchRounded } from "@mui/icons-material";
+import RefundModal from "./RefundModal";
+import { DropdownMenuHistorStatusUpdate } from "./DropDownTicketStatusUpdate";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+// import { DropdownMenuHistorStatusUpdate, DropdownMenuTicketStatusUpdate } from "./DropDownTicketStatusUpdate";
 
 // export interface filterProps {
 
@@ -229,12 +233,35 @@ const OrderHistory = () => {
 
       const order = data?.find((order: any) => order._id === orderId);
       setSingleOrderItem(order)
-
       setOrderModal(true);
     } else {
       setOrderModal(false);
     }
   }, [orderId, data])
+
+
+  // refund order process
+  const [showMenuOptions, setShowMenuOptions] = useState<number | null>(null);
+  const [showRefundModal, setShowRefundModal] = useState(false);
+
+  const [refundOrder, setRefundOrder] = useState<any | null>(null);
+
+  const handleShowMenu = (index: number) => {
+    setShowMenuOptions((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const handleRefundData = (id: any) => {
+    const rd = data?.find((item: any) => item._id === id);
+    setRefundOrder(rd);
+    setShowRefundModal(!showRefundModal);
+    // setOrder(rd);
+    // setRefundOrder(!refundOrder);
+  }
+
+  const handleCancelRefundData = () => {
+    setRefundOrder(null);
+    setShowRefundModal(!showRefundModal);
+  }
 
   return (
     <div>
@@ -425,10 +452,16 @@ const OrderHistory = () => {
 
 
                         <p>&#x20A6;{item.total_price.toLocaleString()}</p>
-                        <p className="px-3 py-1 mx-auto text-sm text-gray-800 border border-gray-800 rounded-full cursor-pointer w-fit"
-                          onClick={() => item?._id && setOrderId(item?._id)}>
-                          View Order
-                        </p>
+                        <div className="relative flex items-center justify-center">
+                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="text-2xl mx-auto" />
+                          {showMenuOptions === index && <DropdownMenuHistorStatusUpdate
+                            orderId={item._id}
+                            setOrderId={setOrderId}
+                            toggleOff={() => setShowMenuOptions(null)}
+                            handleRefundData={handleRefundData}
+                          />}
+                        </div>
+
                       </div>
                     ))
                   )}
@@ -439,8 +472,14 @@ const OrderHistory = () => {
                     SingleOrderItem={SingleOrderItem}
                   />
                 </div>}
+
+                {refundOrder && <RefundModal
+                  cancelVoidOrder={handleCancelRefundData}
+                  voidOrderItem={refundOrder}
+                />}
+
               </div>
-              <div className="flex items-center justify-center w-full my-4">
+              <div className="flex items-center justify-center w-full my-4 fixed bottom-0 left-0">
                 <PaginationComponent setPage={setPage} pagination={pagination} />
               </div>
             </div>
