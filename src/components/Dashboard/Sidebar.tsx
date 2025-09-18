@@ -188,7 +188,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
           link: "/order-history",
         },
         {
-          title: "Customer Data",
+          title: "Customers",
           link: "/customer-data",
         },
       ],
