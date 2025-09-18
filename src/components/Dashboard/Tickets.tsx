@@ -24,8 +24,8 @@ const Tickets = () => {
   const [openTicket, setOpenTicket] = useState<boolean>(false); // to open ticket details modal
   const [page, setPage] = useState(1);
 
-  console.log("orderDataPagination:", orderDataPagination);
-  console.log("Order Data:", orderData);
+  // console.log("orderDataPagination:", orderDataPagination);
+  // console.log("Order Data:", orderData);
 
   const [activeMenuIndex2, setActiveMenuIndex2] = useState<number | null>(null);
 
@@ -156,6 +156,7 @@ const Tickets = () => {
                             branchId={selectedBranch.id}
                             orderId={item._id}
                             setOrderId={setOrderId}
+                            toggleOff={() => setActiveMenuIndex2(null)}
                           />
 
                         )}
@@ -167,32 +168,6 @@ const Tickets = () => {
                   <PaginationComponent setPage={setPage} pagination={orderDataPagination} />
                 </div>
               </div>
-
-              {/* <RefundMenu
-                refundMenu={refundMenu}
-                handleRefundMenu={handleRefundMenu}
-                refundType={refundType}
-                setRefundType={setRefundType}
-                openInput={openInput}
-                setOpenInput={setOpenInput}
-                refundAmount={refundAmount}
-                setRefundAmount={setRefundAmount}
-                setRefundMenu={setRefundMenu}
-              /> */}
-
-              {/* <VacateTableModal
-                vacateTableMenu={vacateTableMenu}
-                handleVacateTableMenu={handleVacateTableMenu}
-                setVacateTableMenu={setVacateTableMenu}
-              /> */}
-
-              {/* <OpenTicketModal
-                openTicket={openTicket}
-                handleTicketMenu={handleTicketMenu}
-                setOpenTicket={setOpenTicket}
-                data={data}
-                openTicketData={openTicketData}
-              /> */}
             </div>
           </div>
           {orderModal && <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/40">
