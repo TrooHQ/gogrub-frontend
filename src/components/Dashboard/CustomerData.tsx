@@ -109,7 +109,7 @@ const CustomerData = () => {
 
       const res = await axios.get(`${SERVER_DOMAIN}/order/getOrderCustomerData?businessIdentifier=${businessIdentifier}`,
         {
-          params: { ...params, page, limit: 10, phone_number },
+          params: { ...params, page, limit: 10, phoneNumber: phone_number },
           headers: {
             Authorization: `Bearer ${token}`,
           },
