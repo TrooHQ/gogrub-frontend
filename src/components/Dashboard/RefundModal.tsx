@@ -12,11 +12,13 @@ import { CloseRounded } from "@mui/icons-material";
 type refundModalProps = {
   voidOrderItem?: any;
   cancelVoidOrder: () => void;
+  getTickets?: () => void;
 };
 
 const RefundModal = ({
   voidOrderItem,
-  cancelVoidOrder
+  cancelVoidOrder,
+  getTickets
 }: refundModalProps) => {
 
 
@@ -69,7 +71,8 @@ const RefundModal = ({
       );
 
       toast.success("Refund successful");
-      console.log("response", response)
+      console.log("response", response);
+      getTickets && getTickets()
       // setVoidOrderMenu(false)
       cancelVoidOrder();
       setShowConfirmationModal(false)
@@ -86,13 +89,13 @@ const RefundModal = ({
 
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-black/40 min-h-screen flex items-center justify-center ">
+    <div className="fixed top-0 left-0 flex items-center justify-center w-full min-h-screen bg-black/40 ">
       <div className=" p-5  bg-white relative rounded-[20px]  w-[539px]">
         <div
           className="flex items-center justify-end cursor-pointer"
           onClick={cancelVoidOrder}
         >
-          <CloseRounded className=' text-black cursor-pointer fill-black ' />
+          <CloseRounded className='text-black cursor-pointer fill-black' />
         </div>
         <div className="flex flex-col items-center justify-center gap-6">
           <p className="text-[24px] font-[500] text-black">Refund Order</p>
@@ -173,7 +176,7 @@ export default RefundModal;
 
 const RefundConfirmation = ({ setShowConfirmationModal, confirmRefund }: any) => {
   return (
-    <div className="fixed top-0 left-0 w-full bg-black/40 min-h-screen flex items-center justify-center ">
+    <div className="fixed top-0 left-0 flex items-center justify-center w-full min-h-screen bg-black/40 ">
       <div className="w-[539px] p-6 px-10 bg-gray-100 rounded-md ">
         <div className="px-10">
           <h4 className="my-6 text-2xl font-semibold">Are you sure you want to refund this order?</h4>

@@ -24,8 +24,6 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
       },
     };
 
-    //     url: https://troox-backend-new.vercel.app/api/order/updateBranchOrder/
-    // /order/updateGoGrubBranchOrder/
     try {
       const response = await axios.put(
         `${SERVER_DOMAIN}/order/updateGoGrubBranchOrder/`,
@@ -39,30 +37,11 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
       // console.log(response.data);
       dispatch(getTickets({ selectedBranch: { id: branchId } }));
       toast.success(response.data.message || "Order Updated successfully");
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       toast.error("Error updating order");
     }
   }
-
-  // refund order process
-  // const [refundOrder, setRefundOrder] = useState<any>(false);
-
-  // const { orderData } = useSelector((state: RootState) => state.tickets);
-  // const [order, setOrder] = useState<any | null>(null);
-
-  // const handleRefundData = (id: any) => {
-  //   const rd = orderData?.find((item: any) => item._id === id);
-  //   setOrder(rd);
-  //   setRefundOrder(!refundOrder);
-  // }
-
-  // const handleCancelRefundData = () => {
-  //   setOrder(null);
-  //   setRefundOrder(!refundOrder);
-  //   toggleOff && toggleOff();
-  // }
-
 
   return (
     <div>
