@@ -159,18 +159,9 @@ const Tickets = () => {
                       </div>
                       <p>&#x20A6;{item.total_price.toLocaleString()}</p>
                       <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
-                        {/* <div
-                          className="w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
-                          onClick={() => toggleMenu2(index)}
-                        >
-                          <>
-                            {item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "completed" ? null :
-                              <img src={More} alt="" className="w-[5px]" />
-                            }
-                          </>
-                        </div> */}
+
                         <div className="relative flex items-center justify-center">
-                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="text-2xl mx-auto" />
+                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="mx-auto text-2xl" />
 
                           {showMenuOptions === index && <DropdownMenuTicketStatusUpdate
                             getTickets={fetchTickets}
@@ -181,15 +172,6 @@ const Tickets = () => {
                             handleRefundData={handleRefundData}
                           />}
                         </div>
-
-                        {/* {activeMenuIndex2 === index && (
-                          <DropdownMenuTicketStatusUpdate
-                            orderId={item._id}
-                            setOrderId={setOrderId}
-                            toggleOff={() => setActiveMenuIndex2(null)}
-                          />
-
-                        )} */}
                       </div>
                     </div>
                   ))

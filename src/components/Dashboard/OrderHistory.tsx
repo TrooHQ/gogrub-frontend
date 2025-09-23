@@ -453,7 +453,7 @@ const OrderHistory = () => {
 
                         <p>&#x20A6;{item.total_price.toLocaleString()}</p>
                         <div className="relative flex items-center justify-center">
-                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="text-2xl mx-auto" />
+                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="mx-auto text-2xl" />
                           {showMenuOptions === index && <DropdownMenuHistorStatusUpdate
                             orderId={item._id}
                             setOrderId={setOrderId}
@@ -476,10 +476,11 @@ const OrderHistory = () => {
                 {refundOrder && <RefundModal
                   cancelVoidOrder={handleCancelRefundData}
                   voidOrderItem={refundOrder}
+                  getTickets={() => getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue })}
                 />}
 
               </div>
-              <div className="flex items-center justify-center w-full my-4 fixed bottom-0 left-0">
+              <div className="fixed bottom-0 left-0 flex items-center justify-center w-full my-4">
                 <PaginationComponent setPage={setPage} pagination={pagination} />
               </div>
             </div>
