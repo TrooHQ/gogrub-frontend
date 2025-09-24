@@ -317,11 +317,16 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
                               </p>
                             </div>
                             <div className="grid items-center md:flex md:justify-between">
-                              <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
+                              {plan.billingCycleInMonths === 12 ? <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
                                 Pay <span className="font-[400]">₦ </span>
                                 {plan.billingFrequencyAmount.toLocaleString()}{" "}
-                                every {plan.billingCycleInMonths} months
-                              </p>
+                                once every {plan.billingCycleInMonths} months
+                              </p> :
+                                <p className="capitalize font-[400] text-[14px] md:text-[18px] text-[#414141] transition-all duration-500 ease-in-out">
+                                  Pay <span className="font-[400]">₦ </span>
+                                  {plan.billingFrequencyAmount.toLocaleString()}{" "}
+                                  every {plan.billingCycleInMonths} months
+                                </p>}
                               {plan.name !== "quarterly plan" && (
                                 <p className="font-[600] text-[#303030] text-[14px] line-through transition-all duration-500 ease-in-out">
                                   {plan.prevPrice.toLocaleString()}
