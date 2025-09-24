@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { AppDispatch } from "../../store/store";
 import { Key, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 import { fetchTopMenuItems } from "../../slices/overviewSlice";
@@ -24,9 +24,11 @@ const colors = [
 const KPI = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { topMenuItems, loading } = useSelector(
-    (state: RootState) => state.overview
-  );
+  const {
+    loadingDashData,
+    topItems,
+  } = useSelector((state: any) => state.dashboardData);
+
   const { selectedBranch } = useSelector((state: any) => state.branches);
 
   useEffect(() => {
@@ -41,13 +43,13 @@ const KPI = () => {
       <div className={clsx("flex justify-between items-center w-full mb-9")}>
         <h5 className={clsx(styles.salesRevenue)}>Highest Selling Product</h5>
       </div>
-      {loading ? (
+      {loadingDashData ? (
         <div className="flex items-center justify-center h-64">
           <CircularProgress />
         </div>
       ) : (
         <div className="overflow-auto whitespace-nowrap scrollbar-hide">
-          {topMenuItems?.data?.map(
+          {topItems?.map(
             (product: any, index: Key | null | undefined) => (
               <div
                 key={index}
@@ -60,10 +62,10 @@ const KPI = () => {
                     className="w-[80px] h-[60px]"
                   />
                   <h6 className="text-[#201F44] font-medium">
-                    {product.menuItemName}
+                    {product.name}
                   </h6>
                   <p className="text-[#B2B1DC] text-sm">
-                    {product.totalQuantity} quantities sold
+                    {product.count} quantities sold
                   </p>
                 </div>
               </div>
@@ -74,11 +76,11 @@ const KPI = () => {
       {/* Pie chart component */}
       <div className="flex gap-2.5 mt-6">
         <div className="bg-white rounded-[10px] px-5 py-[48px]">
-          <PieCharts topMenuItems={topMenuItems?.data || []} />
+          <PieCharts topMenuItems={topItems || []} />
         </div>
 
         <div className="bg-white rounded-[10px] px-5 py-[48px] flex-grow flex flex-col gap-[22px]">
-          {topMenuItems?.data?.map((product: any, index: any) => {
+          {topItems?.map((product: any, index: any) => {
             const indicator = colors[index % colors.length];
             return (
               <div key={index} className="flex items-center justify-between">
@@ -89,13 +91,13 @@ const KPI = () => {
                   ></div>
                   <div>
                     <h6 className="text-[#201F44] text-[16px] font-medium">
-                      {product.menuItemName}
+                      {product.name}
                     </h6>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <p className="text-[#858497] text-base font-normal">
-                    ₦ {product.totalRevenue.toLocaleString()}
+                    ₦ {product?.revenue?.toLocaleString()}
                   </p>
                 </div>
               </div>

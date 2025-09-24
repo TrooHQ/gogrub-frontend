@@ -29,6 +29,7 @@ import overviewReducer from "../slices/overviewSlice";
 import TicketReducer from "../slices/ticketsSlice";
 import OpenCloseTicketReducer from "../slices/OpenCloseTicketSlice";
 import allBusinessInfoReducer from "../slices/businessPersonalAccountSlice";
+import DashboardReducer from "../slices/Dashboard";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
   tickets: TicketReducer,
   openCloseTickets: OpenCloseTicketReducer,
   allBusinessInfo: allBusinessInfoReducer,
+  dashboardData: DashboardReducer,
 });
 
 const persistConfig = {

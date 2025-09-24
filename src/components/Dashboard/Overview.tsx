@@ -14,6 +14,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { fetchOpenTickets, fetchClosedTickets } from "../../slices/ticketsSlice";
 
 
+
 export const CustomAutocomplete = styled(Autocomplete)({
   "& .MuiOutlinedInput-root": {
     padding: "0.375rem 1rem",
@@ -84,6 +85,7 @@ const Overview: React.FC = () => {
   useEffect(() => {
     dispatch(fetchOpenTickets({ selectedBranch }));
     dispatch(fetchClosedTickets({ selectedBranch }));
+
   }, [dispatch, selectedBranch]);
 
   // console.log("Selected Branch:", selectedBranch);

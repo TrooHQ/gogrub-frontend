@@ -5,7 +5,7 @@ import clsx from "clsx";
 import styles from "./Header.module.css";
 import { fetchSalesGrowthRate } from "../../slices/overviewSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { AppDispatch, } from "../../store/store";
 import { useEffect, useState } from "react";
 import { MoreVert } from "@mui/icons-material";
 import { IconButton, Menu, MenuItem } from "@mui/material";
@@ -27,17 +27,13 @@ const SalesActivities = () => {
     setAnchorEl(null);
   };
 
-  const {
-    salesGrowthRate,
-    totalSales,
-    averageOrderValue,
-    totalCustomerTransaction,
-  } = useSelector((state: RootState) => state.overview);
 
-  // console.log("salesGrowthRate", salesGrowthRate)
-  // console.log("totalSales", totalSales)
-  // console.log("averageOrderValue", averageOrderValue)
-  // console.log("totalCustomerTransaction", totalCustomerTransaction)
+  const {
+    totalRevenue,
+    averageOrderValue,
+    uniqueCustomers,
+    growthRate,
+  } = useSelector((state: any) => state.dashboardData);
 
 
   useEffect(() => {
@@ -45,55 +41,30 @@ const SalesActivities = () => {
   }, [dispatch]);
 
 
-  // Assuming salesGrowthRate.data is available
-  const salesGrowthRateData = salesGrowthRate?.data || {
-    salesGrowthRate: "0.00",
-    getTotalSalesToday: 0,
-    prevDayTotalSales: 0,
-  };
-
-  const { getTotalSalesToday, prevDayTotalSales } = salesGrowthRateData;
-
-  // let status = "No change from yesterday";
-  // let statusIcon = ArrowNeutral;
-  let percentageChange = 0;
-
-  if (prevDayTotalSales !== 0) {
-    percentageChange =
-      ((getTotalSalesToday - prevDayTotalSales) / prevDayTotalSales) * 100;
-    if (percentageChange > 0) {
-      // status = `${percentageChange.toFixed(2)}% up from yesterday`;
-      // statusIcon = ArrowUp;
-    } else if (percentageChange < 0) {
-      // status = `${Math.abs(percentageChange).toFixed(2)}% down from yesterday`;
-      // statusIcon = ArrowDown;
-    }
-  }
-
   const state = {
     salesActivities: [
       {
-        icon: ArrowDown,
+        icon: ArrowNeutral,
         title: "Total Sales Revenue",
         time: "12:45 PM",
-        amount: `₦ ${Number(totalSales?.data || 0).toLocaleString("en-US", {
+        amount: `₦ ${Number(totalRevenue || 0).toLocaleString("en-US", {
           minimumFractionDigits: 2,
         })}`,
-        statusIcon: ArrowDown,
+        statusIcon: ArrowNeutral,
         status: "-25% from yesterday",
       },
       // 
       {
-        icon: (salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 || salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales) ? ArrowNeutral
-          : salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday > salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales ? ArrowUp
+        icon: (growthRate === 0) ? ArrowNeutral
+          : growthRate > 0 ? ArrowUp
             : ArrowDown,
         title: "Sales Growth Rate",
         time: "12:45 PM",
-        amount: `${salesGrowthRate?.data?.salesGrowthRate?.toLocaleString("en-US") || 0}%`,
-        statusIcon: (salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 || salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales) ? ArrowNeutral
-          : salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday > salesGrowthRate?.data?.salesGrowthRate?.prevDayTotalSales ? ArrowUp
+        amount: `${growthRate?.toLocaleString("en-US") || 0}%`,
+        statusIcon: (growthRate === 0) ? ArrowNeutral
+          : growthRate > 0 ? ArrowUp
             : ArrowDown,
-        status: salesGrowthRate?.data?.salesGrowthRate?.getTotalSalesToday === 0 ? "No sales today" : `${salesGrowthRate?.data?.salesGrowthRate?.salesGrowthRate?.toLocaleString("en-US") || 0} from yesterday`,
+        status: growthRate === 0 ? "No sales today" : `${growthRate?.toLocaleString("en-US") || 0} from yesterday`,
       },
       // 
       {
@@ -101,7 +72,7 @@ const SalesActivities = () => {
         title: "Average Order Value",
         time: "12:45 PM",
         amount: `₦ ${Number(
-          averageOrderValue?.data?.averageOrderValue || 0
+          averageOrderValue
         ).toLocaleString("en-US", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
@@ -113,21 +84,13 @@ const SalesActivities = () => {
       // 
       {
         // if todays order is more then yesterdays
-        icon: totalCustomerTransaction?.today?.totalOrders > totalCustomerTransaction?.yesterday?.totalOrders ? ArrowUp
-          // if today equals yesterday, or there are no orders today
-          : (totalCustomerTransaction?.today?.totalOrders === totalCustomerTransaction?.yesterday?.totalOrders || totalCustomerTransaction?.today?.totalOrders === 0) ? ArrowNeutral
-            // when yesterday is more than today
-            : ArrowDown,
+        icon: ArrowNeutral,
         title: "Customer Transaction Count",
         time: "12:45 PM",
         amount:
-          totalCustomerTransaction?.today?.totalOrders.toLocaleString("en-US") || 0,
-        statusIcon: totalCustomerTransaction?.today?.totalOrders > totalCustomerTransaction?.yesterday?.totalOrders ? ArrowUp
-          // if today equals yesterday, or there are no orders today
-          : (totalCustomerTransaction?.today?.totalOrders === totalCustomerTransaction?.yesterday?.totalOrders || totalCustomerTransaction?.today?.totalOrders === 0) ? ArrowNeutral
-            // when yesterday is more than today
-            : ArrowDown,
-        status: totalCustomerTransaction?.today?.totalOrders === 0 ? "No orders yet today" : `${totalCustomerTransaction?.percentageChange} from yesterday`,
+          uniqueCustomers.toLocaleString("en-US") || 0,
+        statusIcon: ArrowNeutral,
+        status: uniqueCustomers === 0 ? "No orders yet today" : `${uniqueCustomers} from yesterday`,
       },
     ],
   };
@@ -180,10 +143,7 @@ const SalesActivities = () => {
               {activity.title}
             </h5>
             <span>{activity.amount}</span>
-            {/* <div className="flex items-center justify-start gap-2">
-              <img src={activity.icon} alt="icon" />
-              <p>{activity.status}</p>
-            </div> */}
+
           </div>
         ))}
       </div>
