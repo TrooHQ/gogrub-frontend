@@ -53,76 +53,277 @@ import PricingPage from "./pages/pricing/PricingPage.tsx";
 import UpgradeSubscription from "./pages/pricing/UpgradeSubscription.tsx";
 import VerifiedPayment from "./pages/pricing/VerifiedPayment.tsx";
 import PayoutDetails from "./pages/pricing/PayoutDetails.tsx";
+import ProtectedRoutes, { UnProtectedRoutes } from "./components/authPages/ProtectedRoutes.tsx";
 
 export default function App() {
+
+
+
   return (
     <div className=" font-GeneralSans">
       <Router>
         <ToastContainer />
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/pos" element={<PosPage />} />
-          <Route path="/kds" element={<KDSPage />} />
-          <Route path="/table-ordering" element={<TableOrderingPage />} />
-          <Route path="/digital-ordering" element={<DigitalOrderingPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/restaurant" element={<RestaurantsPage />} />
-          <Route path="/hotel" element={<HotelPage />} />
-          <Route path="/lounges" element={<LoungesPage />} />
-          <Route path="/cafe" element={<CafePage />} />
-          <Route path="/fast-food" element={<FastFoodPage />} />
-          <Route path="/food-truck" element={<FoodTruckPage />} />
-          <Route path="/request-demo" element={<DemoPage />} />
-          <Route path="/tabs" element={<BusinessTabs />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/manage-users" element={<ManageUsers />} />
-          <Route path="/tenant-settings" element={<TenantSettings />} />
-          <Route path="/manage-assets" element={<ManageTables />} />
-          <Route path="/table-list" element={<TableList />} />
-          <Route path="/menu-builder" element={<MenuBuilder />} />
-          <Route path="/menu-list" element={<MenuList />} />
-          <Route path="/online-ordering" element={<OnlineOrdering />} />
-          <Route path="/qr-ordering" element={<QROrdering />} />
-          <Route path="/price-list" element={<PriceList />} />
-          <Route path="/tickets" element={<Tickets />} />
-          <Route path="/order-history" element={<OrderHistory />} />
-          <Route path="/customer-data" element={<CustomerData />} />
-          <Route path="/subscription-plan" element={<PricingPage />} />
+          <Route path="/" element={<UnProtectedRoutes>
+            <LoginPage />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/login" element={<UnProtectedRoutes>
+            <LoginPage />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/register" element={<UnProtectedRoutes>
+            <BusinessProfiles />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/verify-account" element={<UnProtectedRoutes>
+            <VerifyAccount />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/checkmail" element={<UnProtectedRoutes>
+            <CheckMail />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/password-changed" element={<UnProtectedRoutes>
+            <PasswordChanged />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/reset-password" element={<UnProtectedRoutes>
+            <ResetPassword />
+          </UnProtectedRoutes>
+          } />
+          <Route path="/forgot-password" element={<UnProtectedRoutes>
+            <ForgotPassword />
+          </UnProtectedRoutes>
+          } />
+
+          <Route path="/pos" element={
+            <ProtectedRoutes>
+              <PosPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/kds" element={
+            <ProtectedRoutes>
+              <KDSPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/table-ordering" element={
+            <ProtectedRoutes>
+              <TableOrderingPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/digital-ordering" element={
+            <ProtectedRoutes>
+              <DigitalOrderingPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/payment" element={
+            <ProtectedRoutes>
+              <PaymentPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/restaurant" element={
+            <ProtectedRoutes>
+              <RestaurantsPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/hotel" element={
+            <ProtectedRoutes>
+              <HotelPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/lounges" element={
+            <ProtectedRoutes>
+              <LoungesPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/cafe" element={
+            <ProtectedRoutes>
+              <CafePage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/fast-food" element={
+            <ProtectedRoutes>
+              <FastFoodPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/food-truck" element={
+            <ProtectedRoutes>
+              <FoodTruckPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/request-demo" element={
+            <ProtectedRoutes>
+              <DemoPage />
+            </ProtectedRoutes>
+          } />
+          <Route path="/tabs" element={
+            <ProtectedRoutes>
+              <BusinessTabs />
+            </ProtectedRoutes>
+          } />
+          <Route path="/dashboard" element={
+            <ProtectedRoutes>
+              <Dashboard />
+            </ProtectedRoutes>
+          } />
+          <Route path="/manage-users" element={
+            <ProtectedRoutes>
+              <ManageUsers />
+            </ProtectedRoutes>
+          } />
+          <Route path="/tenant-settings" element={
+            <ProtectedRoutes>
+              <TenantSettings />
+            </ProtectedRoutes>
+          } />
+          <Route path="/manage-assets" element={
+            <ProtectedRoutes>
+              <ManageTables />
+            </ProtectedRoutes>
+          } />
+          <Route path="/table-list" element={
+            <ProtectedRoutes>
+              <TableList />
+            </ProtectedRoutes>
+          } />
+          <Route path="/menu-builder" element={
+            <ProtectedRoutes>
+              <MenuBuilder />
+            </ProtectedRoutes>
+          } />
+          <Route path="/menu-list" element={
+            <ProtectedRoutes>
+              <MenuList />
+            </ProtectedRoutes>
+          } />
+          <Route path="/online-ordering" element={
+            <ProtectedRoutes>
+              <OnlineOrdering />
+            </ProtectedRoutes>
+          } />
+          <Route path="/qr-ordering" element={
+            <ProtectedRoutes>
+              <QROrdering />
+            </ProtectedRoutes>
+          } />
+          <Route path="/price-list" element={
+            <ProtectedRoutes>
+              <PriceList />
+            </ProtectedRoutes>
+          } />
+          <Route path="/tickets" element={
+            <ProtectedRoutes>
+              <Tickets />
+            </ProtectedRoutes>
+          } />
+          <Route path="/order-history" element={
+            <ProtectedRoutes>
+              <OrderHistory />
+            </ProtectedRoutes>
+          } />
+          <Route path="/customer-data" element={
+            <ProtectedRoutes>
+              <CustomerData />
+            </ProtectedRoutes>
+          } />
+          <Route path="/subscription-plan" element={
+            <ProtectedRoutes>
+              <PricingPage />
+            </ProtectedRoutes>
+          } />
           <Route
             path="/upgrade-subscription"
-            element={<UpgradeSubscription />}
+            element={
+              <ProtectedRoutes>
+                <UpgradeSubscription />
+              </ProtectedRoutes>
+            }
           />
-          <Route path="/verified-payment" element={<VerifiedPayment />} />
-          <Route path="/payout-details" element={<PayoutDetails />} />
-          <Route path="/overview" element={<Overview />} />
-          {/* <Route path="/overview/:param?" element={<Overview />} /> */}
-          <Route path="/overview-admin" element={<OverviewAdmin />} />
-          <Route path="/roles" element={<Roles />} />
-          <Route path="/new-roles" element={<NewRoles />} />
-          {/* <Route path="/register" element={<Register />} /> */}
-          <Route path="/register" element={<BusinessProfiles />} />
-          <Route path="/verify-account" element={<VerifyAccount />} />
-          <Route path="/checkmail" element={<CheckMail />} />
-          <Route path="/password-changed" element={<PasswordChanged />} />
-          <Route path="/pin-created" element={<PinCreated />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/create-pin" element={<CreatePin />} />
-          <Route path="/create-pin" element={<CreatePin />} />
-          <Route path="/update-credentials" element={<UpdateCredentials />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verified-payment" element={
+            <ProtectedRoutes>
+              <VerifiedPayment />
+            </ProtectedRoutes>
+          } />
+          <Route path="/payout-details" element={
+            <ProtectedRoutes>
+              <PayoutDetails />
+            </ProtectedRoutes>
+          } />
+          <Route path="/overview" element={
+            <ProtectedRoutes>
+              <Overview />
+            </ProtectedRoutes>
+          } />
+          <Route path="/overview-admin" element={
+            <ProtectedRoutes>
+              <OverviewAdmin />
+            </ProtectedRoutes>
+          } />
+          <Route path="/roles" element={
+            <ProtectedRoutes>
+              <Roles />
+            </ProtectedRoutes>
+          } />
+          <Route path="/new-roles" element={
+            <ProtectedRoutes>
+              <NewRoles />
+            </ProtectedRoutes>
+          } />
+          <Route path="/pin-created" element={
+            <ProtectedRoutes>
+              <PinCreated />
+            </ProtectedRoutes>
+          } />
+          <Route path="/create-pin" element={
+            <ProtectedRoutes>
+              <CreatePin />
+            </ProtectedRoutes>
+          } />
+          <Route path="/create-pin" element={
+            <ProtectedRoutes>
+              <CreatePin />
+            </ProtectedRoutes>
+          } />
+          <Route path="/update-credentials" element={
+            <ProtectedRoutes>
+              <UpdateCredentials />
+            </ProtectedRoutes>
+          } />
 
-          <Route path="/profile-page" element={<ProfilePage />} />
 
-          <Route path="/till" element={<Till />} />
-          <Route path="*" element={<NotFound />} />
+
+          <Route path="/profile-page" element={
+            <ProtectedRoutes>
+              <ProfilePage />
+            </ProtectedRoutes>
+          } />
+
+          <Route path="/till" element={
+            <ProtectedRoutes>
+              <Till />
+            </ProtectedRoutes>
+          } />
+          <Route path="*" element={
+            <ProtectedRoutes>
+              <NotFound />
+            </ProtectedRoutes>
+          } />
 
           <Route
             path="/business-information"
-            element={<BusinessInformation />}
+            element={
+              <ProtectedRoutes>
+                <BusinessInformation />
+              </ProtectedRoutes>
+            }
           />
-          <Route path="/manage-branches" element={<ManageBranches />} />
+          <Route path="/manage-branches" element={
+            <ProtectedRoutes>
+              <ManageBranches />
+            </ProtectedRoutes>
+          } />
         </Routes>
       </Router>
     </div>
