@@ -6,7 +6,7 @@ import confirmation_number from "../../assets/confirmation_number.svg";
 import restaurant_menu from "../../assets/restaurant_menu.svg";
 import DaysTab2 from "./DaysTab2";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { AppDispatch, } from "../../store/store";
 import {
 
   fetchTotalSales,
@@ -17,19 +17,26 @@ import {
   fetchCustomerTransaction,
 } from "../../slices/overviewSlice";
 import { fetchOpenClosedTickets } from "../../slices/OpenCloseTicketSlice";
+import { fetchDashboardInformation } from "../../slices/Dashboard";
 
 const BalanceComp = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [showBalance, setShowBalance] = useState(true);
-  const { loading, totalSales } = useSelector(
-    (state: RootState) => state.overview
-  );
   const { selectedBranch } = useSelector((state: any) => state.branches);
-  const openAndClosedTickets = useSelector((state: any) => state.openCloseTickets);
 
-  console.log("openAndClosedTickets", openAndClosedTickets?.openAndClosedTickets?.data);
-  console.log("openTickets", openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets);
-  console.log("closedTickets", openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets);
+
+  const {
+    loadingDashData,
+    // dashboardDataError,
+    // totalOrders,
+    totalRevenue,
+    // averageOrderValue,
+    // topItems,
+    // uniqueCustomers,
+    openTickets,
+    closedTickets,
+    // growthRate,
+  } = useSelector((state: any) => state.dashboardData);
 
 
   const [dateFilter, setDateFilter] = useState("today");
@@ -37,29 +44,32 @@ const BalanceComp = () => {
   const [endDate, setEndDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0);
 
-
-
   useEffect(() => {
-    // dispatch(fetchOpenAndClosedTickets({ date_filter: "today" }));
-    dispatch(fetchTotalSales({ date_filter: "today" }));
-    dispatch(fetchAverageOrderValue({ date_filter: "today" }));
-    dispatch(fetchSalesRevenueGraph({ date_filter: "today" }));
-    dispatch(
-      fetchTopMenuItems({ branch_id: selectedBranch?.id, date_filter: "today" })
-    );
-
-    dispatch(fetchCustomerTransaction({ date_filter: "today" }));
-
-    dispatch(fetchOpenClosedTickets({
+    dispatch(fetchDashboardInformation({
       date_filter: dateFilter,
       startDate,
       endDate,
-      number_of_days: numberOfDays,
-      branch_id: selectedBranch?.id,
+      number_of_days: numberOfDays
     }))
+  }, [dateFilter, startDate, endDate, numberOfDays, dispatch])
 
 
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchTotalSales({ date_filter: "today" }));
+  //   dispatch(fetchAverageOrderValue({ date_filter: "today" }));
+  //   dispatch(fetchSalesRevenueGraph({ date_filter: "today" }));
+  //   dispatch(
+  //     fetchTopMenuItems({ branch_id: selectedBranch?.id, date_filter: "today" })
+  //   );
+  //   dispatch(fetchCustomerTransaction({ date_filter: "today" }));
+  //   dispatch(fetchOpenClosedTickets({
+  //     date_filter: dateFilter,
+  //     startDate,
+  //     endDate,
+  //     number_of_days: numberOfDays,
+  //     branch_id: selectedBranch?.id,
+  //   }))
+  // }, []);
 
   const changeVisibility = () => {
     setShowBalance(!showBalance);
@@ -147,11 +157,11 @@ const BalanceComp = () => {
         </div>
         <div className="flex justify-start gap-10 items-center w-full mb-[55px]">
           <h2 className={clsx(styles.figure)}>
-            {loading
+            {loadingDashData
               ? "..."
-              : showBalance && totalSales?.data !== undefined
-                ? `₦ ${totalSales?.data?.toLocaleString("en-US")}`
-                : showBalance && totalSales?.data === undefined
+              : showBalance && totalRevenue !== undefined
+                ? `₦ ${totalRevenue?.toLocaleString("en-US")}`
+                : showBalance && totalRevenue === undefined
                   ? "Loading..."
                   : "****"}
           </h2>
@@ -172,14 +182,14 @@ const BalanceComp = () => {
             <img src={restaurant_menu} alt="confirmation_number" />
             <h6 className={clsx(styles.manage)}>
               {" "}
-              {loading ? "Loading..." : `${openAndClosedTickets?.openAndClosedTickets?.data?.open_tickets || 0} Open Orders`}
+              {loadingDashData ? "Loading..." : `${openTickets || 0} Open Orders`}
             </h6>
           </div>
           <div className="flex items-center justify-start gap-1">
             <img src={confirmation_number} alt="confirmation_number" />
             <h6 className={clsx(styles.manage)}>
               {" "}
-              {loading ? "Loading..." : `${openAndClosedTickets?.openAndClosedTickets?.data?.closed_tickets || 0} Closed Tickets`}
+              {loadingDashData ? "Loading..." : `${closedTickets || 0} Closed Tickets`}
             </h6>
           </div>
         </div>
