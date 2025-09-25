@@ -168,6 +168,7 @@ const Tickets = () => {
                             branchId={selectedBranch.id}
                             orderId={item._id}
                             setOrderId={setOrderId}
+                            hasRefunded={item?.isRefunded}
                             toggleOff={() => setShowMenuOptions(null)}
                             handleRefundData={handleRefundData}
                           />}
@@ -183,6 +184,7 @@ const Tickets = () => {
             </div>
           </div>
           {refundOrder && <RefundModal
+            getTickets={() => dispatch(fetchTickets({ selectedBranch, page }))}
             cancelVoidOrder={handleCancelRefundData}
             voidOrderItem={refundOrder}
           />}
