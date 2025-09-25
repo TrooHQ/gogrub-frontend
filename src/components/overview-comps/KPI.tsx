@@ -57,7 +57,7 @@ const KPI = () => {
               >
                 <div className="flex flex-col items-center gap-4 min-w-[200px] py-7 px-8">
                   <img
-                    src={product?._id?.menuItemImage}
+                    src={product?.image}
                     alt="product"
                     className="w-[80px] h-[60px]"
                   />
