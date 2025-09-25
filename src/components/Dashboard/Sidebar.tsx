@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
-// import Logo from "../../assets/troo-logo.png";
-// import LogoMini from "../../assets/logo-mini-icon.svg";
 import OverviewIcon from "../../assets/OverviewIcon.svg";
 import TicketIcon from "../../assets/Tickets.svg";
 import MenuIcon from "../../assets/menuIcon.svg";
@@ -10,19 +8,10 @@ import ManageTablesIcon from "../../assets/manageTableIcon.svg";
 import AccountCircleIcon from "../../assets/account_circle.svg";
 import Upgrade from "../../assets/upgrade.svg";
 import HomeIcon from "../../assets/troo-logo-white.png";
-// import ManageUsersIcon from "../../assets/manageUsers.svg";
-// import HubIcon from "../../assets/hub.svg";
 import LogoutIcon from "../../assets/logout.svg";
-// import ArrowToggle from "../../assets/arrowToggle.svg";
-// import { TextField, Button, Popper, Paper } from "@mui/material";
 import {
   ArrowCircleRightOutlined,
-  // ArrowDropDown,
-  // Search,
 } from "@mui/icons-material";
-// import GoGrubLogo from "../../assets/business_logo.svg";
-
-// import { CustomAutocomplete } from "./Overview";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
