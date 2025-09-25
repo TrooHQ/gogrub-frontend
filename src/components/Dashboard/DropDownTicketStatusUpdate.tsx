@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 // import { useState } from "react";
 
 // export const DropdownMenuTicketStatusUpdate = ({}: {}) => {
-export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, setOrderId, toggleOff, handleRefundData }: { branchId: any, orderId: any, getTickets: any, setOrderId?: any, toggleOff?: any, handleRefundData?: any }) => {
+export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, setOrderId, toggleOff, handleRefundData, hasRefunded }: { branchId: any, orderId: any, getTickets: any, setOrderId?: any, toggleOff?: any, handleRefundData?: any, hasRefunded?: boolean }) => {
 
   const userDetails = useSelector((state: any) => state.user);
   const token = userDetails?.userData?.token;
@@ -59,8 +59,8 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
           Complete Order
         </li>
         <li
-          onClick={() => { handleRefundData(orderId) }}
-          className="font-[400] cursor-pointer text-left text-red-500"
+          onClick={() => { hasRefunded !== true && handleRefundData(orderId) }}
+          className={`font-[400] text-left  ${hasRefunded !== true ? "text-red-500  cursor-pointer" : "text-gray-300 cursor-not-allowed"}`}
         >
           Refund Order
         </li>
