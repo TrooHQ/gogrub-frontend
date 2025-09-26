@@ -31,8 +31,8 @@ const SalesActivities = () => {
   const {
     totalRevenue,
     averageOrderValue,
-    uniqueCustomers,
     growthRate,
+    totalOrders
   } = useSelector((state: any) => state.dashboardData);
 
 
@@ -88,9 +88,9 @@ const SalesActivities = () => {
         title: "Customer Transaction Count",
         time: "12:45 PM",
         amount:
-          uniqueCustomers.toLocaleString("en-US") || 0,
+          totalOrders.toLocaleString("en-US") || 0,
         statusIcon: ArrowNeutral,
-        status: uniqueCustomers === 0 ? "No orders yet today" : `${uniqueCustomers} from yesterday`,
+        status: totalOrders === 0 ? "No orders yet today" : `${totalOrders} from yesterday`,
       },
     ],
   };
