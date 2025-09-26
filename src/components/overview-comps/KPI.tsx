@@ -57,15 +57,15 @@ const KPI = () => {
               >
                 <div className="flex flex-col items-center gap-4 min-w-[200px] py-7 px-8">
                   <img
-                    src={product?.image}
+                    src={product?.menuItemImage}
                     alt="product"
                     className="w-[80px] h-[60px]"
                   />
                   <h6 className="text-[#201F44] font-medium">
-                    {product.name}
+                    {product.menuItemName}
                   </h6>
                   <p className="text-[#B2B1DC] text-sm">
-                    {product.count} quantities sold
+                    {product.totalQuantity} quantities sold
                   </p>
                 </div>
               </div>
@@ -91,13 +91,13 @@ const KPI = () => {
                   ></div>
                   <div>
                     <h6 className="text-[#201F44] text-[16px] font-medium">
-                      {product.name}
+                      {product.menuItemName}
                     </h6>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <p className="text-[#858497] text-base font-normal">
-                    ₦ {product?.revenue?.toLocaleString()}
+                    ₦ {product?.totalRevenue?.toLocaleString()}
                   </p>
                 </div>
               </div>
