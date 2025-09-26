@@ -358,7 +358,7 @@ const CustomerData = () => {
               <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
                 <div className="flex items-center justify-between pr-8">
                   <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">
-                    All Customers Data
+                    All Customers
                   </p>
                   {/* search button */}
                   <div className="flex items-center gap-2">
