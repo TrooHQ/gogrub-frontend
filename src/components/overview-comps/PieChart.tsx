@@ -60,14 +60,14 @@ function PieCenterLabel({ total }: { total: number }) {
 
 const PieCharts = ({ topMenuItems }: { topMenuItems: any[] }) => {
   const totalValue = topMenuItems.reduce(
-    (sum, item) => sum + item.totalRevenue,
+    (sum, item) => sum + item.revenue,
     0
   );
 
   // Map the data to include percentages
   const data = topMenuItems.slice(0, 5).map((item, index) => ({
-    value: parseFloat(((item.totalRevenue / totalValue) * 100).toFixed(2)),
-    // label: `${item.menuItemName}: ${((item.totalRevenue / totalValue) * 100).toFixed(2)}%`, // Add `%` to the label
+    value: parseFloat(((item.revenue / totalValue) * 100).toFixed(2)),
+    // label: `${item.menuItemName}: ${((item.revenue / totalValue) * 100).toFixed(2)}%`, // Add `%` to the label
     color: [
       "#3E53F4", // Black
       "#5B65FF",
@@ -82,7 +82,7 @@ const PieCharts = ({ topMenuItems }: { topMenuItems: any[] }) => {
     ][index % 10],
   }));
 
-  const total = topMenuItems.reduce((sum, item) => sum + item.totalRevenue, 0);
+  const total = topMenuItems.reduce((sum, item) => sum + item.revenue, 0);
 
   return (
     <PieChart
