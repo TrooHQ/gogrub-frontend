@@ -43,6 +43,8 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
     }
   }
 
+  console.log("hasRefunded", hasRefunded);
+
   return (
     <div>
       <ul className="w-[200px] shadow grid gap-[18px] dropdown-menu absolute bg-white p-[12px] text-black right-[25px] top-[40px] z-10">
@@ -83,9 +85,9 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
 
 
 
-export const DropdownMenuHistorStatusUpdate = ({ orderId, setOrderId, toggleOff, handleRefundData }: { orderId: any, setOrderId?: any, toggleOff?: any, handleRefundData?: any }) => {
+export const DropdownMenuHistorStatusUpdate = ({ orderId, setOrderId, toggleOff, handleRefundData, hasRefunded }: { orderId: any, setOrderId?: any, toggleOff?: any, handleRefundData?: any, hasRefunded?: boolean }) => {
 
-
+  console.log("hasRefunded", hasRefunded);
 
   return (
     <div>
@@ -97,9 +99,10 @@ export const DropdownMenuHistorStatusUpdate = ({ orderId, setOrderId, toggleOff,
           View Order
         </li>
 
+        {/* // onClick={() => { handleRefundData(orderId); toggleOff && toggleOff(); }} */}
         <li
-          onClick={() => { handleRefundData(orderId); toggleOff && toggleOff(); }}
-          className="font-[400] cursor-pointer text-left text-red-500"
+          onClick={() => { hasRefunded !== true && handleRefundData(orderId); toggleOff && toggleOff(); }}
+          className={`font-[400] text-left  ${hasRefunded !== true ? "text-red-500  cursor-pointer" : "text-gray-300 cursor-not-allowed"}`}
         >
           Refund Order
         </li>
