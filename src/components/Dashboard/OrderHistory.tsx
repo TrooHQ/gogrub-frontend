@@ -459,6 +459,7 @@ const OrderHistory = () => {
                             setOrderId={setOrderId}
                             toggleOff={() => setShowMenuOptions(null)}
                             handleRefundData={handleRefundData}
+                            hasRefunded={item?.isRefunded}
                           />}
                         </div>
 

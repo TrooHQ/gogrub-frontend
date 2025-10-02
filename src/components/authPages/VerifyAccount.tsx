@@ -49,7 +49,8 @@ const VerifyAccount = () => {
   const resendOTP = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(`${SERVER_DOMAIN}/resendOTP`, {
+      // const response = await axios.post(`${SERVER_DOMAIN}/resendOTP`, {
+      const response = await axios.post(`${SERVER_DOMAIN}/resendGogrubOTP`, {
         email: userEmail || emailInput,
       });
       setLoading(false);
