@@ -102,6 +102,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     fetchPlans();
   }, []);
 
+  console.log("current url", `${window.location.origin}/overview`);
 
   useEffect(() => {
     dispatchs(fetchUserDetails());
@@ -123,7 +124,8 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
           business_email: userData?.business_email,
           amount: selectedPlan?.billingFrequencyAmount,
           plan_description: selectedPlan?.name,
-          callback_url: "https://admin.gogrub.co/overview",
+          callback_url: `${window.location.origin}/overview`,
+          // callback_url: "https://admin.gogrub.co/overview",
           // callback_url: "https://gogrub-client.netlify.app/overview",
         },
         headers
