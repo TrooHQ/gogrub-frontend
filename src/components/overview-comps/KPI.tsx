@@ -38,7 +38,7 @@ const KPI = () => {
   }, [dispatch, selectedBranch]);
 
   return (
-    <div className="border border-[#C7C6CF] p-6 rounded-2xl mb-12">
+    <div className="border border-[#C7C6CF] p-6 rounded-2xl mb-12 overflow-x-hidden">
       {" "}
       <div className={clsx("flex justify-between items-center w-full mb-9")}>
         <h5 className={clsx(styles.salesRevenue)}>Highest Selling Product</h5>
@@ -74,7 +74,7 @@ const KPI = () => {
         </div>
       )}
       {/* Pie chart component */}
-      <div className="flex gap-2.5 mt-6 flex-wrap">
+      <div className="flex gap-2.5 mt-6 flex-wrap overflow-x-hidden">
         <div className="bg-white rounded-[10px] lg:px-5 py-[48px] w-fit">
           <PieCharts topMenuItems={topItems || []} />
         </div>
