@@ -72,7 +72,7 @@ const DaysTab2 = ({
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
         <Tabs
           value={value}
           onChange={handleChange}

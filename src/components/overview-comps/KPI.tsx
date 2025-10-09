@@ -74,8 +74,8 @@ const KPI = () => {
         </div>
       )}
       {/* Pie chart component */}
-      <div className="flex gap-2.5 mt-6">
-        <div className="bg-white rounded-[10px] px-5 py-[48px]">
+      <div className="flex gap-2.5 mt-6 flex-wrap">
+        <div className="bg-white rounded-[10px] lg:px-5 py-[48px] w-fit">
           <PieCharts topMenuItems={topItems || []} />
         </div>
 

@@ -5,7 +5,7 @@ import KPI from "../overview-comps/KPI";
 import SalesActivities from "../overview-comps/SalesActivities";
 import SalesRevenue from "../overview-comps/SalesRevenue";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import { ArrowDropDown, Search } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { fetchBranches, userSelectedBranch } from "../../slices/branchSlice";
@@ -110,7 +110,7 @@ const Overview: React.FC = () => {
   return (
     <div className="">
       <DashboardLayout>
-        <TopMenuNav pathName="Overview" />
+        {/* <TopMenuNav pathName="Overview" /> */}
         {/* First div */}
         <div className="flex items-end my-10">
           <h3 className="text-[#606060] text-[20px] font-normal">
@@ -119,6 +119,7 @@ const Overview: React.FC = () => {
               {userData?.business_name} {""}
             </span>
           </h3>
+          {/*  */}
           <div className="hidden ">
             <Button
               variant="contained"
