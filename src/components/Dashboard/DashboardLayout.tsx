@@ -1,17 +1,59 @@
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
+import TopMenuNav from "./TopMenuNav";
+import { AppDispatch, RootState } from "../../store/store";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  // clearSelectedBranch,
+  fetchBranches,
+  // userSelectedBranch,
+} from "../../slices/branchSlice";
+import { fetchAccountDetails } from "../../slices/businessSlice";
+import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
+import { fetchUserDetails } from "../../slices/UserSlice";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  // const { branches, selectedBranch } = useSelector(
+  //   (state: RootState) => state.branches
+  // );
+  const { userDetails } = useSelector(
+    (state: RootState) => state.user
+  );
+
+  // endpoint for sidebar
+
+  useEffect(() => {
+    if (userDetails?.email_verified === false) {
+      navigate("/verify-account");
+    }
+  }, [userDetails?.email_verified, navigate]);
+
+  useEffect(() => {
+    dispatch(fetchBranches());
+    dispatch(fetchUserDetails());
+    dispatch(fetchAccountDetails());
+    dispatch(fetchAllBusinessInfo());
+  }, [dispatch]);
+
+
   return (
     <div className="bg-[#ebebeb]">
-      <div className=" flex ">
-        <Sidebar userType="user" />
+      <div className="flex ">
+        <div className="hidden lg:block">
+          <Sidebar userType="user" />
+        </div>
 
         <div
-          className={` flex-grow m-5 w-[980px] 2xl:w-[1293px] h-full overflow-y-auto`}
+          className={` flex-grow lg:m-5 w-full h-full overflow-y-auto`}
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           <div
@@ -22,7 +64,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
               overflowX: "hidden",
             }}
           >
-            {children}
+            <div className="w-full">
+              <TopMenuNav pathName="Overview" />
+            </div>
+            <div className="w-full">
+              {children}
+            </div>
           </div>
         </div>
       </div>

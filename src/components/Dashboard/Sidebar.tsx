@@ -16,16 +16,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
   clearSelectedBranch,
-  fetchBranches,
+  // fetchBranches,
   userSelectedBranch,
 } from "../../slices/branchSlice";
-import { clearUserData, fetchUserDetails } from "../../slices/UserSlice";
+// import { clearUserData, fetchUserDetails } from "../../slices/UserSlice";
+import { clearUserData, } from "../../slices/UserSlice";
 import getPermittedMenuItems from "../../utils/getPermittedMenuItems";
 // import BlinkerSubscribe from "../BlinkerSubscribe";
 import { setSubscription } from "../../slices/setupSlice";
 import { RiErrorWarningLine } from "react-icons/ri";
-import { fetchAccountDetails } from "../../slices/businessSlice";
-import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
+// import { fetchAccountDetails } from "../../slices/businessSlice";
+// import { fetchAllBusinessInfo } from "../../slices/businessPersonalAccountSlice";
 import { FiLoader } from "react-icons/fi";
 import { RxCaretUp } from "react-icons/rx";
 // import { fetchAccountDetails } from "@/src/slices/businessSlice";
@@ -57,11 +58,11 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   );
   // console.log("userData", userData)
   // console.log("userDetails", userDetails)
-  useEffect(() => {
-    if (userDetails?.email_verified === false) {
-      navigate("/verify-account");
-    }
-  }, [userDetails?.email_verified, navigate]);
+  // useEffect(() => {
+  //   if (userDetails?.email_verified === false) {
+  //     navigate("/verify-account");
+  //   }
+  // }, [userDetails?.email_verified, navigate]);
 
   const [open, setOpen] = useState(true);
   // const [isAutoOpen, setIsAutoOpen] = useState(false);
@@ -76,12 +77,12 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   //     }
   // );
 
-  useEffect(() => {
-    dispatch(fetchBranches());
-    dispatch(fetchUserDetails());
-    dispatch(fetchAccountDetails());
-    dispatch(fetchAllBusinessInfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchBranches());
+  //   dispatch(fetchUserDetails());
+  //   dispatch(fetchAccountDetails());
+  //   dispatch(fetchAllBusinessInfo());
+  // }, [dispatch]);
 
   const { businessInfo, loading } = useSelector((state: any) => state.allBusinessInfo);
   // useEffect(() => {
@@ -298,8 +299,7 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
   return (
     <div
-      className={`p-2 ${open ? "w-[230px]" : "w-20"
-        }  h-screen relative overflow-y-auto left-0 top-0 duration-300 bg-[#f8f8f8]`}
+      className={`p-2 ${open ? "w-full lg:w-[230px]" : "w-20"}  h-screen relative overflow-y-auto left-0 top-0 duration-300 bg-[#f8f8f8]`}
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
       <div className="grid items-center gap-3">
@@ -499,7 +499,7 @@ export default SideBar;
 
 const LogOutModal = ({ handleLogoutModal, handleLogout }: { handleLogoutModal: () => void, handleLogout: () => void }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed top-0 right-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
       <div className="p-6 text-center bg-white rounded-lg shadow-lg">
         <img
           src="/assets/logout.png"

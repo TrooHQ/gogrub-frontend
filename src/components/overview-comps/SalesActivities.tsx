@@ -104,7 +104,7 @@ const SalesActivities = () => {
       <div className={clsx("flex justify-between items-center w-full mb-9")}>
         <h5 className={clsx(styles.salesActivitiesH4)}>Sales Activities</h5>
       </div>{" "}
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {state.salesActivities.map((activity, index) => (
           <div
             key={index}

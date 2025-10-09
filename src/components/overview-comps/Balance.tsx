@@ -143,8 +143,8 @@ const BalanceComp = () => {
 
   return (
     <div>
-      <div className="rounded-[16px] bg-[#3e3e43] px-8 py-6">
-        <div className="flex items-start justify-between">
+      <div className="rounded-[16px] bg-[#3e3e43] px-2 lg:px-8 py-6 ">
+        <div className="flex flex-wrap items-start justify-between ">
           <h5 className="text-[#EEEEF7] text-lg font-light">Total Sales</h5>
           <DaysTab2
             backgroundColor="#606060"
