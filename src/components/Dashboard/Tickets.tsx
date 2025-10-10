@@ -161,7 +161,7 @@ const Tickets = () => {
                               </span>
                             </td>
                             <td className="py-4">&#x20A6;{item.total_price.toLocaleString()}</td>
-                            <td className="py-4">
+                            <td className="py-4 relative">
                               <HiOutlineDotsVertical
                                 onClick={() => handleShowMenu(index)}
                                 className="mx-auto text-2xl"
