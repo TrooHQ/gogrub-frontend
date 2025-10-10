@@ -36,13 +36,13 @@ export default function DateFilterComp({ handleFilterChange, noOfDays, filterVal
 
 
   return (
-    <div className="flex items-center gap-[32px]">
+    <div className="flex items-center gap-[32px] flex-wrap lg:flex-nowrap">
       <div className="">
         <p className="font-[500] text-[16px] text-[#121212]">
           Filter by:
         </p>
       </div>
-      <div className="flex items-center gap-[8px]">
+      <div className="flex items-center gap-[8px] flex-wrap lg:flex-nowrap">
         <button
           className={`border rounded-[5px] px-[16px] py-[8px] font-[400] text-[12px] ${filterValue === "today"
             ? "bg-black text-white"
