@@ -5,7 +5,7 @@ import KPI from "../overview-comps/KPI";
 import SalesActivities from "../overview-comps/SalesActivities";
 import SalesRevenue from "../overview-comps/SalesRevenue";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import { Autocomplete, TextField, Button, Popper, Paper } from "@mui/material";
 import { styled } from "@mui/system";
 import { ArrowDropDown, Search } from "@mui/icons-material";
@@ -102,8 +102,8 @@ const OverviewAdmin: React.FC = () => {
 
   return (
     <div className="">
-      <DashboardLayout>
-        <TopMenuNav pathName="Overview" />
+      <DashboardLayout title="Overview">
+        {/* <TopMenuNav pathName="Overview" /> */}
 
         {/* First div */}
         <div className="flex items-center my-10">
@@ -113,7 +113,7 @@ const OverviewAdmin: React.FC = () => {
               {storeData.name}
             </span>
           </h3>
-          <div className=" hidden">
+          <div className="hidden ">
             <Button
               variant="contained"
               onClick={handleButtonClick}

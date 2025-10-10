@@ -1,5 +1,5 @@
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import Add from "../../assets/add.svg";
 import Modal from "../Modal";
 import React, { useEffect, useState } from "react";
@@ -235,8 +235,8 @@ const ManageTables: React.FC = () => {
 
   return (
     <div className="">
-      <DashboardLayout>
-        <TopMenuNav pathName="Manage Branch Assets" />
+      <DashboardLayout title="Manage Tables">
+        {/* <TopMenuNav pathName="Manage Branch Assets" /> */}
         <div className=" mt-[40px]">
           <div
             className="border inline-block border-black bg-white  rounded-[5px] px-[24px] py-[10px] font-[500] text-gray-500"

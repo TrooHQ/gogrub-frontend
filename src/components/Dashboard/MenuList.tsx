@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import {
   ArrowBack,
   CheckCircleOutline,
@@ -356,8 +356,8 @@ const MenuList = () => {
   };
 
   return (
-    <DashboardLayout>
-      <TopMenuNav pathName="Menu" />
+    <DashboardLayout title="Menu">
+      {/* <TopMenuNav pathName="Menu" /> */}
       <div className="">
         {viewingBranch === null ? (
           <div className="my-[40px]">

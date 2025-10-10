@@ -1,5 +1,5 @@
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import { SetStateAction, useEffect, useState } from "react";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
@@ -265,8 +265,8 @@ const OrderHistory = () => {
 
   return (
     <div>
-      <DashboardLayout>
-        <TopMenuNav pathName="Order History" />
+      <DashboardLayout title="Order History">
+        {/* <TopMenuNav pathName="Order History" /> */}
         {showCustomerDetail ? (
           <div className="mt-8">
             <button

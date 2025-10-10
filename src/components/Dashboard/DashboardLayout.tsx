@@ -15,9 +15,10 @@ import { fetchUserDetails } from "../../slices/UserSlice";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
+  title?: string;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ title, children }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -65,7 +66,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             }}
           >
             <div className="w-full">
-              <TopMenuNav pathName="Overview" />
+              <TopMenuNav pathName={title ?? ""} />
             </div>
             <div className="w-full">
               {children}

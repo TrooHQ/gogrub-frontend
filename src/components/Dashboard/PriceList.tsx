@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import Print from "../../assets/print.svg";
 import edit from "../../assets/edit.png";
 import { fetchMenuItems2 } from "../../slices/menuSlice";
@@ -110,8 +110,8 @@ const PriceList = () => {
 
   return (
     <div>
-      <DashboardLayout>
-        <TopMenuNav pathName="Price List" />
+      <DashboardLayout title="Price List">
+        {/* <TopMenuNav pathName="Price List" /> */}
         <div className="">
           <div className="mt-[40px]">
             <div className="flex items-center justify-between">
@@ -128,18 +128,18 @@ const PriceList = () => {
             </div>
 
             <div className="my-[40px]">
-              <div className="overflow-x-auto mt-6">
+              <div className="mt-6 overflow-x-auto">
                 <table className="min-w-full border-collapse">
                   <thead>
                     <tr className="bg-[#606060] text-white text-center text-base font-normal">
-                      <th className="py-2 px-4 text-base font-normal">
+                      <th className="px-4 py-2 text-base font-normal">
                         Menu Group
                       </th>
-                      <th className="py-2 px-4 text-base font-normal text-start">
+                      <th className="px-4 py-2 text-base font-normal text-start">
                         Menu Name
                       </th>
-                      <th className="py-2 px-4 text-base font-normal">Price</th>
-                      <th className="py-2 px-4 text-base font-normal">
+                      <th className="px-4 py-2 text-base font-normal">Price</th>
+                      <th className="px-4 py-2 text-base font-normal">
                         Actions
                       </th>
                     </tr>
@@ -147,7 +147,7 @@ const PriceList = () => {
                   <hr className="mb-2 text-[#E7E7E7]" />
 
                   {loading ? (
-                    <div className="text-center min-w-full">Loading...</div>
+                    <div className="min-w-full text-center">Loading...</div>
                   ) : menuItems.length !== 0 ? (
                     <tbody>
                       {menuItems.map((item: any, index: number) => (
@@ -156,21 +156,21 @@ const PriceList = () => {
                           className={`${index % 2 === 1 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
                             }`}
                         >
-                          <td className="text-base font-normal py-2 px-4">
+                          <td className="px-4 py-2 text-base font-normal">
                             {item.menu_group_name}
                           </td>
-                          <td className="text-base font-normal py-2 px-4">
+                          <td className="px-4 py-2 text-base font-normal">
                             {item.menu_item_name}
                           </td>
 
                           {/* Conditional rendering for editing price */}
-                          <td className="text-base font-normal text-center py-2 px-4 break-words">
+                          <td className="px-4 py-2 text-base font-normal text-center break-words">
                             {editMode === item._id ? (
                               <input
                                 type="number"
                                 value={newPrice ?? item.menu_item_price}
                                 onChange={handlePriceChange}
-                                className="border border-gray-300 p-1 rounded"
+                                className="p-1 border border-gray-300 rounded"
                               />
                             ) : (
                               `₦${parseFloat(
@@ -179,7 +179,7 @@ const PriceList = () => {
                             )}
                           </td>
 
-                          <td className="flex items-center justify-center text-center gap-4">
+                          <td className="flex items-center justify-center gap-4 text-center">
                             {editMode === item._id ? (
                               <div className="flex items-center gap-2 mt-2.5">
                                 <button
@@ -210,7 +210,7 @@ const PriceList = () => {
                     </tbody>
                   ) : (
                     <div>
-                      <p className="text-center min-w-full">
+                      <p className="min-w-full text-center">
                         No menu items found
                       </p>
                     </div>
@@ -219,7 +219,7 @@ const PriceList = () => {
                 {totalPages > 1 && !loading && (
                   <Stack
                     spacing={2}
-                    className="flex justify-center items-center mt-8"
+                    className="flex items-center justify-center mt-8"
                   >
                     <CustomPagination
                       count={totalPages}
