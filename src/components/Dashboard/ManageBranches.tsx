@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 // import add from "../../assets/add.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/src/store/store";
@@ -102,8 +102,8 @@ const ManageBranches = () => {
 
   return (
     <div>
-      <DashboardLayout>
-        <TopMenuNav pathName="Manage Branches" />
+      <DashboardLayout title="Manage Branches">
+        {/* <TopMenuNav pathName="Manage Branches" /> */}
         <div className="">
           <div className="my-[40px]">
             <div className="flex items-center justify-between">

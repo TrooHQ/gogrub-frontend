@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import DaysTab2 from "../overview-comps/DaysTab2";
 import clsx from "clsx";
 import styles from "../overview-comps/Header.module.css";
@@ -269,8 +269,8 @@ const CustomerData = () => {
   return (
     <div>
       {" "}
-      <DashboardLayout>
-        <TopMenuNav pathName="Customers" />
+      <DashboardLayout title="Customers">
+        {/* <TopMenuNav pathName="Customers" /> */}
 
         <div className="my-4">
 
