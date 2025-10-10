@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import Modal from "../Modal";
 import CustomInput from "../inputFields/CustomInput";
 import CustomSelect from "../inputFields/CustomSelect";
@@ -248,10 +248,10 @@ const ManageUsers: React.FC = () => {
 
   return (
     <div className="">
-      <DashboardLayout>
-        <TopMenuNav pathName="Manage Users" />
+      <DashboardLayout title="Manage Users">
+        {/* <TopMenuNav pathName="Manage Users" /> */}
         <div className="">
-          <div className="flex justify-between items-center border-b border-grey100 my-10">
+          <div className="flex items-center justify-between my-10 border-b border-grey100">
             <div className="flex items-center gap-10">
               {["Roles", "All Users"].map((tab, index) => (
                 <p
@@ -387,7 +387,7 @@ const ManageUsers: React.FC = () => {
         <Modal isOpen={isModalOpen2} onClose={() => setIsModalOpen2(false)}>
           <div className="">
             <div className="py-[28px] 2xl:py-[36px] px-[28px] 2xl:px-[51px] bg-white relative rounded-[20px] w-[539px]">
-              <div className="flex flex-col justify-center items-center gap-6">
+              <div className="flex flex-col items-center justify-center gap-6">
                 <p className="text-[24px] font-[500] text-gray-500">
                   Delete User
                 </p>{" "}

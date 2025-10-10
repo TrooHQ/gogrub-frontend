@@ -109,7 +109,7 @@ const Overview: React.FC = () => {
 
   return (
     <div className="">
-      <DashboardLayout>
+      <DashboardLayout title="Overview">
         {/* <TopMenuNav pathName="Overview" /> */}
         {/* First div */}
         <div className="flex items-end my-10">

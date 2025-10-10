@@ -4,7 +4,7 @@ import Table from "./TableItem";
 const Dashboard: React.FC = () => {
   return (
     <div className="">
-      <DashboardLayout>
+      <DashboardLayout title="Dashboard">
         <div className="">
           <Table />
         </div>

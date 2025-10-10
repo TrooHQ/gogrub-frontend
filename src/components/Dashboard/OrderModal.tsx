@@ -4,10 +4,10 @@ import dayjs from "dayjs"
 export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrderId: (id: string | null) => void, SingleOrderItem: any }) {
 
   return (
-    <div className='w-full lg:w-[55vw] max-w-[860px] bg-white rounded-md h-[65vh]  max-h-[540px] overflow-hidden z-50'>
-      <div className='grid w-full h-full overflow-y-hidden grid-col-1 lg:grid-cols-5'>
+    <div className='w-[90vw] lg:w-[55vw] max-w-[860px] bg-white rounded-md h-[65vh]  max-h-[540px] overflow-hidden z-50'>
+      <div className="flex flex-col-reverse w-full h-full overflow-y-scroll lg:overflow-y-hidden lg:grid lg:grid-cols-5">
 
-        <div className='flex items-center justify-center w-full h-full col-span-2 p-8 bg-gray-100'>
+        <div className='flex items-center justify-center w-full h-full col-span-1 p-8 bg-gray-100 lg:col-span-2'>
           <div className='w-full h-full '>
             <div className="flex items-center gap-[10px] text-orange-100 px-[10px] w-fit py-[5px] rounded-full text-sm"
               style={{
@@ -52,7 +52,7 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
         </div>
 
 
-        <div className='col-span-3 px-5 py-8 overflow-y-scroll'>
+        <div className='col-span-1 px-5 py-8 lg:overflow-y-scroll lg:col-span-3'>
 
           <div className='relative flex flex-col items-center justify-center my-4 gap-y-3'>
             <img

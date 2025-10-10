@@ -1,5 +1,5 @@
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 // import Add from "../../assets/add.svg";
 // import activeArrow from "../../assets/activeArrow.svg";
 import { useEffect, useState } from "react";
@@ -409,8 +409,8 @@ const MenuBuilder = () => {
   return (
     <div>
       {" "}
-      <DashboardLayout>
-        <TopMenuNav pathName="Menu" />
+      <DashboardLayout title="Menu">
+        {/* <TopMenuNav pathName="Menu" /> */}
         <div>
           <div className="mt-[40px]">
             <div className="flex items-center justify-between">

@@ -1,5 +1,5 @@
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 // import More from "../../assets/more_vert.svg";
 import Refresh from "../../assets/refresh.svg";
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const Tickets = () => {
 
   const { selectedBranch } = useSelector((state: any) => state.branches);
   const { orderData, loadingOrder, orderDataPagination } = useSelector((state: RootState) => state.tickets);
-  const [openTicket, setOpenTicket] = useState<boolean>(false); // to open ticket details modal
+  // const [openTicket, setOpenTicket] = useState<boolean>(false); // to open ticket details modal
   const [page, setPage] = useState(1);
 
   // console.log("orderDataPagination:", orderDataPagination);
@@ -31,9 +31,9 @@ const Tickets = () => {
 
   // const [activeMenuIndex2, setActiveMenuIndex2] = useState<number | null>(null);
 
-  const handleTicketMenu = () => {
-    setOpenTicket(!openTicket);
-  };
+  // const handleTicketMenu = () => {
+  //   setOpenTicket(!openTicket);
+  // };
 
   // const toggleMenu2 = (index: number) => {
   //   setActiveMenuIndex2((prevIndex) => (prevIndex === index ? null : index));
@@ -92,8 +92,8 @@ const Tickets = () => {
 
   return (
     <div>
-      <DashboardLayout>
-        <TopMenuNav pathName="Tickets" />
+      <DashboardLayout title="Tickets">
+        {/* <TopMenuNav pathName="Tickets" /> */}
         <div className="">
           <div className="mt-[40px]">
             {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}
@@ -111,72 +111,80 @@ const Tickets = () => {
 
             <div className="">
 
-              <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
+              <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px] overflow-x-scroll">
                 <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">Tickets</p>
 
-                <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-7 border-b">
-                  <p className=" text-[14px] text-[#121212]">Date</p>
-                  <p className=" text-[14px] text-[#121212]">Time</p>
-                  <p className=" text-[14px] text-[#121212]">Order No</p>
-                  <p className=" text-[14px] text-[#121212]">Customer </p>
-                  <p className=" text-[14px] text-[#121212]">Status </p>
-                  <p className=" text-[14px] text-[#121212]">Bill</p>
-                  <p className=" text-[14px] text-[#121212]">Actions </p>
+                <div className="w-full overflow-x-auto">
+                  <table className="min-w-[700px] w-full mt-[24px] table-auto">
+                    <thead>
+                      <tr className="h-[1px]">
+                        <th className="py-2 border-b border-b-grey100">Date</th>
+                        <th className="py-2 border-b border-b-grey100">Time</th>
+                        <th className="py-2 border-b border-b-grey100">Order No</th>
+                        <th className="py-2 border-b border-b-grey100">Customer</th>
+                        <th className="py-2 border-b border-b-grey100">Status</th>
+                        <th className="py-2 border-b border-b-grey100">Bill</th>
+                        <th className="py-2 border-b border-b-grey100">Actions</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {loadingOrder ? (
+                        <tr>
+                          <td colSpan={7} className="py-8 text-center">Loading...</td>
+                        </tr>
+                      ) : orderData.length === 0 ? (
+                        <tr>
+                          <td colSpan={7} className="py-8 text-center">No order available</td>
+                        </tr>
+                      ) : (
+                        orderData.map((item, index) => (
+                          <tr
+                            key={index}
+                            className={`relative text-center py-[14px] px-[32px] items-center font-base text-normal text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                              }`}
+                          >
+                            <td className="py-4">{item.createdAt.slice(0, 10)}</td>
+                            <td className="py-4">{item.createdAt.slice(11, 16)}</td>
+                            <td className="py-4">{item.order_number || "-"}</td>
+                            <td className="py-4">
+                              {item.customer_name
+                                ? truncateText(
+                                  item.customer_name.charAt(0).toUpperCase() + item.customer_name.slice(1),
+                                  10
+                                )
+                                : ""}
+                            </td>
+                            <td className="flex justify-center py-4">
+                              <span className="flex items-center gap-[10px] bg-orange-500 text-orange-100 px-[10px] py-[5px] rounded-full text-sm">
+                                {item.status === "Ordered" ? "Pending" : item.status}
+                              </span>
+                            </td>
+                            <td className="py-4">&#x20A6;{item.total_price.toLocaleString()}</td>
+                            <td className="py-4">
+                              <HiOutlineDotsVertical
+                                onClick={() => handleShowMenu(index)}
+                                className="mx-auto text-2xl"
+                              />
+                              {showMenuOptions === index && (
+                                <DropdownMenuTicketStatusUpdate
+                                  getTickets={fetchTickets}
+                                  branchId={selectedBranch.id}
+                                  orderId={item._id}
+                                  setOrderId={setOrderId}
+                                  hasRefunded={item?.isRefunded}
+                                  toggleOff={() => setShowMenuOptions(null)}
+                                  handleRefundData={handleRefundData}
+                                />
+                              )}
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-                {loadingOrder ? (
-                  <p className="px-8">Loading...</p>
-                ) : orderData.length === 0 ? (
-                  <p className="px-8">No order available</p>
-                ) : (
-                  orderData.map((item, index) => (
-                    <div
-                      className={`text-center py-[14px] px-[32px] grid grid-cols-7 items-center font-base text-normal text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                        }`}
-                      key={index}
-                    >
-                      <p className="" onClick={handleTicketMenu}>
-                        {item.createdAt.slice(0, 10)}
-                      </p>
-                      <p className="" onClick={handleTicketMenu}>
-                        {item.createdAt.slice(11, 16)}
-                      </p>
-                      <p onClick={handleTicketMenu}>
-                        {item.order_number || "-"}
-                      </p>
-                      <p                      >
-                        {item.customer_name
-                          ? truncateText(
-                            item.customer_name.charAt(0).toUpperCase() +
-                            item.customer_name.slice(1),
-                            10
-                          )
-                          : ""}
-                      </p>
-                      <div className="mx-auto w-fit">
-                        <div className="flex items-center gap-[10px] bg-orange-500 text-orange-100 px-[10px] py-[5px] rounded-full text-sm">
-                          <p>{item.status === "Ordered" ? "Pending" : item.status}</p>
-                        </div>
-                      </div>
-                      <p>&#x20A6;{item.total_price.toLocaleString()}</p>
-                      <div className="flex items-center justify-center py-[10px] px-[20px] rounded-full relative">
 
-                        <div className="relative flex items-center justify-center">
-                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="mx-auto text-2xl" />
-
-                          {showMenuOptions === index && <DropdownMenuTicketStatusUpdate
-                            getTickets={fetchTickets}
-                            branchId={selectedBranch.id}
-                            orderId={item._id}
-                            setOrderId={setOrderId}
-                            hasRefunded={item?.isRefunded}
-                            toggleOff={() => setShowMenuOptions(null)}
-                            handleRefundData={handleRefundData}
-                          />}
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
                 <div className="flex items-center justify-center w-full my-4">
                   <PaginationComponent setPage={setPage} pagination={orderDataPagination} />
                 </div>

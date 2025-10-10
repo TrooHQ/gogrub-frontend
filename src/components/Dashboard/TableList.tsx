@@ -1,5 +1,5 @@
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
+// import TopMenuNav from "./TopMenuNav";
 import QrCode from "../../assets/qr-code.png";
 import More from "../../assets/more_vert.svg";
 import { useState } from "react";
@@ -140,8 +140,8 @@ const TableList = () => {
 
   return (
     <div>
-      <DashboardLayout>
-        <TopMenuNav pathName="Manage Assets" />
+      <DashboardLayout title="Manage Tables">
+        {/* <TopMenuNav pathName="Manage Assets" /> */}
         <div className="mt-[40px]">
           {Object.values(data.tables).map((tables, ownerIndex) => (
             <div key={ownerIndex}>
@@ -207,7 +207,7 @@ const TableList = () => {
               </p>
               <hr className="border my-[24px] border-[#E7E7E7]" />
               <div className=" flex items-center gap-[8px] justify-center">
-                <div className=" flex-grow  ">
+                <div className="flex-grow ">
                   <CustomInput
                     type="text"
                     label="Enter table Name"
@@ -317,7 +317,7 @@ const TableList = () => {
               )}
               <hr className="border mb-[16px] mt-[24px] border-[#E7E7E7]" />
 
-              <div className=" flex justify-end items-center  gap-2">
+              <div className="flex items-center justify-end gap-2 ">
                 <div
                   className="border cursor-pointer border-black rounded px-[24px]  py-[10px] font-[600] text-gray-500"
                   onClick={() => setAddModifierModal(false)}
