@@ -1,6 +1,7 @@
 import DashboardLayout from "./DashboardLayout";
 // import TopMenuNav from "./TopMenuNav";
-import { SetStateAction, useEffect, useState } from "react";
+// import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SERVER_DOMAIN } from "../../Api/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -42,9 +43,9 @@ const OrderHistory = () => {
   const [start_date, setStartDate] = useState<string | undefined>();
   const [end_date, setEndDate] = useState<string | undefined>();
 
-  const [showCustomerDetail, setShowCustomerDetail] = useState(false);
+  // const [showCustomerDetail, setShowCustomerDetail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState<any>();
+  // const [selectedCustomer, setSelectedCustomer] = useState<any>();
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState<{ totalOrders: number; totalPages: number; currentPage: number; pageSize: number }>({
     totalOrders: 0,
@@ -58,18 +59,18 @@ const OrderHistory = () => {
 
   const token = userDetails?.userData?.token;
 
-  const handleTicketMenu = () => {
-    setShowCustomerDetail(true);
-  };
+  // const handleTicketMenu = () => {
+  //   setShowCustomerDetail(true);
+  // };
 
-  const handleCustomerShow = (item: SetStateAction<undefined>) => {
-    setSelectedCustomer(item);
-    setShowCustomerDetail(true);
-  };
+  // const handleCustomerShow = (item: SetStateAction<undefined>) => {
+  //   setSelectedCustomer(item);
+  //   setShowCustomerDetail(true);
+  // };
 
-  const handleCustomerMenu = () => {
-    setShowCustomerDetail(true);
-  };
+  // const handleCustomerMenu = () => {
+  //   setShowCustomerDetail(true);
+  // };
 
   useEffect(() => {
     getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue })
@@ -220,9 +221,9 @@ const OrderHistory = () => {
     exportToExcel();
   };
 
-  const handleBack = () => {
-    setShowCustomerDetail(false);
-  };
+  // const handleBack = () => {
+  //   setShowCustomerDetail(false);
+  // };
 
   const [orderId, setOrderId] = useState<string | null>(null);
   const [orderModal, setOrderModal] = useState<boolean>(true);
@@ -267,7 +268,7 @@ const OrderHistory = () => {
     <div>
       <DashboardLayout title="Order History">
         {/* <TopMenuNav pathName="Order History" /> */}
-        {showCustomerDetail ? (
+        {/* {showCustomerDetail ? (
           <div className="mt-8">
             <button
               className="border border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
@@ -322,171 +323,177 @@ const OrderHistory = () => {
               )}
             </div>
           </div>
-        ) : (
-          <div className="">
-            <div className="mt-[40px]">
-              {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}
-              <div className="flex items-center justify-between">
-                <DateFilterComp
-                  handleFilterChange={handleFilterChange}
-                  noOfDays={noOfDays}
-                  filterValue={filterValue}
-                  setFilterValue={setFilterValue}
-                  setNoOfDays={setNoOfDays}
-                />
-                {/* Export buttons */}
-                <div className="flex items-center gap-[12px]">
-                  <div className="relative">
-                    <button
-                      onClick={toggleDropdown}
-                      className="border border-[#B6B6B6] rounded-[5px] px-[16px] py-[8px] font-[400] text-[#121212]"
-                    >
-                      Download
-                    </button>
-                    {dropdownVisible && (
-                      <div className="absolute mt-2 right-0 w-[150px] bg-white border border-[#B6B6B6] rounded-[5px] shadow-lg">
-                        <button
-                          onClick={handleDownloadCSV}
-                          className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
-                        >
-                          Download CSV
-                        </button>
-                        <button
-                          onClick={handleDownloadExcel}
-                          className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
-                        >
-                          Download Excel
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="">
-                <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
-                  <div className="px-[32px] flex items-center justify-between">
-
-                    <p className="   font-[400] text-[24px] text-[#121212]">
-                      Orders
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <select className="border border-[#B6B6B6] bg-transparent  px-[16px] py-[8px] font-[400] text-[#121212] rounded-lg"
-                        value={statusFilter} // Controlled input
-                        onChange={handleStatusChange}>
-                        <option value="">All</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
-                      </select>
-
-                      {/* search  */}
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="text"
-                          placeholder="Search by order number"
-                          className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-[300px]"
-                          onChange={(e) => setSearchValue(e.target.value)}
-                        />
-                        <button className="p-2 bg-black border border-black rounded" onClick={() => getTickets({ order_number: searchValue })}>
-                          <SearchRounded className="text-white" />
-                        </button>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-6 border-b">
-                    <p className="text-start text-[14px] text-[#121212]">
-                      Order No
-                    </p>
-                    <p className=" text-[14px] text-[#121212]">Date/Time</p>
-                    <p className=" text-[14px] text-[#121212]">Customer </p>
-                    <p className=" text-[14px] text-[#121212]">Status </p>
-                    <p className=" text-[14px] text-[#121212]">Bill </p>
-                    <p className=" text-[14px] text-[#121212]">Actions </p>
-                  </div>
-                  {isLoading ? (
-                    <div className="px-8">Loading...</div>
-                  ) : data.length === 0 ? (
-                    <div className="px-8">No data during this period</div>
-                  ) : (
-                    Array.isArray(data) &&
-                    data?.map((item, index) => (
-                      <div
-                        className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-6 items-center  font-base text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                          }`}
-                        key={index}
+        ) : ( */}
+        <div className="">
+          <div className="mt-[40px]">
+            {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}
+            <div className="flex flex-wrap items-center justify-between">
+              <DateFilterComp
+                handleFilterChange={handleFilterChange}
+                noOfDays={noOfDays}
+                filterValue={filterValue}
+                setFilterValue={setFilterValue}
+                setNoOfDays={setNoOfDays}
+              />
+              {/* Export buttons */}
+              <div className="flex items-center gap-[12px] flex-wrap">
+                <div className="relative">
+                  <button
+                    onClick={toggleDropdown}
+                    className="border border-[#B6B6B6] rounded-[5px] px-[16px] py-[8px] font-[400] text-[#121212]"
+                  >
+                    Download
+                  </button>
+                  {dropdownVisible && (
+                    <div className="absolute mt-2 right-0 w-[150px] bg-white border border-[#B6B6B6] rounded-[5px] shadow-lg">
+                      <button
+                        onClick={handleDownloadCSV}
+                        className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
                       >
-                        <p className="text-start" onClick={handleCustomerMenu}>
-                          {item.order_number || "-"}
-                        </p>
-                        <p className="" onClick={handleTicketMenu}>
-                          {item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 16)}
-                        </p>
-
-                        <p onClick={() => handleCustomerShow(item)}>
-                          {item.customer_name
-                            ? truncateText(
-                              item.customer_name.charAt(0).toUpperCase() +
-                              item.customer_name.slice(1),
-                              12
-                            )
-                            : ""}
-                        </p>
-
-                        {
-                          (item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "canceled") ? (
-                            <div className=" w-fit flex mx-auto items-center gap-[10px] bg-red-500 text-red-100 px-4 py-1.5 rounded-full text-sm">
-                              <p>{item.status}</p>
-                            </div>
-                          ) : item.status?.toLowerCase() === "completed" ? (
-                            <div className="w-fit mx-auto flex items-center gap-[10px] bg-green-500 text-green-100 px-4 py-1.5 rounded-full text-sm">
-                              <p>{item.status}</p>
-                            </div>
-                          ) : (
-                            // Default status
-                            <div className="flex items-center gap-[10px] bg-yellow-500 text-yellow-100 px-4 py-1.5 rounded-full text-sm">
-                              <p>{item.status}</p>
-                            </div>
-                          )
-                        }
-
-
-                        <p>&#x20A6;{item.total_price.toLocaleString()}</p>
-                        <div className="relative flex items-center justify-center">
-                          <HiOutlineDotsVertical onClick={() => handleShowMenu(index)} className="mx-auto text-2xl" />
-                          {showMenuOptions === index && <DropdownMenuHistorStatusUpdate
-                            orderId={item._id}
-                            setOrderId={setOrderId}
-                            toggleOff={() => setShowMenuOptions(null)}
-                            handleRefundData={handleRefundData}
-                            hasRefunded={item?.isRefunded}
-                          />}
-                        </div>
-
-                      </div>
-                    ))
+                        Download CSV
+                      </button>
+                      <button
+                        onClick={handleDownloadExcel}
+                        className="block w-full text-left px-[16px] py-[8px] hover:bg-gray-200"
+                      >
+                        Download Excel
+                      </button>
+                    </div>
                   )}
                 </div>
-                {orderModal && <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/40">
-                  <ViewOrderModal
-                    setOrderId={setOrderId}
-                    SingleOrderItem={SingleOrderItem}
-                  />
-                </div>}
-
-                {refundOrder && <RefundModal
-                  cancelVoidOrder={handleCancelRefundData}
-                  voidOrderItem={refundOrder}
-                  getTickets={() => getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue })}
-                />}
-
-              </div>
-              <div className="fixed bottom-0 left-0 flex items-center justify-center w-full my-4">
-                <PaginationComponent setPage={setPage} pagination={pagination} />
               </div>
             </div>
+
+            <div className="">
+              <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
+                <div className="w-[90%] mx-auto flex flex-wrap lg:flex-nowrap items-center justify-between">
+
+                  <p className="   font-[400] text-[24px] text-[#121212]">
+                    Orders
+                  </p>
+                  <div className="flex flex-wrap items-center gap-4 lg:flex-nowrap">
+                    <select className="border border-[#B6B6B6] bg-transparent  px-[16px] py-[8px] font-[400] text-[#121212] rounded-lg"
+                      value={statusFilter} // Controlled input
+                      onChange={handleStatusChange}>
+                      <option value="">All</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+
+                    {/* search  */}
+                    <div className="flex items-center w-full gap-2">
+                      <input
+                        type="text"
+                        placeholder="Search by order number"
+                        className="border border-grey300 rounded-[5px] px-[16px] py-[10px] w-full"
+                        onChange={(e) => setSearchValue(e.target.value)}
+                      />
+                      <button className="p-2 bg-black border border-black rounded" onClick={() => getTickets({ order_number: searchValue })}>
+                        <SearchRounded className="text-white" />
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+                <div className="w-full overflow-x-auto">
+                  <table className="min-w-[700px] w-full mt-[24px] table-auto">
+                    <thead>
+                      <tr>
+                        <th className="py-2 border-b border-b-grey100">Order No</th>
+                        <th className="py-2 border-b border-b-grey100">Date/Time</th>
+                        <th className="py-2 border-b border-b-grey100">Customer</th>
+                        <th className="py-2 border-b border-b-grey100">Status</th>
+                        <th className="py-2 border-b border-b-grey100">Bill</th>
+                        <th className="py-2 border-b border-b-grey100">Actions</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {isLoading ? (
+                        <tr>
+                          <td colSpan={6} className="py-8 text-center">Loading...</td>
+                        </tr>) : data.length === 0 ? (
+                          <tr>
+                            <td colSpan={6} className="py-8 text-center">No order available</td>
+                          </tr>
+                        ) : (
+                        Array.isArray(data) &&
+                        data?.map((item, index) => (
+                          <tr
+                            className={`relative text-center py-[14px] px-[32px] items-center font-base text-normal text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
+                              }`}
+                            key={index}
+                          >
+                            <td className="py-4">{item.order_number || "-"}</td>
+                            <td className="py-4">{item.createdAt.slice(0, 10)} {item.createdAt.slice(11, 16)}</td>
+                            <td className="py-4">{item.customer_name
+                              ? truncateText(
+                                item.customer_name.charAt(0).toUpperCase() +
+                                item.customer_name.slice(1),
+                                12
+                              )
+                              : ""}</td>
+                            <td className="py-4">{item.customer_name || "-"}</td>
+
+                            {
+                              (item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "canceled") ? (
+                                <td className=" w-fit flex mx-auto items-center gap-[10px] bg-red-500 text-red-100 px-4 py-1.5 rounded-full text-sm">
+                                  {item.status}
+                                </td>
+                              ) : item.status?.toLowerCase() === "completed" ? (
+                                <td className="w-fit mx-auto flex items-center gap-[10px] bg-green-500 text-green-100 px-4 py-1.5 rounded-full text-sm">
+                                  {item.status}
+                                </td>
+                              ) : (
+                                // Default status
+                                <td className="flex items-center gap-[10px] bg-yellow-500 text-yellow-100 px-4 py-1.5 rounded-full text-sm">
+                                  {item.status}
+                                </td>
+                              )
+                            }
+                            <td className="relative py-4">
+                              <HiOutlineDotsVertical
+                                onClick={() => handleShowMenu(index)}
+                                className="mx-auto text-2xl"
+                              />
+                              {showMenuOptions === index && <DropdownMenuHistorStatusUpdate
+                                orderId={item._id}
+                                setOrderId={setOrderId}
+                                toggleOff={() => setShowMenuOptions(null)}
+                                handleRefundData={handleRefundData}
+                                hasRefunded={item?.isRefunded}
+                              />}
+                            </td>
+                          </tr>))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+
+              </div>
+              {orderModal && <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-black/40">
+                <ViewOrderModal
+                  setOrderId={setOrderId}
+                  SingleOrderItem={SingleOrderItem}
+                />
+              </div>}
+
+              {refundOrder && <RefundModal
+                cancelVoidOrder={handleCancelRefundData}
+                voidOrderItem={refundOrder}
+                getTickets={() => getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue })}
+              />}
+
+            </div>
+            <div className="fixed bottom-0 left-0 flex items-center justify-center w-full my-4">
+              <PaginationComponent setPage={setPage} pagination={pagination} />
+            </div>
           </div>
-        )}
+        </div>
+        {/* )} */}
       </DashboardLayout>
     </div>
   );
