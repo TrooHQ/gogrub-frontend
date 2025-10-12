@@ -3,35 +3,29 @@
 ############################
 # Build stage
 ############################
-FROM node:latest AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 
-# Give Node more heap (4 GB). Tweak if needed.
+# Increase V8 heap limit (4 GB)
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-# Faster installs with cached deps:
+# Install deps with cache
 COPY package.json yarn.lock ./
 RUN --mount=type=cache,target=/root/.cache/yarn \
     yarn install --frozen-lockfile
 
-# Copy the rest and build
+# Copy sources and build
 COPY . .
-
-# IMPORTANT: keep Docker build light — only run vite here.
-# Move/keep type checking in CI:
-#   package.json -> "build": "vite build"
-RUN yarn build
+RUN yarn build    # ensure package.json -> "build": "vite build"
 
 ############################
 # Runtime stage
 ############################
-FROM node:latest
+FROM node:22-alpine
 WORKDIR /app
 
-# Tiny static server
 RUN npm i -g serve@14
 
-# Copy built assets only
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
