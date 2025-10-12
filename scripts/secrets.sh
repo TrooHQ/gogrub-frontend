@@ -29,8 +29,6 @@ VITE_APP_PAYMENT_DOMAIN=https://staging.troopay.co/api
 # VITE_APP_CLOUD_NAME='dslqlq4po'
 # VITE_APP_PRESET_KEY='ml_default'
 
-NODE_ENV=production
-
 
 EOF
 }
