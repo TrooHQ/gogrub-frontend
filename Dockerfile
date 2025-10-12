@@ -3,7 +3,7 @@
 ############################
 # Build stage
 ############################
-FROM node:20-alpine AS builder
+FROM node:latest AS builder
 WORKDIR /app
 
 # Give Node more heap (4 GB). Tweak if needed.
@@ -25,7 +25,7 @@ RUN yarn build
 ############################
 # Runtime stage
 ############################
-FROM node:20-alpine
+FROM node:latest
 WORKDIR /app
 
 # Tiny static server
