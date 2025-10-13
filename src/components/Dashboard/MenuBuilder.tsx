@@ -410,8 +410,7 @@ const MenuBuilder = () => {
     <div>
       {" "}
       <DashboardLayout title="Menu">
-        {/* <TopMenuNav pathName="Menu" /> */}
-        <div>
+        <div className="overflow-x-scroll">
           <div className="mt-[40px]">
             <div className="flex items-center justify-between">
               <div className="border border-black bg-black w-fit rounded-[5px] px-[24px] py-[10px] font-[500] text-[#ffffff]">

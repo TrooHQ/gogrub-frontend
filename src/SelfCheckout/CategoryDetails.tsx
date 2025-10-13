@@ -7,7 +7,7 @@ import { RootState } from "../store/store";
 import MenuDetailsModal from "./MenuDetails";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { RiArrowUpDoubleLine } from "react-icons/ri";
@@ -22,6 +22,13 @@ import {
 } from "../slices/BasketSlice";
 
 import Swipe from "./assets/swipe.png";
+
+import SliderLib from "react-slick";
+import type { Settings } from "react-slick";
+import type { FC } from "react";
+
+
+const Slider = SliderLib as unknown as FC<any>;
 
 import Modal from "../components/Modal";
 import { HiMinusCircle, HiPlusCircle, HiPlusSm } from "react-icons/hi";
@@ -152,7 +159,7 @@ export const CategoryDetails = () => {
     }
   }, []);
 
-  const settings = {
+  const settings:Settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -475,7 +482,7 @@ export const CategoryDetails = () => {
                                 className=" flex items-center justify-end cursor-pointer rounded-full"
                                 style={{
                                   backgroundColor: color || "#414141",
-                                  color: "#ffffff" || "#414141",
+                                  color:"#414141",
                                 }}
                                 onClick={() => decrementCount(menu)}
                               >
@@ -490,7 +497,7 @@ export const CategoryDetails = () => {
                                 className=" flex items-center justify-end cursor-pointer rounded-full"
                                 style={{
                                   backgroundColor: color || "#414141",
-                                  color: "#ffffff" || "#414141",
+                                  color: "#414141",
                                 }}
                                 onClick={() => incrementCount(menu)}
                               >
