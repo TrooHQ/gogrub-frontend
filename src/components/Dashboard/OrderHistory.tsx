@@ -267,63 +267,6 @@ const OrderHistory = () => {
   return (
     <div>
       <DashboardLayout title="Order History">
-        {/* <TopMenuNav pathName="Order History" /> */}
-        {/* {showCustomerDetail ? (
-          <div className="mt-8">
-            <button
-              className="border border-black rounded px-[24px] py-[10px] font-[600] text-gray-500"
-              onClick={handleBack}
-            >
-              Back
-            </button>
-            <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
-              <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">
-                Customer Details
-              </p>
-
-              <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-4 border-b">
-                <p className="text-center text-[14px] text-[#121212]">
-                  Customer Name
-                </p>
-                <p className=" text-[14px] text-[#121212]">Email</p>
-                <p className=" text-[14px] text-[#121212]">Phone Number</p>
-                <p className=" text-[14px] text-[#121212]">Address</p>
-              </div>
-              {isLoading ? (
-                <div className="px-8">Loading...</div>
-              ) : data.length === 0 ? (
-                <div className="px-8">No data during this period</div>
-              ) : selectedCustomer ? (
-                <div
-                  className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-4 items-center  font-base text-[14px] text-[#414141] bg-white`}
-                >
-                  <p className="items-start">
-                    {selectedCustomer.customer_name
-                      ? truncateText(
-                        selectedCustomer.customer_name
-                          .charAt(0)
-                          .toUpperCase() +
-                        selectedCustomer.customer_name.slice(1),
-                        12
-                      )
-                      : ""}
-                  </p>
-                  <p className="" onClick={handleCustomerMenu}>
-                    {selectedCustomer.customerData.email || "-"}
-                  </p>
-                  <p className="" onClick={handleCustomerMenu}>
-                    {selectedCustomer.customerData.phoneNumber || "-"}
-                  </p>
-                  <p className="" onClick={handleCustomerMenu}>
-                    {selectedCustomer.customerData.address || "-"}
-                  </p>
-                </div>
-              ) : (
-                <div className="px-8">No data during this period</div>
-              )}
-            </div>
-          </div>
-        ) : ( */}
         <div className="">
           <div className="mt-[40px]">
             {/* <ChangeBranchForTicket handleRefresh={handleRefresh} /> */}

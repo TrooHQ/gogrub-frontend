@@ -79,9 +79,9 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-4 items-start justify-start w-[70%] m-auto py-10">
+    <div className="flex flex-col gap-4 items-start justify-start w-full w-lg:[70%] mx-auto py-10">
       {/* Logo */}
-      <div className="flex items-center justify-start gap-7">
+      <div className="flex flex-wrap items-center justify-start mx-auto gap-7">
         <img src={logo} alt="Uploaded Logo" className="w-[150px] h-auto" />
         <button
           className="bg-white text-[#0d0d0d] border border-[#0d0d0d] py-2 px-6 rounded"
@@ -92,11 +92,11 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
       </div>
 
       {/* Text */}
-      <div className="px-6 py-3 border border-[#b6b6b6] rounded-lg w-[80%] flex gap-[50px] bg-[rgba(238,238,247,0.40)] mt-8">
+      <div className="px-6 py-3 border border-[#b6b6b6] rounded-lg  flex justify-between w-full lg:w-[80%]  bg-[rgba(238,238,247,0.40)] mt-8 mx-auto flex-wrap lg:flex-nowrap gap-4">
         {/* <div> */}
 
-        <div className="min-w-[50%]">
-          <h3 className="text-[#121212] text-start text-[16px] font-medium leading-[26px] tracking-[0.15px]">
+        <div className="flex flex-wrap items-center w-full gap-2">
+          <h3 className="text-[#121212] text-start text-[16px] font-medium leading-[26px]">
             Your Generated Link Is below
           </h3>
           <div className="flex items-center justify-start gap-2">
@@ -118,7 +118,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
           </div>
         </div>
         {/* Generated Link Box */}
-        <div className="flex items-center justify-between w-full p-0 rounded-lg">
+        <div className="flex items-center justify-between p-0 rounded-lg">
           <div className="flex items-center gap-4">
             {/* QR Code Placeholder */}
             <div className="w-[50px] h-[50px] bg-gray-300 flex items-center justify-center rounded-md">
@@ -139,15 +139,13 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
                 className="w-[32px] h-[32px]"
               />
             </div>
-            {/* <IoMdDownload className="text-[#121212] cursor-pointer text-[22px]" /> */}
           </div>
         </div>
-        {/* </div> */}
       </div>
 
       {/* Description and instruction form */}
       {/* {showForm && ( */}
-      <form className="flex flex-col w-4/5 gap-4 mt-5">
+      <form className="flex flex-col w-full lg:w-[80%] gap-4 mx-auto mt-5">
         <CustomInput
           type="text"
           label="Add Business Full Name*"

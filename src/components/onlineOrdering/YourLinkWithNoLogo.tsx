@@ -150,7 +150,7 @@ const YourLinkWithNoLogo = ({
   return (
     <div>
       {!businessLogo && !isUploadSuccessful ? (
-        <div className="flex flex-col gap-4 items-center justify-center h-full pt-[100px] w-[45%] m-auto">
+        <div className="flex flex-col gap-4 items-center justify-center h-full pt-[100px] w-full lg:w-[45%] mx-auto ">
           <img src={linkImage} alt="link" className="w-[200px] h-[200px]" />
           <h3 className="text-[#929292] text-center font-sans text-[20px] not-italic font-medium leading-[26px] tracking-[0.15px]">
             To Get Your Generated{" "}
