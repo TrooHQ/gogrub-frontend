@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
-import TopMenuNav from "../../components/Dashboard/TopMenuNav";
+// import TopMenuNav from "../../components/Dashboard/TopMenuNav";
 import ProfileDetails from "./ProfileDetails";
 import BranchDetails from "./BranchDetails";
 import Security from "./Security";
@@ -42,8 +42,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <DashboardLayout>
-      <TopMenuNav pathName="Profile Page" />
+    <DashboardLayout title="Profile Page">
+      {/* <TopMenuNav pathName="Profile Page" /> */}
       <div className="mt-6">
         <hr />
         <div className="flex">
