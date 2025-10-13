@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
-import TopMenuNav from "./TopMenuNav";
 import DeliveryService from "../onlineOrdering/DeliveryService";
 import PickupLocation from "../onlineOrdering/PickupLocation";
 import YourLink from "../onlineOrdering/YourLink";
@@ -35,8 +34,8 @@ const OnlineOrdering = () => {
   };
 
   return (
-    <DashboardLayout>
-      <TopMenuNav pathName="Online Ordering" />
+    <DashboardLayout title="Online Ordering">
+      {/* <TopMenuNav pathName="Online Ordering" /> */}
       <div className="mt-6">
         <Sidebar
           activeComponent={activeComponent}

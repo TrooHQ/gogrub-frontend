@@ -11,9 +11,16 @@ import {
   removeItemFromBasket,
   updateItemQuantity,
 } from "../../slices/BasketSlice";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import SliderLib from "react-slick";
+import type { Settings } from "react-slick";
+import type { FC } from "react";
+
+
+const Slider = SliderLib as unknown as FC<any>;
 
 import Swipe from "../assets/swipe.png";
 
@@ -167,7 +174,7 @@ export const CategoryDetails = () => {
     getItems();
   }, []);
 
-  const settings = {
+  const settings:Settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 2,
