@@ -35,7 +35,6 @@ const OnlineOrdering = () => {
 
   return (
     <DashboardLayout title="Online Ordering">
-      {/* <TopMenuNav pathName="Online Ordering" /> */}
       <div className="mt-6">
         <Sidebar
           activeComponent={activeComponent}
