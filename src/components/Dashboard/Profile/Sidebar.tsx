@@ -10,7 +10,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeComponent, setActiveComponent }
   const isActive = (component: string) => activeComponent === component;
 
   return (
-    <div className="w-64 min-h-screen p-2 bg-white border-r border-gray-200">
+    <div className="w-full p-2 bg-white border-r border-gray-200 lg:w-64 h-fit lg:min-h-screen">
       <nav className="mt-4 space-y-6">
         <button
           onClick={() => setActiveComponent("profile")}

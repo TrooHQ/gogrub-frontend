@@ -265,13 +265,13 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     // ) : (
     <div className="">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className="w-[900px] max-h-[900px] h-auto mx-auto bg-white  relative overflow-auto">
+        <div className="lg:w-[900px] lg:max-h-[900px] h-auto mx-auto bg-white  relative overflow-auto">
           <div className="w-full transition-all duration-500 ease-in-out font-GeneralSans ">
             <div className=" flex items-center gap-[9px] justify-center py-[20px]">
-              <p className="font-[500] text-[28px] text-[#000000]">
+              <p className="font-[500] text-base lg:text-[28px] text-[#000000]">
                 Choose Your Plan With
               </p>
-              <img src={Logo} alt="Logo" />
+              <img src={Logo} alt="Logo" className="" />
             </div>
 
             <div
