@@ -88,8 +88,8 @@ const DeliveryService = () => {
   return (
     <div className="h-full">
       {!showAdd && (
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center g-2.5">
+        <div className="flex flex-wrap justify-between mb-4 lg:items-center">
+          <div className="flex flex-wrap items-center g-2.5">
             <span className="text-[#121212] text-base font-normal">
               Do you want to offer delivery service?
             </span>

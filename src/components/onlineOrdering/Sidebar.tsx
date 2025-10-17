@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Tab } from "@mui/material";
+import { Tabs, Tab, useMediaQuery, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 
 interface SidebarProps {
@@ -12,7 +12,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   setActiveComponent,
 }) => {
   const { userDetails } = useSelector((state: any) => state.user);
-
   const BusinessPlan = userDetails?.businessPlan?.plan?.name;
 
   const param = new URLSearchParams(window.location.search);
@@ -21,11 +20,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault();
     if (tab) {
-      window.location.href = '/online-ordering'
+      window.location.href = "/online-ordering";
     } else {
       setActiveComponent(newValue);
     }
-  }
+  };
 
   const tabStyle = {
     textTransform: "none",
@@ -49,16 +48,29 @@ const Sidebar: React.FC<SidebarProps> = ({
     { label: "THEMES", value: "themes" },
   ];
 
+  // ✅ Use MUI breakpoints for responsive behavior
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <div className="w-full px-0 py-2 bg-white">
       <Tabs
         value={activeComponent}
         onChange={handleTabChange}
-        variant="fullWidth"
+        variant={isSmallScreen ? "scrollable" : "fullWidth"}
+        scrollButtons={isSmallScreen ? "auto" : false}
+        allowScrollButtonsMobile
         sx={{
           "& .MuiTabs-indicator": {
             display: "none",
+          },
+          "& .MuiTabs-flexContainer": {
+            flexWrap: "nowrap",
+          },
+          overflowX: "auto",
+          scrollbarWidth: "none", // hide scrollbar in Firefox
+          "&::-webkit-scrollbar": {
+            display: "none", // hide scrollbar in Chrome/Safari
           },
         }}
       >
@@ -73,7 +85,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                 color: "#fff !important",
               }),
               ...tabStyle,
-              maxWidth: "150px",
             }}
           />
         ))}

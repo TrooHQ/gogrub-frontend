@@ -270,7 +270,6 @@ const CustomerData = () => {
     <div>
       {" "}
       <DashboardLayout title="Customers">
-        {/* <TopMenuNav pathName="Customers" /> */}
 
         <div className="my-4">
 
@@ -301,7 +300,8 @@ const CustomerData = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-4 gap-6 mt-5">
+          {/* <div className="grid grid-cols-4 gap-6 mt-5"> */}
+          <div className="grid grid-cols-1 gap-6 mt-5 md:grid-cols-2 lg:grid-cols-4">
             {state.salesActivities.map((activity, index) => (
               <div
                 key={index}
@@ -356,8 +356,8 @@ const CustomerData = () => {
           <div className="mt-[40px]">
             <div className="">
               <div className="py-[32px] border rounded-[10px] border-grey100 mt-[24px]">
-                <div className="flex items-center justify-between pr-8">
-                  <p className=" px-[32px]  font-[400] text-[24px] text-[#121212]">
+                <div className="flex flex-wrap items-center justify-between mx-auto lg:pr-8">
+                  <p className=" font-[400] text-[24px] text-[#121212]">
                     All Customers
                   </p>
                   {/* search button */}
@@ -377,33 +377,37 @@ const CustomerData = () => {
                   </div>
                 </div>
 
-                <div className=" text-center pb-[16px] mb-[16px] pt-[24px] px-[32px] grid grid-cols-4 border-b border-[#b6b6b6]">
-                  <p className="text-start  text-[14px] text-[#121212]">Name</p>
-                  <p className=" text-[14px] text-[#121212]">Email</p>
-                  <p className=" text-[14px] text-[#121212]">Phone Number</p>
-                  <p className=" text-[14px]  text-[#121212]">Address </p>
+                <div className="w-full overflow-x-auto">
+                  <table className="min-w-[700px] w-full mt-[24px] table-auto">
+                    <thead>
+                      <tr className="h-[1px]">
+                        <th className="py-2 border-b border-b-grey100">Name</th>
+                        <th className="py-2 border-b border-b-grey100">Email</th>
+                        <th className="py-2 border-b border-b-grey100">Phone Number</th>
+                        <th className="py-2 border-b border-b-grey100">Address</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {loading ? (
+                        <div className="px-8">Loading...</div>
+                      ) : customerData?.length === 0 ? (
+                        <div className="px-8">No data during this period</div>
+                      ) : (
+                        customerData.map((data: any, index: any) => (
+                          <>
+                            {data?.customerName && <tr key={index}>
+                              <td className="px-8 py-4 text-start">{data.customerName}</td>
+                              <td className="px-8 py-4">{data.email}</td>
+                              <td className="px-8 py-4">{data.phoneNumber}</td>
+                              <td className="px-8 py-4">{data.address}</td>
+                            </tr>}</>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-                {loading ? (
-                  <div className="px-8">Loading...</div>
-                ) : customerData?.length === 0 ? (
-                  <div className="px-8">No data during this period</div>
-                ) : customerData ? (
-                  customerData.map((data: any, index: any) => (
-                    <>
-                      {data?.customerName && <div
-                        className={`cursor-pointer text-center py-[14px] px-[32px] grid grid-cols-4 items-center  font-base text-[14px] text-[#414141] ${index % 2 === 0 ? "bg-[#ffffff]" : "bg-[#F8F8F8]"
-                          }`}
-                        key={index}
-                      >
-                        <p className="text-start ">{data.customerName}</p>
-                        <p className="">{data.email}</p>
-                        <p className="">{data.phoneNumber}</p>
-                        <p className="">{data.address}</p>
-                      </div>}</>
-                  ))
-                ) : (
-                  <div className="px-8">No data during this period</div>
-                )}
+
               </div>
             </div>
             <div className="flex items-center justify-center w-full my-4">
