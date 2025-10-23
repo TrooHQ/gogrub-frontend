@@ -43,7 +43,7 @@ export default function ViewOrderModal({ setOrderId, SingleOrderItem }: { setOrd
                 <p className="text-xs">{SingleOrderItem?.customerData?.address}</p>
               </div>}
               {SingleOrderItem?.scheduledDate && <div className='flex items-center justify-between py-2 border-b border-gray-200'>
-                <p className='text-gray-500 '>Date/Time {SingleOrderItem?.scheduledDate && <span className="text-xs">(Scheduled)</span>}</p>
+                <p className='text-gray-500 '>Date/Time <span className="text-xs">(Scheduled)</span></p>
                 <p className='text-gray-900'>{dayjs(SingleOrderItem?.scheduledDate).format("YYYY-MM-DD HH:mm")}</p>
               </div>}
             </div>
