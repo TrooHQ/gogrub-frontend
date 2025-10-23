@@ -46,7 +46,7 @@ const ProfilePage = () => {
       {/* <TopMenuNav pathName="Profile Page" /> */}
       <div className="mt-6">
         <hr />
-        <div className="flex flex-wrap">
+        <div className="flex flex-row lg:flex-col">
           <Sidebar activeComponent={activeComponent} setActiveComponent={setActiveComponent} />
           <div className="w-full px-4 mt-4">{renderActiveComponent()}</div>
         </div>
