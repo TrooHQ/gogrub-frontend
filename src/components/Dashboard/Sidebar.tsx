@@ -110,13 +110,13 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
 
   // console.log("accountDetails", accountDetails);
 
-  const transformedBranches = branches.map((branch: any) => ({
+  const transformedBranches = branches?.map((branch: any) => ({
     label: branch.branch_name,
     id: branch._id,
   }));
   useEffect(() => {
     if (userData?.user_role === "admin") {
-      const defaultBranch = transformedBranches[0];
+      const defaultBranch = transformedBranches[0] ?? "";
       (selectedBranch === null || selectedBranch === undefined) &&
         dispatch(userSelectedBranch(defaultBranch as any));
     } else if (userData?.user_role === "employee") {
