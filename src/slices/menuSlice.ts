@@ -236,16 +236,24 @@ export const fetchMenuItems2 = createAsyncThunk<
 
 export const fetchMenuItemsWithoutStatus = createAsyncThunk<
   MenuItemsByGroupResponse,
-  { branch_id: string; menu_group_name?: string; page?: number },
+  {
+    branch_id: string;
+    menu_group_name?: string;
+    page?: number;
+    statusFilter?: string;
+  },
   { rejectValue: string }
 >(
   "menu/fetchMenuItemsWithoutStatus",
-  async ({ branch_id, menu_group_name, page }, { rejectWithValue }) => {
+  async (
+    { branch_id, menu_group_name, page, statusFilter },
+    { rejectWithValue }
+  ) => {
     try {
       const token = localStorage.getItem("token");
 
       // Construct the query string
-      let queryString = `branch_id=${branch_id}`;
+      let queryString = `branch_id=${branch_id}&menu_category_name=${statusFilter}`;
       if (menu_group_name !== undefined && menu_group_name !== null) {
         queryString += `&menu_group_name=${menu_group_name}`;
       }
