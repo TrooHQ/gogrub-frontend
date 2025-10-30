@@ -147,8 +147,8 @@ export const OnlineOrderingSelectPayment = () => {
       <div className=" mt-[30px] border border-[#E7E7E7] px-[12px] py-[32px] rounded-[10px] flex items-center gap-[8px] mx-[8px] overflow-x-auto hidden">
         <p
           className={`text-[14px] font-[500] min-w-[120px] w-full cursor-pointer text-center py-[16px] px-[8px] bg-white rounded-[10px] ${selectedOption === "Bank Transfer"
-              ? "border-4 border-[#5855B3] text-[#121212]"
-              : "border-4 border-[#B6B6B6] text-[#414141]"
+            ? "border-4 border-[#5855B3] text-[#121212]"
+            : "border-4 border-[#B6B6B6] text-[#414141]"
             }`}
           onClick={() => setSelectedOption("Bank Transfer")}
         >
@@ -156,8 +156,8 @@ export const OnlineOrderingSelectPayment = () => {
         </p>
         <p
           className={`min-w-[120px] w-full text-[14px] font-[500] cursor-pointer text-center py-[16px] px-[8px] bg-white rounded-[10px] ${selectedOption === "WebPay"
-              ? "border-4 border-[#5855B3] text-[#121212]"
-              : "border-4 border-[#B6B6B6] text-[#414141]"
+            ? "border-4 border-[#5855B3] text-[#121212]"
+            : "border-4 border-[#B6B6B6] text-[#414141]"
             }`}
           onClick={() => setSelectedOption("WebPay")}
         >
@@ -165,8 +165,8 @@ export const OnlineOrderingSelectPayment = () => {
         </p>
         <p
           className={`min-w-[120px] w-full text-[14px] font-[500] cursor-pointer text-center py-[16px] px-[8px] bg-white rounded-[10px] ${selectedOption === "Terminals"
-              ? "border-4 border-[#5855B3] text-[#121212]"
-              : "border-4 border-[#B6B6B6] text-[#414141]"
+            ? "border-4 border-[#5855B3] text-[#121212]"
+            : "border-4 border-[#B6B6B6] text-[#414141]"
             }`}
           onClick={() => setSelectedOption("Terminals")}
         >

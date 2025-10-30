@@ -13,8 +13,8 @@ import { fetchMenuCategories } from "../../slices/menuSlice";
 
 const AddMenuCategory = ({ setIsModalOpen, editCategory, handleEditCategoryConfirm, setCategoryEdit }: any) => {
   const dispatch = useDispatch<AppDispatch>();
-  // const { branches } = useSelector((state: any) => state.branches.branches);
   const { selectedBranch } = useSelector((state: any) => state.branches);
+  const branches = useSelector((state: any) => state.branches.branches);
 
   const [menuName, setMenuName] = useState<string>("");
   const [image, setImage] = useState<string>("");
@@ -78,14 +78,14 @@ const AddMenuCategory = ({ setIsModalOpen, editCategory, handleEditCategoryConfi
         `${SERVER_DOMAIN}/menu/addMenuCategory`,
         {
           menu_category_name: menuName,
-          branch_id: selectedBranch.id,
+          branch_id: selectedBranch.id ?? branches[0]?._id,
           image,
         },
         headers
       );
       console.log(response);
       if (response.status === 200) {
-        dispatch(fetchMenuCategories(selectedBranch.id,));
+        dispatch(fetchMenuCategories(selectedBranch.id ?? branches[0]?._id));
 
         toast.success(
           response.data.message || "Menu category added successfully."

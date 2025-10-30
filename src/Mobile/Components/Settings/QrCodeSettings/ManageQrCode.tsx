@@ -124,9 +124,8 @@ const ManageQrCode = () => {
                 <img
                   src={arrowDown}
                   alt="Arrow Down"
-                  className={`transform ${
-                    visibleTableId === group._id ? "rotate-180" : ""
-                  }`}
+                  className={`transform ${visibleTableId === group._id ? "rotate-180" : ""
+                    }`}
                 />
               </div>
 

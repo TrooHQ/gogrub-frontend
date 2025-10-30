@@ -102,7 +102,7 @@ const UpgradeSubscriptionModal: React.FC<SetupModalProps> = ({
     fetchPlans();
   }, []);
 
-  console.log("current url", `${window.location.origin}/overview`);
+  // console.log("current url", `${window.location.origin}/overview`);
 
   useEffect(() => {
     dispatchs(fetchUserDetails());

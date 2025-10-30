@@ -240,20 +240,20 @@ export const fetchMenuItemsWithoutStatus = createAsyncThunk<
     branch_id: string;
     menu_group_name?: string;
     page?: number;
-    statusFilter?: string;
+    category_name?: string;
   },
   { rejectValue: string }
 >(
   "menu/fetchMenuItemsWithoutStatus",
   async (
-    { branch_id, menu_group_name, page, statusFilter },
+    { branch_id, menu_group_name, page, category_name },
     { rejectWithValue }
   ) => {
     try {
       const token = localStorage.getItem("token");
 
       // Construct the query string
-      let queryString = `branch_id=${branch_id}&menu_category_name=${statusFilter}`;
+      let queryString = `branch_id=${branch_id}&menu_category_name=${category_name}`;
       if (menu_group_name !== undefined && menu_group_name !== null) {
         queryString += `&menu_group_name=${menu_group_name}`;
       }
