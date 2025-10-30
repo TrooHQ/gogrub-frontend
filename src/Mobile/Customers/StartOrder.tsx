@@ -109,8 +109,7 @@ const StartOrder = () => {
 
   if (type === "room") {
     navigate(
-      `demo/in_room_dining${
-        location.pathname + location.search + location.hash
+      `demo/in_room_dining${location.pathname + location.search + location.hash
       }`
     );
   } else if (!business_identifier || !tableNo || !comingFrom) {
@@ -181,9 +180,8 @@ const StartOrder = () => {
             </p>
 
             <p
-              className={`px-[24px] py-[10px] inline rounded-[5px] text-[#ffffff] text-[16px] font-[500] ${
-                !userName ? " cursor-default" : "cursor-pointer"
-              }`}
+              className={`px-[24px] py-[10px] inline rounded-[5px] text-[#ffffff] text-[16px] font-[500] ${!userName ? " cursor-default" : "cursor-pointer"
+                }`}
               onClick={userName ? handleNext : undefined}
               style={{
                 backgroundColor: userName ? color : "#f2f2f2",
@@ -213,9 +211,8 @@ const StartOrder = () => {
             </p>
             <Link to={`demo/category-details/orderandpay`}>
               <p
-                className={`px-[24px] py-[10px] ${
-                  !table ? " cursor-default" : " cursor-pointer"
-                } inline rounded-[5px] text-[#ffffff] text-[16px] font-[500]`}
+                className={`px-[24px] py-[10px] ${!table ? " cursor-default" : " cursor-pointer"
+                  } inline rounded-[5px] text-[#ffffff] text-[16px] font-[500]`}
                 style={{
                   backgroundColor: table ? color : "#f2f2f2",
                 }}

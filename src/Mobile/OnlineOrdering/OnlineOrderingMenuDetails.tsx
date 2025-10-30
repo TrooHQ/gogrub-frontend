@@ -352,13 +352,12 @@ const OnlineOrderingMenuDetails = () => {
                               (opt) => opt.name === option.modifier_name
                             )}
                             onChange={() => handleCheckboxChange(option)}
-                            className={`h-5 w-5 ${
-                              selectedOptions.some(
-                                (opt) => opt.name === option.modifier_name
-                              )
-                                ? "bg-red-600"
-                                : "bg-white"
-                            }`}
+                            className={`h-5 w-5 ${selectedOptions.some(
+                              (opt) => opt.name === option.modifier_name
+                            )
+                              ? "bg-red-600"
+                              : "bg-white"
+                              }`}
                           />
                         </div>
                       </div>
@@ -393,15 +392,15 @@ const OnlineOrderingMenuDetails = () => {
             {menuItems.some(
               (menu) => menu.is_recommended && menu._id !== id
             ) && (
-              <div className="flex items-center justify-between my-[20px]">
-                <p className="text-[16px] text-[#121212] font-[500]">
-                  Recommended Items
-                </p>
-                <div className="text-[16px]">
-                  <MdKeyboardArrowRight />
+                <div className="flex items-center justify-between my-[20px]">
+                  <p className="text-[16px] text-[#121212] font-[500]">
+                    Recommended Items
+                  </p>
+                  <div className="text-[16px]">
+                    <MdKeyboardArrowRight />
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             <div className="flex items-center gap-[50px] overflow-x-scroll py-[11px] border-t border-[#E7E7E7] cursor-pointer">
               {menuItems.map(

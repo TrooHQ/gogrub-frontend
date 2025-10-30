@@ -139,9 +139,8 @@ const BeginOrder = () => {
 
             <div className=" flex items-center justify-center">
               <p
-                className={` px-[120px] py-[37px] text-[32px]  font-bold ${
-                  !userName ? " bg-[#B6B6B6]" : "bg-[#FF0000] cursor-pointer"
-                } rounded-full inline-flex text-white text-center`}
+                className={` px-[120px] py-[37px] text-[32px]  font-bold ${!userName ? " bg-[#B6B6B6]" : "bg-[#FF0000] cursor-pointer"
+                  } rounded-full inline-flex text-white text-center`}
                 style={{
                   backgroundColor: !userName ? "#B6B6B6" : color,
                 }}
@@ -186,13 +185,12 @@ const BeginOrder = () => {
               </p>
               <Link to="/demo/category-details/selfcheckout">
                 <p
-                  className={`px-[99px] py-[37px] text-[32px] font-[500] rounded-full inline-flex text-white text-center ${
-                    !number ? "cursor-not-allowed" : "cursor-pointer"
-                  }`}
+                  className={`px-[99px] py-[37px] text-[32px] font-[500] rounded-full inline-flex text-white text-center ${!number ? "cursor-not-allowed" : "cursor-pointer"
+                    }`}
                   style={{
                     backgroundColor: !number ? "#B6B6B6" : color,
                   }}
-                  // onClick={number ? handleNext : undefined}
+                // onClick={number ? handleNext : undefined}
                 >
                   CONTINUE
                 </p>

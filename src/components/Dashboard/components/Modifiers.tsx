@@ -5,7 +5,7 @@ import { SERVER_DOMAIN } from "../../../Api/Api";
 import { toast } from "react-toastify";
 import Modal from "../../Modal";
 // import OutletSelectionRadioGroup from "../OutletSelectionRadioGroup";
-import { useDispatch, } from "react-redux";
+import { useDispatch, useSelector, } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import { fetchBranches } from "../../../slices/branchSlice";
 import ConfirmationDialog from "../ConfirmationDialog";
@@ -43,7 +43,6 @@ const Modifiers = ({
     { id: 1, name: "", price: "" },
   ]);
 
-  console.log("modifier", modifiers);
 
   const [confirmSaveModal, setConfirmSaveModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -59,6 +58,7 @@ const Modifiers = ({
   const [selectedModifier, setSelectedModifier] = useState({} as any);
   // const navigate = useNavigate();
   // const { branches } = useSelector((state: any) => state.branches);
+  const branches = useSelector((state: any) => state.branches.branches);
 
   useEffect(() => {
     dispatch(fetchBranches());
@@ -86,7 +86,7 @@ const Modifiers = ({
     try {
       const response = await axios.get(
         // /menu/getAllModifierGroups/?branch_id=669e67afbe2d93ee11921119
-        `${SERVER_DOMAIN}/menu/getAllModifierGroups/?branch_id=${selectedBranch?.id}`,
+        `${SERVER_DOMAIN}/menu/getAllModifierGroups/?branch_id=${selectedBranch?.id ?? branches[0]?._id}`,
         // `${SERVER_DOMAIN}/menu/getMenuModifierGroupByItem/?attach_to=item&name=${selectedMenuItem.menu_item_name}&branch_id=${selectedBranch?.id}`,
         headers
       );
