@@ -97,6 +97,7 @@ const MenuList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const branches = useSelector((state: any) => state.branches.branches);
+
   const {
     menuItemsWithoutStatus: menuItems,
     totalPages,

@@ -159,7 +159,7 @@ export const CategoryDetails = () => {
     }
   }, []);
 
-  const settings:Settings = {
+  const settings: Settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -324,11 +324,10 @@ export const CategoryDetails = () => {
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                   <p
-                    className={`cursor-pointer text-[32px] px-[12px] py-[8px] rounded-[4px] ${
-                      selectedGroup === "All"
-                        ? "font-[600] text-[#FFFFFF] border border-[#929292]"
-                        : "text-[#606060] font-[400] border border-[#B6B6B6]"
-                    }`}
+                    className={`cursor-pointer text-[32px] px-[12px] py-[8px] rounded-[4px] ${selectedGroup === "All"
+                      ? "font-[600] text-[#FFFFFF] border border-[#929292]"
+                      : "text-[#606060] font-[400] border border-[#B6B6B6]"
+                      }`}
                     style={{
                       backgroundColor:
                         selectedGroup === "All"
@@ -351,11 +350,10 @@ export const CategoryDetails = () => {
                           ref={(el) => (groupRefs.current[index + 1] = el)}
                         >
                           <p
-                            className={`cursor-pointer text-[32px] px-[12px] py-[8px] rounded-[4px] border ${
-                              selectedGroup === groupName
-                                ? "font-[600] text-[#FFFFFF] border-[#929292]"
-                                : "text-[#606060] font-[400] border-[#B6B6B6]"
-                            }`}
+                            className={`cursor-pointer text-[32px] px-[12px] py-[8px] rounded-[4px] border ${selectedGroup === groupName
+                              ? "font-[600] text-[#FFFFFF] border-[#929292]"
+                              : "text-[#606060] font-[400] border-[#B6B6B6]"
+                              }`}
                             style={{
                               backgroundColor:
                                 selectedGroup === groupName
@@ -482,7 +480,7 @@ export const CategoryDetails = () => {
                                 className=" flex items-center justify-end cursor-pointer rounded-full"
                                 style={{
                                   backgroundColor: color || "#414141",
-                                  color:"#414141",
+                                  color: "#414141",
                                 }}
                                 onClick={() => decrementCount(menu)}
                               >
@@ -541,7 +539,7 @@ export const CategoryDetails = () => {
               <Link to="/demo/basket/selfcheckout">
                 <p
                   className=" text-white  text-[36px] font-[500] py-[14px] px-[38px] rounded-[5px] "
-                  // style={{ color: color || "#C5291E" }}
+                // style={{ color: color || "#C5291E" }}
                 >
                   Checkout
                 </p>
