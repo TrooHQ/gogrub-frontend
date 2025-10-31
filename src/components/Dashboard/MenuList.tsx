@@ -168,7 +168,7 @@ const MenuList = () => {
         fetchMenuItemsWithoutStatus({
           branch_id: viewingBranch._id,
           page,
-          statusFilter
+          category_name: statusFilter
         })
       );
     }
