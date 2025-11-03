@@ -85,7 +85,7 @@ const initialState: MenuState = {
   menuItems2: [],
   menuItemsWithoutStatus: [],
   menuItemsByGroup: [],
-  loading: false,
+  loading: true,
   mgLoading: false,
   error: null,
   totalItems: 0,
