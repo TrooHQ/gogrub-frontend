@@ -13,7 +13,7 @@ const YourLink = () => {
   const dispatch = useDispatch();
 
   const [businessLogo, setBusinessLogo] = useState("");
-  const { selectedBranch } = useSelector((state: RootState) => state.branches);
+  const { selectedBranch, branches } = useSelector((state: RootState) => state.branches);
   const { userDetails } = useSelector((state: RootState) => state.user);
 
   const { accountDetails } = useSelector((state: RootState) => state.business);
@@ -22,6 +22,7 @@ const YourLink = () => {
     (state: RootState) => state.asset
   );
 
+  console.log("selectedBranch", selectedBranch, branches)
   console.log("onlineOrderingLink", onlineOrderingLink)
 
   useEffect(() => {
@@ -31,10 +32,10 @@ const YourLink = () => {
 
 
   useEffect(() => {
-    if (selectedBranch?.id) {
-      dispatch(fetchOnlineOrderingLink(selectedBranch?.id || "") as any);
-    }
-  }, [selectedBranch?.id, dispatch]);
+    // if (selectedBranch?.id) {
+    dispatch(fetchOnlineOrderingLink(selectedBranch?.id || branches[0]?._id || "") as any);
+    // }
+  }, [selectedBranch?.id, dispatch, branches]);
 
 
 
