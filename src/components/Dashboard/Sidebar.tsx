@@ -67,37 +67,12 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
   const [open, setOpen] = useState(true);
   // const [isAutoOpen, setIsAutoOpen] = useState(false);
   const [openSubmenuIndex, setOpenSubmenuIndex] = useState<number | null>(null);
-  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  // const [selectedOutlet, setSelectedOutlet] = useState(
-  //   selectedBranch
-  //     ? selectedBranch
-  //     : {
-  //       label: "All outlets",
-  //       id: "",
-  //     }
-  // );
 
-  // useEffect(() => {
-  //   dispatch(fetchBranches());
-  //   dispatch(fetchUserDetails());
-  //   dispatch(fetchAccountDetails());
-  //   dispatch(fetchAllBusinessInfo());
-  // }, [dispatch]);
+  //     ? selectedBranch
+
+
 
   const { businessInfo, loading } = useSelector((state: any) => state.allBusinessInfo);
-  // useEffect(() => {
-  //   // console.log('from side bar')
-  //   const fetchAcc = async () => {
-  //     try {
-  //       const res = await "https://troox-backend-new.vercel.app/api/getAccountDetails"
-
-  //       // console.log("res from sidebar", res)
-  //     } catch (error) {
-  //       console.error("Error fetching account details:", error);
-  //     }
-  //   }
-  //   fetchAcc();
-  // }, [])
 
   const { accountDetails } = useSelector((state: RootState) => state.business);
 
@@ -124,17 +99,6 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
     }
   }, [dispatch, transformedBranches, selectedBranch]);
 
-  // const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  //   setIsAutoOpen((prev) => !prev);
-  // };
-
-  // const handleSelect = (event: any, value: any) => {
-  //   event.preventDefault();
-  //   setSelectedOutlet(value ?? { label: "All outlets" });
-  //   dispatch(userSelectedBranch(value));
-  //   setIsAutoOpen(false);
-  // };
 
   useEffect(() => {
     // Open the submenu if the current location is within its links
@@ -189,19 +153,38 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
       link: "/menu-list",
       subMenu: [
         {
-          title: "Menu List",
+          title: "Menu Items",
           link: "/menu-list",
         },
         {
-          title: "Menu Builder",
-          link: "/menu-builder",
+          title: "Menu Categories",
+          link: "/menu-categories",
         },
         {
-          title: "Price List",
-          link: "/price-list",
+          title: "Modifiers",
+          link: "/menu-modifiers",
         },
       ],
     },
+    // {
+    //   title: "Menu",
+    //   icon: MenuIcon,
+    //   link: "/menu-list",
+    //   subMenu: [
+    //     {
+    //       title: "Menu List",
+    //       link: "/menu-list",
+    //     },
+    //     {
+    //       title: "Menu Builder",
+    //       link: "/menu-builder",
+    //     },
+    //     {
+    //       title: "Price List",
+    //       link: "/price-list",
+    //     },
+    //   ],
+    // },
 
     {
       subTitle: "SETTINGS",
