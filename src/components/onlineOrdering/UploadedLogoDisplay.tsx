@@ -42,7 +42,7 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
 
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(onlineOrderingLink?.url);
+    navigator.clipboard.writeText(onlineOrderingLink?.storefront_url);
     setCopied(true);
 
     // Reset the icon after 2 seconds
@@ -106,8 +106,8 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
             <span className="text-[#121212] text-[16px] font-normal">
               {loading
                 ? "Loading..."
-                : onlineOrderingLink?.url
-                  ? truncateText(onlineOrderingLink?.url, 30)
+                : onlineOrderingLink?.storefront_url
+                  ? truncateText(onlineOrderingLink?.storefront_url, 30)
                   : "No link generated yet"}
             </span>
             {copied ? (
