@@ -90,7 +90,7 @@ const Overview: React.FC = () => {
 
   // console.log("Selected Branch:", selectedBranch);
 
-  const transformedBranches = branches.map((branch: any) => ({
+  const transformedBranches = branches?.map((branch: any) => ({
     label: branch.branch_name,
     id: branch._id,
   }));

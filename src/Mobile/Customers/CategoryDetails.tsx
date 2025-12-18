@@ -174,7 +174,7 @@ export const CategoryDetails = () => {
     getItems();
   }, []);
 
-  const settings:Settings = {
+  const settings: Settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 2,
@@ -278,11 +278,10 @@ export const CategoryDetails = () => {
             >
               <p
                 ref={(el) => (groupRefs.current[0] = el)}
-                className={`cursor-pointer px-[12px] py-[8px] rounded-[4px] ${
-                  selectedGroup === "All"
-                    ? `font-[600] text-[#FFFFFF] border border-[#929292]`
-                    : "text-[#606060] font-[400] border border-[#B6B6B6]"
-                }`}
+                className={`cursor-pointer px-[12px] py-[8px] rounded-[4px] ${selectedGroup === "All"
+                  ? `font-[600] text-[#FFFFFF] border border-[#929292]`
+                  : "text-[#606060] font-[400] border border-[#B6B6B6]"
+                  }`}
                 style={{
                   backgroundColor:
                     selectedGroup === "All"

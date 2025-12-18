@@ -164,9 +164,8 @@ const InRoomStartOrder = () => {
               Cancel
             </p>
             <p
-              className={`px-[24px] py-[10px] ${
-                !userName ? "bg-[#F8C9C9]" : "bg-[#FF0000] cursor-pointer"
-              } inline rounded-[5px] text-[#ffffff] text-[16px] font-[500]`}
+              className={`px-[24px] py-[10px] ${!userName ? "bg-[#F8C9C9]" : "bg-[#FF0000] cursor-pointer"
+                } inline rounded-[5px] text-[#ffffff] text-[16px] font-[500]`}
               onClick={userName ? handleNext : undefined}
               style={{
                 backgroundColor: userName ? color : "#f2f2f2",
@@ -196,9 +195,8 @@ const InRoomStartOrder = () => {
             </p>
             <Link to={`/demo/category-details/in_room_dining`}>
               <p
-                className={`px-[24px] py-[10px] ${
-                  !room ? "bg-[#F8C9C9]" : "bg-[#FF0000] cursor-pointer"
-                } inline rounded-[5px] text-[#ffffff] text-[16px] font-[500]`}
+                className={`px-[24px] py-[10px] ${!room ? "bg-[#F8C9C9]" : "bg-[#FF0000] cursor-pointer"
+                  } inline rounded-[5px] text-[#ffffff] text-[16px] font-[500]`}
                 style={{
                   backgroundColor: room ? color : "#f2f2f2",
                 }}

@@ -385,14 +385,13 @@ const MenuDetailsModal: React.FC<MenuDetailsModalProps> = ({
                                 >
                                   <div
                                     id={option.modifier_name}
-                                    className={`h-[40px] min-w-[40px] border rounded-full ${
-                                      selectedOptions.some(
-                                        (opt) =>
-                                          opt.name === option.modifier_name
-                                      )
-                                        ? "bg-red-600"
-                                        : " border-[3px] border-[#B6B6B6]"
-                                    }`}
+                                    className={`h-[40px] min-w-[40px] border rounded-full ${selectedOptions.some(
+                                      (opt) =>
+                                        opt.name === option.modifier_name
+                                    )
+                                      ? "bg-red-600"
+                                      : " border-[3px] border-[#B6B6B6]"
+                                      }`}
                                   ></div>
                                   <label
                                     htmlFor={option.modifier_name}
@@ -429,84 +428,84 @@ const MenuDetailsModal: React.FC<MenuDetailsModalProps> = ({
                   {menuItems.some(
                     (menu) => menu.is_recommended && menu._id !== menuItemId
                   ) && (
-                    <div className="mx-[24px] my-[80px]">
-                      <div className="flex items-center justify-between py-[32px] px-[24px]">
-                        <p className="text-[32px] font-[500] text-[#121212]">
-                          Recommended Items
-                        </p>
-                        <div className="text-[50px]">
-                          <MdKeyboardArrowRight />
+                      <div className="mx-[24px] my-[80px]">
+                        <div className="flex items-center justify-between py-[32px] px-[24px]">
+                          <p className="text-[32px] font-[500] text-[#121212]">
+                            Recommended Items
+                          </p>
+                          <div className="text-[50px]">
+                            <MdKeyboardArrowRight />
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex items-center gap-[50px] overflow-x-scroll py-[11px] cursor-pointer">
-                        {menuItems.map(
-                          (menu, index) =>
-                            menu.is_recommended &&
-                            menu._id !== menuItemId && (
-                              <div
-                                key={index}
-                                className="flex-shrink-0 w-[531px] h-[231px] border shadow-md"
-                              >
-                                <div className="flex items-center justify-between px-[24px]">
-                                  <div className="w-[180px] grid gap-[40px]">
-                                    <p className="text-[28px] text-[#121212] font-[500]">
-                                      {menu?.menu_item_name}
-                                    </p>
-                                    <p className="text-[28px] text-[#606060]">
-                                      &#x20A6;
-                                      {menu.menu_item_price?.toLocaleString()}
-                                    </p>
-                                  </div>
-                                  <div className="relative">
-                                    <img
-                                      src={menu.menu_item_image}
-                                      alt={menu.menu_item_name}
-                                      className="h-[201px] w-[224px] object-cover rounded-[8px]"
-                                    />
-                                    <div>
-                                      {ids.find(
-                                        (item) => item.id === menu?._id
-                                      ) ? (
-                                        <div className="absolute bottom-2 right-2">
-                                          <div className="flex items-center gap-[20px] p-[10px] rounded-[8px] bg-black">
-                                            <FaCircleMinus
-                                              className="text-[#ffffff]"
-                                              size={30}
-                                              onClick={() => decrement(menu)}
-                                            />
-                                            <p className="text-[36px] text-[#ffffff] font-[500]">
-                                              {ids.find(
-                                                (item) => item.id === menu?._id
-                                              )?.quantity || 1}
-                                            </p>
+                        <div className="flex items-center gap-[50px] overflow-x-scroll py-[11px] cursor-pointer">
+                          {menuItems.map(
+                            (menu, index) =>
+                              menu.is_recommended &&
+                              menu._id !== menuItemId && (
+                                <div
+                                  key={index}
+                                  className="flex-shrink-0 w-[531px] h-[231px] border shadow-md"
+                                >
+                                  <div className="flex items-center justify-between px-[24px]">
+                                    <div className="w-[180px] grid gap-[40px]">
+                                      <p className="text-[28px] text-[#121212] font-[500]">
+                                        {menu?.menu_item_name}
+                                      </p>
+                                      <p className="text-[28px] text-[#606060]">
+                                        &#x20A6;
+                                        {menu.menu_item_price?.toLocaleString()}
+                                      </p>
+                                    </div>
+                                    <div className="relative">
+                                      <img
+                                        src={menu.menu_item_image}
+                                        alt={menu.menu_item_name}
+                                        className="h-[201px] w-[224px] object-cover rounded-[8px]"
+                                      />
+                                      <div>
+                                        {ids.find(
+                                          (item) => item.id === menu?._id
+                                        ) ? (
+                                          <div className="absolute bottom-2 right-2">
+                                            <div className="flex items-center gap-[20px] p-[10px] rounded-[8px] bg-black">
+                                              <FaCircleMinus
+                                                className="text-[#ffffff]"
+                                                size={30}
+                                                onClick={() => decrement(menu)}
+                                              />
+                                              <p className="text-[36px] text-[#ffffff] font-[500]">
+                                                {ids.find(
+                                                  (item) => item.id === menu?._id
+                                                )?.quantity || 1}
+                                              </p>
+                                              <FaCirclePlus
+                                                className="text-[#ffffff]"
+                                                size={30}
+                                                onClick={() => increment(menu)}
+                                              />
+                                            </div>
+                                          </div>
+                                        ) : (
+                                          <div
+                                            className="absolute bottom-2 right-2"
+                                            onClick={() => handleClick(menu?._id)}
+                                          >
                                             <FaCirclePlus
-                                              className="text-[#ffffff]"
-                                              size={30}
-                                              onClick={() => increment(menu)}
+                                              className="text-red-500"
+                                              size={50}
                                             />
                                           </div>
-                                        </div>
-                                      ) : (
-                                        <div
-                                          className="absolute bottom-2 right-2"
-                                          onClick={() => handleClick(menu?._id)}
-                                        >
-                                          <FaCirclePlus
-                                            className="text-red-500"
-                                            size={50}
-                                          />
-                                        </div>
-                                      )}
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            )
-                        )}
+                              )
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   <div className=" mx-[24px] my-[150px]">
                     <div className=" flex items-center justify-between py-[32px] px-[24px]">

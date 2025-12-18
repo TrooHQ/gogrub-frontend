@@ -174,7 +174,7 @@ export const OnlineOrderingCategoryDetails = () => {
     getItems();
   }, []);
 
-  const settings:Settings = {
+  const settings: Settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 2,

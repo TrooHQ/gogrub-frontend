@@ -33,25 +33,12 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
     }
   }, [editId, menuItems])
 
-  console.log("editData", editData)
-
   const { selectedBranch } = useSelector((state: any) => state.branches);
+  const branches = useSelector((state: any) => state.branches.branches);
 
   const [imageName, setImageName] = useState<string>("");
   const [image, setImage] = useState<string>(editData ? editData?.menu_item_image : "");
   const [hasUploadedImage, setHasUploadedImage] = useState<boolean>(false);
-
-  // console.log("oamge", image)
-  // const handleFileChange = async (e: any) => {
-  //   const file = e.target.files[0];
-  //   setImageName(file.name);
-  //   try {
-  //     const base64 = await convertToBase64(file);
-  //     setImage(base64 as string);
-  //   } catch (error) {
-  //     console.error("Error converting file to base64:", error);
-  //   }
-  // };
 
   const handleFileChange = async (e: any) => {
     const file = e.target.files[0];
@@ -79,24 +66,10 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
   //   setSelectedMod(value);
   // };
 
-  // console.log("selectedMod", selectedMod);
-  console.log("extras", extras);
-  console.log("complimentary", complimentary);
 
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
-
-
-  // useEffect(() => {
-  //   if (editData) {
-  //     setMenuName(editData?.menu_item_name || "");
-  //     setMenuDescription(editData?.description || "");
-  //     setMenuPrice(editData?.menu_item_price || "");
-  //     // setImage(editData?.image || "");
-  //     // setSelectedMod(editData?.modifiers || []); 
-  //   }
-  // }, [editData]);
 
   useEffect(() => {
     if (editData) {
@@ -105,12 +78,10 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       setMenuPrice(editData?.menu_item_price || "");
       setImageName("Existing Image"); // optional fallback label
 
-      console.log("editData?.modifierGroups", editData?.modifierGroups)
-
       if (editData?.modifierGroups) {
         const mod = editData?.modifierGroups.map((item: any) => item.modifier_group_name);
         const com = editData?.complimentary.map((item: any) => item.modifier_group_name);
-        console.log(mod)
+
         setExtras(mod);
         setComplimentary(com);
       }
@@ -132,8 +103,6 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
     setMenuPrice(value);
   };
 
-
-
   const dispatch = useDispatch<AppDispatch>();
 
   const [loading, setLoading] = useState(false);
@@ -147,14 +116,13 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    // /menu/editGogrubMenuItem
-    // const endpoint = editId ? `${SERVER_DOMAIN}/menu/editGogrubMenuItem/` : `${SERVER_DOMAIN}/menu/addMenuItem`;
+
 
     try {
       const response = await axios.post(`${SERVER_DOMAIN}/menu/addMenuItem`,
         {
           menu_category_name: activeCategory?.name,
-          branch_id: selectedBranch.id,
+          branch_id: selectedBranch.id ?? branches[0]?._id,
           menu_group_name: activeGroup?.name,
           menu_item_name: menuName,
           description: menuDescription,
@@ -167,13 +135,10 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
       );
       dispatch(
         fetchMenuItemsWithoutStatus({
-          branch_id: selectedBranch.id, page: 1, menu_group_name: activeGroup?.name,
+          branch_id: selectedBranch.id ?? branches[0]?._id, page: 1, menu_group_name: activeGroup?.name, category_name: activeCategory.name
+
         })
-        // fetchMenuItemsByMenuGroup({
-        //   branch_id: selectedBranch.id,
-        //   menu_group_name: activeGroup?.name,
-        //   page: currentPage || 1,
-        // })
+
       );
       toast.success(response.data.message || "Menu group added successfully.");
       setMenuName("");
@@ -261,7 +226,7 @@ const MenuItemForm: React.FC<Props> = ({ onCancel, activeCategory, activeGroup, 
 
       try {
         const response = await axios.get(
-          `${SERVER_DOMAIN}/menu/getAllModifierGroups/?branch_id=${selectedBranch?.id}`,
+          `${SERVER_DOMAIN}/menu/getAllModifierGroups/?branch_id=${selectedBranch?.id ?? branches[0]?._id}`,
           headers
         );
         console.log("resp", response);

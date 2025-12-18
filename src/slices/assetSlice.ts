@@ -73,7 +73,7 @@ const initialState: AssetState = {
   pickupLocations: [],
   deliveryDetails: null,
   onlineOrderingLink: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 

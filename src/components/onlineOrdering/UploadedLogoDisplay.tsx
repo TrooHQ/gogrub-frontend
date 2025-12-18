@@ -38,6 +38,9 @@ const UploadedLogoDisplay: React.FC<UploadedLogoDisplayProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
 
+  console.log("onlineOrderingLink", onlineOrderingLink)
+
+
   const handleCopy = () => {
     navigator.clipboard.writeText(onlineOrderingLink?.url);
     setCopied(true);

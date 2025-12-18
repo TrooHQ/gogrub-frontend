@@ -112,9 +112,8 @@ const OnlineOrderingStartOrder = () => {
             By clicking “Start Your Order” you agree to our{" "}
             <a href="">
               <span
-                className={`underline ${
-                  color ? `text-[${color}]` : "text-[#606060]"
-                }`}
+                className={`underline ${color ? `text-[${color}]` : "text-[#606060]"
+                  }`}
               >
                 Terms & Conditions
               </span>

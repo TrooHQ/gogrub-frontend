@@ -38,7 +38,16 @@ const CustomPagination = styled(Pagination)(() => ({
     },
   },
 }));
-
+interface MenuItem {
+  _id: string;
+  menu_item_name: string;
+  menu_item_price: number;
+  menu_category_name: string;
+  menu_group_name: string;
+  is_frozen: boolean;
+  is_recommended: boolean;
+  modifierGroups: ModifierGroup[];
+}
 interface Modifier {
   _id: string;
   created_by: string;
@@ -88,6 +97,7 @@ const MenuList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const branches = useSelector((state: any) => state.branches.branches);
+
   const {
     menuItemsWithoutStatus: menuItems,
     totalPages,
@@ -95,6 +105,18 @@ const MenuList = () => {
   } = useSelector((state: any) => state.menu);
 
   const [page, setPage] = useState<number>(1);
+  const [statusFilter, setStatusFilter] = useState<string>("");
+
+  const categoryNames: string[] = Array.isArray(menuItems)
+    ? (menuItems as MenuItem[]).map((item: MenuItem) => item.menu_category_name)
+    : [];
+
+  const uniqueCategoryNames = [...new Set(categoryNames)];
+
+
+  const handleCategoryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setStatusFilter(event.target.value as string);
+  };
 
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
@@ -146,10 +168,11 @@ const MenuList = () => {
         fetchMenuItemsWithoutStatus({
           branch_id: viewingBranch._id,
           page,
+          category_name: statusFilter
         })
       );
     }
-  }, [dispatch, viewingBranch, page]);
+  }, [dispatch, viewingBranch, page, statusFilter]);
 
   // Delete function
   const handleDeleteClick = (item: any) => {
@@ -410,7 +433,21 @@ const MenuList = () => {
                 <ArrowBack />
                 Back
               </button>
-              <div className="flex items-center justify-between"></div>
+              <div className="flex items-center justify-between">
+                <select className="border border-[#B6B6B6] bg-transparent  px-[16px] py-[8px] font-[400] text-[#121212] rounded-lg"
+                  // value={statusFilter} // Controlled input
+                  onChange={handleCategoryChange}
+                >
+                  <option value="">All</option>
+                  {
+                    uniqueCategoryNames.map((categoryName, index) => (
+                      <option key={index} value={categoryName}>
+                        {categoryName}
+                      </option>
+                    ))
+                  }
+                </select>
+              </div>
             </div>
 
             <div className="mt-6 overflow-x-auto">

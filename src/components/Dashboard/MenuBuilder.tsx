@@ -49,6 +49,7 @@ const MenuBuilder = () => {
     mgLoading,
   } = useSelector((state: any) => state.menu);
   const { selectedBranch } = useSelector((state: any) => state.branches);
+  const branches = useSelector((state: any) => state.branches.branches);
   const [currentPage, setCurrentPage] = useState(theCurrentPage || 1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addMenuGroup, setAddMenuGroup] = useState(false);
@@ -58,6 +59,7 @@ const MenuBuilder = () => {
   const [menuItemLoading, setMenuItemLoading] = useState(false);
   const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
 
+  // console.log("branches", branches)
 
   useEffect(() => {
     dispatch(fetchBranches());
@@ -93,12 +95,12 @@ const MenuBuilder = () => {
 
   // Useeffects
   useEffect(() => {
-    if (selectedBranch) {
-      console.log("selectedBranch", selectedBranch)
-      dispatch(fetchMenuCategories(selectedBranch.id));
+    if (selectedBranch || branches[0]?._id) {
+      dispatch(fetchMenuCategories(selectedBranch.id ?? branches[0]?._id));
     }
-  }, [selectedBranch, dispatch]);
+  }, [selectedBranch, dispatch, branches]);
 
+  // console.log("selectedBranch", selectedBranch)
   // Add new menu category
   const handleAddMenu = () => {
     setIsModalOpen(true);
@@ -109,7 +111,7 @@ const MenuBuilder = () => {
     setActiveCategory(category);
     dispatch(
       fetchMenuGroups({
-        branch_id: selectedBranch.id,
+        branch_id: selectedBranch.id ?? branches[0]?._id,
         menu_category_name: category.name,
       })
     );
@@ -126,7 +128,7 @@ const MenuBuilder = () => {
 
   const [categoryEdit, setCategoryEdit] = useState<any>({});
 
-  console.log("categoryEdit", categoryEdit)
+  // console.log("categoryEdit", categoryEdit)
   const handleDeleteCategory = async (category: any) => {
 
     if (category) {
@@ -142,7 +144,7 @@ const MenuBuilder = () => {
         // toast.success(res?.data?.message);
         toast.success("Item deleted successfully");
         // console.log(res);
-        dispatch(fetchMenuCategories(selectedBranch.id));
+        dispatch(fetchMenuCategories(selectedBranch.id ?? branches[0]?._id));
       }
       catch (e) {
         toast.error("An error occurred, please try again");
@@ -172,7 +174,7 @@ const MenuBuilder = () => {
           // setEditCategoryModalOpen(false);
           setCategoryEdit({});
           setIsModalOpen(false);
-          dispatch(fetchMenuCategories(selectedBranch.id));
+          dispatch(fetchMenuCategories(selectedBranch.id ?? branches[0]?._id));
         }
       } catch (error) {
         toast.error("An error occurred, please try again");
@@ -191,9 +193,11 @@ const MenuBuilder = () => {
     setActiveGroup(group);
     dispatch(
       fetchMenuItemsWithoutStatus({
-        branch_id: selectedBranch.id,
+        branch_id: selectedBranch.id ?? branches[0]?._id,
         menu_group_name: group.name,
         page: currentPage || 1,
+        category_name: activeCategory.name
+
       })
     ).finally(() => {
       setMenuItemLoading(false); // Set loading to false after fetching
@@ -247,7 +251,7 @@ const MenuBuilder = () => {
           setEditGroupModalOpen(false);
           dispatch(
             fetchMenuGroups({
-              branch_id: selectedBranch.id,
+              branch_id: selectedBranch.id ?? branches[0]?._id,
               menu_category_name: activeCategory?.name,
             })
           );
@@ -299,7 +303,7 @@ const MenuBuilder = () => {
         toast.success("Item deleted successfully");
         dispatch(
           fetchMenuGroups({
-            branch_id: selectedBranch.id,
+            branch_id: selectedBranch.id ?? branches[0]?._id,
             menu_category_name: activeCategory?.name,
           })
         );
@@ -342,7 +346,7 @@ const MenuBuilder = () => {
     const payload = {
       category_name: activeCategory?.name,
       group_name: groupName,
-      branch_id: selectedBranch.id,
+      branch_id: selectedBranch.id ?? branches[0]?._id,
       price_to_all_items: applyPriceToAll,
       ...(applyPriceToAll && { price: Number(price) }),
     };
@@ -355,7 +359,7 @@ const MenuBuilder = () => {
       );
       dispatch(
         fetchMenuGroups({
-          branch_id: selectedBranch.id,
+          branch_id: selectedBranch.id ?? branches[0]?._id,
           menu_category_name: activeCategory?.name,
         })
       );
@@ -399,9 +403,10 @@ const MenuBuilder = () => {
 
     dispatch(
       fetchMenuItemsWithoutStatus({
-        branch_id: selectedBranch.id,
+        branch_id: selectedBranch.id ?? branches[0]?._id,
         menu_group_name: activeGroup?.name,
         page: page,
+        category_name: activeCategory.name
       })
     );
   };
