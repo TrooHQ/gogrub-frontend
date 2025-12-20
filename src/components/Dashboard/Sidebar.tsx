@@ -147,44 +147,44 @@ const SideBar: React.FC<SideBarProps> = ({ userType }) => {
         },
       ],
     },
-    {
-      title: "Menu",
-      icon: MenuIcon,
-      link: "/menu-list",
-      subMenu: [
-        {
-          title: "Menu Items",
-          link: "/menu-list",
-        },
-        {
-          title: "Menu Categories",
-          link: "/menu-categories",
-        },
-        {
-          title: "Modifiers",
-          link: "/menu-modifiers",
-        },
-      ],
-    },
     // {
     //   title: "Menu",
     //   icon: MenuIcon,
     //   link: "/menu-list",
     //   subMenu: [
     //     {
-    //       title: "Menu List",
+    //       title: "Menu Items",
     //       link: "/menu-list",
     //     },
     //     {
-    //       title: "Menu Builder",
-    //       link: "/menu-builder",
+    //       title: "Menu Categories",
+    //       link: "/menu-categories",
     //     },
     //     {
-    //       title: "Price List",
-    //       link: "/price-list",
+    //       title: "Modifiers",
+    //       link: "/menu-modifiers",
     //     },
     //   ],
     // },
+    {
+      title: "Menu",
+      icon: MenuIcon,
+      link: "/menu-list",
+      subMenu: [
+        {
+          title: "Menu List",
+          link: "/menu-list",
+        },
+        {
+          title: "Menu Builder",
+          link: "/menu-builder",
+        },
+        // {
+        //   title: "Price List",
+        //   link: "/price-list",
+        // },
+      ],
+    },
 
     {
       subTitle: "SETTINGS",

@@ -40,7 +40,7 @@ import OverviewAdmin from "./components/Dashboard/OverviewAdmin.tsx";
 import BusinessInformation from "./components/Dashboard/BusinessInformation.tsx";
 import ManageBranches from "./components/Dashboard/ManageBranches.tsx";
 import TenantSettings from "./components/Dashboard/TenantSettings.tsx";
-// import MenuList from "./components/Dashboard/MenuList.tsx";
+import MenuList from "./components/Dashboard/MenuList.tsx";
 import OrderHistory from "./components/Dashboard/OrderHistory.tsx";
 import CreatePin from "./components/authPages/CreatePin.tsx";
 import PinCreated from "./components/authPages/PinCreated.tsx";
@@ -54,7 +54,7 @@ import UpgradeSubscription from "./pages/pricing/UpgradeSubscription.tsx";
 import VerifiedPayment from "./pages/pricing/VerifiedPayment.tsx";
 import PayoutDetails from "./pages/pricing/PayoutDetails.tsx";
 import ProtectedRoutes, { UnProtectedRoutes } from "./components/authPages/ProtectedRoutes.tsx";
-import MenuItems from "./components/Dashboard/NewMenuBuilder/MenuItems.tsx";
+// import MenuItems from "./components/Dashboard/NewMenuBuilder/MenuItems.tsx";
 import Categories from "./components/Dashboard/NewMenuBuilder/Categories.tsx";
 import MenuModifiers from "./components/Dashboard/NewMenuBuilder/MenuModifiers.tsx";
 import AddMenuItem from "./components/Dashboard/NewMenuBuilder/AddNewMenuItem.tsx";
@@ -200,10 +200,10 @@ export default function App() {
               <MenuBuilder />
             </ProtectedRoutes>
           } />
-          {/* <MenuList /> */}
+          {/* <MenuItems /> */}
           <Route path="/menu-list" element={
             <ProtectedRoutes>
-              <MenuItems />
+              <MenuList />
             </ProtectedRoutes>
           } />
           <Route path="/menu-list/add" element={
