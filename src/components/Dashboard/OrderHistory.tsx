@@ -32,8 +32,8 @@ const OrderHistory = () => {
   }, [])
 
 
-  const { selectedBranch } = useSelector((state: any) => state.branches);
-
+  const { branches } = useSelector((state: any) => state.branches);
+  const selectedBranch = branches?.[0]?._id ?? null;
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [data, setData] = useState<any[]>([]);
@@ -128,7 +128,7 @@ const OrderHistory = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=history&status=${statusFilter}&page=${page}&limit=10&order_number=${order_number}`,
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch}&queryType=history&status=${statusFilter}&page=${page}&limit=10&order_number=${order_number}`,
         {
           ...headers,
           params
