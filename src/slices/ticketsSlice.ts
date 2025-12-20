@@ -73,7 +73,7 @@ export const fetchTickets = createAsyncThunk<
   async ({ selectedBranch, page }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch.id}&queryType=ticket&page=${page}&limit=10`,
+        `${SERVER_DOMAIN}/order/getOrderbyType/?branch_id=${selectedBranch}&queryType=ticket&page=${page}&limit=10`,
         getAuthHeaders()
       );
       return { data: response.data.data, pagination: response.data.pagination };
