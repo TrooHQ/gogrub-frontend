@@ -33,7 +33,9 @@ const Tickets = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchTickets({ selectedBranch: selectedBranch, page }));
+    if (selectedBranch) {
+      dispatch(fetchTickets({ selectedBranch: selectedBranch, page }));
+    }
   }, [dispatch, selectedBranch, page]);
 
   const handleRefresh = () => {
