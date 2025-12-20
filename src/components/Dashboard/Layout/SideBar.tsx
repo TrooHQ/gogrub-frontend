@@ -58,21 +58,26 @@ export default function SideBar() {
           link: "/menu-list",
           showMenu: true,
         },
-        {
-          title: "Menu Categories",
-          link: "/menu-categories",
-          showMenu: true,
-        },
-        {
-          title: "Menu Modifiers",
-          link: "/menu-modifiers",
-          showMenu: true,
-        },
         // {
-        //   title: "Menu Builder",
-        //   link: "/menu-builder",
+        //   title: "Menu Categories",
+        //   link: "/menu-categories",
         //   showMenu: true,
         // },
+        // {
+        //   title: "Menu Modifiers",
+        //   link: "/menu-modifiers",
+        //   showMenu: true,
+        // },
+        {
+          title: "Menu Builder",
+          link: "/menu-builder",
+          showMenu: true,
+        },
+        {
+          title: "Menu Builder",
+          link: "/menu-builder",
+          showMenu: true,
+        },
         // {
         //   title: "Price List",
         //   link: "/price-list",
@@ -150,9 +155,9 @@ export default function SideBar() {
     <div className='flex flex-col justify-between w-full h-full'>
       <div>
         {commonMenu.map((menu, index) => (
-          <div key={index} className='flex flex-col gap-3 justify-between cursor-pointer group'  >
+          <div key={index} className='flex flex-col justify-between gap-3 cursor-pointer group'  >
             <div className={`flex items-center justify-between p-4  ${menu.link === url || menu.subMenu && menu.subMenu.some(item => item.link === url) ? 'bg-slate-100 border-l-4 border-l-slate-700' : 'hover:bg-slate-100 group-hover:border-l-4 group-hover:border-l-slate-600'} `}>
-              <NavLink to={menu.link} className='flex gap-3 items-center' >
+              <NavLink to={menu.link} className='flex items-center gap-3' >
                 <p className={`text-xl group-hover:text-slate-600 ${menu.title === url || menu.subMenu && menu.subMenu.some(item => item.link === url) ? 'text-slate-700' : 'group-hover:text-slate-600'}`}>{menu.icon}</p>
                 <p className={`${menu.title === url || menu.subMenu && menu.subMenu.some(item => item.link === url) ? 'text-slate-700 font-semibold' : 'group-hover:text-slate-600 group-hover:font-semibold'}`}>{menu.title}</p>
               </NavLink>
@@ -173,12 +178,12 @@ export default function SideBar() {
       </div>
       <div className='flex flex-col gap-4 px-4 mb-5'>
 
-        <NavLink to={'/subscription-plan'} className='flex flex-col gap-2 p-3 rounded-md border bg-slate-100 border-slate-200'>
+        <NavLink to={'/subscription-plan'} className='flex flex-col gap-2 p-3 border rounded-md bg-slate-100 border-slate-200'>
           <p className='text-sm text-slate-500'>Access more features to boost your business </p><p className='text-[#F86C17] flex items-center gap-2'>Upgrade Plan <GoArrowUpRight /></p>
         </NavLink >
 
-        <div className='flex flex-row gap-2 p-3 bg-white rounded-md border border-slate-200'>
-          <div style={{ backgroundImage: `url(${userData?.business_logo})` }} className='w-12 h-12 bg-center bg-no-repeat bg-cover rounded-md border border-slate-300' />
+        <div className='flex flex-row gap-2 p-3 bg-white border rounded-md border-slate-200'>
+          <div style={{ backgroundImage: `url(${userData?.business_logo})` }} className='w-12 h-12 bg-center bg-no-repeat bg-cover border rounded-md border-slate-300' />
           <div><h3 className='font-semibold text-slate-700'>{userData?.first_name + " " + userData?.last_name}</h3>
             <p className='text-slate-500'>{userData?.business_email}</p>
           </div>
