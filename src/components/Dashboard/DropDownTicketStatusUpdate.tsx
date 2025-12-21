@@ -35,7 +35,7 @@ export const DropdownMenuTicketStatusUpdate = ({ branchId, orderId, getTickets, 
         headers
       );
       // console.log(response.data);
-      dispatch(getTickets({ selectedBranch: { id: branchId } }));
+      dispatch(getTickets({ selectedBranch: branchId }));
       toast.success(response.data.message || "Order Updated successfully");
       // window.location.reload();
     } catch (error) {
