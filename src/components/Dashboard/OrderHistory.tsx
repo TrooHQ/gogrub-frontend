@@ -73,8 +73,10 @@ const OrderHistory = () => {
   // };
 
   useEffect(() => {
-    getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue })
-  }, [filterValue, noOfDays, start_date, end_date, page]);
+    if (selectedBranch) {
+      getTickets({ date_filter: filterValue, number_of_days: noOfDays, startDate: start_date, endDate: end_date, page, order_number: searchValue, });
+    }
+  }, [filterValue, noOfDays, start_date, end_date, page, selectedBranch]);
 
   const handleFilterChange = (
     filter?: string | number,
@@ -157,10 +159,10 @@ const OrderHistory = () => {
     setStatusFilter(e.target.value);
   };
 
-  useEffect(() => {
-    getTickets({ date_filter: noOfDays, order_number: searchValue });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedBranch, statusFilter]);
+  // useEffect(() => {
+  //   getTickets({ date_filter: noOfDays, order_number: searchValue });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedBranch, statusFilter]);
 
   // const handleRefresh = () => {
   //   getTickets({ date_filter: "today" });
@@ -226,7 +228,7 @@ const OrderHistory = () => {
   // };
 
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [orderModal, setOrderModal] = useState<boolean>(true);
+  const [orderModal, setOrderModal] = useState<boolean>(false);
   const [SingleOrderItem, setSingleOrderItem] = useState({});
 
   useEffect(() => {
@@ -377,23 +379,24 @@ const OrderHistory = () => {
                               )
                               : ""}</td>
                             <td className="py-4">{item.customer_name || "-"}</td>
-
-                            {
-                              (item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "canceled") ? (
-                                <td className=" w-fit flex mx-auto items-center gap-[10px] bg-red-500 text-red-100 px-4 py-1.5 rounded-full text-sm">
-                                  {item.status}
-                                </td>
-                              ) : item.status?.toLowerCase() === "completed" ? (
-                                <td className="w-fit mx-auto flex items-center gap-[10px] bg-green-500 text-green-100 px-4 py-1.5 rounded-full text-sm">
-                                  {item.status}
-                                </td>
-                              ) : (
-                                // Default status
-                                <td className="flex items-center gap-[10px] bg-yellow-500 text-yellow-100 px-4 py-1.5 rounded-full text-sm">
-                                  {item.status}
-                                </td>
-                              )
-                            }
+                            <td>
+                              {
+                                (item.status?.toLowerCase() === "cancelled" || item.status?.toLowerCase() === "canceled") ? (
+                                  <span className=" w-fit flex mx-auto items-center gap-[10px] bg-red-500 text-red-100 px-4 py-1.5 rounded-full text-sm">
+                                    {item.status}
+                                  </span>
+                                ) : item.status?.toLowerCase() === "completed" ? (
+                                  <span className=" w-fit flex mx-auto items-center gap-[10px] bg-green-500 text-green-100 px-4 py-1.5 rounded-full text-sm">
+                                    {item.status}
+                                  </span>
+                                ) : (
+                                  // Default status
+                                  <span className=" w-fit flex mx-auto items-center gap-[10px] bg-yellow-500 text-yellow-100 px-4 py-1.5 rounded-full text-sm">
+                                    {item.status}
+                                  </span>
+                                )
+                              }
+                            </td>
                             <td className="relative py-4">
                               <HiOutlineDotsVertical
                                 onClick={() => handleShowMenu(index)}

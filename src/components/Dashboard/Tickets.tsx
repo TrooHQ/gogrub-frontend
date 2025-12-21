@@ -162,7 +162,7 @@ const Tickets = () => {
                               {showMenuOptions === index && (
                                 <DropdownMenuTicketStatusUpdate
                                   getTickets={fetchTickets}
-                                  branchId={selectedBranch?.id || selectedBranch?._id}
+                                  branchId={selectedBranch?.id || selectedBranch?._id || selectedBranch}
                                   orderId={item._id}
                                   setOrderId={setOrderId}
                                   hasRefunded={item?.isRefunded}
